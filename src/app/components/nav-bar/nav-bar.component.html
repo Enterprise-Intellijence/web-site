@@ -2,21 +2,69 @@
   <div class="container-sm py-2">
     <div class="row align-items-center gx-5">
       <div class="col-auto">
-        <a class="navbar-brand" href="#">NOME APP</a>
+        <a class="navbar-brand" [routerLink]="['/home']">NOME APP</a>
       </div>
 
 
       <form class="col" role="search">
-        <div class="row">
-          <input class="form-control me-2 col" type="search" placeholder="Search for items" aria-label="Search">
-          <button class="btn btn-outline-success col-auto" type="submit">Search</button>
+        <div class="row input-group">
+
+          <input class="form-control col" type="search" placeholder="Search for items" aria-label="Search">
+          <!-- <fa-icon class="col-auto" [icon]="['fas', 'search']"></fa-icon> -->
+
+          <fa-icon [icon]="search_icon"></fa-icon>
+          <button class="btn btn-outline-success col-auto" type="submit">
+            Search
+          </button>
         </div>
       </form>
 
       <div class="col-auto">
+        <div *ngIf="isLoggedIn">
 
-        <button class="btn btn-outline-primary me-2">Sign up | log in</button>
-        <button class="btn btn-primary">Sell now</button>
+
+          <button class="btn btn-outline-primary me-2" [routerLink]="['/messages']">
+            <fa-icon [icon]="messages_icon"></fa-icon>
+          </button>
+          <button class="btn btn-outline-primary me-2" [routerLink]="['/']">
+            <fa-icon [icon]="likes_icon"></fa-icon>
+          </button>
+          <div ngbDropdown class="d-inline-block me-2">
+
+            <button ngbDropdownToggle class="btn btn-outline-primary " [routerLink]="['/users/me']">
+              <fa-icon [icon]="user_icon"></fa-icon>
+            </button>
+
+
+            <ul ngbDropdownMenu class="p-2 rounded-3">
+              <h6 class="dropdown-header">Account</h6>
+              <li>
+                <a ngbDropdownItem class="rounded-2" [routerLink]="">profile</a>
+              </li>
+              <li>
+                <a ngbDropdownItem class="rounded-2" [routerLink]="">settings</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a ngbDropdownItem class="rounded-2" (click)="isLoggedIn=false">log out</a>
+              </li>
+            </ul>
+          </div>
+
+
+          <button class="btn btn-primary" [routerLink]="['/products/new']">Sell now</button>
+        </div>
+
+        <div *ngIf="!isLoggedIn">
+          <button class="btn btn-outline-primary me-2" [routerLink]="['/login']" (click)="isLoggedIn=true">
+            <fa-icon [icon]="loginIcon"></fa-icon>
+            Sign up | log in
+          </button>
+          <button class="btn btn-primary" [routerLink]="['/products/new']">Sell now</button>
+        </div>
+
       </div>
 
 
@@ -28,26 +76,28 @@
     <ul class="navbar-nav">
       <li class="nav-item" ngbDropdown>
         <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarWomanDropdown" role="button"> Woman </a>
-        <div ngbDropdownMenu aria-labelledby="navbarWomanDropdown" class="dropdown-menu">
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 1</a>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 2</a>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 3</a>
+        <div ngbDropdownMenu aria-labelledby="navbarWomanDropdown" class="gap-2 p-2 rounded-3">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
+          <hr class="dropdown-divider">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Clothes</a>
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Shoes</a>
         </div>
       </li>
       <li class="nav-item" ngbDropdown>
         <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarMenDropdown" role="button"> Men </a>
         <div ngbDropdownMenu aria-labelledby="navbarMenDropdown" class="dropdown-menu">
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 1</a>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 2</a>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 3</a>
+
+          <a ngbDropdownItem [routerLink]="[]">All</a>
+          <a ngbDropdownItem [routerLink]="[]">SUB CATEGORY 2</a>
+          <a ngbDropdownItem [routerLink]="[]">SUB CATEGORY 3</a>
         </div>
       </li>
       <li class="nav-item" ngbDropdown>
         <a class="nav-link" tabindex="0" ngbDropdownToggle id="Other" role="button"> Other </a>
         <div ngbDropdownMenu aria-labelledby="Other" class="dropdown-menu">
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 1</a>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 2</a>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">SUB CATEGORY 3</a>
+          <a ngbDropdownItem [routerLink]="[]" (click)="$event.preventDefault()">All</a>
+          <a ngbDropdownItem [routerLink]="[]" (click)="$event.preventDefault()">SUB CATEGORY 2</a>
+          <a ngbDropdownItem [routerLink]="[]" (click)="$event.preventDefault()">SUB CATEGORY 3</a>
         </div>
       </li>
     </ul>
