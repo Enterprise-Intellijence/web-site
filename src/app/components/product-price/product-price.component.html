@@ -1,0 +1,11 @@
+<div class="card mb-3 product-page" style="width: 18rem;">
+    <div class="card-body">
+        <h2 class="card-title-sium" >30,00 €</h2>
+        <h5 class="card-subtitle mb-2 text-muted">32,20 € include la Protezione acquisti</h5>
+        <hr class="product-page"/>
+        <button type="button" class="btn btn-primary btn-block product-btn">Acquista</button>
+        <button type="button" class="btn btn-outline-primary btn-block product-btn">Fai un offerta</button>
+        <button type="button" class="btn btn-outline-primary btn-block product-btn">Chiedi informazioni</button>
+        <button type="button" (click)="clickFavButton()"class="btn btn-outline-secondary btn-block product-btn"><i class="bi bi-heart" *ngIf="!filledIcon"></i><i class="bi bi-heart-fill" *ngIf="filledIcon"></i> {{favButtonText}}</button>
+    </div>
+</div>
