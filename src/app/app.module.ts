@@ -13,6 +13,7 @@ import { AccountSettingsComponent } from './pages/settings/account-settings/acco
 import { ShippingComponent } from './pages/settings/shipping/shipping.component';
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
 import { NotificationsComponent } from './pages/settings/notifications/notifications.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NotificationsComponent } from './pages/settings/notifications/notificat
     AccountSettingsComponent,
     ShippingComponent,
     PaymentsComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
