@@ -8,12 +8,9 @@
 
       <form class="col" role="search">
         <div class="row input-group">
-
           <input class="form-control col" type="search" placeholder="Search for items" aria-label="Search">
-          <!-- <fa-icon class="col-auto" [icon]="['fas', 'search']"></fa-icon> -->
-
-          <fa-icon [icon]="search_icon"></fa-icon>
           <button class="btn btn-outline-success col-auto" type="submit">
+            <fa-icon [icon]="search_icon"></fa-icon>
             Search
           </button>
         </div>
@@ -85,19 +82,32 @@
       </li>
       <li class="nav-item" ngbDropdown>
         <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarMenDropdown" role="button"> Men </a>
-        <div ngbDropdownMenu aria-labelledby="navbarMenDropdown" class="dropdown-menu">
-
-          <a ngbDropdownItem [routerLink]="[]">All</a>
-          <a ngbDropdownItem [routerLink]="[]">SUB CATEGORY 2</a>
-          <a ngbDropdownItem [routerLink]="[]">SUB CATEGORY 3</a>
+        <div ngbDropdownMenu aria-labelledby="navbarMenDropdown" class="gap-2 p-2 rounded-3">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
+          <hr class="dropdown-divider">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Clothes</a>
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Shoes</a>
         </div>
       </li>
       <li class="nav-item" ngbDropdown>
-        <a class="nav-link" tabindex="0" ngbDropdownToggle id="Other" role="button"> Other </a>
-        <div ngbDropdownMenu aria-labelledby="Other" class="dropdown-menu">
-          <a ngbDropdownItem [routerLink]="[]" (click)="$event.preventDefault()">All</a>
-          <a ngbDropdownItem [routerLink]="[]" (click)="$event.preventDefault()">SUB CATEGORY 2</a>
-          <a ngbDropdownItem [routerLink]="[]" (click)="$event.preventDefault()">SUB CATEGORY 3</a>
+        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarEntertainmentDropdown" role="button">entertainment</a>
+        <div ngbDropdownMenu aria-labelledby="navbarEntertainmentDropdown" class="gap-2 p-2 rounded-3">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
+          <hr class="dropdown-divider">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 1</a>
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 2</a>
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 3</a>
+        </div>
+      </li>
+      <li class="nav-item" ngbDropdown>
+        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarOtherDropdown" role="button"> Other </a>
+
+        <div ngbDropdownMenu aria-labelledby="navbarOtherDropdown" class="gap-2 p-2 rounded-3">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
+          <hr class="dropdown-divider">
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 1</a>
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 2</a>
+          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 3</a>
         </div>
       </li>
     </ul>
