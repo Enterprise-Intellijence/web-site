@@ -1,6 +1,18 @@
 .img-size {
+    width:  15cm;
+    height: 10cm;
+}
+
+.thumbnail-size {
     float: left;
     width:  100px;
     height: 100px;
     object-fit: cover;
 }
+
+@media screen and (max-width: 770px) {
+    .div {
+        clear: left;
+        width: 100%;
+    }
+};

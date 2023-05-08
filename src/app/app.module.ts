@@ -30,7 +30,7 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
     ShippingComponent,
     PaymentsComponent,
     NotificationsComponent,
-    ProductPriceComponent
+    ProductPriceComponent,
     NotificationsComponent,
     ProductImagesComponent,
     ProductComponent,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'product-images',
@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ProductImagesComponent {
 
-  thumbnails: String[] = ["https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp",
+  @Input() thumbnails: String[] = ["https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp",
                           "https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp",
                           "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"];
 

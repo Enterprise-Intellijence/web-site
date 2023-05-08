@@ -12,7 +12,7 @@ export interface Product {
     address: Address;
     productSize: ProductSize;
     uploadDate: Date;
-    visibility: Visibility ;
+    visibility: Visibility;
     availability: Availability;
     productCategory: ProductCategory;
     seller: User;
