@@ -33,7 +33,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     NotificationsComponent,
     ProductImagesComponent,
     ProductComponent,
-    ProductInfoComponent
+    ProductInfoComponent,
     HomePageComponent
   ],
   imports: [
