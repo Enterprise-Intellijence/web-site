@@ -13,6 +13,10 @@ import { AccountSettingsComponent } from './pages/settings/account-settings/acco
 import { ShippingComponent } from './pages/settings/shipping/shipping.component';
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
 import { NotificationsComponent } from './pages/settings/notifications/notifications.component';
+import { ProductPriceComponent } from './components/product-price/product-price.component';
+import { ProductImagesComponent } from './components/product-images/product-images.component';
+import { ProductComponent } from './pages/product/product.component';
+import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
@@ -25,6 +29,11 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     ShippingComponent,
     PaymentsComponent,
     NotificationsComponent,
+    ProductPriceComponent,
+    NotificationsComponent,
+    ProductImagesComponent,
+    ProductComponent,
+    ProductInfoComponent
     HomePageComponent
   ],
   imports: [
