@@ -18,6 +18,8 @@ import { ProductImagesComponent } from './components/product-images/product-imag
 import { ProductComponent } from './pages/product/product.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { DeliveryControllerService, MessageControllerService, OfferControllerService, OrderControllerService, PaymentMethodControllerService, ProductControllerService, ReviewControllerService, TransactionControllerService, UserControllerService } from './services/api-service';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,16 +35,27 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     NotificationsComponent,
     ProductImagesComponent,
     ProductComponent,
-    ProductInfoComponent
-    HomePageComponent
+    ProductInfoComponent,
+    HomePageComponent 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    DeliveryControllerService,
+    MessageControllerService,
+    OfferControllerService,
+    OrderControllerService,
+    PaymentMethodControllerService,
+    ProductControllerService,
+    ReviewControllerService,
+    TransactionControllerService,
+    UserControllerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
