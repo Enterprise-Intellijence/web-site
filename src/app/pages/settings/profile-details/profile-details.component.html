@@ -1,15 +1,15 @@
 <div class="container mt-4 border-bottom p-2 shadow-sm">
     <div class="row">
-        <div class="col-6 text-left float-start">
+        <div class="col-6 text-left float-start fw-bold">
             <p>Your photo</p>
         </div>
 
         <div class="col-6">
             <div class = "row">
-                <div class="col-6">
+                <div class="col-6 fw-bold">
                     <img src="../assets/photo.jpg" class = "rounded float-end" style = "width: 50px;"> 
                 </div>
-                <div class="col-6">
+                <div class="col-6 fw-bold">
                     <button class="btn btn-sm btn-outline-primary float-end" type="button">Change photo</button> 
                 </div>
             </div>
@@ -19,7 +19,7 @@
 
 <div class="container mt-4 border-bottom p-2 shadow-sm">
     <div class="row">
-        <div class="col-6 text-left float-start">
+        <div class="col-6 text-left float-start fw-bold">
             <p>Bio</p>
         </div>
 
@@ -27,4 +27,49 @@
             <textarea  class="form-control" id="floatingTextArea" placeholder="Enter text"></textarea>
         </div>
     </div>    
+</div>
+
+
+<div class="container mt-4 border-bottom p-2 shadow-sm">
+    <div class = "row fw-lighter">
+        <span>Your position</span>
+    </div>
+    <div class = "row">
+        <div class="col-6 fw-bold mt-3">
+            <span>Country</span>
+        </div>
+        <div class="col-6 fw-bold mt-2">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle float-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Country
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Italia</a></li>
+                  <li><a class="dropdown-item" href="#">Francia</a></li>
+                  <li><a class="dropdown-item" href="#">Marocco</a></li>
+                </ul>
+              </div>
+        </div>
+        <span class="border-bottom mt-2"></span>
+        <div class="col-6 fw-bold mt-3">
+            <span>City</span>
+        </div>
+        <div class="col-6 fw-bold mt-2">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle float-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  City
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Lamezia Terme</a></li>
+                  <li><a class="dropdown-item" href="#">Montalto Uffugo</a></li>
+                  <li><a class="dropdown-item" href="#">Rende</a></li>
+                </ul>
+              </div>
+        </div>
+
+
+    </div>
+
+
+
 </div>
