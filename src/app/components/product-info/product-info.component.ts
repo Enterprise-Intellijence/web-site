@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/model/models';
+import { ProductDTO } from 'src/app/services/api-service';
 
 @Component({
   selector: 'product-info',
@@ -8,5 +8,5 @@ import { Product } from 'src/app/model/models';
 })
 export class ProductInfoComponent {
 
-  @Input() productInfo?: Product;
+  @Input() productInfo?: ProductDTO;
 }

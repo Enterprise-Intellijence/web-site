@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface HttpHeaders extends null<String, Array> { 
+export interface HttpHeaders {  // extends null<String, Array<string>>
   [key: string]: Array<string>;
 
 
