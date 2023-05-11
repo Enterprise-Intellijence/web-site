@@ -17,4 +17,4 @@ import { HttpMethod } from './httpMethod';
 import { HttpRange } from './httpRange';
 import { MediaType } from './mediaType';
 
-export type ResponseStatusExceptionHeaders = Map;
+export type ResponseStatusExceptionHeaders = Map<string, Array<string>>;
