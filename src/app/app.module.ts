@@ -20,55 +20,55 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NgbdModalConfirm, NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 import { DeliveryControllerService, MessageControllerService, OfferControllerService, OrderControllerService, PaymentMethodControllerService, ProductControllerService, ReviewControllerService, TransactionControllerService, UserControllerService } from './services/api-service';
-import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
 import { TempCardComponent } from './components/temp-card/temp-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    ProfileDetailsComponent,
-    SettingsComponent,
-    AccountSettingsComponent,
-    ShippingComponent,
-    PaymentsComponent,
-    NotificationsComponent,
-    ProductPriceComponent,
-    NotificationsComponent,
-    ProductImagesComponent,
-    ProductComponent,
-    ProductInfoComponent,
-    HomePageComponent,
-    TempCardComponent,
-    MostRequestProductComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    FontAwesomeModule,
-    HttpClientModule
-  ],
-  providers: [
-    HttpClient,
-    DeliveryControllerService,
-    MessageControllerService,
-    OfferControllerService,
-    OrderControllerService,
-    PaymentMethodControllerService,
-    ProductControllerService,
-    ReviewControllerService,
-    TransactionControllerService,
-    UserControllerService,
-
-  ],
-  bootstrap: [AppComponent]
-        NgbdModalFocus
-        NgbdModalConfirm,
+    declarations: [
+        AppComponent,
+        NavBarComponent,
+        ProfileDetailsComponent,
+        SettingsComponent,
+        AccountSettingsComponent,
+        ShippingComponent,
+        PaymentsComponent,
+        NotificationsComponent,
+        ProductPriceComponent,
+        NotificationsComponent,
+        ProductImagesComponent,
+        ProductComponent,
+        ProductInfoComponent,
+        HomePageComponent,
+        TempCardComponent,
+        MostRequestProductComponent
+    ],
+    providers: [
+        HttpClient,
+        DeliveryControllerService,
+        MessageControllerService,
+        OfferControllerService,
+        OrderControllerService,
+        PaymentMethodControllerService,
+        ProductControllerService,
+        ReviewControllerService,
+        TransactionControllerService,
+        UserControllerService,
+    ],
+    bootstrap: [
+        AppComponent,
         FontAwesomeModule,
         NgbModule,
         AppRoutingModule,
+        BrowserModule
+      ],
+    imports: [
         BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        FontAwesomeModule,
+        HttpClientModule,
+        NgbdModalFocus
+    ]
 })
 export class AppModule { }
