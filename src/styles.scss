@@ -1,6 +1,13 @@
-@import "bootstrap/scss/bootstrap";
-/*
-or import only the bootstrap scss files that your application actually needs,
-as described in the Bootstrap customization guide:
-https://getbootstrap.com/docs/5.2/customize/sass/#importing
-*/
+@import './scss/main.scss';
+
+.basic-container {
+
+  /*** Basic Container ***/
+  
+  @extend .container;
+  @extend .shadow-sm;
+  @extend .mt-4;
+  @extend .p-2;
+
+  background-color: $gray-100;
+}

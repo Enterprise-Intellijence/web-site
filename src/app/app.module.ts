@@ -18,31 +18,34 @@ import { ProductImagesComponent } from './components/product-images/product-imag
 import { ProductComponent } from './pages/product/product.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NgbdModalConfirm, NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    ProfileDetailsComponent,
-    SettingsComponent,
-    AccountSettingsComponent,
-    ShippingComponent,
-    PaymentsComponent,
-    NotificationsComponent,
-    ProductPriceComponent,
-    NotificationsComponent,
-    ProductImagesComponent,
-    ProductComponent,
-    ProductInfoComponent,
-    HomePageComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    FontAwesomeModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavBarComponent,
+        ProfileDetailsComponent,
+        SettingsComponent,
+        AccountSettingsComponent,
+        ShippingComponent,
+        PaymentsComponent,
+        NotificationsComponent,
+        ProductPriceComponent,
+        NotificationsComponent,
+        ProductImagesComponent,
+        ProductComponent,
+        ProductInfoComponent,
+        HomePageComponent,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        FontAwesomeModule,
+        NgbdModalConfirm,
+        NgbdModalFocus
+    ]
 })
 export class AppModule { }
