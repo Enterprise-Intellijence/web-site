@@ -19,7 +19,9 @@ import { ProductComponent } from './pages/product/product.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { DeliveryControllerService, MessageControllerService, OfferControllerService, OrderControllerService, PaymentMethodControllerService, ProductControllerService, ReviewControllerService, TransactionControllerService, UserControllerService } from './services/api-service';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import { TempCardComponent } from './components/temp-card/temp-card.component';
+import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +38,16 @@ import { HttpClient } from '@angular/common/http';
     ProductImagesComponent,
     ProductComponent,
     ProductInfoComponent,
-    HomePageComponent 
+    HomePageComponent,
+    TempCardComponent,
+    MostRequestProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [
     HttpClient,
@@ -54,7 +59,8 @@ import { HttpClient } from '@angular/common/http';
     ProductControllerService,
     ReviewControllerService,
     TransactionControllerService,
-    UserControllerService
+    UserControllerService,
+
   ],
   bootstrap: [AppComponent]
 })
