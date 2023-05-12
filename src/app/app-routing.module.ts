@@ -6,6 +6,7 @@ import { AccountSettingsComponent } from './pages/settings/account-settings/acco
 import { NotificationsComponent } from './pages/settings/notifications/notifications.component';
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,9 +18,9 @@ const routes: Routes = [
   // { path: 'login', component: LoginPageComponent },
   // { path: 'register', component: RegisterPageComponent },
   {
-    path: 'settings', children: [
-      { path: '', redirectTo: 'profile', pathMatch: 'full'},
-      { path: 'profile', component: ProfileDetailsComponent },
+    path: 'settings', component: SettingsComponent, children: [
+      { path: '', redirectTo: 'profile-details', pathMatch: 'full'},
+      { path: 'profile-details', component: ProfileDetailsComponent },
       { path: 'account', component: AccountSettingsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'shipping', component: ShippingComponent },
