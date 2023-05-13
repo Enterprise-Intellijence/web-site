@@ -15,12 +15,12 @@ import { PaymentsComponent } from './pages/settings/payments/payments.component'
 import { NotificationsComponent } from './pages/settings/notifications/notifications.component';
 import { ProductPriceComponent } from './components/product-price/product-price.component';
 import { ProductImagesComponent } from './components/product-images/product-images.component';
-import { ProductComponent } from './pages/product/product.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NgbdModalConfirm, NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 import { DeliveryControllerService, MessageControllerService, OfferControllerService, OrderControllerService, PaymentMethodControllerService, ProductControllerService, ReviewControllerService, TransactionControllerService, UserControllerService } from './services/api-service';
-import { HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import { HttpClient, HttpClientModule} from '@angular/common/http';
 import { TempCardComponent } from './components/temp-card/temp-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 
@@ -37,7 +37,7 @@ import { MostRequestProductComponent } from './components/most-request-product/m
         ProductPriceComponent,
         NotificationsComponent,
         ProductImagesComponent,
-        ProductComponent,
+        ProductPageComponent,
         ProductInfoComponent,
         HomePageComponent,
         TempCardComponent,

@@ -7,13 +7,14 @@ import { NotificationsComponent } from './pages/settings/notifications/notificat
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   // { path: 'user/:id', component: ProfilePageComponent },
   // { path: 'products/new', component: NewProductPageComponent },
-  // { path: 'products/:id', component: ProductPageComponent },
+  { path: 'products/:id', component: ProductPageComponent },
   // { path: 'search', component: SearchPageComponent },
   // { path: 'login', component: LoginPageComponent },
   // { path: 'register', component: RegisterPageComponent },

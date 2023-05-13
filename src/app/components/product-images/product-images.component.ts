@@ -16,5 +16,4 @@ export class ProductImagesComponent {
   changeImage(index: number) {
     this.image = this.thumbnails[index];
   }
-
 }
