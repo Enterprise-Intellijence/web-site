@@ -23,8 +23,6 @@ export class MostRequestProductComponent  implements OnInit{
 
       }
     })
-
-
   }
 
 
