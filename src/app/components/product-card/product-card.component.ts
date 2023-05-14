@@ -1,16 +1,29 @@
-import { Component, Input } from '@angular/core';
-import { ProductDTO } from "../../services/api-service";
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductControllerService, ProductDTO } from "../../services/api-service";
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
-  selector: 'temp-card',
-  templateUrl: './temp-card.component.html',
-  styleUrls: ['./temp-card.component.scss']
+  selector: 'product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss']
 })
-export class TempCardComponent {
+export class ProductCardComponent implements OnInit {
 
   @Input() product!: ProductDTO;
 
-  constructor() {
+  constructor(private productService: ProductControllerService) {
+    this.createFakeProduct();
+  }
+
+  ngOnInit(): void {
+    this.productService.allProduct().subscribe((products) => {
+      console.log(products);
+    });
+  }
+
+
+
+  private createFakeProduct() {
     this.product = {
       id: "0",
       title: "A test product",
@@ -51,7 +64,6 @@ export class TempCardComponent {
       },
       usersThatLiked: [],
       messages: [],
-    }
+    };
   }
-
 }
