@@ -4,11 +4,11 @@
     </div>
     <div class="col-6">
         <div class="row">
-            <div class="col-auto">
+            <div class="col-6">
                 <product-info [productInfo]="product"></product-info>
             </div>
             <div class="col-auto">
-                <product-price></product-price>
+                <product-price [productPrice]="product?.myMoney"></product-price>
             </div>
         </div>
     </div>

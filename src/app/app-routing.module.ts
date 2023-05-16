@@ -8,16 +8,19 @@ import { PaymentsComponent } from './pages/settings/payments/payments.component'
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
+import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   // { path: 'user/:id', component: ProfilePageComponent },
-  // { path: 'products/new', component: NewProductPageComponent },
+  { path: 'products/new', component: NewProductPageComponent },
   { path: 'products/:id', component: ProductPageComponent },
   // { path: 'search', component: SearchPageComponent },
   // { path: 'login', component: LoginPageComponent },
   // { path: 'register', component: RegisterPageComponent },
+  { path: 'favourites', component: LikedProductsPageComponent },
   {
     path: 'settings', component: SettingsComponent, children: [
       { path: '', redirectTo: 'profile-details', pathMatch: 'full'},

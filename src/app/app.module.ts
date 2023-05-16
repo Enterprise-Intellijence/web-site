@@ -23,6 +23,9 @@ import { DeliveryControllerService, MessageControllerService, OfferControllerSer
 import { HttpClient, HttpClientModule} from '@angular/common/http';
 import { TempCardComponent } from './components/temp-card/temp-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
+import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
+import { ReviewCardComponent } from './components/review-card/review-card.component';
+import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +44,10 @@ import { MostRequestProductComponent } from './components/most-request-product/m
         ProductInfoComponent,
         HomePageComponent,
         TempCardComponent,
-        MostRequestProductComponent
+        MostRequestProductComponent,
+        LikedProductsPageComponent,
+        ReviewCardComponent,
+        NewProductPageComponent
     ],
     providers: [
         HttpClient,
