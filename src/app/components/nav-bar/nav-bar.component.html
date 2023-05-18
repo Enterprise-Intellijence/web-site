@@ -31,8 +31,8 @@
           </button>
           <button class="btn btn-outline-primary position-relative" [routerLink]="['/']">
             <fa-icon [icon]="likesIcon"></fa-icon>
-            <span *ngIf="likedProducts > 0" class="position-absolute top-0 start-100 badge rounded-pill bg-danger" style="transform: translate(-60%, -40%);">
-              {{likedProducts | badgeText}}
+            <span *ngIf="likedProductsCount > 0" class="position-absolute top-0 start-100 badge rounded-pill bg-danger" style="transform: translate(-60%, -40%);">
+              {{likedProductsCount | badgeText}}
               <span class="visually-hidden">liked products</span>
             </span>
           </button>

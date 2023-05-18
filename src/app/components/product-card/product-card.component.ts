@@ -3,6 +3,7 @@ import { ProductControllerService, ProductDTO } from "../../services/api-service
 import { ProductService } from 'src/app/services/product.service';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartFull } from '@fortawesome/free-solid-svg-icons';
+import { UserLikesService } from 'src/app/services/user-likes.service';
 
 @Component({
   selector: 'product-card',
@@ -20,7 +21,7 @@ export class ProductCardComponent implements OnInit {
 
   totalLikes: number = 0;
 
-  constructor(private productService: ProductControllerService) {
+  constructor(private productService: ProductControllerService, private userLikesService: UserLikesService) {
     this.createFakeProduct();
   }
 
@@ -28,6 +29,12 @@ export class ProductCardComponent implements OnInit {
     this.productService.allProduct().subscribe((products) => {
       console.log(products);
     });
+
+
+    this.userLikesService.LikedProducts$.subscribe(() => {
+      this.userLikesProduct = this.userLikesService.isProductLiked(this.product);
+    });
+
 
     // TODO: get the total number of likes from the server
     this.totalLikes = this.product.usersThatLiked?.length || 0;
@@ -40,11 +47,10 @@ export class ProductCardComponent implements OnInit {
 
 
   public toggleLike() {
-    // TODO: send a request to the server to like/unlike the product
-    this.userLikesProduct = !this.userLikesProduct;
-    this.totalLikes += this.userLikesProduct ? 1 : -1;
-    console.log("User likes product: " + this.userLikesProduct);
 
+    this.totalLikes += this.userLikesProduct ? -1 : 1;
+
+    this.userLikesService.toggleLikeProduct(this.product);
   }
 
 
