@@ -10,26 +10,36 @@
         <div class="row input-group">
           <input class="form-control col" type="search" placeholder="Search for items" aria-label="Search">
           <button class="btn btn-outline-success col-auto" type="submit">
-            <fa-icon [icon]="search_icon"></fa-icon>
+            <fa-icon [icon]="searchIcon"></fa-icon>
             Search
           </button>
         </div>
       </form>
 
       <div class="col-auto">
-        <div *ngIf="isLoggedIn">
+        <div *ngIf="isLoggedIn" class="hstack gap-3">
 
 
-          <button class="btn btn-outline-primary me-2" [routerLink]="['/messages']">
-            <fa-icon [icon]="messages_icon"></fa-icon>
+          <button class="btn btn-outline-primary position-relative" [routerLink]="['/messages']" (click)="unreadMessages = 2*unreadMessages + 1">
+            <fa-icon [icon]="messagesIcon"></fa-icon>
+
+            <span *ngIf="unreadMessages > 0" class="position-absolute top-0 start-100 badge rounded-pill bg-danger" style="transform: translate(-60%, -40%);">
+              {{unreadMessages | badgeText}}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+
           </button>
-          <button class="btn btn-outline-primary me-2" [routerLink]="['/']">
-            <fa-icon [icon]="likes_icon"></fa-icon>
+          <button class="btn btn-outline-primary position-relative" [routerLink]="['/']">
+            <fa-icon [icon]="likesIcon"></fa-icon>
+            <span *ngIf="likedProducts > 0" class="position-absolute top-0 start-100 badge rounded-pill bg-danger" style="transform: translate(-60%, -40%);">
+              {{likedProducts | badgeText}}
+              <span class="visually-hidden">liked products</span>
+            </span>
           </button>
-          <div ngbDropdown class="d-inline-block me-2">
+          <div ngbDropdown class="d-inline-block">
 
             <button ngbDropdownToggle class="btn btn-outline-primary " [routerLink]="['/users/me']">
-              <fa-icon [icon]="user_icon"></fa-icon>
+              <fa-icon [icon]="userIcon"></fa-icon>
             </button>
 
 
@@ -41,9 +51,7 @@
               <li>
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/settings']">settings</a>
               </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
+              <li><hr class="dropdown-divider"></li>
               <li>
                 <a ngbDropdownItem class="rounded-2" (click)="isLoggedIn=false">log out</a>
               </li>

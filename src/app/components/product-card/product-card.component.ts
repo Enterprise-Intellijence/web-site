@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductControllerService, ProductDTO } from "../../services/api-service";
 import { ProductService } from 'src/app/services/product.service';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartFull } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'product-card',
@@ -9,7 +11,14 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductCardComponent implements OnInit {
 
+  fullHeartIcon = faHeartFull;
+  emptyHeartIcon = faHeart;
+
   @Input() product!: ProductDTO;
+
+  userLikesProduct: boolean = false;
+
+  totalLikes: number = 0;
 
   constructor(private productService: ProductControllerService) {
     this.createFakeProduct();
@@ -19,7 +28,25 @@ export class ProductCardComponent implements OnInit {
     this.productService.allProduct().subscribe((products) => {
       console.log(products);
     });
+
+    // TODO: get the total number of likes from the server
+    this.totalLikes = this.product.usersThatLiked?.length || 0;
+
+
+
+    // TODO: check if the user has already liked the product
+
   }
+
+
+  public toggleLike() {
+    // TODO: send a request to the server to like/unlike the product
+    this.userLikesProduct = !this.userLikesProduct;
+    this.totalLikes += this.userLikesProduct ? 1 : -1;
+    console.log("User likes product: " + this.userLikesProduct);
+
+  }
+
 
 
 

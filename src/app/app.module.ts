@@ -23,6 +23,7 @@ import { DeliveryControllerService, MessageControllerService, OfferControllerSer
 import { HttpClient, HttpClientModule} from '@angular/common/http';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
+import { BadgeTextPipe } from './pipes/badge-text.pipe';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { MostRequestProductComponent } from './components/most-request-product/m
         ProductInfoComponent,
         HomePageComponent,
         ProductCardComponent,
-        MostRequestProductComponent
+        MostRequestProductComponent,
+        BadgeTextPipe
     ],
     providers: [
         HttpClient,

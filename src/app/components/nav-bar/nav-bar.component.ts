@@ -7,12 +7,16 @@ import { faEnvelope, faHeart, faRightFromBracket, faSearch, faUser } from '@fort
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
-  search_icon = faSearch;
+  searchIcon = faSearch;
   loginIcon = faRightFromBracket;
-  messages_icon = faEnvelope;
-  likes_icon = faHeart;
-  user_icon = faUser;
+  messagesIcon = faEnvelope;
+  likesIcon = faHeart;
+  userIcon = faUser;
 
   isCollapsed = true;
   isLoggedIn = true;
+
+  unreadMessages: number = 2;
+  likedProducts: number = 4;
+
 }
