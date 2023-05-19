@@ -18,9 +18,9 @@ import { ProductImagesComponent } from './components/product-images/product-imag
 import { ProductComponent } from './pages/product/product.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { NgbdModalConfirm, NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
+import { NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 import { DeliveryControllerService, MessageControllerService, OfferControllerService, OrderControllerService, PaymentMethodControllerService, ProductControllerService, ReviewControllerService, TransactionControllerService, UserControllerService } from './services/api-service';
-import { HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TempCardComponent } from './components/temp-card/temp-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 
