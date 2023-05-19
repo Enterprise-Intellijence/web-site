@@ -7,7 +7,7 @@
         <div class="col-6">
             <div class = "row align-items-center">
                 <div class="col-6 fw-semibold">
-                    <img src="/assets/images/default-profile-pic.png" class = "rounded float-end" style = "width: 50px;"> 
+                    <img [src]="profilePic | defaultProfilePic" class = "rounded float-end" style = "width: 50px;"> 
                 </div>
                 <div class="col-6 fw-semibold">
                     <button class="btn btn-sm btn-outline-primary float-end" type="button">Change photo</button> 
