@@ -23,6 +23,7 @@ import { DeliveryControllerService, MessageControllerService, OfferControllerSer
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TempCardComponent } from './components/temp-card/temp-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { MostRequestProductComponent } from './components/most-request-product/m
         ProductInfoComponent,
         HomePageComponent,
         TempCardComponent,
-        MostRequestProductComponent
+        MostRequestProductComponent,
+        ProfileComponent
     ],
     providers: [
         HttpClient,
