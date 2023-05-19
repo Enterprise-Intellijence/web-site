@@ -7,7 +7,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./shipping.component.scss']
 })
 export class ShippingComponent {
-  arrowDown = faAngleRight
+  arrowRight = faAngleRight
 
 
 }
