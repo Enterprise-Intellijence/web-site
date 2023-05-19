@@ -24,6 +24,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TempCardComponent } from './components/temp-card/temp-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
         HomePageComponent,
         TempCardComponent,
         MostRequestProductComponent,
-        ProfileComponent
+        ProfileComponent,
+        DefaultProfilePicPipe
     ],
     providers: [
         HttpClient,
