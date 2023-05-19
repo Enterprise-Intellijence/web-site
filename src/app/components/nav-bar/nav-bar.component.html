@@ -27,25 +27,27 @@
             <fa-icon [icon]="likes_icon"></fa-icon>
           </button>
           <div ngbDropdown class="d-inline-block me-2">
-
-            <button ngbDropdownToggle class="btn btn-outline-primary " [routerLink]="['/users/me']">
+            
+            <button ngbDropdownToggle class="btn btn-outline-primary ">
               <fa-icon [icon]="user_icon"></fa-icon>
             </button>
-
-
+            
+            
             <ul ngbDropdownMenu class="p-2 rounded-3">
               <h6 class="dropdown-header">Account</h6>
               <li>
-                <a ngbDropdownItem class="rounded-2" [routerLink]="">profile</a>
+                <!-- TODO: Add argument to routerLink when account id is available-->
+                <!-- <button ngbDropdownToggle class="btn btn-outline-primary " [routerLink]="['/users', {{user.id}}]"></button> -->
+                <a ngbDropdownItem class="rounded-2" [routerLink]="['/users/me']">Profile</a>
               </li>
               <li>
-                <a ngbDropdownItem class="rounded-2" [routerLink]="['/settings']">settings</a>
+                <a ngbDropdownItem class="rounded-2" [routerLink]="['/settings']">Settings</a>
               </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a ngbDropdownItem class="rounded-2" (click)="isLoggedIn=false">log out</a>
+                <a ngbDropdownItem class="rounded-2" (click)="isLoggedIn=false">Log out</a>
               </li>
             </ul>
           </div>
@@ -90,7 +92,7 @@
         </div>
       </li>
       <li class="nav-item" ngbDropdown>
-        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarEntertainmentDropdown" role="button">entertainment</a>
+        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarEntertainmentDropdown" role="button">Entertainment</a>
         <div ngbDropdownMenu aria-labelledby="navbarEntertainmentDropdown" class="gap-2 p-2 rounded-3">
           <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
           <hr class="dropdown-divider">
