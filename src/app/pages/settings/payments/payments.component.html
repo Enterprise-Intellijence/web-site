@@ -1,1 +1,121 @@
-<p>payments works!</p>
+
+<div class="basic-container">
+    <div class = "row fw-lighter">
+        <span>Payment options</span>
+    </div>
+    <div class = "row">
+        <div class="col-6 fw-semibold mt-3">
+            <span>Add credit card</span>
+        </div>
+        <div class="col-6 fw-semibold mt-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#myModal">
+            <fa-icon [icon]="arrowRight">
+
+            </fa-icon>
+          </button>
+        </div>
+    </div>
+</div>
+
+<div class="basic-container">
+    <div class = "row fw-lighter">
+        <span>Transfer options</span>
+    </div>
+    <div class = "row">
+        <div class="col-6 fw-semibold mt-3">
+            <span>Add bank-account</span>
+        </div>
+        <div class="col-6 fw-semibold mt-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary float-end" [routerLink]="['/settings/payments/bank-account']">
+            <fa-icon [icon]="arrowRight">
+
+            </fa-icon>
+          </button>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header d-flex justify-content-center align-items-center">
+           <h6 class="text-center">Card Details</h6>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form>
+            <div class="container">
+                <div class="row fw-lighter">
+                    <span>The information about your card are protected</span>
+                </div>
+            </div>
+            <div class="basic-container mb-4">
+
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Card's holder name</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{profileName}}">
+                    </div>
+                </div>
+            </div>
+            <div class="basic-container mb-4">
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Number of the card</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{cardNumber}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                </div>
+            </div>
+
+            <div class="basic-container mb-4">
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Expiration Day</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{expirationDay}}" (input)="formatDateInput($event)" [ngClass]="{ 'error': error }">
+                        <div class="error-message mt-2" *ngIf="error">Il valore inserito per il mese non è valido.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="basic-container mb-4">
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Secure code</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{secureCode}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                </div>
+            </div>
+          </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+
+
+
+  

@@ -25,6 +25,7 @@ import { TempCardComponent } from './components/temp-card/temp-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
+import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
         TempCardComponent,
         MostRequestProductComponent,
         ProfileComponent,
-        DefaultProfilePicPipe
+        DefaultProfilePicPipe,
+        BankAccountComponent
     ],
     providers: [
         HttpClient,

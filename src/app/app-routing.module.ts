@@ -8,6 +8,7 @@ import { PaymentsComponent } from './pages/settings/payments/payments.component'
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import{ ProfileComponent } from './pages/profile/profile.component';
+import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,7 +32,9 @@ const routes: Routes = [
       { path: 'account', component: AccountSettingsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'shipping', component: ShippingComponent },
-      { path: 'payments', component: PaymentsComponent },
+      { path: 'payments', component: PaymentsComponent, children: [{
+        path: 'bank-account', component: BankAccountComponent
+      }] },
     ]
   },
   { path: '**', redirectTo: 'home' }
