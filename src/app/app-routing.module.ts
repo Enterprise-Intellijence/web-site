@@ -32,11 +32,11 @@ const routes: Routes = [
       { path: 'account', component: AccountSettingsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'shipping', component: ShippingComponent },
-      { path: 'payments', component: PaymentsComponent, children: [{
-        path: 'bank-account', component: BankAccountComponent
-      }] },
+      { path: 'payments', component: PaymentsComponent},
     ]
   },
+
+  { path: 'wallet/bank-account', component: BankAccountComponent},
   { path: '**', redirectTo: 'home' }
 ];
 
