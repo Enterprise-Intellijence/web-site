@@ -10,23 +10,15 @@ import { Router } from '@angular/router';
 export class PaymentsComponent {
   arrowRight = faAngleRight
   profileName?: string = "Owner of the card's name";
-  cardNumber?: string = "ad es: 1234 1234 1234 1234";
+  cardNumber?: string = "example: 1234 1234 1234 1234";
   expirationDay?: string = "MM/AA";
-  secureCode?: string = "ad es: 123";
+  secureCode?: string = "example: 123";
   error: boolean = false;
   constructor(private router: Router){
     
   }
 
   ngOnInit(){}
-
-  onBtnClick(){
-    // Navigate to /products page
-    this.router.navigate(['settings','payments','bank-account']);
-  }
-
-
-
 
   formatDateInput(event: any) {
     const input = event.target as HTMLInputElement;
