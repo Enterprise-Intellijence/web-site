@@ -18,4 +18,19 @@
 .custom-column-spacing {
   margin-bottom: 10px;
 }
+
+.custom-right-container{
+  @extend .container;
+  @extend .shadow-sm;
+  @extend .mt-4;
+  @extend .p-2;
+
+  position: sticky;
+  top: 0;
+  right: 0;
+
+  flex-shrink: 0;
+  width: 300px;
+  padding: 10px;
+}
     
