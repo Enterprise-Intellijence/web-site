@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'shipping',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./shipping.component.scss']
 })
 export class ShippingComponent {
+  arrowRight = faAngleRight
+
 
 }
+
+
+
+
+
+
+

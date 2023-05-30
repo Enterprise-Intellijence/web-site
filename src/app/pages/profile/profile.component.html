@@ -1,0 +1,19 @@
+<div class="col-12 offset-2 pt-4 flex-grow-0">
+    <div class="row">
+        <div class="col-12 col-sm-2">
+            <div class="row">
+                <div class="col-4">
+                    <img [src]="profilePic | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px;">
+                </div>
+            </div>
+        </div>
+        
+        <div class=" col-sm-4">
+            <span>Name</span>
+        </div>
+
+        <div class="col-12 col-sm-4">
+            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>
+        </div>
+    </div>
+</div>

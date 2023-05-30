@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'settings',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent {
-
+    arrowDown = faChevronDown
 }
+
+
