@@ -21,11 +21,12 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 import { DeliveryControllerService, MessageControllerService, OfferControllerService, OrderControllerService, PaymentMethodControllerService, ProductControllerService, ReviewControllerService, TransactionControllerService, UserControllerService } from './services/api-service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TempCardComponent } from './components/temp-card/temp-card.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
+import { BadgeTextPipe } from './pipes/badge-text.pipe';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { BankAccountComponent } from './pages/settings/payments/bank-account/ban
         ProductComponent,
         ProductInfoComponent,
         HomePageComponent,
-        TempCardComponent,
+        BadgeTextPipe,
+        ProductCardComponent,
         MostRequestProductComponent,
         ProfileComponent,
         DefaultProfilePicPipe,
