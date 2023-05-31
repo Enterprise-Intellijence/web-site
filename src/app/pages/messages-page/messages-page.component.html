@@ -1,28 +1,39 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row border border-2 rounded">
     <div class="col-4">
-      <div class="row p-1 d-flex align-items-center border-end border-2" >
+      <div class="row p-2 d-flex align-items-center border-end border-bottom border-2">
         <span class="col">
           Inbox
         </span>
         <div class="col-auto">
-          <button class="btn btn-outline-primary btn-sm">New Message</button>
+          <button class="btn btn-outline-primary btn-sm">
+            <fa-icon [icon]="writeIcon"></fa-icon>
+            New Message</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row border-end border-2">
+        <ul>
+          <!-- <ng-container *ngFor="let conversation of conversations">
+            <li>
 
+            </li>
+          </ng-container> -->
+        </ul>
       </div>
     </div>
     <div class="col-8">
-      <div class="row p-1 d-flex align-items-center border-end border-2" >
+      <div class="row p-2 d-flex align-items-center border-bottom border-2">
         <span class="col text-start">
-          <a [routerLink]="['/users', 'me']" class="fw-bold">
+          <a [routerLink]="['/users', 'me']" class="fw-semibold text-decoration-none">
             <!-- TODO: put id of currently selected person here -->
             Username
           </a>
         </span>
         <div class="col-3 text-end">
-          <button class="btn btn-outline-primary btn-sm">info</button>
+          <button class="btn btn-outline-primary btn-sm">
+            <fa-icon [icon]="infoIcon"></fa-icon>
+            info
+          </button>
         </div>
       </div>
       <main>
