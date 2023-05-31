@@ -29,6 +29,16 @@ import { BankAccountComponent } from './pages/settings/payments/bank-account/ban
 import { BadgeTextPipe } from './pipes/badge-text.pipe';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
+import { AlertModule } from './components/alerts/alert.module';
+import { DropzoneModule, DropzoneConfigInterface,
+    DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+    // Change this to your upload POST address:
+    url: 'https://httpbin.org/post',
+    acceptedFiles: 'image/*',
+    createImageThumbnails: true
+    };
 
 @NgModule({
     declarations: [
@@ -53,7 +63,7 @@ import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
         DefaultProfilePicPipe,
         DefaultProductPicPipe,
         BankAccountComponent,
-        PurchasingPageComponent
+        PurchasingPageComponent,
     ],
     providers: [
         HttpClient,
@@ -66,6 +76,10 @@ import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
         ReviewControllerService,
         TransactionControllerService,
         UserControllerService,
+        {
+            provide: DROPZONE_CONFIG,
+            useValue: DEFAULT_DROPZONE_CONFIG
+        }
     ],
     bootstrap: [
         AppComponent,
@@ -74,13 +88,16 @@ import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
         AppRoutingModule,
         BrowserModule
       ],
+    exports: [],
     imports: [
         BrowserModule,
         AppRoutingModule,
         NgbModule,
         FontAwesomeModule,
         HttpClientModule,
-        NgbdModalFocus
-    ]
+        NgbdModalFocus,
+        AlertModule,
+        DropzoneModule,
+    ],
 })
 export class AppModule { }
