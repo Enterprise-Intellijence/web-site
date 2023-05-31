@@ -1,6 +1,6 @@
-<div class="card shadow cursor-pointer" style="max-width: 20rem;">
+<div class="card shadow cursor-pointer" style="max-width: 20rem;" [routerLink]="['/products', product.id]">
 
-  <div class="card-header text-truncate cursor-pointer" [routerLink]="['/user', product.seller?.id]">
+  <div class="card-header text-truncate cursor-pointer" [routerLink]="['/users', product.seller?.id]">
     <img src="https://via.placeholder.com/50" alt="" class="rounded-circle" height="26px">
     <span class="ms-2">{{product.seller?.username}}</span>
   </div>
