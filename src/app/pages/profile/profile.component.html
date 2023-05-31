@@ -9,11 +9,20 @@
         </div>
         
         <div class=" col-sm-4">
-            <span>Name</span>
+            <h4>{{profileName}}</h4>
         </div>
 
-        <div class="col-12 col-sm-4">
-            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>
+        <div *ngIf="visitedUserId == currentUserId" class="col-12 col-sm-4">
+            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>     
+        </div>
+
+        <div *ngIf="visitedUserId != currentUserId" class="col-12 col-sm-4">
+            <button class="btn btn-outline-success" type="button" [routerLink]="['/messages']">Message</button>
+            <button class="btn btn-success margin-button" type="button">Follow</button>
+
+            <button class="btn btn-outline-warning margin-button" type="button">
+                <fa-icon [icon]="faCircleExclamation"></fa-icon>
+            </button>
         </div>
     </div>
 </div>
