@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class ProfileDetailsComponent {
 
+  constructor() {}
+
+  // TODO: Get profile pic from user service
+  profilePic: String = "";
+
 }
