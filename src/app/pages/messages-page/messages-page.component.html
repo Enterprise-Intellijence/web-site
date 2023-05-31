@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row border border-2 rounded">
+    <div class="col-4">
+      <div class="row p-1 d-flex align-items-center border-end border-2" >
+        <span class="col">
+          Inbox
+        </span>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary btn-sm">New Message</button>
+        </div>
+      </div>
+      <div class="row">
+
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="row p-1 d-flex align-items-center border-end border-2" >
+        <span class="col text-start">
+          <a [routerLink]="['/users', 'me']" class="fw-bold">
+            <!-- TODO: put id of currently selected person here -->
+            Username
+          </a>
+        </span>
+        <div class="col-3 text-end">
+          <button class="btn btn-outline-primary btn-sm">info</button>
+        </div>
+      </div>
+      <main>
+
+
+      </main>
+    </div>
+  </div>
+</div>
