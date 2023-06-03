@@ -9,17 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Money } from './money';
+import { CustomMoneyDTO } from './customMoneyDTO';
+import { ProductBasicDTO } from './productBasicDTO';
 
-export interface MyMoney { 
-    price?: number;
-    currency?: MyMoney.CurrencyEnum;
-    money?: Money;
-}
-export namespace MyMoney {
-    export type CurrencyEnum = 'EUR' | 'USD';
-    export const CurrencyEnum = {
-        EUR: 'EUR' as CurrencyEnum,
-        USD: 'USD' as CurrencyEnum
-    };
+export interface OfferCreateDTO { 
+    amount?: CustomMoneyDTO;
+    product?: ProductBasicDTO;
 }

@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface Address { 
-    country?: string;
-    city?: string;
-    street?: string;
-    postalCode?: string;
+export interface PaymentMethodBasicDTO { 
+    id?: string;
+    creditCard: string;
 }

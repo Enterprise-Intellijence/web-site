@@ -9,17 +9,18 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import{ ProfileComponent } from './pages/profile/profile.component';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
+import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
-  
+
   // TODO: Just for test purposes the profile page is accessible from users/me but, when the user id
   //  is provided use the users/:id path
   // TODO: Add the :id to all the routerLink that are using the users/:id path
   { path: 'users/me', component: ProfileComponent },
   // { path: 'users/:id', component: ProfileComponent },
-
+  {path: 'messages', component: MessagesPageComponent},
   // { path: 'products/new', component: NewProductPageComponent },
   // { path: 'products/:id', component: ProductPageComponent },
   // { path: 'search', component: SearchPageComponent },

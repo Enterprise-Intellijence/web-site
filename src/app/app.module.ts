@@ -27,6 +27,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { BadgeTextPipe } from './pipes/badge-text.pipe';
+import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { BadgeTextPipe } from './pipes/badge-text.pipe';
         MostRequestProductComponent,
         ProfileComponent,
         DefaultProfilePicPipe,
-        BankAccountComponent
+        BankAccountComponent,
+        MessagesPageComponent
     ],
     providers: [
         HttpClient,

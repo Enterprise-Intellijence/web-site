@@ -9,20 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { MessageDTO } from './messageDTO';
 import { PageableObject } from './pageableObject';
-import { PaymentMethodDTO } from './paymentMethodDTO';
 import { SortObject } from './sortObject';
 
-export interface PagePaymentMethodDTO { 
+export interface PageMessageDTO { 
     totalPages?: number;
     totalElements?: number;
     size?: number;
-    content?: Array<PaymentMethodDTO>;
+    content?: Array<MessageDTO>;
     number?: number;
     sort?: SortObject;
+    pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
     numberOfElements?: number;
-    pageable?: PageableObject;
     empty?: boolean;
 }

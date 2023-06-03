@@ -3,13 +3,18 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { AdminControllerService } from './api/adminController.service';
 import { DeliveryControllerService } from './api/deliveryController.service';
+import { DemoControllerService } from './api/demoController.service';
+import { ImageControllerService } from './api/imageController.service';
 import { MessageControllerService } from './api/messageController.service';
 import { OfferControllerService } from './api/offerController.service';
 import { OrderControllerService } from './api/orderController.service';
 import { PaymentMethodControllerService } from './api/paymentMethodController.service';
 import { ProductControllerService } from './api/productController.service';
+import { ReportControllerService } from './api/reportController.service';
 import { ReviewControllerService } from './api/reviewController.service';
+import { SuperAdminControllerService } from './api/superAdminController.service';
 import { TransactionControllerService } from './api/transactionController.service';
 import { UserControllerService } from './api/userController.service';
 
@@ -18,13 +23,18 @@ import { UserControllerService } from './api/userController.service';
   declarations: [],
   exports:      [],
   providers: [
+    AdminControllerService,
     DeliveryControllerService,
+    DemoControllerService,
+    ImageControllerService,
     MessageControllerService,
     OfferControllerService,
     OrderControllerService,
     PaymentMethodControllerService,
     ProductControllerService,
+    ReportControllerService,
     ReviewControllerService,
+    SuperAdminControllerService,
     TransactionControllerService,
     UserControllerService ]
 })

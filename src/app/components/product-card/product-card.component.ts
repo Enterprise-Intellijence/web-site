@@ -26,9 +26,9 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.allProduct().subscribe((products) => {
-      console.log(products);
-    });
+    // this.productService.allProduct().subscribe((products) => {
+    //   console.log(products);
+    // });
 
 
     this.userLikesService.LikedProducts$.subscribe(() => {
@@ -57,46 +57,35 @@ export class ProductCardComponent implements OnInit {
 
 
   private createFakeProduct() {
-    this.product = {
-      id: "0",
-      title: "A test product",
-      description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
-      Duis vulputate commodo lectus, ac blandit elit tincidunt id.`,
-      myMoney: {
-        price: 14.99,
-        currency: "EUR"
-      },
-      brand: "Nike",
-      condition: "NEW_WITH_TAG",
-      address: {
-        city: "Milan",
-        country: "Italy",
-        street: "Via Roma",
-        postalCode: "20100"
-      },
-      productSize: "MEDIUM",
-      views: 0,
-      uploadDate: new Date(),
-      visibility: "PUBLIC",
-      availability: "AVAILABLE",
-      productCategory: "CLOTHING",
-      seller: {
-        id: "0",
-        username: "Mario Rossi",
-        email: "mario.rossi@gmail.com",
-        role: "USER",
-        address: {
-          city: "Milan",
-          country: "Italy",
-          street: "Via Roma",
-          postalCode: "20100"
-        },
-        provider: "LOCAL"
-      },
-      usersThatLiked: [],
-      messages: [],
-    };
+    // this.product = {
+    //   id: "0",
+    //   title: "A test product",
+    //   description: `
+    //   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    //   Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
+    //   Duis vulputate commodo lectus, ac blandit elit tincidunt id.`,
+    //   productCost: {
+    //     price: 14.99,
+    //     currency: "EUR"
+    //   },
+    //   brand: "Nike",
+    //   condition: "NEW_WITH_TAG",
+    //   address: {
+    //     city: "Milan",
+    //     country: "Italy",
+    //     street: "Via Roma",
+    //     postalCode: "20100"
+    //   },
+    //   productSize: "MEDIUM",
+    //   views: 0,
+    //   uploadDate: new Date(),
+    //   visibility: "PUBLIC",
+    //   availability: "AVAILABLE",
+    //   productCategory: "CLOTHING",
+    //   seller: {
+    //     id: "0",
+    //     username: "Mario Rossi",
+    //   },
+    // };
   }
 }
