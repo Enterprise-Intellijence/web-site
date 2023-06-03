@@ -9,27 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ClothingDTO } from './clothingDTO';
-import { DeliveryDTO } from './deliveryDTO';
-import { EntertainmentDTO } from './entertainmentDTO';
-import { HomeDTO } from './homeDTO';
-import { OfferDTO } from './offerDTO';
-import { ProductDTO } from './productDTO';
+import { OfferBasicDTO } from './offerBasicDTO';
+import { ProductBasicDTO } from './productBasicDTO';
 
 export interface OrderCreateDTO { 
-    state?: OrderCreateDTO.StateEnum;
-    product?: ProductDTO | ClothingDTO | EntertainmentDTO | HomeDTO;
-    delivery?: DeliveryDTO;
-    offer: OfferDTO;
-}
-export namespace OrderCreateDTO {
-    export type StateEnum = 'CANCELED' | 'PENDING' | 'PURCHASED' | 'SHIPPED' | 'DELIVERED' | 'COMPLETED';
-    export const StateEnum = {
-        CANCELED: 'CANCELED' as StateEnum,
-        PENDING: 'PENDING' as StateEnum,
-        PURCHASED: 'PURCHASED' as StateEnum,
-        SHIPPED: 'SHIPPED' as StateEnum,
-        DELIVERED: 'DELIVERED' as StateEnum,
-        COMPLETED: 'COMPLETED' as StateEnum
-    };
+    product?: ProductBasicDTO;
+    offer: OfferBasicDTO;
 }

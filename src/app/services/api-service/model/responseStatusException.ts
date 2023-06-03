@@ -26,12 +26,12 @@ export interface ResponseStatusException {
     reason?: string;
     message?: string;
     responseHeaders?: HttpHeaders;
-    instance?: string;
-    statusCode?: HttpStatusCode;
     detail?: string;
     title?: string;
+    statusCode?: HttpStatusCode;
     detailMessageArguments?: Array<any>;
     detailMessageCode?: string;
+    instance?: string;
     type?: string;
     titleMessageCode?: string;
     rootCause?: ResponseStatusExceptionRootCause;

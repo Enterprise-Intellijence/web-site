@@ -9,15 +9,25 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Address } from './address';
-import { Money } from './money';
-import { OrderDTO } from './orderDTO';
+import { AddressDTO } from './addressDTO';
+import { CustomMoneyDTO } from './customMoneyDTO';
+import { OrderBasicDTO } from './orderBasicDTO';
 
 export interface DeliveryDTO { 
-    order?: OrderDTO;
-    deliveryCost?: Money;
+    order?: OrderBasicDTO;
+    sendTime?: Date;
+    deliveredTime?: Date;
+    deliveryCost?: CustomMoneyDTO;
     shipper?: string;
-    senderAddress?: Address;
-    receiverAddress?: Address;
+    deliveryStatus?: DeliveryDTO.DeliveryStatusEnum;
+    senderAddress?: AddressDTO;
+    receiverAddress?: AddressDTO;
     id?: string;
+}
+export namespace DeliveryDTO {
+    export type DeliveryStatusEnum = 'SHIPPED' | 'DELIVERED';
+    export const DeliveryStatusEnum = {
+        SHIPPED: 'SHIPPED' as DeliveryStatusEnum,
+        DELIVERED: 'DELIVERED' as DeliveryStatusEnum
+    };
 }

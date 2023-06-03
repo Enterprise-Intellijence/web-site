@@ -10,27 +10,23 @@
  * Do not edit the class manually.
  */
 import { AddressDTO } from './addressDTO';
-import { MessageDTO } from './messageDTO';
-import { MyMoney } from './myMoney';
-import { OrderDTO } from './orderDTO';
+import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductDTO } from './productDTO';
-import { UserDTO } from './userDTO';
+import { ProductImageDTO } from './productImageDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
 export interface EntertainmentDTO extends ProductDTO { 
-    entertainmentType?: EntertainmentDTO.EntertainmentTypeEnum;
+    entertainmentLanguage: EntertainmentDTO.EntertainmentLanguageEnum;
 }
 export namespace EntertainmentDTO {
-    export type EntertainmentTypeEnum = 'VIDEOGAMES_CONSOLES_XBOXONE' | 'VIDEOGAMES_CONSOLES_PLAYSTATION_FIVE' | 'VIDEOGAMES_CONSOLES_PLAYSTATION_OLDER' | 'VIDEOGAMES_CONSOLES_PCGAMES' | 'MEDIA_MUSIC' | 'MEDIA_VIDEO' | 'BOOKS_NON_FICTION' | 'BOOKS_KIDS' | 'BOOKS_LITERATURE' | 'BOOKS_FICTION';
-    export const EntertainmentTypeEnum = {
-        VIDEOGAMESCONSOLESXBOXONE: 'VIDEOGAMES_CONSOLES_XBOXONE' as EntertainmentTypeEnum,
-        VIDEOGAMESCONSOLESPLAYSTATIONFIVE: 'VIDEOGAMES_CONSOLES_PLAYSTATION_FIVE' as EntertainmentTypeEnum,
-        VIDEOGAMESCONSOLESPLAYSTATIONOLDER: 'VIDEOGAMES_CONSOLES_PLAYSTATION_OLDER' as EntertainmentTypeEnum,
-        VIDEOGAMESCONSOLESPCGAMES: 'VIDEOGAMES_CONSOLES_PCGAMES' as EntertainmentTypeEnum,
-        MEDIAMUSIC: 'MEDIA_MUSIC' as EntertainmentTypeEnum,
-        MEDIAVIDEO: 'MEDIA_VIDEO' as EntertainmentTypeEnum,
-        BOOKSNONFICTION: 'BOOKS_NON_FICTION' as EntertainmentTypeEnum,
-        BOOKSKIDS: 'BOOKS_KIDS' as EntertainmentTypeEnum,
-        BOOKSLITERATURE: 'BOOKS_LITERATURE' as EntertainmentTypeEnum,
-        BOOKSFICTION: 'BOOKS_FICTION' as EntertainmentTypeEnum
+    export type EntertainmentLanguageEnum = 'MULTI_LANGUAGE' | 'ITALIAN' | 'FRENCH' | 'GERMAN' | 'ENGLISH' | 'SPANISH' | 'OTHERS';
+    export const EntertainmentLanguageEnum = {
+        MULTILANGUAGE: 'MULTI_LANGUAGE' as EntertainmentLanguageEnum,
+        ITALIAN: 'ITALIAN' as EntertainmentLanguageEnum,
+        FRENCH: 'FRENCH' as EntertainmentLanguageEnum,
+        GERMAN: 'GERMAN' as EntertainmentLanguageEnum,
+        ENGLISH: 'ENGLISH' as EntertainmentLanguageEnum,
+        SPANISH: 'SPANISH' as EntertainmentLanguageEnum,
+        OTHERS: 'OTHERS' as EntertainmentLanguageEnum
     };
 }

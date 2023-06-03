@@ -9,15 +9,24 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { OfferDTO } from './offerDTO';
-import { ProductDTO } from './productDTO';
-import { UserDTO } from './userDTO';
+import { OfferBasicDTO } from './offerBasicDTO';
+import { ProductBasicDTO } from './productBasicDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
 export interface MessageDTO { 
     id?: string;
-    context?: string;
-    product?: ProductDTO;
-    sendUser?: UserDTO;
-    receivedUser?: UserDTO;
-    offer?: OfferDTO;
+    text: string;
+    messageDate?: Date;
+    messageStatus?: MessageDTO.MessageStatusEnum;
+    product?: ProductBasicDTO;
+    sendUser: UserBasicDTO;
+    receivedUser: UserBasicDTO;
+    offer?: OfferBasicDTO;
+}
+export namespace MessageDTO {
+    export type MessageStatusEnum = 'READ' | 'UNREAD';
+    export const MessageStatusEnum = {
+        READ: 'READ' as MessageStatusEnum,
+        UNREAD: 'UNREAD' as MessageStatusEnum
+    };
 }

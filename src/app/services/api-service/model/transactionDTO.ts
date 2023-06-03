@@ -9,10 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Money } from './money';
+import { CustomMoneyDTO } from './customMoneyDTO';
+import { OrderBasicDTO } from './orderBasicDTO';
+import { PaymentMethodBasicDTO } from './paymentMethodBasicDTO';
 
 export interface TransactionDTO { 
     id?: string;
-    amount: Money;
-    paymentMethod: string;
+    creationTime?: Date;
+    amount: CustomMoneyDTO;
+    transactionState?: TransactionDTO.TransactionStateEnum;
+    paymentMethod: PaymentMethodBasicDTO;
+    order?: OrderBasicDTO;
+}
+export namespace TransactionDTO {
+    export type TransactionStateEnum = 'REJECTED' | 'COMPLETED';
+    export const TransactionStateEnum = {
+        REJECTED: 'REJECTED' as TransactionStateEnum,
+        COMPLETED: 'COMPLETED' as TransactionStateEnum
+    };
 }
