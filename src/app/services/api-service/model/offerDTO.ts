@@ -9,23 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ClothingDTO } from './clothingDTO';
-import { EntertainmentDTO } from './entertainmentDTO';
-import { HomeDTO } from './homeDTO';
-import { MessageDTO } from './messageDTO';
-import { Money } from './money';
-import { OrderDTO } from './orderDTO';
-import { ProductDTO } from './productDTO';
-import { UserDTO } from './userDTO';
+import { CustomMoneyDTO } from './customMoneyDTO';
+import { OrderBasicDTO } from './orderBasicDTO';
+import { ProductBasicDTO } from './productBasicDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
 export interface OfferDTO { 
     id?: string;
-    amount?: Money;
+    amount?: CustomMoneyDTO;
+    creationTime?: Date;
     state?: OfferDTO.StateEnum;
-    offerer?: UserDTO;
-    product?: ProductDTO | ClothingDTO | EntertainmentDTO | HomeDTO;
-    message?: MessageDTO;
-    order?: OrderDTO;
+    offerer?: UserBasicDTO;
+    product?: ProductBasicDTO;
+    order?: OrderBasicDTO;
 }
 export namespace OfferDTO {
     export type StateEnum = 'PENDING' | 'ACCEPTED' | 'REJECTED';

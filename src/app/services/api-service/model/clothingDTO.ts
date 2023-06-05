@@ -10,17 +10,15 @@
  * Do not edit the class manually.
  */
 import { AddressDTO } from './addressDTO';
-import { MessageDTO } from './messageDTO';
-import { MyMoney } from './myMoney';
-import { OrderDTO } from './orderDTO';
+import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductDTO } from './productDTO';
-import { UserDTO } from './userDTO';
+import { ProductImageDTO } from './productImageDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
 export interface ClothingDTO extends ProductDTO { 
-    productGender?: ClothingDTO.ProductGenderEnum;
-    size?: ClothingDTO.SizeEnum;
-    colour?: ClothingDTO.ColourEnum;
-    clothingType?: ClothingDTO.ClothingTypeEnum;
+    productGender: ClothingDTO.ProductGenderEnum;
+    size: ClothingDTO.SizeEnum;
+    colour: ClothingDTO.ColourEnum;
 }
 export namespace ClothingDTO {
     export type ProductGenderEnum = 'MALE' | 'FEMALE' | 'UNISEX';
@@ -29,47 +27,50 @@ export namespace ClothingDTO {
         FEMALE: 'FEMALE' as ProductGenderEnum,
         UNISEX: 'UNISEX' as ProductGenderEnum
     };
-    export type SizeEnum = 'CLOTHS_3XS' | 'CLOTHS_2XS' | 'CLOTHS_XS' | 'CLOTHS_S' | 'CLOTHS_M' | 'CLOTHS_L' | 'CLOTHS_XL' | 'CLOTHS_2XL' | 'CLOTHS_3L' | 'CLOTHS_4XL' | 'SHOES_25' | 'SHOES_26' | 'SHOES_27' | 'SHOES_28' | 'SHOES_29' | 'SHOES_30' | 'SHOES_31' | 'SHOES_32' | 'SHOES_33' | 'SHOES_34' | 'SHOES_35' | 'SHOES_36' | 'SHOES_37' | 'SHOES_38' | 'SHOES_39' | 'SHOES_40' | 'SHOES_41' | 'SHOES_42' | 'SHOES_43' | 'SHOES_44' | 'SHOES_45' | 'SHOES_46' | 'SHOES_47' | 'SHOES_48' | 'SHOES_49' | 'SHOES_50' | 'OTHER_SMALL' | 'OTHER_MEDIUM' | 'OTHER_BIG';
+    export type SizeEnum = '_3XS' | '_2XS' | '_XS' | '_S' | '_M' | '_L' | '_XL' | '_2XL' | '_3L' | '_4XL' | '_25' | '_26' | '_27' | '_28' | '_29' | '_30' | '_31' | '_32' | '_33' | '_34' | '_35' | '_36' | '_37' | '_38' | '_39' | '_40' | '_41' | '_42' | '_43' | '_44' | '_45' | '_46' | '_47' | '_48' | '_49' | '_50' | 'SMALL_BAG' | 'MEDIUM_BAG' | 'BIG_BAG' | 'SMALL_ACC' | 'MEDIUM_ACC' | 'BIG_ACC';
     export const SizeEnum = {
-        CLOTHS3XS: 'CLOTHS_3XS' as SizeEnum,
-        CLOTHS2XS: 'CLOTHS_2XS' as SizeEnum,
-        CLOTHSXS: 'CLOTHS_XS' as SizeEnum,
-        CLOTHSS: 'CLOTHS_S' as SizeEnum,
-        CLOTHSM: 'CLOTHS_M' as SizeEnum,
-        CLOTHSL: 'CLOTHS_L' as SizeEnum,
-        CLOTHSXL: 'CLOTHS_XL' as SizeEnum,
-        CLOTHS2XL: 'CLOTHS_2XL' as SizeEnum,
-        CLOTHS3L: 'CLOTHS_3L' as SizeEnum,
-        CLOTHS4XL: 'CLOTHS_4XL' as SizeEnum,
-        SHOES25: 'SHOES_25' as SizeEnum,
-        SHOES26: 'SHOES_26' as SizeEnum,
-        SHOES27: 'SHOES_27' as SizeEnum,
-        SHOES28: 'SHOES_28' as SizeEnum,
-        SHOES29: 'SHOES_29' as SizeEnum,
-        SHOES30: 'SHOES_30' as SizeEnum,
-        SHOES31: 'SHOES_31' as SizeEnum,
-        SHOES32: 'SHOES_32' as SizeEnum,
-        SHOES33: 'SHOES_33' as SizeEnum,
-        SHOES34: 'SHOES_34' as SizeEnum,
-        SHOES35: 'SHOES_35' as SizeEnum,
-        SHOES36: 'SHOES_36' as SizeEnum,
-        SHOES37: 'SHOES_37' as SizeEnum,
-        SHOES38: 'SHOES_38' as SizeEnum,
-        SHOES39: 'SHOES_39' as SizeEnum,
-        SHOES40: 'SHOES_40' as SizeEnum,
-        SHOES41: 'SHOES_41' as SizeEnum,
-        SHOES42: 'SHOES_42' as SizeEnum,
-        SHOES43: 'SHOES_43' as SizeEnum,
-        SHOES44: 'SHOES_44' as SizeEnum,
-        SHOES45: 'SHOES_45' as SizeEnum,
-        SHOES46: 'SHOES_46' as SizeEnum,
-        SHOES47: 'SHOES_47' as SizeEnum,
-        SHOES48: 'SHOES_48' as SizeEnum,
-        SHOES49: 'SHOES_49' as SizeEnum,
-        SHOES50: 'SHOES_50' as SizeEnum,
-        OTHERSMALL: 'OTHER_SMALL' as SizeEnum,
-        OTHERMEDIUM: 'OTHER_MEDIUM' as SizeEnum,
-        OTHERBIG: 'OTHER_BIG' as SizeEnum
+        _3XS: '_3XS' as SizeEnum,
+        _2XS: '_2XS' as SizeEnum,
+        XS: '_XS' as SizeEnum,
+        S: '_S' as SizeEnum,
+        M: '_M' as SizeEnum,
+        L: '_L' as SizeEnum,
+        XL: '_XL' as SizeEnum,
+        _2XL: '_2XL' as SizeEnum,
+        _3L: '_3L' as SizeEnum,
+        _4XL: '_4XL' as SizeEnum,
+        _25: '_25' as SizeEnum,
+        _26: '_26' as SizeEnum,
+        _27: '_27' as SizeEnum,
+        _28: '_28' as SizeEnum,
+        _29: '_29' as SizeEnum,
+        _30: '_30' as SizeEnum,
+        _31: '_31' as SizeEnum,
+        _32: '_32' as SizeEnum,
+        _33: '_33' as SizeEnum,
+        _34: '_34' as SizeEnum,
+        _35: '_35' as SizeEnum,
+        _36: '_36' as SizeEnum,
+        _37: '_37' as SizeEnum,
+        _38: '_38' as SizeEnum,
+        _39: '_39' as SizeEnum,
+        _40: '_40' as SizeEnum,
+        _41: '_41' as SizeEnum,
+        _42: '_42' as SizeEnum,
+        _43: '_43' as SizeEnum,
+        _44: '_44' as SizeEnum,
+        _45: '_45' as SizeEnum,
+        _46: '_46' as SizeEnum,
+        _47: '_47' as SizeEnum,
+        _48: '_48' as SizeEnum,
+        _49: '_49' as SizeEnum,
+        _50: '_50' as SizeEnum,
+        SMALLBAG: 'SMALL_BAG' as SizeEnum,
+        MEDIUMBAG: 'MEDIUM_BAG' as SizeEnum,
+        BIGBAG: 'BIG_BAG' as SizeEnum,
+        SMALLACC: 'SMALL_ACC' as SizeEnum,
+        MEDIUMACC: 'MEDIUM_ACC' as SizeEnum,
+        BIGACC: 'BIG_ACC' as SizeEnum
     };
     export type ColourEnum = 'YELLOW' | 'GREEN' | 'BLUE' | 'RED' | 'BLACK' | 'WHITE' | 'MULTICOLOUR';
     export const ColourEnum = {
@@ -80,27 +81,5 @@ export namespace ClothingDTO {
         BLACK: 'BLACK' as ColourEnum,
         WHITE: 'WHITE' as ColourEnum,
         MULTICOLOUR: 'MULTICOLOUR' as ColourEnum
-    };
-    export type ClothingTypeEnum = 'CLOTHS_JEANS' | 'CLOTHS_DRESS' | 'CLOTHS_SKIRT' | 'CLOTHS_T_SHIRT' | 'CLOTHS_SWEATERS' | 'CLOTHS_TROUSERS' | 'SHOES_BOOTS' | 'SHOES_HEELS' | 'SHOES_SPORT' | 'SHOES_TRAINERS' | 'SHOES_SANDALS' | 'BAGS_SHOULDER_BAG' | 'BAGS_HANDBAGS' | 'BAGS_LUGGAGE' | 'BAGS_BACKPACKS' | 'ACCESSORIES_WATCHES' | 'ACCESSORIES_SUNGLASSES' | 'ACCESSORIES_BELTS' | 'ACCESSORIES_HATS_CAPS';
-    export const ClothingTypeEnum = {
-        CLOTHSJEANS: 'CLOTHS_JEANS' as ClothingTypeEnum,
-        CLOTHSDRESS: 'CLOTHS_DRESS' as ClothingTypeEnum,
-        CLOTHSSKIRT: 'CLOTHS_SKIRT' as ClothingTypeEnum,
-        CLOTHSTSHIRT: 'CLOTHS_T_SHIRT' as ClothingTypeEnum,
-        CLOTHSSWEATERS: 'CLOTHS_SWEATERS' as ClothingTypeEnum,
-        CLOTHSTROUSERS: 'CLOTHS_TROUSERS' as ClothingTypeEnum,
-        SHOESBOOTS: 'SHOES_BOOTS' as ClothingTypeEnum,
-        SHOESHEELS: 'SHOES_HEELS' as ClothingTypeEnum,
-        SHOESSPORT: 'SHOES_SPORT' as ClothingTypeEnum,
-        SHOESTRAINERS: 'SHOES_TRAINERS' as ClothingTypeEnum,
-        SHOESSANDALS: 'SHOES_SANDALS' as ClothingTypeEnum,
-        BAGSSHOULDERBAG: 'BAGS_SHOULDER_BAG' as ClothingTypeEnum,
-        BAGSHANDBAGS: 'BAGS_HANDBAGS' as ClothingTypeEnum,
-        BAGSLUGGAGE: 'BAGS_LUGGAGE' as ClothingTypeEnum,
-        BAGSBACKPACKS: 'BAGS_BACKPACKS' as ClothingTypeEnum,
-        ACCESSORIESWATCHES: 'ACCESSORIES_WATCHES' as ClothingTypeEnum,
-        ACCESSORIESSUNGLASSES: 'ACCESSORIES_SUNGLASSES' as ClothingTypeEnum,
-        ACCESSORIESBELTS: 'ACCESSORIES_BELTS' as ClothingTypeEnum,
-        ACCESSORIESHATSCAPS: 'ACCESSORIES_HATS_CAPS' as ClothingTypeEnum
     };
 }

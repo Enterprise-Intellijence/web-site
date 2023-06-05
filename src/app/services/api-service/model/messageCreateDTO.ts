@@ -9,13 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ProductBasicDTO } from './productBasicDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    numeric3Code?: string;
-    countryCodes?: Array<string>;
-    pseudoCurrency?: boolean;
+export interface MessageCreateDTO { 
+    text: string;
+    product?: ProductBasicDTO;
+    receivedUser: UserBasicDTO;
 }

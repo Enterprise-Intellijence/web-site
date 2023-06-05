@@ -10,35 +10,24 @@
  * Do not edit the class manually.
  */
 import { AddressDTO } from './addressDTO';
-import { ClothingDTO } from './clothingDTO';
-import { EntertainmentDTO } from './entertainmentDTO';
-import { HomeDTO } from './homeDTO';
-import { MessageDTO } from './messageDTO';
-import { OfferDTO } from './offerDTO';
-import { OrderDTO } from './orderDTO';
-import { PaymentMethodDTO } from './paymentMethodDTO';
-import { ProductDTO } from './productDTO';
+import { PaymentMethodBasicDTO } from './paymentMethodBasicDTO';
 import { ReviewDTO } from './reviewDTO';
+import { UserImageDTO } from './userImageDTO';
 
 export interface UserDTO { 
     id?: string;
     username: string;
-    password?: string;
     email?: string;
-    photo?: Array<string>;
+    bio?: string;
+    photoProfile?: UserImageDTO;
     provider: UserDTO.ProviderEnum;
     address?: AddressDTO;
     role: UserDTO.RoleEnum;
-    defaultPaymentMethod?: PaymentMethodDTO;
-    paymentMethods?: Array<PaymentMethodDTO>;
-    offers?: Array<OfferDTO>;
-    followers?: Array<UserDTO>;
-    soldProducts?: Array<ProductDTO | ClothingDTO | EntertainmentDTO | HomeDTO>;
-    follows?: Array<UserDTO>;
-    likes?: Array<ProductDTO | ClothingDTO | EntertainmentDTO | HomeDTO>;
-    sendMessages?: Array<MessageDTO>;
-    receivedMessages?: Array<MessageDTO>;
-    orders?: Array<OrderDTO>;
+    defaultPaymentMethod?: PaymentMethodBasicDTO;
+    reviewsTotalSum?: number;
+    reviewsNumber?: number;
+    followersNumber?: number;
+    followingNumber?: number;
     receivedReviews?: Array<ReviewDTO>;
     sentReviews?: Array<ReviewDTO>;
 }
@@ -48,9 +37,10 @@ export namespace UserDTO {
         LOCAL: 'LOCAL' as ProviderEnum,
         GOOGLE: 'GOOGLE' as ProviderEnum
     };
-    export type RoleEnum = 'ADMIN' | 'USER';
+    export type RoleEnum = 'ADMIN' | 'USER' | 'SUPER_ADMIN';
     export const RoleEnum = {
         ADMIN: 'ADMIN' as RoleEnum,
-        USER: 'USER' as RoleEnum
+        USER: 'USER' as RoleEnum,
+        SUPERADMIN: 'SUPER_ADMIN' as RoleEnum
     };
 }

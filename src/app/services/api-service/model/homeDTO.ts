@@ -10,15 +10,15 @@
  * Do not edit the class manually.
  */
 import { AddressDTO } from './addressDTO';
-import { MessageDTO } from './messageDTO';
-import { MyMoney } from './myMoney';
-import { OrderDTO } from './orderDTO';
+import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductDTO } from './productDTO';
-import { UserDTO } from './userDTO';
+import { ProductImageDTO } from './productImageDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
 export interface HomeDTO extends ProductDTO { 
-    colour?: HomeDTO.ColourEnum;
-    homeType?: HomeDTO.HomeTypeEnum;
+    colour: HomeDTO.ColourEnum;
+    homeSize: HomeDTO.HomeSizeEnum;
+    homeMaterial: HomeDTO.HomeMaterialEnum;
 }
 export namespace HomeDTO {
     export type ColourEnum = 'YELLOW' | 'GREEN' | 'BLUE' | 'RED' | 'BLACK' | 'WHITE' | 'MULTICOLOUR';
@@ -31,21 +31,58 @@ export namespace HomeDTO {
         WHITE: 'WHITE' as ColourEnum,
         MULTICOLOUR: 'MULTICOLOUR' as ColourEnum
     };
-    export type HomeTypeEnum = 'TEXTILES_BLANKETS' | 'TEXTILES_CUSHIONS' | 'TEXTILES_TABLE_LINEN' | 'TEXTILES_TOWEL' | 'TEXTILES_BEDDING' | 'HOME_ACCESSORIES_COOKS' | 'HOME_ACCESSORIES_PICTURE' | 'HOME_ACCESSORIES_PHOTO_FRAMES' | 'HOME_ACCESSORIES_STORAGE' | 'HOME_ACCESSORIES_MIRRORS' | 'HOME_ACCESSORIES_VASES' | 'TABLEWARE_DINNERWARE' | 'TABLEWARE_CUTLERY' | 'TABLEWARE_DRINKWARE';
-    export const HomeTypeEnum = {
-        TEXTILESBLANKETS: 'TEXTILES_BLANKETS' as HomeTypeEnum,
-        TEXTILESCUSHIONS: 'TEXTILES_CUSHIONS' as HomeTypeEnum,
-        TEXTILESTABLELINEN: 'TEXTILES_TABLE_LINEN' as HomeTypeEnum,
-        TEXTILESTOWEL: 'TEXTILES_TOWEL' as HomeTypeEnum,
-        TEXTILESBEDDING: 'TEXTILES_BEDDING' as HomeTypeEnum,
-        HOMEACCESSORIESCOOKS: 'HOME_ACCESSORIES_COOKS' as HomeTypeEnum,
-        HOMEACCESSORIESPICTURE: 'HOME_ACCESSORIES_PICTURE' as HomeTypeEnum,
-        HOMEACCESSORIESPHOTOFRAMES: 'HOME_ACCESSORIES_PHOTO_FRAMES' as HomeTypeEnum,
-        HOMEACCESSORIESSTORAGE: 'HOME_ACCESSORIES_STORAGE' as HomeTypeEnum,
-        HOMEACCESSORIESMIRRORS: 'HOME_ACCESSORIES_MIRRORS' as HomeTypeEnum,
-        HOMEACCESSORIESVASES: 'HOME_ACCESSORIES_VASES' as HomeTypeEnum,
-        TABLEWAREDINNERWARE: 'TABLEWARE_DINNERWARE' as HomeTypeEnum,
-        TABLEWARECUTLERY: 'TABLEWARE_CUTLERY' as HomeTypeEnum,
-        TABLEWAREDRINKWARE: 'TABLEWARE_DRINKWARE' as HomeTypeEnum
+    export type HomeSizeEnum = '_30x50cm' | '_35x50cm' | '_35x40cm' | '_40x40cm' | '_40x60cm' | '_40x75cm' | '_40x80cm' | '_40x90cm' | '_45x45cm' | '_50x50cm' | '_50x60cm' | '_50x70cm' | '_50x90cm' | '_60x60cm' | '_65x65cm' | '_80x80cm' | '_70x90cm' | '_80x100cm' | '_100x150cm' | '_100x200cm' | '_110x150cm' | '_110x170cm' | '_120x160cm' | '_120x200cm' | '_130x200cm' | '_125x150cm' | '_130x170cm' | '_150x200cm' | '_180x200cm' | 'other';
+    export const HomeSizeEnum = {
+        _30x50cm: '_30x50cm' as HomeSizeEnum,
+        _35x50cm: '_35x50cm' as HomeSizeEnum,
+        _35x40cm: '_35x40cm' as HomeSizeEnum,
+        _40x40cm: '_40x40cm' as HomeSizeEnum,
+        _40x60cm: '_40x60cm' as HomeSizeEnum,
+        _40x75cm: '_40x75cm' as HomeSizeEnum,
+        _40x80cm: '_40x80cm' as HomeSizeEnum,
+        _40x90cm: '_40x90cm' as HomeSizeEnum,
+        _45x45cm: '_45x45cm' as HomeSizeEnum,
+        _50x50cm: '_50x50cm' as HomeSizeEnum,
+        _50x60cm: '_50x60cm' as HomeSizeEnum,
+        _50x70cm: '_50x70cm' as HomeSizeEnum,
+        _50x90cm: '_50x90cm' as HomeSizeEnum,
+        _60x60cm: '_60x60cm' as HomeSizeEnum,
+        _65x65cm: '_65x65cm' as HomeSizeEnum,
+        _80x80cm: '_80x80cm' as HomeSizeEnum,
+        _70x90cm: '_70x90cm' as HomeSizeEnum,
+        _80x100cm: '_80x100cm' as HomeSizeEnum,
+        _100x150cm: '_100x150cm' as HomeSizeEnum,
+        _100x200cm: '_100x200cm' as HomeSizeEnum,
+        _110x150cm: '_110x150cm' as HomeSizeEnum,
+        _110x170cm: '_110x170cm' as HomeSizeEnum,
+        _120x160cm: '_120x160cm' as HomeSizeEnum,
+        _120x200cm: '_120x200cm' as HomeSizeEnum,
+        _130x200cm: '_130x200cm' as HomeSizeEnum,
+        _125x150cm: '_125x150cm' as HomeSizeEnum,
+        _130x170cm: '_130x170cm' as HomeSizeEnum,
+        _150x200cm: '_150x200cm' as HomeSizeEnum,
+        _180x200cm: '_180x200cm' as HomeSizeEnum,
+        Other: 'other' as HomeSizeEnum
+    };
+    export type HomeMaterialEnum = 'Cotton' | 'Linen' | 'Wool' | 'Acrylic' | 'Chiffon' | 'Polyamide_Nylon' | 'Polyester' | 'Silk' | 'Ceramic' | 'Glass' | 'Stainless_Steel' | 'Plastic' | 'Wood' | 'Stone' | 'Porcelain' | 'Silver' | 'Metal' | 'Other';
+    export const HomeMaterialEnum = {
+        Cotton: 'Cotton' as HomeMaterialEnum,
+        Linen: 'Linen' as HomeMaterialEnum,
+        Wool: 'Wool' as HomeMaterialEnum,
+        Acrylic: 'Acrylic' as HomeMaterialEnum,
+        Chiffon: 'Chiffon' as HomeMaterialEnum,
+        PolyamideNylon: 'Polyamide_Nylon' as HomeMaterialEnum,
+        Polyester: 'Polyester' as HomeMaterialEnum,
+        Silk: 'Silk' as HomeMaterialEnum,
+        Ceramic: 'Ceramic' as HomeMaterialEnum,
+        Glass: 'Glass' as HomeMaterialEnum,
+        StainlessSteel: 'Stainless_Steel' as HomeMaterialEnum,
+        Plastic: 'Plastic' as HomeMaterialEnum,
+        Wood: 'Wood' as HomeMaterialEnum,
+        Stone: 'Stone' as HomeMaterialEnum,
+        Porcelain: 'Porcelain' as HomeMaterialEnum,
+        Silver: 'Silver' as HomeMaterialEnum,
+        Metal: 'Metal' as HomeMaterialEnum,
+        Other: 'Other' as HomeMaterialEnum
     };
 }

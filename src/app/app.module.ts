@@ -39,6 +39,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     acceptedFiles: 'image/*',
     createImageThumbnails: true
     };
+import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 
 @NgModule({
     declarations: [
@@ -64,6 +65,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         DefaultProductPicPipe,
         BankAccountComponent,
         PurchasingPageComponent,
+        BankAccountComponent,
+        MessagesPageComponent
     ],
     providers: [
         HttpClient,
