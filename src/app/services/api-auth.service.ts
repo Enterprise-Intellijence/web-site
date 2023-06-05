@@ -18,43 +18,21 @@ export class ApiAuthService {
 
   public login(email:string, password:string) {
     return this.userService.authenticate(email, password)
-      .pipe(tap(res => this.setSession(res)));
+      .pipe(tap(res => this.setJWT(res)));
   }
 
-  private setSession(authResult: any) {
+  private setJWT(encodedJwt: any) {
 
       const expiresAt = new Date();
-      expiresAt.setSeconds(expiresAt.getSeconds() + authResult.expiresIn);
+      expiresAt.setSeconds(expiresAt.getSeconds() + encodedJwt.expiresIn);
 
-      localStorage.setItem('id_token', authResult.idToken);
+      localStorage.setItem('id_token', encodedJwt.idToken);
       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
   }
 
-  logout() {
-      localStorage.removeItem("id_token");
-      localStorage.removeItem("expires_at");
-  }
 
-  public isLoggedIn() {
-    const expirationDate = this.getExpiration();
-    if(!expirationDate)
-      return false;
 
-      return Date.now() <= expirationDate;
-  }
 
-  isLoggedOut() {
-      return !this.isLoggedIn();
-  }
 
-  getExpiration(): Date | null {
-      // unix timestamp in seconds
-      const expiration = localStorage.getItem("expires_at");
-      if(!expiration)
-        return null;
 
-      const expiresAt = JSON.parse(expiration);
-
-      return ;
-  }
 }
