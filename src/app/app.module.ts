@@ -29,6 +29,8 @@ import { BankAccountComponent } from './pages/settings/payments/bank-account/ban
 import { BadgeTextPipe } from './pipes/badge-text.pipe';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { FormsModule } from '@angular/forms';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -58,7 +60,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
         ProfileComponent,
         DefaultProfilePicPipe,
         BankAccountComponent,
-        MessagesPageComponent
+        MessagesPageComponent,
+        LoginPageComponent
     ],
     providers: [
         HttpClient,
@@ -79,7 +82,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
         FontAwesomeModule,
         NgbModule,
         AppRoutingModule,
-        BrowserModule
+        BrowserModule,
       ],
     imports: [
         BrowserModule,
@@ -87,7 +90,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
         NgbModule,
         FontAwesomeModule,
         HttpClientModule,
-        NgbdModalFocus
+        FormsModule,
+        NgbdModalFocus,
     ]
 })
 export class AppModule { }
