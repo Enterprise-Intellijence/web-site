@@ -6,11 +6,12 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { ApiRequestConfiguration } from '../services/api-request-configuration.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private apiRequestConfiguration: ApiRequestConfiguration) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // Apply the headers
