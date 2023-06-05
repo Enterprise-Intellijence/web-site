@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ApiAuthService } from 'src/app/services/api-auth.service';
 
 @Component({
@@ -8,16 +9,26 @@ import { ApiAuthService } from 'src/app/services/api-auth.service';
 })
 export class LoginPageComponent {
 
-  public email: string = '';
+
+  public username: string = '';
   public password: string = '';
 
 
   constructor(private auth: ApiAuthService) { }
 
-  onSubmit(event: any) {
-    this.auth.login(this.email, this.password).subscribe(res => {
-      console.log(`res: ${JSON.stringify(res)}`);
-    }
-    );
+  onSubmit() {
+    this.auth.login(this.username, this.password).subscribe(res => {
+      console.log(`res:`, res);
+    });
   }
+
+  setUsername($event: any) {
+    this.username = $event;
+  }
+
+  setPassword($event: any) {
+    this.password = $event;
+  }
+
+
 }

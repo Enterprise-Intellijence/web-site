@@ -10,6 +10,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import{ ProfileComponent } from './pages/profile/profile.component';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,7 +25,7 @@ const routes: Routes = [
   // { path: 'products/new', component: NewProductPageComponent },
   // { path: 'products/:id', component: ProductPageComponent },
   // { path: 'search', component: SearchPageComponent },
-  // { path: 'login', component: LoginPageComponent },
+  { path: 'login', component: LoginPageComponent },
   // { path: 'register', component: RegisterPageComponent },
   {
     path: 'settings', component: SettingsComponent, children: [
