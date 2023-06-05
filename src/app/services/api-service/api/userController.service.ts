@@ -23,7 +23,6 @@ import { PageOrderBasicDTO } from '../model/pageOrderBasicDTO';
 import { PagePaymentMethodBasicDTO } from '../model/pagePaymentMethodBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
 import { PageUserBasicDTO } from '../model/pageUserBasicDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 import { UserBasicDTO } from '../model/userBasicDTO';
 import { UserDTO } from '../model/userDTO';
 
@@ -88,7 +87,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -143,7 +141,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -198,7 +195,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -240,7 +236,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -286,8 +281,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -329,7 +323,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -388,8 +381,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -449,8 +441,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -505,8 +496,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -561,8 +551,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -617,8 +606,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -673,8 +661,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -729,8 +716,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -785,8 +771,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -828,7 +813,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -864,7 +848,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -900,8 +883,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -937,7 +919,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -999,8 +980,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -1047,8 +1027,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -1100,7 +1079,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -1147,7 +1125,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -1189,7 +1166,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -1230,7 +1206,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -1276,8 +1251,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -1324,8 +1298,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
