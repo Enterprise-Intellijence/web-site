@@ -10,6 +10,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import{ ProfileComponent } from './pages/profile/profile.component';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
+import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,6 +38,7 @@ const routes: Routes = [
   },
 
   { path: 'wallet/bank-account', component: BankAccountComponent},
+  {path: 'purchasing-page', component: PurchasingPageComponent},
   { path: '**', redirectTo: 'home' }
 ];
 
