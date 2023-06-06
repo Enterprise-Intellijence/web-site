@@ -31,7 +31,7 @@ import { MessagesPageComponent } from './pages/messages-page/messages-page.compo
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
-import { ApiModule } from './services/api-service';
+import { ApiModule, Configuration } from './services/api-service';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -82,7 +82,10 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
         NgbModule,
         FontAwesomeModule,
         HttpClientModule,
-        ApiModule,
+        ApiModule.forRoot(() => new Configuration({
+          withCredentials: false,
+          basePath: 'https://localhost:8443'
+        })),
         FormsModule,
         NgbdModalFocus,
     ]

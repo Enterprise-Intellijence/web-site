@@ -30,11 +30,13 @@ export class ApiInterceptor implements HttpInterceptor {
       })
     );
   }
+
   addAuthHeader(request: HttpRequest<unknown>): HttpRequest<unknown> {
     return request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.apiAuth.encodedAccessJWT}`
-      }
+        Authorization: `Bearer ${this.apiAuth.encodedAccessJWT}`,
+      },
+      withCredentials: true
     });
   }
 }
