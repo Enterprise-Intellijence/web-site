@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductBasicDTO, UserControllerService } from './api-service';
 import { BehaviorSubject } from 'rxjs';
+import { ApiAuthService } from './api-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,11 @@ export class UserLikesService {
   LikedProducts$ = new BehaviorSubject<ProductBasicDTO[]>([]);
   LikedProductsCount$ = new BehaviorSubject<number>(0);
 
-  constructor(private userService: UserControllerService) {
-    this.getAllLikedProducts();
+  constructor(private userService: UserControllerService, private apiAuth: ApiAuthService) {
+    this.apiAuth.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn)
+        this.getAllLikedProducts();
+    });
   }
 
 

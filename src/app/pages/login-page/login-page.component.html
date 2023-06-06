@@ -4,8 +4,7 @@
 
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
-    <input ngModel type="username" #username="ngModel" [ngModel]="username" (ngModelChange)="setUsername($event)" name="email" class="form-control" id="email" aria-describedby="usernameHelp" required>
-    <!-- <div id="usernameHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+    <input ngModel type="username" #username="ngModel" [ngModel]="username" (ngModelChange)="setUsername($event)" name="username" class="form-control" id="username" [value]="username" aria-describedby="usernameHelp" required>
     <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
       <div *ngIf="username.errors?.['required']">
         Username is required.
@@ -16,7 +15,7 @@
 
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input ngModel type="password" #password="ngModel" [ngModel]="password" (ngModelChange)="setPassword($event)" name="password" class="form-control" id="password" required>
+    <input ngModel type="password" #password="ngModel" [ngModel]="password" (ngModelChange)="setPassword($event)" name="password" class="form-control" [value]="password" id="password" required>
     <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
       <div *ngIf="password.errors?.['required']">
         Password is required.
