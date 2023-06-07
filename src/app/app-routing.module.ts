@@ -10,6 +10,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import{ ProfileComponent } from './pages/profile/profile.component';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 
 const routes: Routes = [
@@ -20,25 +21,25 @@ const routes: Routes = [
   // TODO: Add the :id to all the routerLink that are using the users/:id path
   { path: 'users/me', component: ProfileComponent },
   // { path: 'users/:id', component: ProfileComponent },
-  {path: 'messages', component: MessagesPageComponent},
+  { path: 'messages', component: MessagesPageComponent },
   // { path: 'products/new', component: NewProductPageComponent },
   // { path: 'products/:id', component: ProductPageComponent },
   // { path: 'search', component: SearchPageComponent },
-  // { path: 'login', component: LoginPageComponent },
+  { path: 'login', component: LoginPageComponent },
   // { path: 'register', component: RegisterPageComponent },
   {
     path: 'settings', component: SettingsComponent, children: [
-      { path: '', redirectTo: 'profile-details', pathMatch: 'full'},
+      { path: '', redirectTo: 'profile-details', pathMatch: 'full' },
       { path: 'profile-details', component: ProfileDetailsComponent },
       { path: 'account', component: AccountSettingsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'shipping', component: ShippingComponent },
-      { path: 'payments', component: PaymentsComponent},
+      { path: 'payments', component: PaymentsComponent },
     ]
   },
 
-  { path: 'wallet/bank-account', component: BankAccountComponent},
-  {path: 'purchasing-page', component: PurchasingPageComponent},
+  { path: 'wallet/bank-account', component: BankAccountComponent },
+  { path: 'purchasing-page', component: PurchasingPageComponent },
   { path: '**', redirectTo: 'home' }
 ];
 

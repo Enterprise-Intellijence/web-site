@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider, forwardRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,8 +19,8 @@ import { ProductComponent } from './pages/product/product.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
-import { DeliveryControllerService, MessageControllerService, OfferControllerService, OrderControllerService, PaymentMethodControllerService, ProductControllerService, ReviewControllerService, TransactionControllerService, UserControllerService } from './services/api-service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -40,6 +40,16 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     createImageThumbnails: true
     };
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
+import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { FormsModule } from '@angular/forms';
+import { ApiModule, Configuration } from './services/api-service';
+
+export const API_INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  useExisting: forwardRef(() => ApiInterceptor),
+  multi: true
+};
 
 @NgModule({
     declarations: [
@@ -67,17 +77,12 @@ import { MessagesPageComponent } from './pages/messages-page/messages-page.compo
         PurchasingPageComponent,
         BankAccountComponent,
         MessagesPageComponent
+        LoginPageComponent
     ],
     providers: [
         HttpClient,
-        DeliveryControllerService,
-        MessageControllerService,
-        OfferControllerService,
-        OrderControllerService,
-        PaymentMethodControllerService,
-        ProductControllerService,
-        ReviewControllerService,
-        TransactionControllerService,
+        ApiInterceptor,
+        API_INTERCEPTOR_PROVIDER,
         UserControllerService,
         {
             provide: DROPZONE_CONFIG,
@@ -89,7 +94,7 @@ import { MessagesPageComponent } from './pages/messages-page/messages-page.compo
         FontAwesomeModule,
         NgbModule,
         AppRoutingModule,
-        BrowserModule
+        BrowserModule,
       ],
     exports: [],
     imports: [
@@ -98,9 +103,14 @@ import { MessagesPageComponent } from './pages/messages-page/messages-page.compo
         NgbModule,
         FontAwesomeModule,
         HttpClientModule,
-        NgbdModalFocus,
         AlertModule,
         DropzoneModule,
-    ],
+        ApiModule.forRoot(() => new Configuration({
+          withCredentials: false,
+          basePath: 'https://localhost:8443'
+        })),
+        FormsModule,
+        NgbdModalFocus,
+    ]
 })
 export class AppModule { }
