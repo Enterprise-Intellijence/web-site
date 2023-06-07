@@ -30,8 +30,8 @@ import { BadgeTextPipe } from './pipes/badge-text.pipe';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
 import { AlertModule } from './components/alerts/alert.module';
-import { DropzoneModule, DropzoneConfigInterface,
-    DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { DropzoneModule, DropzoneConfigInterface, DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { FormsModule } from '@angular/forms';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     // Change this to your upload POST address:
@@ -98,6 +98,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
         NgbdModalFocus,
         AlertModule,
         DropzoneModule,
+        FormsModule
     ],
 })
 export class AppModule { }
