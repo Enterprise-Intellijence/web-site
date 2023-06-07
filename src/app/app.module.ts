@@ -30,20 +30,20 @@ import { BadgeTextPipe } from './pipes/badge-text.pipe';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
 import { AlertModule } from './components/alerts/alert.module';
-import { DropzoneModule, DropzoneConfigInterface,
-    DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
-
-const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
-    // Change this to your upload POST address:
-    url: 'https://httpbin.org/post',
-    acceptedFiles: 'image/*',
-    createImageThumbnails: true
-    };
+import { DropzoneModule, DropzoneConfigInterface, DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
-import { ApiModule, Configuration } from './services/api-service';
+import { ApiModule, Configuration, UserControllerService } from './services/api-service';
+
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+  // Change this to your upload POST address:
+  url: 'https://httpbin.org/post',
+  acceptedFiles: 'image/*',
+  createImageThumbnails: true
+};
+
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -52,65 +52,64 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 };
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavBarComponent,
-        ProfileDetailsComponent,
-        SettingsComponent,
-        AccountSettingsComponent,
-        ShippingComponent,
-        PaymentsComponent,
-        NotificationsComponent,
-        ProductPriceComponent,
-        NotificationsComponent,
-        ProductImagesComponent,
-        ProductComponent,
-        ProductInfoComponent,
-        HomePageComponent,
-        BadgeTextPipe,
-        ProductCardComponent,
-        MostRequestProductComponent,
-        ProfileComponent,
-        DefaultProfilePicPipe,
-        DefaultProductPicPipe,
-        BankAccountComponent,
-        PurchasingPageComponent,
-        BankAccountComponent,
-        MessagesPageComponent
-        LoginPageComponent
-    ],
-    providers: [
-        HttpClient,
-        ApiInterceptor,
-        API_INTERCEPTOR_PROVIDER,
-        UserControllerService,
-        {
-            provide: DROPZONE_CONFIG,
-            useValue: DEFAULT_DROPZONE_CONFIG
-        }
-    ],
-    bootstrap: [
-        AppComponent,
-        FontAwesomeModule,
-        NgbModule,
-        AppRoutingModule,
-        BrowserModule,
-      ],
-    exports: [],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NgbModule,
-        FontAwesomeModule,
-        HttpClientModule,
-        AlertModule,
-        DropzoneModule,
-        ApiModule.forRoot(() => new Configuration({
-          withCredentials: false,
-          basePath: 'https://localhost:8443'
-        })),
-        FormsModule,
-        NgbdModalFocus,
-    ]
+  declarations: [
+    AppComponent,
+    NavBarComponent,
+    ProfileDetailsComponent,
+    SettingsComponent,
+    AccountSettingsComponent,
+    ShippingComponent,
+    PaymentsComponent,
+    NotificationsComponent,
+    ProductPriceComponent,
+    NotificationsComponent,
+    ProductImagesComponent,
+    ProductComponent,
+    ProductInfoComponent,
+    HomePageComponent,
+    BadgeTextPipe,
+    ProductCardComponent,
+    MostRequestProductComponent,
+    ProfileComponent,
+    DefaultProfilePicPipe,
+    DefaultProductPicPipe,
+    BankAccountComponent,
+    PurchasingPageComponent,
+    BankAccountComponent,
+    MessagesPageComponent,
+    LoginPageComponent
+  ],
+  providers: [
+    HttpClient,
+    ApiInterceptor,
+    API_INTERCEPTOR_PROVIDER,
+    UserControllerService,
+    {
+      provide: DROPZONE_CONFIG,
+      useValue: DEFAULT_DROPZONE_CONFIG
+    }
+  ],
+  bootstrap: [
+    AppComponent,
+    FontAwesomeModule,
+    NgbModule,
+    AppRoutingModule,
+    BrowserModule,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    AlertModule,
+    DropzoneModule,
+    ApiModule.forRoot(() => new Configuration({
+      withCredentials: false,
+      basePath: 'https://localhost:8443'
+    })),
+    FormsModule,
+    NgbdModalFocus,
+  ]
 })
 export class AppModule { }
