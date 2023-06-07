@@ -16,7 +16,7 @@ export class MostRequestProductComponent  implements OnInit{
   ngOnInit(): void {
     console.log("ciao")
     this.productList = new Array<ProductDTO>()
-    this.productService.allProduct().subscribe({
+    this.productService.getFilteredProducts().subscribe({
       next:(value: any)=>{
         this.productList = value
         console.log(this.productList)

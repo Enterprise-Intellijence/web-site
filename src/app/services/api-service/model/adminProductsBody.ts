@@ -12,20 +12,6 @@
 import { ClothingDTO } from './clothingDTO';
 import { EntertainmentDTO } from './entertainmentDTO';
 import { HomeDTO } from './homeDTO';
-import { PageableObject } from './pageableObject';
 import { ProductDTO } from './productDTO';
-import { SortObject } from './sortObject';
 
-export interface PageProductDTO { 
-    totalPages?: number;
-    totalElements?: number;
-    size?: number;
-    content?: Array<ProductDTO | ClothingDTO | EntertainmentDTO | HomeDTO>;
-    number?: number;
-    sort?: SortObject;
-    first?: boolean;
-    last?: boolean;
-    numberOfElements?: number;
-    pageable?: PageableObject;
-    empty?: boolean;
-}
+export type AdminProductsBody = ProductDTO | ClothingDTO | EntertainmentDTO | HomeDTO;

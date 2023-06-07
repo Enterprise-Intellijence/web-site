@@ -9,13 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UserDTO } from './userDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
 export interface ReviewDTO { 
     id?: string;
+    date?: Date;
     title?: string;
     description?: string;
     vote?: number;
-    reviewer?: UserDTO;
-    reviewed?: UserDTO;
+    reviewer?: UserBasicDTO;
+    reviewed?: UserBasicDTO;
 }

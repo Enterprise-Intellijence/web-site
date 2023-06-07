@@ -19,7 +19,7 @@ export interface ContentDisposition {
     creationDate?: Date;
     modificationDate?: Date;
     readDate?: Date;
-    inline?: boolean;
     attachment?: boolean;
     formData?: boolean;
+    inline?: boolean;
 }
