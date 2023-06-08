@@ -35,7 +35,6 @@ import { DropzoneModule, DropzoneConfigInterface, DROPZONE_CONFIG } from 'ngx-dr
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { FormsModule } from '@angular/forms';
 import { ApiModule, Configuration, UserControllerService } from './services/api-service';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
