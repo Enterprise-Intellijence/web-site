@@ -9,15 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { FollowingFollowersDTO } from './followingFollowersDTO';
 import { PageableObject } from './pageableObject';
 import { SortObject } from './sortObject';
-import { UserBasicDTO } from './userBasicDTO';
 
-export interface PageUserBasicDTO { 
-    totalPages?: number;
+export interface PageFollowingFollowersDTO { 
     totalElements?: number;
+    totalPages?: number;
     size?: number;
-    content?: Array<UserBasicDTO>;
+    content?: Array<FollowingFollowersDTO>;
     number?: number;
     sort?: SortObject;
     pageable?: PageableObject;

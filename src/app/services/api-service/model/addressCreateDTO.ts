@@ -10,10 +10,12 @@
  * Do not edit the class manually.
  */
 
-export interface PaymentMethodDTO { 
-    id?: string;
-    creditCard: string;
-    expiryDate: string;
-    owner: string;
+export interface AddressCreateDTO { 
+    header: string;
+    country: string;
+    city: string;
+    street: string;
+    zipCode: string;
+    phoneNumber: string;
     _default?: boolean;
 }

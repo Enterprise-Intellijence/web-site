@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { ImagesProductBody } from '../model/imagesProductBody';
 import { PhotoprofileIdBody } from '../model/photoprofileIdBody';
 import { ProductIdBody } from '../model/productIdBody';
+import { ResponseStatusException } from '../model/responseStatusException';
 import { UsersPhotoprofileBody } from '../model/usersPhotoprofileBody';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -78,6 +79,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -118,6 +120,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -158,7 +161,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'image/jpeg'
+            'image/jpeg',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -199,7 +203,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'image/jpeg'
+            'image/jpeg',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -245,6 +250,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -296,6 +302,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -360,7 +367,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -418,7 +426,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

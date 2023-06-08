@@ -11,8 +11,12 @@
  */
 
 export interface AddressDTO { 
-    country?: string;
-    city?: string;
-    street?: string;
-    postalCode?: string;
+    id: string;
+    header: string;
+    country: string;
+    city: string;
+    street: string;
+    zipCode: string;
+    phoneNumber: string;
+    _default?: boolean;
 }

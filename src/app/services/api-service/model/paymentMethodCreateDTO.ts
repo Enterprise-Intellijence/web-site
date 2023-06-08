@@ -10,8 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface PaymentMethodDTO { 
-    id?: string;
+export interface PaymentMethodCreateDTO { 
     creditCard: string;
     expiryDate: string;
     owner: string;

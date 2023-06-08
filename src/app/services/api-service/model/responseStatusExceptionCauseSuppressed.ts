@@ -9,11 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ResponseStatusExceptionCauseStackTrace } from './responseStatusExceptionCauseStackTrace';
 
-export interface PaymentMethodDTO { 
-    id?: string;
-    creditCard: string;
-    expiryDate: string;
-    owner: string;
-    _default?: boolean;
+export interface ResponseStatusExceptionCauseSuppressed { 
+    stackTrace?: Array<ResponseStatusExceptionCauseStackTrace>;
+    message?: string;
+    localizedMessage?: string;
 }

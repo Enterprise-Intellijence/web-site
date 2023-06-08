@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { ResponseStatusException } from '../model/responseStatusException';
 import { UserDTO } from '../model/userDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -88,7 +89,8 @@ export class SuperAdminControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

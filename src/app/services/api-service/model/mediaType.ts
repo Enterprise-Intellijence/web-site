@@ -10,10 +10,14 @@
  * Do not edit the class manually.
  */
 
-export interface PaymentMethodDTO { 
-    id?: string;
-    creditCard: string;
-    expiryDate: string;
-    owner: string;
-    _default?: boolean;
+export interface MediaType { 
+    type?: string;
+    subtype?: string;
+    parameters?: { [key: string]: string; };
+    qualityValue?: number;
+    wildcardType?: boolean;
+    wildcardSubtype?: boolean;
+    subtypeSuffix?: string;
+    concrete?: boolean;
+    charset?: string;
 }

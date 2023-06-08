@@ -10,10 +10,13 @@
  * Do not edit the class manually.
  */
 
-export interface PaymentMethodDTO { 
-    id?: string;
-    creditCard: string;
-    expiryDate: string;
-    owner: string;
-    _default?: boolean;
+export interface ResponseStatusExceptionCauseStackTrace { 
+    classLoaderName?: string;
+    moduleName?: string;
+    moduleVersion?: string;
+    methodName?: string;
+    fileName?: string;
+    lineNumber?: number;
+    nativeMethod?: boolean;
+    className?: string;
 }

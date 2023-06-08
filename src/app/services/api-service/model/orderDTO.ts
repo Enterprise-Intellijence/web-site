@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { AddressDTO } from './addressDTO';
 import { DeliveryDTO } from './deliveryDTO';
 import { OfferBasicDTO } from './offerBasicDTO';
 import { ProductBasicDTO } from './productBasicDTO';
@@ -23,6 +24,7 @@ export interface OrderDTO {
     product?: ProductBasicDTO;
     user?: UserBasicDTO;
     delivery?: DeliveryDTO;
+    deliveryAddress?: AddressDTO;
     offer?: OfferBasicDTO;
     transaction?: TransactionDTO;
 }
