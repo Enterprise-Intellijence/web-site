@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductControllerService, ProductDTO } from "../../services/api-service";
+import { ProductBasicDTO, ProductControllerService, ProductDTO } from "../../services/api-service";
 import { ProductService } from 'src/app/services/product.service';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartFull } from '@fortawesome/free-solid-svg-icons';
@@ -15,34 +15,25 @@ export class ProductCardComponent implements OnInit {
   fullHeartIcon = faHeartFull;
   emptyHeartIcon = faHeart;
 
-  @Input() product!: ProductDTO;
+  @Input() product!: ProductBasicDTO;
 
   userLikesProduct: boolean = false;
 
   totalLikes: number = 0;
 
-  constructor(private productService: ProductControllerService, private userLikesService: UserLikesService) {
-    this.createFakeProduct();
+  constructor(private userLikesService: UserLikesService) {
+
   }
 
   ngOnInit(): void {
-    // this.productService.allProduct().subscribe((products) => {
-    //   console.log(products);
-    // });
 
 
     this.userLikesService.LikedProducts$.subscribe(() => {
       this.userLikesProduct = this.userLikesService.isProductLiked(this.product);
     });
 
-
-    // TODO: get the total number of likes from the server
-    this.totalLikes = this.product.usersThatLiked?.length || 0;
-
-
-
-    // TODO: check if the user has already liked the product
-
+    this.totalLikes = this.product.likesNumber || 0;
+    this.userLikesProduct = this.userLikesService.isProductLiked(this.product);
   }
 
 
@@ -51,41 +42,5 @@ export class ProductCardComponent implements OnInit {
     this.totalLikes += this.userLikesProduct ? -1 : 1;
 
     this.userLikesService.toggleLikeProduct(this.product);
-  }
-
-
-
-
-  private createFakeProduct() {
-    // this.product = {
-    //   id: "0",
-    //   title: "A test product",
-    //   description: `
-    //   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    //   Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
-    //   Duis vulputate commodo lectus, ac blandit elit tincidunt id.`,
-    //   productCost: {
-    //     price: 14.99,
-    //     currency: "EUR"
-    //   },
-    //   brand: "Nike",
-    //   condition: "NEW_WITH_TAG",
-    //   address: {
-    //     city: "Milan",
-    //     country: "Italy",
-    //     street: "Via Roma",
-    //     postalCode: "20100"
-    //   },
-    //   productSize: "MEDIUM",
-    //   views: 0,
-    //   uploadDate: new Date(),
-    //   visibility: "PUBLIC",
-    //   availability: "AVAILABLE",
-    //   productCategory: "CLOTHING",
-    //   seller: {
-    //     id: "0",
-    //     username: "Mario Rossi",
-    //   },
-    // };
   }
 }
