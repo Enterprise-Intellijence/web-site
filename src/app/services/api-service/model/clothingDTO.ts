@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AddressDTO } from './addressDTO';
 import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductDTO } from './productDTO';
 import { ProductImageDTO } from './productImageDTO';

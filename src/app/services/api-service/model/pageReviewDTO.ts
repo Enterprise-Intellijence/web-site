@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 import { PageableObject } from './pageableObject';
-import { ReportDTO } from './reportDTO';
+import { ReviewDTO } from './reviewDTO';
 import { SortObject } from './sortObject';
 
-export interface PageReportDTO { 
+export interface PageReviewDTO { 
     totalElements?: number;
     totalPages?: number;
     size?: number;
-    content?: Array<ReportDTO>;
+    content?: Array<ReviewDTO>;
     number?: number;
     sort?: SortObject;
     pageable?: PageableObject;

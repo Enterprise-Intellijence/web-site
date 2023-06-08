@@ -17,6 +17,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { PageReviewDTO } from '../model/pageReviewDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 import { ReviewCreateDTO } from '../model/reviewCreateDTO';
 import { ReviewDTO } from '../model/reviewDTO';
 
@@ -59,19 +61,32 @@ export class ReviewControllerService {
     /**
      * 
      * 
+     * @param page 
+     * @param sizePage 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public allReview(observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public allReview(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public allReview(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public allReview(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public allReviewReceived(page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageReviewDTO>;
+    public allReviewReceived(page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageReviewDTO>>;
+    public allReviewReceived(page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageReviewDTO>>;
+    public allReviewReceived(page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (page !== undefined && page !== null) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (sizePage !== undefined && sizePage !== null) {
+            queryParameters = queryParameters.set('sizePage', <any>sizePage);
+        }
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -82,8 +97,59 @@ export class ReviewControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/reviews`,
+        return this.httpClient.request<PageReviewDTO>('get',`${this.basePath}/api/v1/reviews/received`,
             {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param page 
+     * @param sizePage 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public allReviewSent(page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageReviewDTO>;
+    public allReviewSent(page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageReviewDTO>>;
+    public allReviewSent(page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageReviewDTO>>;
+    public allReviewSent(page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (page !== undefined && page !== null) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (sizePage !== undefined && sizePage !== null) {
+            queryParameters = queryParameters.set('sizePage', <any>sizePage);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<PageReviewDTO>('get',`${this.basePath}/api/v1/reviews/sent`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -112,7 +178,8 @@ export class ReviewControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -159,6 +226,7 @@ export class ReviewControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -204,7 +272,8 @@ export class ReviewControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -251,7 +320,8 @@ export class ReviewControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -297,7 +367,8 @@ export class ReviewControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

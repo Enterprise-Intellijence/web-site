@@ -3,7 +3,6 @@ import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'n
 import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 
-
 @Component({
   selector: 'profile-details',
   templateUrl: './profile-details.component.html',
@@ -12,6 +11,9 @@ import { AlertService } from 'src/app/services/alert.service';
 
 export class ProfileDetailsComponent {
 
+  textAreaText?: String;
+  bioText: String = "This is a long bio just to test how it is displayed in the textarea";
+  maxBioLength: number = 500;
   // TODO: Get profile pic from user service
   profilePic: String = "";
 

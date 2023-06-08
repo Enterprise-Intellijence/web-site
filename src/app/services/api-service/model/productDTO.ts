@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AddressDTO } from './addressDTO';
 import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductImageDTO } from './productImageDTO';
 import { UserBasicDTO } from './userBasicDTO';
@@ -24,7 +23,6 @@ export interface ProductDTO {
     condition?: ProductDTO.ConditionEnum;
     likesNumber?: number;
     seller?: UserBasicDTO;
-    address?: AddressDTO;
     productSize?: ProductDTO.ProductSizeEnum;
     views?: number;
     uploadDate?: Date;

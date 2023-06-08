@@ -10,10 +10,11 @@
  * Do not edit the class manually.
  */
 
-export interface PaymentMethodDTO { 
-    id?: string;
-    creditCard: string;
-    expiryDate: string;
-    owner: string;
-    _default?: boolean;
+export interface ProblemDetail { 
+    type?: string;
+    title?: string;
+    status?: number;
+    detail?: string;
+    instance?: string;
+    properties?: { [key: string]: any; };
 }

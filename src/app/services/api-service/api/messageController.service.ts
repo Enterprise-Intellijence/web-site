@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { MessageCreateDTO } from '../model/messageCreateDTO';
 import { MessageDTO } from '../model/messageDTO';
 import { PageMessageDTO } from '../model/pageMessageDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -77,7 +78,8 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -124,6 +126,7 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -159,7 +162,8 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -183,29 +187,24 @@ export class MessageControllerService {
     /**
      * 
      * 
-     * @param user 
-     * @param prodId 
+     * @param conversationId 
      * @param page 
      * @param sizePage 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getConversation(user: string, prodId?: string, page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageMessageDTO>;
-    public getConversation(user: string, prodId?: string, page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageMessageDTO>>;
-    public getConversation(user: string, prodId?: string, page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageMessageDTO>>;
-    public getConversation(user: string, prodId?: string, page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getConversation(conversationId: string, page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageMessageDTO>;
+    public getConversation(conversationId: string, page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageMessageDTO>>;
+    public getConversation(conversationId: string, page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageMessageDTO>>;
+    public getConversation(conversationId: string, page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (user === null || user === undefined) {
-            throw new Error('Required parameter user was null or undefined when calling getConversation.');
+        if (conversationId === null || conversationId === undefined) {
+            throw new Error('Required parameter conversationId was null or undefined when calling getConversation.');
         }
-
 
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (prodId !== undefined && prodId !== null) {
-            queryParameters = queryParameters.set('prodId', <any>prodId);
-        }
         if (page !== undefined && page !== null) {
             queryParameters = queryParameters.set('page', <any>page);
         }
@@ -217,7 +216,8 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -228,7 +228,7 @@ export class MessageControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageMessageDTO>('get',`${this.basePath}/api/v1/messages/conversations/${encodeURIComponent(String(user))}`,
+        return this.httpClient.request<PageMessageDTO>('get',`${this.basePath}/api/v1/messages/conversations/${encodeURIComponent(String(conversationId))}`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -259,7 +259,8 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -305,7 +306,8 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -352,6 +354,7 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -403,7 +406,8 @@ export class MessageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

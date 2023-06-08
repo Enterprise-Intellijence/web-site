@@ -24,9 +24,18 @@
         </div>
 
         <div class="col-6">
-            <textarea  class="form-control" id="floatingTextArea" placeholder="Enter text"></textarea>
+            <textarea  class="form-control" id="floatingTextArea" [(ngModel)]="textAreaText" placeholder="Enter your bio here">{{bioText}}</textarea>
         </div>
-    </div>    
+    </div>
+    
+    <div *ngIf="bioText != textAreaText" class = "row align-items-center">
+        <div class="col-6">
+
+        </div>
+        <div class="col-6 fw-semibold">
+            <button class="btn btn-sm btn-primary float-end" type="button">Save</button> 
+        </div>
+    </div>
 </div>
 
 

@@ -15,6 +15,7 @@ import { UserBasicDTO } from './userBasicDTO';
 
 export interface MessageDTO { 
     id?: string;
+    conversationId?: string;
     text: string;
     messageDate?: Date;
     messageStatus?: MessageDTO.MessageStatusEnum;

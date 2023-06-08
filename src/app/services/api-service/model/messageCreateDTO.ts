@@ -13,6 +13,7 @@ import { ProductBasicDTO } from './productBasicDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface MessageCreateDTO { 
+    conversationId?: string;
     text: string;
     product?: ProductBasicDTO;
     receivedUser: UserBasicDTO;

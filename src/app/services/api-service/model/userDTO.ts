@@ -10,8 +10,7 @@
  * Do not edit the class manually.
  */
 import { AddressDTO } from './addressDTO';
-import { PaymentMethodBasicDTO } from './paymentMethodBasicDTO';
-import { ReviewDTO } from './reviewDTO';
+import { PaymentMethodDTO } from './paymentMethodDTO';
 import { UserImageDTO } from './userImageDTO';
 
 export interface UserDTO { 
@@ -21,15 +20,13 @@ export interface UserDTO {
     bio?: string;
     photoProfile?: UserImageDTO;
     provider: UserDTO.ProviderEnum;
-    address?: AddressDTO;
+    addresses?: Array<AddressDTO>;
+    paymentMethods?: Array<PaymentMethodDTO>;
     role: UserDTO.RoleEnum;
-    defaultPaymentMethod?: PaymentMethodBasicDTO;
     reviewsTotalSum?: number;
     reviewsNumber?: number;
     followersNumber?: number;
     followingNumber?: number;
-    receivedReviews?: Array<ReviewDTO>;
-    sentReviews?: Array<ReviewDTO>;
 }
 export namespace UserDTO {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
