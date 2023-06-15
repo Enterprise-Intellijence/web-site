@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductBasicDTO } from 'src/app/services/api-service';
+import { UserLikesService } from 'src/app/services/user-likes.service';
 
 @Component({
   selector: 'liked-products-page',
@@ -8,14 +9,12 @@ import { ProductBasicDTO } from 'src/app/services/api-service';
 })
 export class LikedProductsPageComponent {
 
-  productList!: Array<ProductBasicDTO>;
-
+  productList!: Set<ProductBasicDTO>;
+  
   ngOnInit(): void {
-    this.productList = new Array<ProductBasicDTO>();
-    /*this.productService.allProduct().subscribe({
-      next:(value: any)=>{
-        this.productList = value
-      }
-    });*/
+    this.productList = this.userLikesService.LikedProductsSet;
+  }
+
+  constructor(private userLikesService: UserLikesService) {
   }
 }
