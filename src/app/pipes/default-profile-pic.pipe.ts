@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DefaultProfilePicPipe implements PipeTransform {
 
-  transform(s: String): String {
+  transform(s: string | undefined | null): string {
     if (s) {
       return s;
     } else {

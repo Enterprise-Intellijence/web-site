@@ -11,11 +11,11 @@ import { AlertService } from 'src/app/services/alert.service';
 
 export class ProfileDetailsComponent {
 
-  textAreaText?: String;
-  bioText: String = "This is a long bio just to test how it is displayed in the textarea";
+  textAreaText?: string;
+  bioText: string = "This is a long bio just to test how it is displayed in the textarea";
   maxBioLength: number = 500;
   // TODO: Get profile pic from user service
-  profilePic: String = "";
+  profilePic: string = "";
 
   public type: string = 'component';
 

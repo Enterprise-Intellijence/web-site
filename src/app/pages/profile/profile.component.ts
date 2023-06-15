@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
-import { UserControllerService, UserDTO } from 'src/app/services/api-service';
+import { UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'profile',
@@ -10,36 +12,52 @@ import { UserControllerService, UserDTO } from 'src/app/services/api-service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private userService: UserControllerService) {}
 
   faCircleExclamation = faCircleExclamation;
-  
-  // TODO: Get user info from user service
-  currentUserId: String = "";
-  
-  visitedUserId: String = "";
-  profilePic: String = "";
-  profileName: String = "John Doe";
-  followers: Number = 0;
-  following: Number = 0;
-  reviews: Number = 0;
-  isFollowing: Boolean = false;
 
 
+  currentUserId: string | null = null;
+  userId: string | null = null;
 
 
+  user?: UserBasicDTO;
 
-  user?: UserDTO; 
+
+  isFollowing: boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserControllerService,
+    private currentUserService: CurrentUserService,) { }
 
   ngOnInit(): void {
-    this.userService.me().subscribe(
-      p=>{
-        this.user = p;
-        console.log(this.user);
-      }
-    )
-  }
-  
+    // example route with id: http://localhost:4200/users/1
+    // example route: http://localhost:4200/users/me
 
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get('id') ?? null;
+      if(this.userId != null)
+        this.userService.userById(this.userId).subscribe(user => this.user = user);
+      else
+        this.loadCurrentUser();
+    });
+
+    this.currentUserService.user$.subscribe(user => this.currentUserId = user?.id ?? null);
+  }
+
+  loadCurrentUser() {
+    console.log(`loadCurrentUser()`);
+
+    this.currentUserService.user$.subscribe(user => {
+      if (user) {
+        this.userId = user.id ?? null;
+        this.user = user;
+      }
+    });
+  }
+
+  public get isCurrentUser(): boolean {
+    return this.userId !== null && this.currentUserId === this.userId;
+  }
 
 }
