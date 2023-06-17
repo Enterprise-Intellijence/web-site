@@ -1,0 +1,15 @@
+<li class="nav-item" ngbDropdown>
+  <a class="nav-link" tabindex="0" ngbDropdownToggle [id]="'navbar' + title + 'Dropdown'" role="button">{{title}}</a>
+  <div ngbDropdownMenu class="gap-2 p-2 rounded-3">
+    <div class="d-flex justify-content-between">
+      <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
+      <hr class="dropdown-divider">
+      <ng-container *ngFor="let secondaryCategory of primaryCategory?.childCategories">
+        <a ngbDropdownItem class="rounded-2" [routerLink]="[]">{{secondaryCategory.name}}</a>
+      </ng-container>
+    </div>
+    <div class="">
+
+    </div>
+  </div>
+</li>
