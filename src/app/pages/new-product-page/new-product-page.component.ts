@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ProductBasicDTO } from 'src/app/services/api-service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ProductDTO } from 'src/app/services/api-service';
 
 @Component({
   selector: 'new-product-page',
@@ -8,15 +9,27 @@ import { ProductBasicDTO } from 'src/app/services/api-service';
 })
 export class NewProductPageComponent {
 
-  imagesLoaded: Array<String> = new Array<String>();
+  imagesLoaded: Array<SafeUrl> = new Array<SafeUrl>();
   title: string = "";
   description: string = "";
   price: string = "";
   categoryList;
   selectedCategory = "";
+  selectedParentCategory = "";
+  selectedChildCategory = "";
 
-  constructor() {
-    this.categoryList = Object.keys(ProductBasicDTO.ProductCategoryEnum);
+  printSizeImgs() {
+    console.log("S: " + this.imagesLoaded.length);
+  }
+
+  onFileSelected(event: any) {
+    if(event.target.files) {
+        this.imagesLoaded.push(this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(event.target.files[0])));
+    }
+  }
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.categoryList = Object.keys(ProductDTO.ProductCategoryEnum);
     console.log("size: " + this.imagesLoaded.length);
   }
 }
