@@ -9,6 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { User } from './user';
 
-export interface HttpMethod { 
+export interface Following { 
+    id?: string;
+    followingFrom?: Date;
+    follower?: User;
+    following?: User;
 }

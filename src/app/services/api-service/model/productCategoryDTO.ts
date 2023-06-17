@@ -10,16 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface ContentDisposition { 
-    type?: string;
-    name?: string;
-    filename?: string;
-    charset?: string;
-    size?: number;
-    creationDate?: Date;
-    modificationDate?: Date;
-    readDate?: Date;
-    attachment?: boolean;
-    formData?: boolean;
-    inline?: boolean;
+export interface ProductCategoryDTO { 
+    id?: string;
+    primaryCat: string;
+    secondaryCat: string;
+    tertiaryCat: string;
 }

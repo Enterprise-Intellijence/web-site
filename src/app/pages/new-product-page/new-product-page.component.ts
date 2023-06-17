@@ -12,11 +12,9 @@ export class NewProductPageComponent {
   title: string = "";
   description: string = "";
   price: string = "";
-  categoryList;
   selectedCategory = "";
 
   constructor() {
-    this.categoryList = Object.keys(ProductBasicDTO.ProductCategoryEnum);
     console.log("size: " + this.imagesLoaded.length);
   }
 }

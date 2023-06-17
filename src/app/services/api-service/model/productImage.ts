@@ -9,6 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Product } from './product';
 
-export interface HttpRange { 
+export interface ProductImage { 
+    id?: string;
+    description?: string;
+    urlPhoto?: string;
+    product?: Product;
 }

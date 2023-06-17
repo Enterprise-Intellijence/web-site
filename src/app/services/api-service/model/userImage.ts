@@ -9,8 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { User } from './user';
 
-export interface HttpHeadersAcceptLanguage { 
-    range?: string;
-    weight?: number;
+export interface UserImage { 
+    id?: string;
+    description?: string;
+    urlPhoto?: string;
+    user?: User;
 }
