@@ -10,19 +10,19 @@
  * Do not edit the class manually.
  */
 import { PageableObject } from './pageableObject';
+import { ReviewDTO } from './reviewDTO';
 import { SortObject } from './sortObject';
-import { UserBasicDTO } from './userBasicDTO';
 
-export interface PageUserBasicDTO { 
-    totalPages?: number;
+export interface PageReviewDTO { 
     totalElements?: number;
+    totalPages?: number;
     size?: number;
-    content?: Array<UserBasicDTO>;
+    content?: Array<ReviewDTO>;
     number?: number;
     sort?: SortObject;
     pageable?: PageableObject;
+    numberOfElements?: number;
     first?: boolean;
     last?: boolean;
-    numberOfElements?: number;
     empty?: boolean;
 }

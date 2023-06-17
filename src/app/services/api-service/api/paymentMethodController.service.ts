@@ -17,6 +17,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { PagePaymentMethodBasicDTO } from '../model/pagePaymentMethodBasicDTO';
+import { PaymentMethodCreateDTO } from '../model/paymentMethodCreateDTO';
 import { PaymentMethodDTO } from '../model/paymentMethodDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -62,10 +64,10 @@ export class PaymentMethodControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createPaymentMethod(body: PaymentMethodDTO, observe?: 'body', reportProgress?: boolean): Observable<PaymentMethodDTO>;
-    public createPaymentMethod(body: PaymentMethodDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PaymentMethodDTO>>;
-    public createPaymentMethod(body: PaymentMethodDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PaymentMethodDTO>>;
-    public createPaymentMethod(body: PaymentMethodDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createPaymentMethod(body: PaymentMethodCreateDTO, observe?: 'body', reportProgress?: boolean): Observable<PaymentMethodDTO>;
+    public createPaymentMethod(body: PaymentMethodCreateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PaymentMethodDTO>>;
+    public createPaymentMethod(body: PaymentMethodCreateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PaymentMethodDTO>>;
+    public createPaymentMethod(body: PaymentMethodCreateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createPaymentMethod.');
@@ -134,6 +136,61 @@ export class PaymentMethodControllerService {
 
         return this.httpClient.request<any>('delete',`${this.basePath}/api/v1/payment-methods/${encodeURIComponent(String(id))}`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param page 
+     * @param size 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getMyPaymentMethods(page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PagePaymentMethodBasicDTO>;
+    public getMyPaymentMethods(page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PagePaymentMethodBasicDTO>>;
+    public getMyPaymentMethods(page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PagePaymentMethodBasicDTO>>;
+    public getMyPaymentMethods(page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (page === null || page === undefined) {
+            throw new Error('Required parameter page was null or undefined when calling getMyPaymentMethods.');
+        }
+
+        if (size === null || size === undefined) {
+            throw new Error('Required parameter size was null or undefined when calling getMyPaymentMethods.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (page !== undefined && page !== null) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (size !== undefined && size !== null) {
+            queryParameters = queryParameters.set('size', <any>size);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<PagePaymentMethodBasicDTO>('get',`${this.basePath}/api/v1/payment-methods`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

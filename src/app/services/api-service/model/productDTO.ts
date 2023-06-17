@@ -9,8 +9,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AddressDTO } from './addressDTO';
 import { CustomMoneyDTO } from './customMoneyDTO';
+import { ProductCategoryDTO } from './productCategoryDTO';
 import { ProductImageDTO } from './productImageDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
@@ -24,18 +24,15 @@ export interface ProductDTO {
     condition?: ProductDTO.ConditionEnum;
     likesNumber?: number;
     seller?: UserBasicDTO;
-    address?: AddressDTO;
     productSize?: ProductDTO.ProductSizeEnum;
     views?: number;
     uploadDate?: Date;
     lastUpdateDate?: Date;
     visibility?: ProductDTO.VisibilityEnum;
     availability?: ProductDTO.AvailabilityEnum;
-    productCategoryParent?: ProductDTO.ProductCategoryParentEnum;
-    productCategory: ProductDTO.ProductCategoryEnum;
+    productCategory?: ProductCategoryDTO;
     usersThatLiked?: Array<UserBasicDTO>;
     productImages?: Array<ProductImageDTO>;
-    productCategoryChild: ProductDTO.ProductCategoryChildEnum;
 }
 export namespace ProductDTO {
     export type ConditionEnum = 'NEW_WITH_TAG' | 'NEW_WITHOUT_TAG' | 'VERY_GOOD' | 'GOOD' | 'ACCEPTABLE';
@@ -62,73 +59,5 @@ export namespace ProductDTO {
         AVAILABLE: 'AVAILABLE' as AvailabilityEnum,
         PENDING: 'PENDING' as AvailabilityEnum,
         UNAVAILABLE: 'UNAVAILABLE' as AvailabilityEnum
-    };
-    export type ProductCategoryParentEnum = 'CLOTHS' | 'SHOES' | 'BAGS' | 'ACCESSORIES' | 'VIDEOGAMES' | 'MEDIA' | 'BOOKS' | 'TEXTILES' | 'HOME' | 'TABLEWARE' | 'OTHER';
-    export const ProductCategoryParentEnum = {
-        CLOTHS: 'CLOTHS' as ProductCategoryParentEnum,
-        SHOES: 'SHOES' as ProductCategoryParentEnum,
-        BAGS: 'BAGS' as ProductCategoryParentEnum,
-        ACCESSORIES: 'ACCESSORIES' as ProductCategoryParentEnum,
-        VIDEOGAMES: 'VIDEOGAMES' as ProductCategoryParentEnum,
-        MEDIA: 'MEDIA' as ProductCategoryParentEnum,
-        BOOKS: 'BOOKS' as ProductCategoryParentEnum,
-        TEXTILES: 'TEXTILES' as ProductCategoryParentEnum,
-        HOME: 'HOME' as ProductCategoryParentEnum,
-        TABLEWARE: 'TABLEWARE' as ProductCategoryParentEnum,
-        OTHER: 'OTHER' as ProductCategoryParentEnum
-    };
-    export type ProductCategoryEnum = 'OTHER' | 'ENTERTAINMENT' | 'HOME' | 'CLOTHING';
-    export const ProductCategoryEnum = {
-        OTHER: 'OTHER' as ProductCategoryEnum,
-        ENTERTAINMENT: 'ENTERTAINMENT' as ProductCategoryEnum,
-        HOME: 'HOME' as ProductCategoryEnum,
-        CLOTHING: 'CLOTHING' as ProductCategoryEnum
-    };
-    export type ProductCategoryChildEnum = 'JEANS' | 'DRESS' | 'SKIRT' | 'T_SHIRT' | 'SWEATERS' | 'TROUSERS' | 'BOOTS' | 'HEELS' | 'SPORT' | 'TRAINERS' | 'SANDALS' | 'SHOULDER_BAG' | 'HANDBAGS' | 'LUGGAGE' | 'BACKPACKS' | 'WATCHES' | 'SUNGLASSES' | 'BELTS' | 'HATS_CAPS' | 'CONSOLES_XBOXONE' | 'CONSOLES_PLAYSTATION_FIVE' | 'CONSOLES_PLAYSTATION_OLDER' | 'CONSOLES_PCGAMES' | 'MUSIC' | 'VIDEO' | 'NON_FICTION' | 'KIDS' | 'LITERATURE' | 'FICTION' | 'BLANKETS' | 'CUSHIONS' | 'TABLE_LINEN' | 'TOWEL' | 'BEDDING' | 'ACCESSORIES_COOKS' | 'ACCESSORIES_PICTURE' | 'ACCESSORIES_PHOTO_FRAMES' | 'ACCESSORIES_STORAGE' | 'ACCESSORIES_MIRRORS' | 'ACCESSORIES_VASES' | 'DINNERWARE' | 'CUTLERY' | 'DRINKWARE' | 'OTHER';
-    export const ProductCategoryChildEnum = {
-        JEANS: 'JEANS' as ProductCategoryChildEnum,
-        DRESS: 'DRESS' as ProductCategoryChildEnum,
-        SKIRT: 'SKIRT' as ProductCategoryChildEnum,
-        TSHIRT: 'T_SHIRT' as ProductCategoryChildEnum,
-        SWEATERS: 'SWEATERS' as ProductCategoryChildEnum,
-        TROUSERS: 'TROUSERS' as ProductCategoryChildEnum,
-        BOOTS: 'BOOTS' as ProductCategoryChildEnum,
-        HEELS: 'HEELS' as ProductCategoryChildEnum,
-        SPORT: 'SPORT' as ProductCategoryChildEnum,
-        TRAINERS: 'TRAINERS' as ProductCategoryChildEnum,
-        SANDALS: 'SANDALS' as ProductCategoryChildEnum,
-        SHOULDERBAG: 'SHOULDER_BAG' as ProductCategoryChildEnum,
-        HANDBAGS: 'HANDBAGS' as ProductCategoryChildEnum,
-        LUGGAGE: 'LUGGAGE' as ProductCategoryChildEnum,
-        BACKPACKS: 'BACKPACKS' as ProductCategoryChildEnum,
-        WATCHES: 'WATCHES' as ProductCategoryChildEnum,
-        SUNGLASSES: 'SUNGLASSES' as ProductCategoryChildEnum,
-        BELTS: 'BELTS' as ProductCategoryChildEnum,
-        HATSCAPS: 'HATS_CAPS' as ProductCategoryChildEnum,
-        CONSOLESXBOXONE: 'CONSOLES_XBOXONE' as ProductCategoryChildEnum,
-        CONSOLESPLAYSTATIONFIVE: 'CONSOLES_PLAYSTATION_FIVE' as ProductCategoryChildEnum,
-        CONSOLESPLAYSTATIONOLDER: 'CONSOLES_PLAYSTATION_OLDER' as ProductCategoryChildEnum,
-        CONSOLESPCGAMES: 'CONSOLES_PCGAMES' as ProductCategoryChildEnum,
-        MUSIC: 'MUSIC' as ProductCategoryChildEnum,
-        VIDEO: 'VIDEO' as ProductCategoryChildEnum,
-        NONFICTION: 'NON_FICTION' as ProductCategoryChildEnum,
-        KIDS: 'KIDS' as ProductCategoryChildEnum,
-        LITERATURE: 'LITERATURE' as ProductCategoryChildEnum,
-        FICTION: 'FICTION' as ProductCategoryChildEnum,
-        BLANKETS: 'BLANKETS' as ProductCategoryChildEnum,
-        CUSHIONS: 'CUSHIONS' as ProductCategoryChildEnum,
-        TABLELINEN: 'TABLE_LINEN' as ProductCategoryChildEnum,
-        TOWEL: 'TOWEL' as ProductCategoryChildEnum,
-        BEDDING: 'BEDDING' as ProductCategoryChildEnum,
-        ACCESSORIESCOOKS: 'ACCESSORIES_COOKS' as ProductCategoryChildEnum,
-        ACCESSORIESPICTURE: 'ACCESSORIES_PICTURE' as ProductCategoryChildEnum,
-        ACCESSORIESPHOTOFRAMES: 'ACCESSORIES_PHOTO_FRAMES' as ProductCategoryChildEnum,
-        ACCESSORIESSTORAGE: 'ACCESSORIES_STORAGE' as ProductCategoryChildEnum,
-        ACCESSORIESMIRRORS: 'ACCESSORIES_MIRRORS' as ProductCategoryChildEnum,
-        ACCESSORIESVASES: 'ACCESSORIES_VASES' as ProductCategoryChildEnum,
-        DINNERWARE: 'DINNERWARE' as ProductCategoryChildEnum,
-        CUTLERY: 'CUTLERY' as ProductCategoryChildEnum,
-        DRINKWARE: 'DRINKWARE' as ProductCategoryChildEnum,
-        OTHER: 'OTHER' as ProductCategoryChildEnum
     };
 }

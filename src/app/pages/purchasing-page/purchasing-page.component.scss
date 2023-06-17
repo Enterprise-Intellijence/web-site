@@ -1,0 +1,32 @@
+.scrollable-container-left {
+    height: 600px;
+    overflow-y: auto;
+  }
+  
+  .scrollable-container-left::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  .scrollable-container-left::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  
+  .custom-scrollbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    background-color: #F5F5F5;
+  }
+  
+  .custom-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+
+  .big-container{
+    overflow-y: auto;
+  }
+
+
+  

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdminControllerService } from './api/adminController.service';
 import { DeliveryControllerService } from './api/deliveryController.service';
 import { DemoControllerService } from './api/demoController.service';
+import { FollowingControllerService } from './api/followingController.service';
 import { ImageControllerService } from './api/imageController.service';
 import { MessageControllerService } from './api/messageController.service';
 import { OfferControllerService } from './api/offerController.service';
@@ -26,6 +27,7 @@ import { UserControllerService } from './api/userController.service';
     AdminControllerService,
     DeliveryControllerService,
     DemoControllerService,
+    FollowingControllerService,
     ImageControllerService,
     MessageControllerService,
     OfferControllerService,

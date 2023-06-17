@@ -17,12 +17,9 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { PageMessageDTO } from '../model/pageMessageDTO';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageOrderBasicDTO } from '../model/pageOrderBasicDTO';
-import { PagePaymentMethodBasicDTO } from '../model/pagePaymentMethodBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
-import { PageUserBasicDTO } from '../model/pageUserBasicDTO';
 import { UserBasicDTO } from '../model/userBasicDTO';
 import { UserDTO } from '../model/userDTO';
 
@@ -97,7 +94,7 @@ export class UserControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('post',`${this.basePath}/api/v1/users/activate`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/users/activate`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -116,9 +113,9 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public authenticate(username: string, password: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public authenticate(username: string, password: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public authenticate(username: string, password: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public authenticate(username: string, password: string, observe?: 'body', reportProgress?: boolean): Observable<{ [key: string]: string; }>;
+    public authenticate(username: string, password: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<{ [key: string]: string; }>>;
+    public authenticate(username: string, password: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<{ [key: string]: string; }>>;
     public authenticate(username: string, password: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (username === null || username === undefined) {
@@ -141,6 +138,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -151,7 +149,7 @@ export class UserControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('post',`${this.basePath}/api/v1/users/authenticate`,
+        return this.httpClient.request<{ [key: string]: string; }>('post',`${this.basePath}/api/v1/users/authenticate`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -306,166 +304,6 @@ export class UserControllerService {
     /**
      * 
      * 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public follow(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public follow(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public follow(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public follow(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling follow.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<any>('post',`${this.basePath}/api/v1/users/follow/${encodeURIComponent(String(id))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param page 
-     * @param size 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getFollowers(id: string, page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PageUserBasicDTO>;
-    public getFollowers(id: string, page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageUserBasicDTO>>;
-    public getFollowers(id: string, page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageUserBasicDTO>>;
-    public getFollowers(id: string, page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getFollowers.');
-        }
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getFollowers.');
-        }
-
-        if (size === null || size === undefined) {
-            throw new Error('Required parameter size was null or undefined when calling getFollowers.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<PageUserBasicDTO>('get',`${this.basePath}/api/v1/users/followers/${encodeURIComponent(String(id))}`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param page 
-     * @param size 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getFollowing(id: string, page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PageUserBasicDTO>;
-    public getFollowing(id: string, page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageUserBasicDTO>>;
-    public getFollowing(id: string, page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageUserBasicDTO>>;
-    public getFollowing(id: string, page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getFollowing.');
-        }
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getFollowing.');
-        }
-
-        if (size === null || size === undefined) {
-            throw new Error('Required parameter size was null or undefined when calling getFollowing.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<PageUserBasicDTO>('get',`${this.basePath}/api/v1/users/following/${encodeURIComponent(String(id))}`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
      * @param page 
      * @param size 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -508,61 +346,6 @@ export class UserControllerService {
         ];
 
         return this.httpClient.request<PageProductBasicDTO>('get',`${this.basePath}/api/v1/users/liked/`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param page 
-     * @param size 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getMyInBoxMessage(page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PageMessageDTO>;
-    public getMyInBoxMessage(page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageMessageDTO>>;
-    public getMyInBoxMessage(page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageMessageDTO>>;
-    public getMyInBoxMessage(page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getMyInBoxMessage.');
-        }
-
-        if (size === null || size === undefined) {
-            throw new Error('Required parameter size was null or undefined when calling getMyInBoxMessage.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<PageMessageDTO>('get',`${this.basePath}/api/v1/users/me/inbox`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -673,116 +456,6 @@ export class UserControllerService {
         ];
 
         return this.httpClient.request<PageOrderBasicDTO>('get',`${this.basePath}/api/v1/users/me/orders`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param page 
-     * @param size 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getMyOutBoxMessage(page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PageMessageDTO>;
-    public getMyOutBoxMessage(page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageMessageDTO>>;
-    public getMyOutBoxMessage(page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageMessageDTO>>;
-    public getMyOutBoxMessage(page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getMyOutBoxMessage.');
-        }
-
-        if (size === null || size === undefined) {
-            throw new Error('Required parameter size was null or undefined when calling getMyOutBoxMessage.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<PageMessageDTO>('get',`${this.basePath}/api/v1/users/me/outbox`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param page 
-     * @param size 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getMyPaymentMethods(page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PagePaymentMethodBasicDTO>;
-    public getMyPaymentMethods(page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PagePaymentMethodBasicDTO>>;
-    public getMyPaymentMethods(page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PagePaymentMethodBasicDTO>>;
-    public getMyPaymentMethods(page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getMyPaymentMethods.');
-        }
-
-        if (size === null || size === undefined) {
-            throw new Error('Required parameter size was null or undefined when calling getMyPaymentMethods.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<PagePaymentMethodBasicDTO>('get',`${this.basePath}/api/v1/users/me/payment-methods`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -910,15 +583,16 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public refreshToken(observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public refreshToken(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public refreshToken(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public refreshToken(observe?: 'body', reportProgress?: boolean): Observable<{ [key: string]: string; }>;
+    public refreshToken(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<{ [key: string]: string; }>>;
+    public refreshToken(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<{ [key: string]: string; }>>;
     public refreshToken(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -929,7 +603,7 @@ export class UserControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/users/refreshToken`,
+        return this.httpClient.request<{ [key: string]: string; }>('get',`${this.basePath}/api/v1/users/refreshToken`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -1138,46 +812,6 @@ export class UserControllerService {
         return this.httpClient.request<any>('get',`${this.basePath}/api/v1/users/getNewPassword`,
             {
                 params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public unfollow(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public unfollow(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public unfollow(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public unfollow(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling unfollow.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<any>('post',`${this.basePath}/api/v1/users/unfollow/${encodeURIComponent(String(id))}`,
-            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

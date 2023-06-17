@@ -7,14 +7,14 @@
         <div class="col-6">
             <div class = "row align-items-center">
                 <div class="col-6 fw-semibold">
-                    <img [src]="profilePic | defaultProfilePic" class = "rounded float-end" style = "width: 50px;"> 
+                    <img [src]="profilePic | defaultProfilePic" class = "rounded float-end" style = "width: 50px;">
                 </div>
                 <div class="col-6 fw-semibold">
-                    <button class="btn btn-sm btn-outline-primary float-end" type="button">Change photo</button> 
+                    <button class="btn btn-sm btn-outline-primary float-end" type="button"  data-bs-toggle="modal" data-bs-target="#changePhotoModal" (click)="resetDropzoneUploads()">Change photo</button>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 
 <div class="basic-container">
@@ -24,9 +24,18 @@
         </div>
 
         <div class="col-6">
-            <textarea  class="form-control" id="floatingTextArea" placeholder="Enter text"></textarea>
+            <textarea  class="form-control" id="floatingTextArea" [(ngModel)]="textAreaText" placeholder="Enter your bio here">{{bioText}}</textarea>
         </div>
-    </div>    
+    </div>
+
+    <div *ngIf="bioText != textAreaText" class = "row align-items-center">
+        <div class="col-6">
+
+        </div>
+        <div class="col-6 fw-semibold">
+            <button class="btn btn-sm btn-primary float-end" type="button">Save</button>
+        </div>
+    </div>
 </div>
 
 
@@ -62,10 +71,49 @@
                 </select>
             </div>
         </div>
-
-
     </div>
-
-
-
 </div>
+
+
+<!--Modal -->
+<div class="modal" id="changePhotoModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header d-flex justify-content-center align-items-center">
+           <h6 class="text-center">Change photo</h6>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" onended="'ciao'">
+          <form>
+            <div class="container">
+                <div class="row fw-lighter">
+                    <span>Choose your profile photo</span>
+                </div>
+            </div>
+
+            <div class="basic-container mb-4">
+
+                <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
+                    <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+                      <dropzone *ngIf="type === 'component'" class="dropzone-container" [config]="config" [disabled]="disabled" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto" [message]="'Click or drag images here to upload'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
+
+                      <div *ngIf="type === 'directive'" class="dropzone dropzone-container" [dropzone]="config" [disabled]="disabled" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                    </div>
+                  </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="close()">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+

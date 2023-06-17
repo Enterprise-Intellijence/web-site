@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProductDTO } from 'src/app/services/api-service';
+import { ProductDTO, AddressDTO } from 'src/app/services/api-service';
 
 @Component({
   selector: 'product-info',
@@ -8,5 +8,11 @@ import { ProductDTO } from 'src/app/services/api-service';
 })
 export class ProductInfoComponent {
 
+  addressProduct?: AddressDTO;
   @Input() productInfo?: ProductDTO;
+
+  constructor() {
+    //this.addressProduct = this.productInfo?.address;
+    console.log(this.addressProduct);
+  }
 }

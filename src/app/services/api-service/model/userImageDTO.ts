@@ -13,4 +13,5 @@
 export interface UserImageDTO { 
     id?: string;
     description?: string;
+    urlPhoto?: string;
 }

@@ -1,0 +1,319 @@
+<div class="container" style="display: flex;">
+    <div class="scrollable-container-left" style="flex-grow: 1; margin-right: 100px;">
+        <div class="basic-container" style="margin-bottom: 30px;">
+            <div class="row fw-lighter">
+                <span>Order</span>
+            </div>
+            <div class="row">
+                <div class="col-6 text-left float-start mt-2">
+                    <div class="d-flex align-items-center">
+                        <img [src]="productPic | defaultProductPic" class="rounded-circle mt-2" style="width: 50px; height: 50px;">
+                        <div class="d-inline-block ms-2">
+                            <span class="fw-semibold">{{productName}}</span>
+                            <br>
+                            <span class="fw-lighter d-block">{{productDescription}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 text-end mt-2">
+                    <div class="d-flex justify-content-end mr-4">
+                        <div class="d-inline-block">
+                            <span class="fw-semibold">{{productPrice}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="basic-container">
+            <div class = "row fw-lighter">
+                <span>Your address</span>
+            </div>
+            <div class = "row">
+                <div class="col-6 fw-semibold mt-3">
+                    <span>Add address</span>
+                </div>
+                <div class="col-6 fw-semibold mt-2">
+                  <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#addressModal">
+                    <fa-icon [icon]="faPlusIcon">
+        
+                    </fa-icon>
+                  </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="basic-container">
+            <div class = "row fw-lighter">
+                <span>Payment options</span>
+            </div>
+            <div class = "row">
+                <div class="col-6 fw-semibold mt-3">
+                    <span>Add credit card</span>
+                </div>
+                <div class="col-6 fw-semibold mt-2">
+                  <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#paymentMethodModal">
+                    <fa-icon [icon]="faPlusIcon">
+        
+                    </fa-icon>
+                  </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="basic-container">
+            <div class="row fw-lighter">
+                <span>Delivery details</span>
+            </div>
+            <div class="row align-items-end">
+                <div class="col-6 text-start">
+                    <div class="row align-items-center">
+                        <span class="fw-semibold">Use default address</span>
+                    </div>
+                </div>
+                <div class="col-6 text-end mr-2">
+                    <div class="form-check form-switch form-control-lg d-flex justify-content-end">
+                        <input class="form-check-input" type="checkbox" id="newMessageNotificationSwitch">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6 fw-semibold mt-3">
+                    <span>Choose a pickup point</span>
+                </div>
+                <div class="col-6 fw-semibold mt-2 text-end mr-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#pickupPointModal">
+                        <fa-icon [icon]="faPlusIcon"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="custom-right-container d-flex flex-column justify-content-center align-items-center">
+        <div class="row fw-lighter">
+            <span>Order summary</span>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6 text-start fw-semibold">
+                <span>Ordine:</span>
+            </div>
+            <div class="col-6 text-end">
+                <span>costo</span>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6 text-start fw-semibold">
+                <span>Spedizione:</span>
+            </div>
+            <div class="col-6 text-end">
+                <span>costo</span>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6 text-start fw-semibold">
+                <span>Totale:</span>
+            </div>
+            <div class="col-6 text-end">
+                <span>costoTotale</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-4">
+                <button class="btn btn-primary">Paga Ora</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="custom-scrollbar">
+        <div class="custom-scrollbar-thumb"></div>
+    </div>
+</div>
+
+
+
+  <!--Modal -->
+<div class="modal" id="paymentMethodModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Add credit card</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form>
+            <div class="container">
+                <div class="row fw-lighter">
+                    <span>The information about your card are protected</span>
+                </div>
+            </div>
+            <div class="basic-container mb-4">
+
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Card's holder name</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{profileName}}">
+                    </div>
+                </div>
+            </div>
+            <div class="basic-container mb-4">
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Number of the card</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{cardNumber}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                </div>
+            </div>
+
+            <div class="basic-container mb-4">
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Expiration Day</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{expirationDay}}" (input)="formatDateInput($event)" [ngClass]="{ 'error': error }">
+                        <div class="error-message mt-2" *ngIf="error">Invalid month, try again.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="basic-container mb-4">
+                <div class="row align-items-center">
+                    <div class="col-12 ml-2">
+                        <span>Secure code</span>
+                    </div>
+            
+                    <div class="col-8 mt-2">
+                        <input type="text" class="form-control border-0" placeholder="{{secureCode}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                </div>
+            </div>
+          </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+</div>
+
+
+<div class="modal" id="addressModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add address</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form>
+              <div class="container border-bottom p-2 shadow-sm">
+                  <div class = "row fw-lighter">
+                      <span>Country</span>
+                  </div>
+                  <div class = "row">
+                      <div class="col-6 fw-bold mt-2">
+                          <select class="form-select" aria-label="Default select example">
+                              <option selected>Select country</option>
+                              <option value="1">Italy</option>
+                              <option value="2">France</option>
+                              <option value="3">Russia</option>
+                          </select>
+                      </div>
+                      <span class="border-bottom mt-2"></span>
+                      <div class = "row fw-lighter mt-2">
+                          <span>Name and Lastname</span>
+                      </div>
+                      <div class="col-xs-4 mt-2">
+                          <input class="form-control" id="ex3" type="text">
+                      </div>
+                      <span class="border-bottom mt-2"></span>
+                      <div class = "row fw-lighter mt-2">
+                          <span>Address 1</span>
+                      </div>
+                      <div class="col-xs-4 mt-2">
+                          <input class="form-control" id="ex3" type="text">
+                      </div>
+                      <span class="border-bottom mt-2"></span>
+                      <div class = "row fw-lighter mt-2">
+                          <span>Address 2 (optional)</span>
+                      </div>
+                      <div class="col-xs-4 mt-2">
+                          <input class="form-control" id="ex3" type="text">
+                      </div>
+                      <span class="border-bottom mt-2"></span>
+                      <div class = "row fw-lighter mt-2">
+                          <span>Postal Code</span>
+                      </div>
+                      <div class="col-xs-4 mt-2">
+                          <input class="form-control" id="ex3" type="text">
+                      </div>
+              
+                  </div>
+              
+              
+              
+              </div>
+          </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal" id="pickupPointModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">TODO</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+          
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+</div>

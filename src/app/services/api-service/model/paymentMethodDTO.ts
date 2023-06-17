@@ -9,12 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UserBasicDTO } from './userBasicDTO';
 
 export interface PaymentMethodDTO { 
     id?: string;
     creditCard: string;
     expiryDate: string;
     owner: string;
-    ownerUser?: UserBasicDTO;
+    _default?: boolean;
 }

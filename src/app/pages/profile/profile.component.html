@@ -3,17 +3,26 @@
         <div class="col-12 col-sm-2">
             <div class="row">
                 <div class="col-4">
-                    <img [src]="profilePic | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px;">
+                    <img [src]="user?.photoProfile?.id | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px;">
                 </div>
             </div>
         </div>
-        
-        <div class=" col-sm-4">
-            <span>Name</span>
+
+        <div class="col-sm-4">
+            <h4>{{user?.username}}</h4>
         </div>
 
-        <div class="col-12 col-sm-4">
+        <div *ngIf="isCurrentUser" class="col-12 col-sm-4">
             <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>
+        </div>
+
+        <div *ngIf="!isCurrentUser" class="col-12 col-sm-4">
+            <button class="btn btn-outline-success" type="button" [routerLink]="['/messages']">Message</button>
+            <button class="btn btn-success margin-button" type="button">Follow</button>
+
+            <button class="btn btn-outline-warning margin-button" type="button">
+                <fa-icon [icon]="faCircleExclamation"></fa-icon>
+            </button>
         </div>
     </div>
 </div>

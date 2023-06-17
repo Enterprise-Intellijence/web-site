@@ -37,12 +37,12 @@ export class ApiAuthService {
       .pipe(tap(response => this.handleAuthenticateResponse(response)));
   }
 
-  private handleAuthenticateResponse(response: Response) {
+  private handleAuthenticateResponse(response: any) {
     this.encodedAccessJWT = response.accessToken.replace('Bearer ', '');
     this.encodedRefreshJWT = response.refreshToken.replace('Bearer ', '');
 
-    this.accessJWT = jwtDecode(this.encodedAccessJWT);
-    this.refreshJWT = jwtDecode(this.encodedRefreshJWT);
+    this.accessJWT = jwtDecode(this.encodedAccessJWT!);
+    this.refreshJWT = jwtDecode(this.encodedRefreshJWT!);
 
     this.saveTokens();
 

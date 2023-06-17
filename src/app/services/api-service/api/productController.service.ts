@@ -23,6 +23,7 @@ import { OrderBasicDTO } from '../model/orderBasicDTO';
 import { PageMessageDTO } from '../model/pageMessageDTO';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
+import { ProductCategory } from '../model/productCategory';
 import { ProductsIdBody } from '../model/productsIdBody';
 import { ProductsIdBody1 } from '../model/productsIdBody1';
 import { UserBasicDTO } from '../model/userBasicDTO';
@@ -299,6 +300,42 @@ export class ProductControllerService {
     /**
      * 
      * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCategoriesList(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getCategoriesList(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getCategoriesList(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getCategoriesList(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/categories`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param title 
      * @param description 
      * @param minProductCost 
@@ -310,14 +347,14 @@ export class ProductControllerService {
      * @param uploadDate 
      * @param availability 
      * @param productCategory 
-     * @param productCategoryParent 
-     * @param productCategoryChild 
+     * @param primaryCat 
+     * @param secondaryCat 
+     * @param tertiaryCat 
      * @param likesNumber 
      * @param productGender 
-     * @param size 
+     * @param sizes 
      * @param colour 
      * @param entertainmentLanguage 
-     * @param homeSize 
      * @param homeMaterial 
      * @param page 
      * @param sizePage 
@@ -326,10 +363,10 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: string, productCategoryParent?: string, productCategoryChild?: string, likesNumber?: number, productGender?: string, size?: string, colour?: string, entertainmentLanguage?: string, homeSize?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'body', reportProgress?: boolean): Observable<PageProductBasicDTO>;
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: string, productCategoryParent?: string, productCategoryChild?: string, likesNumber?: number, productGender?: string, size?: string, colour?: string, entertainmentLanguage?: string, homeSize?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageProductBasicDTO>>;
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: string, productCategoryParent?: string, productCategoryChild?: string, likesNumber?: number, productGender?: string, size?: string, colour?: string, entertainmentLanguage?: string, homeSize?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageProductBasicDTO>>;
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: string, productCategoryParent?: string, productCategoryChild?: string, likesNumber?: number, productGender?: string, size?: string, colour?: string, entertainmentLanguage?: string, homeSize?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'body', reportProgress?: boolean): Observable<PageProductBasicDTO>;
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageProductBasicDTO>>;
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageProductBasicDTO>>;
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
 
@@ -391,11 +428,14 @@ export class ProductControllerService {
         if (productCategory !== undefined && productCategory !== null) {
             queryParameters = queryParameters.set('productCategory', <any>productCategory);
         }
-        if (productCategoryParent !== undefined && productCategoryParent !== null) {
-            queryParameters = queryParameters.set('productCategoryParent', <any>productCategoryParent);
+        if (primaryCat !== undefined && primaryCat !== null) {
+            queryParameters = queryParameters.set('primaryCat', <any>primaryCat);
         }
-        if (productCategoryChild !== undefined && productCategoryChild !== null) {
-            queryParameters = queryParameters.set('productCategoryChild', <any>productCategoryChild);
+        if (secondaryCat !== undefined && secondaryCat !== null) {
+            queryParameters = queryParameters.set('secondaryCat', <any>secondaryCat);
+        }
+        if (tertiaryCat !== undefined && tertiaryCat !== null) {
+            queryParameters = queryParameters.set('tertiaryCat', <any>tertiaryCat);
         }
         if (likesNumber !== undefined && likesNumber !== null) {
             queryParameters = queryParameters.set('likesNumber', <any>likesNumber);
@@ -403,17 +443,16 @@ export class ProductControllerService {
         if (productGender !== undefined && productGender !== null) {
             queryParameters = queryParameters.set('productGender', <any>productGender);
         }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
+        if (sizes) {
+            sizes.forEach((element) => {
+                queryParameters = queryParameters.append('sizes', <any>element);
+            })
         }
         if (colour !== undefined && colour !== null) {
             queryParameters = queryParameters.set('colour', <any>colour);
         }
         if (entertainmentLanguage !== undefined && entertainmentLanguage !== null) {
             queryParameters = queryParameters.set('entertainmentLanguage', <any>entertainmentLanguage);
-        }
-        if (homeSize !== undefined && homeSize !== null) {
-            queryParameters = queryParameters.set('homeSize', <any>homeSize);
         }
         if (homeMaterial !== undefined && homeMaterial !== null) {
             queryParameters = queryParameters.set('homeMaterial', <any>homeMaterial);
@@ -705,6 +744,42 @@ export class ProductControllerService {
         ];
 
         return this.httpClient.request<OrderBasicDTO>('get',`${this.basePath}/api/v1/products/${encodeURIComponent(String(id))}/order`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSizesList(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getSizesList(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getSizesList(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getSizesList(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/sizes`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
