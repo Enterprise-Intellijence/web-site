@@ -10,6 +10,9 @@ export class NavBarMenuItemComponent implements OnInit {
   @Input() title: string = 'undefined';
   @Input() primaryCategory?: ProductCategory;
 
+  // small unique id for the menu item
+  uniqueId = Math.random().toString(36).substring(2, 15);
+
   selectedSecondaryCategory: ProductCategory | undefined;
 
 
