@@ -1,10 +1,10 @@
-<li class="nav-item" ngbDropdown>
+<li class="nav-item" ngbDropdown #drop="ngbDropdown">
   <a class="nav-link" tabindex="0" ngbDropdownToggle [id]="'navbar' + title + 'Dropdown'" role="button">{{title}}</a>
-  <div ngbDropdownMenu class="rounded-3 p-2" style="width: 20vw">
+  <div ngbDropdownMenu class="rounded-3 p-2" style="width: 550px">
     <div class="row g-3">
 
       <div class="col-auto">
-        <button class="btn btn-primary w-100" [routerLink]="">
+        <button class="btn btn-primary w-100" (click)="selectCategory(primaryCategory); drop.close()">
           All
         </button>
         <hr class="dropdown-divider">
@@ -29,7 +29,7 @@
         <div class="row row-cols-2 g-2">
           <div class="col">
 
-            <button class="btn btn-primary w-100">
+            <button class="btn btn-primary w-100" (click)="selectCategory(selectedSecondaryCategory); ; drop.close()">
               All
             </button>
           </div>
@@ -37,7 +37,7 @@
           <ng-container *ngFor="let tertiaryCategory of selectedSecondaryCategory?.childCategories">
             <div class="col">
 
-              <button class="btn btn-outline-primary w-100">
+              <button class="btn btn-outline-primary w-100" (click)="selectCategory(tertiaryCategory); drop.close()">
                 {{tertiaryCategory.name}}
               </button>
             </div>
