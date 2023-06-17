@@ -14,11 +14,8 @@ export class MostRequestProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("ciao")
-
     this.productService.getFilteredProducts().subscribe({
       next: (value: PageProductBasicDTO) => {
-        console.log(value)
         this.productList = value.content ?? []
       }
     })

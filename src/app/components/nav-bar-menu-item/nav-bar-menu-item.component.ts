@@ -7,7 +7,7 @@ import { ProductCategory } from 'src/app/models/product-category';
   styleUrls: ['./nav-bar-menu-item.component.scss']
 })
 export class NavBarMenuItemComponent implements OnInit {
-  @Input() title: string = 'undefined';
+ @Input() title: string = 'undefined';
   @Input() primaryCategory?: ProductCategory;
 
   // small unique id for the menu item
@@ -16,12 +16,15 @@ export class NavBarMenuItemComponent implements OnInit {
   selectedSecondaryCategory: ProductCategory | undefined;
 
 
-  ngOnInit(): void {
-    if (!this.primaryCategory) {
-      throw new Error('primaryCategory is undefined');
-    }
 
-    this.selectedSecondaryCategory = this.primaryCategory.childCategories.at(0);
+  ngOnChanges() {
+    this.selectedSecondaryCategory = this.primaryCategory?.childCategories.at(0);
+  }
+
+
+
+  ngOnInit(): void {
+    this.selectedSecondaryCategory = this.primaryCategory?.childCategories.at(0);
   }
 
 
