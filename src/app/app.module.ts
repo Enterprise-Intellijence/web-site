@@ -36,6 +36,10 @@ import { MessagesPageComponent } from './pages/messages-page/messages-page.compo
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ApiModule, Configuration, UserControllerService } from './services/api-service';
+import { ReviewCardComponent } from './components/review-card/review-card.component';
+import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
+import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
+import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -77,7 +81,11 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     PurchasingPageComponent,
     BankAccountComponent,
     MessagesPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    ReviewCardComponent,
+    NewProductPageComponent,
+    LikedProductsPageComponent,
+    NavBarMenuItemComponent
   ],
   providers: [
     HttpClient,

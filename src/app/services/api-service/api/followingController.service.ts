@@ -19,7 +19,6 @@ import { Observable }                                        from 'rxjs';
 
 import { FollowingFollowersDTO } from '../model/followingFollowersDTO';
 import { PageFollowingFollowersDTO } from '../model/pageFollowingFollowersDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -77,8 +76,7 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -131,8 +129,7 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -186,8 +183,7 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -229,7 +225,6 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

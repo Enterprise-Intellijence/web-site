@@ -12,6 +12,7 @@ import { BankAccountComponent } from './pages/settings/payments/bank-account/ban
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
+import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,8 +22,9 @@ const routes: Routes = [
   // TODO: Add the :id to all the routerLink that are using the users/:id path
   { path: 'users/:id', component: ProfileComponent },
   { path: 'users/me', component: ProfileComponent },
+  { path: 'users/:id', component: ProfileComponent },
   { path: 'messages', component: MessagesPageComponent },
-  // { path: 'products/new', component: NewProductPageComponent },
+  { path: 'products/new', component: NewProductPageComponent },
   // { path: 'products/:id', component: ProductPageComponent },
   // { path: 'search', component: SearchPageComponent },
   { path: 'login', component: LoginPageComponent },

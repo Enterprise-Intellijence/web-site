@@ -10,14 +10,8 @@
  * Do not edit the class manually.
  */
 
-export interface MediaType { 
-    type?: string;
-    subtype?: string;
-    parameters?: { [key: string]: string; };
-    qualityValue?: number;
-    wildcardType?: boolean;
-    wildcardSubtype?: boolean;
-    subtypeSuffix?: string;
-    concrete?: boolean;
-    charset?: string;
+export interface SizeDTO { 
+    id?: string;
+    sizeName: string;
+    type: string;
 }

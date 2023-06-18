@@ -1,0 +1,51 @@
+<li class="nav-item" ngbDropdown #drop="ngbDropdown">
+  <a class="nav-link" tabindex="0" ngbDropdownToggle [id]="'navbar' + title + 'Dropdown'" role="button">{{title}}</a>
+  <div ngbDropdownMenu class="rounded-3 p-2" style="width: 550px">
+    <div class="row g-3">
+
+      <div class="col-auto">
+        <button class="btn btn-primary w-100" (click)="selectCategory(primaryCategory); drop.close()">
+          All
+        </button>
+        <hr class="dropdown-divider">
+        <div class="btn-group-vertical" role="group">
+
+          <ng-container *ngFor="let secondaryCategory of primaryCategory?.childCategories; first as isFirst;">
+            <input type="radio" [id]="uniqueId+secondaryCategory.rawName" [name]="uniqueId+secondaryCategory.rawName" [value]="secondaryCategory" class="btn-check" autocomplete="off" [checked]="selectedSecondaryCategory==secondaryCategory" (click)="selectedSecondaryCategory=secondaryCategory">
+
+            <label [for]="uniqueId+secondaryCategory.rawName" class="btn btn-outline-primary">
+              {{secondaryCategory.name}}
+            </label>
+          </ng-container>
+        </div>
+
+      </div>
+      <div class="col-auto">
+        <span class="vr h-100"></span>
+      </div>
+
+
+      <div class="col">
+        <div class="row row-cols-2 g-2">
+          <div class="col">
+
+            <button class="btn btn-primary w-100" (click)="selectCategory(selectedSecondaryCategory); ; drop.close()">
+              All
+            </button>
+          </div>
+
+          <ng-container *ngFor="let tertiaryCategory of selectedSecondaryCategory?.childCategories">
+            <div class="col">
+
+              <button class="btn btn-outline-primary w-100" (click)="selectCategory(tertiaryCategory); drop.close()">
+                {{tertiaryCategory.name}}
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</li>

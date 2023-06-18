@@ -24,8 +24,46 @@ export class ProfileComponent implements OnInit {
 
   private routeSubscription?: Subscription;
 
-  ngOnInit(): void {
 
+  user?: UserBasicDTO;
+
+
+  isFollowing: boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserControllerService,
+    private currentUserService: CurrentUserService,) { }
+
+  ngOnInit(): void {
+    // example route with id: http://localhost:4200/users/1
+    // example route: http://localhost:4200/users/me
+
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get('id') ?? null;
+      if(this.userId != null)
+        this.userService.userById(this.userId).subscribe(user => this.user = user);
+      else
+        this.loadCurrentUser();
+    });
+
+    this.currentUserService.user$.subscribe(user => this.currentUserId = user?.id ?? null);
+  }
+
+  loadCurrentUser() {
+    console.log(`loadCurrentUser()`);
+
+    this.currentUserService.user$.subscribe(user => {
+      if (user) {
+        this.userId = user.id ?? null;
+        this.user = user;
+      }
+    });
+  }
+
+  public get isCurrentUser(): boolean {
+    return this.userId !== null && this.currentUserId === this.userId;
+  }
     this.userProfileService.currentUserProfile?.subscribe(p=>{
       this.currentUserProfile = p;
     });

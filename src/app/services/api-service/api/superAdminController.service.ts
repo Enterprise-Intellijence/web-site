@@ -17,7 +17,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { ResponseStatusException } from '../model/responseStatusException';
+import { ProductCategoryDTO } from '../model/productCategoryDTO';
+import { SizeDTO } from '../model/sizeDTO';
 import { UserDTO } from '../model/userDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -89,8 +90,7 @@ export class SuperAdminControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -104,6 +104,324 @@ export class SuperAdminControllerService {
         return this.httpClient.request<UserDTO>('post',`${this.basePath}/api/v1/superAdmin/users/changeRole`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createNewCategory(body: ProductCategoryDTO, observe?: 'body', reportProgress?: boolean): Observable<ProductCategoryDTO>;
+    public createNewCategory(body: ProductCategoryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductCategoryDTO>>;
+    public createNewCategory(body: ProductCategoryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductCategoryDTO>>;
+    public createNewCategory(body: ProductCategoryDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling createNewCategory.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<ProductCategoryDTO>('post',`${this.basePath}/api/v1/superAdmin/categories`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createNewSize(body: SizeDTO, observe?: 'body', reportProgress?: boolean): Observable<SizeDTO>;
+    public createNewSize(body: SizeDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SizeDTO>>;
+    public createNewSize(body: SizeDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SizeDTO>>;
+    public createNewSize(body: SizeDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling createNewSize.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<SizeDTO>('post',`${this.basePath}/api/v1/superAdmin/size`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param catId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteCategory(catId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteCategory(catId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteCategory(catId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteCategory(catId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (catId === null || catId === undefined) {
+            throw new Error('Required parameter catId was null or undefined when calling deleteCategory.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('delete',`${this.basePath}/api/v1/superAdmin/categories/${encodeURIComponent(String(catId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param sizeId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteSize(sizeId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteSize(sizeId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteSize(sizeId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteSize(sizeId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (sizeId === null || sizeId === undefined) {
+            throw new Error('Required parameter sizeId was null or undefined when calling deleteSize.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('delete',`${this.basePath}/api/v1/superAdmin/size/${encodeURIComponent(String(sizeId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param catId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public productCategoryEnableOrDisable(catId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public productCategoryEnableOrDisable(catId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public productCategoryEnableOrDisable(catId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public productCategoryEnableOrDisable(catId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (catId === null || catId === undefined) {
+            throw new Error('Required parameter catId was null or undefined when calling productCategoryEnableOrDisable.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('post',`${this.basePath}/api/v1/superAdmin/categories/${encodeURIComponent(String(catId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param catId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public replaceProductCategory(body: ProductCategoryDTO, catId: string, observe?: 'body', reportProgress?: boolean): Observable<ProductCategoryDTO>;
+    public replaceProductCategory(body: ProductCategoryDTO, catId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductCategoryDTO>>;
+    public replaceProductCategory(body: ProductCategoryDTO, catId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductCategoryDTO>>;
+    public replaceProductCategory(body: ProductCategoryDTO, catId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling replaceProductCategory.');
+        }
+
+        if (catId === null || catId === undefined) {
+            throw new Error('Required parameter catId was null or undefined when calling replaceProductCategory.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<ProductCategoryDTO>('put',`${this.basePath}/api/v1/superAdmin/categories/${encodeURIComponent(String(catId))}`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param sizeId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public replaceSize(body: SizeDTO, sizeId: string, observe?: 'body', reportProgress?: boolean): Observable<SizeDTO>;
+    public replaceSize(body: SizeDTO, sizeId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SizeDTO>>;
+    public replaceSize(body: SizeDTO, sizeId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SizeDTO>>;
+    public replaceSize(body: SizeDTO, sizeId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling replaceSize.');
+        }
+
+        if (sizeId === null || sizeId === undefined) {
+            throw new Error('Required parameter sizeId was null or undefined when calling replaceSize.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<SizeDTO>('put',`${this.basePath}/api/v1/superAdmin/size/${encodeURIComponent(String(sizeId))}`,
+            {
+                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

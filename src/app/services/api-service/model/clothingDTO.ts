@@ -10,13 +10,15 @@
  * Do not edit the class manually.
  */
 import { CustomMoneyDTO } from './customMoneyDTO';
+import { ProductCategoryDTO } from './productCategoryDTO';
 import { ProductDTO } from './productDTO';
 import { ProductImageDTO } from './productImageDTO';
+import { SizeDTO } from './sizeDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface ClothingDTO extends ProductDTO { 
     productGender: ClothingDTO.ProductGenderEnum;
-    size: ClothingDTO.SizeEnum;
+    size: SizeDTO;
     colour: ClothingDTO.ColourEnum;
 }
 export namespace ClothingDTO {
@@ -25,51 +27,6 @@ export namespace ClothingDTO {
         MALE: 'MALE' as ProductGenderEnum,
         FEMALE: 'FEMALE' as ProductGenderEnum,
         UNISEX: 'UNISEX' as ProductGenderEnum
-    };
-    export type SizeEnum = '_3XS' | '_2XS' | '_XS' | '_S' | '_M' | '_L' | '_XL' | '_2XL' | '_3L' | '_4XL' | '_25' | '_26' | '_27' | '_28' | '_29' | '_30' | '_31' | '_32' | '_33' | '_34' | '_35' | '_36' | '_37' | '_38' | '_39' | '_40' | '_41' | '_42' | '_43' | '_44' | '_45' | '_46' | '_47' | '_48' | '_49' | '_50' | 'SMALL_BAG' | 'MEDIUM_BAG' | 'BIG_BAG' | 'SMALL_ACC' | 'MEDIUM_ACC' | 'BIG_ACC';
-    export const SizeEnum = {
-        _3XS: '_3XS' as SizeEnum,
-        _2XS: '_2XS' as SizeEnum,
-        XS: '_XS' as SizeEnum,
-        S: '_S' as SizeEnum,
-        M: '_M' as SizeEnum,
-        L: '_L' as SizeEnum,
-        XL: '_XL' as SizeEnum,
-        _2XL: '_2XL' as SizeEnum,
-        _3L: '_3L' as SizeEnum,
-        _4XL: '_4XL' as SizeEnum,
-        _25: '_25' as SizeEnum,
-        _26: '_26' as SizeEnum,
-        _27: '_27' as SizeEnum,
-        _28: '_28' as SizeEnum,
-        _29: '_29' as SizeEnum,
-        _30: '_30' as SizeEnum,
-        _31: '_31' as SizeEnum,
-        _32: '_32' as SizeEnum,
-        _33: '_33' as SizeEnum,
-        _34: '_34' as SizeEnum,
-        _35: '_35' as SizeEnum,
-        _36: '_36' as SizeEnum,
-        _37: '_37' as SizeEnum,
-        _38: '_38' as SizeEnum,
-        _39: '_39' as SizeEnum,
-        _40: '_40' as SizeEnum,
-        _41: '_41' as SizeEnum,
-        _42: '_42' as SizeEnum,
-        _43: '_43' as SizeEnum,
-        _44: '_44' as SizeEnum,
-        _45: '_45' as SizeEnum,
-        _46: '_46' as SizeEnum,
-        _47: '_47' as SizeEnum,
-        _48: '_48' as SizeEnum,
-        _49: '_49' as SizeEnum,
-        _50: '_50' as SizeEnum,
-        SMALLBAG: 'SMALL_BAG' as SizeEnum,
-        MEDIUMBAG: 'MEDIUM_BAG' as SizeEnum,
-        BIGBAG: 'BIG_BAG' as SizeEnum,
-        SMALLACC: 'SMALL_ACC' as SizeEnum,
-        MEDIUMACC: 'MEDIUM_ACC' as SizeEnum,
-        BIGACC: 'BIG_ACC' as SizeEnum
     };
     export type ColourEnum = 'YELLOW' | 'GREEN' | 'BLUE' | 'RED' | 'BLACK' | 'WHITE' | 'MULTICOLOUR';
     export const ColourEnum = {

@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CustomMoneyDTO } from './customMoneyDTO';
+import { ProductCategoryDTO } from './productCategoryDTO';
 import { ProductImageDTO } from './productImageDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
@@ -25,7 +26,7 @@ export interface ProductBasicDTO {
     likesNumber?: number;
     seller?: UserBasicDTO;
     productImages?: ProductImageDTO;
-    productCategory?: ProductBasicDTO.ProductCategoryEnum;
+    productCategory?: ProductCategoryDTO;
 }
 export namespace ProductBasicDTO {
     export type ConditionEnum = 'NEW_WITH_TAG' | 'NEW_WITHOUT_TAG' | 'VERY_GOOD' | 'GOOD' | 'ACCEPTABLE';
@@ -35,12 +36,5 @@ export namespace ProductBasicDTO {
         VERYGOOD: 'VERY_GOOD' as ConditionEnum,
         GOOD: 'GOOD' as ConditionEnum,
         ACCEPTABLE: 'ACCEPTABLE' as ConditionEnum
-    };
-    export type ProductCategoryEnum = 'OTHER' | 'ENTERTAINMENT' | 'HOME' | 'CLOTHING';
-    export const ProductCategoryEnum = {
-        OTHER: 'OTHER' as ProductCategoryEnum,
-        ENTERTAINMENT: 'ENTERTAINMENT' as ProductCategoryEnum,
-        HOME: 'HOME' as ProductCategoryEnum,
-        CLOTHING: 'CLOTHING' as ProductCategoryEnum
     };
 }
