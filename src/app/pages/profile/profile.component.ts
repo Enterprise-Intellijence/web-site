@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
-import { UserControllerService, UserDTO } from 'src/app/services/api-service';
+import { UserBasicDTO, UserControllerService, UserDTO, UserImageDTO } from 'src/app/services/api-service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
   selector: 'profile',
@@ -10,36 +13,32 @@ import { UserControllerService, UserDTO } from 'src/app/services/api-service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private userService: UserControllerService) {}
+  constructor(private userControllerService: UserControllerService,
+              private activatedRoute: ActivatedRoute,
+              private userProfileService: UserProfileService) {}
 
   faCircleExclamation = faCircleExclamation;
-  
-  // TODO: Get user info from user service
-  currentUserId: String = "";
-  
-  visitedUserId: String = "";
-  profilePic: String = "";
-  profileName: String = "John Doe";
-  followers: Number = 0;
-  following: Number = 0;
-  reviews: Number = 0;
-  isFollowing: Boolean = false;
 
+  visitedUserProfile?: UserDTO;
+  currentUserProfile?: UserDTO;
 
-
-
-
-  user?: UserDTO; 
+  private routeSubscription?: Subscription;
 
   ngOnInit(): void {
-    this.userService.me().subscribe(
-      p=>{
-        this.user = p;
-        console.log(this.user);
-      }
-    )
+
+    this.userProfileService.currentUserProfile?.subscribe(p=>{
+      this.currentUserProfile = p;
+    });
+
+    if (this.activatedRoute.snapshot.params['id']) {
+      this.routeSubscription = this.activatedRoute.params.subscribe(params => {
+        let id = params['id'];
+        this.userProfileService.loadVisitedUserProfile(id);
+        this.userProfileService.visitedUserProfile?.subscribe(p=>{
+          this.visitedUserProfile = p;
+          console.log(this.visitedUserProfile);
+        });
+      });
+    }
   }
-  
-
-
 }

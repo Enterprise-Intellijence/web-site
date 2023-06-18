@@ -19,8 +19,8 @@ const routes: Routes = [
   // TODO: Just for test purposes the profile page is accessible from users/me but, when the user id
   //  is provided use the users/:id path
   // TODO: Add the :id to all the routerLink that are using the users/:id path
+  { path: 'users/:id', component: ProfileComponent },
   { path: 'users/me', component: ProfileComponent },
-  // { path: 'users/:id', component: ProfileComponent },
   { path: 'messages', component: MessagesPageComponent },
   // { path: 'products/new', component: NewProductPageComponent },
   // { path: 'products/:id', component: ProductPageComponent },

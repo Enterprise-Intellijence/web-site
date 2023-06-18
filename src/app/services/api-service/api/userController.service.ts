@@ -938,9 +938,9 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public userById(id: string, observe?: 'body', reportProgress?: boolean): Observable<UserBasicDTO>;
-    public userById(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserBasicDTO>>;
-    public userById(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserBasicDTO>>;
+    public userById(id: string, observe?: 'body', reportProgress?: boolean): Observable<UserDTO>;
+    public userById(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDTO>>;
+    public userById(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDTO>>;
     public userById(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
