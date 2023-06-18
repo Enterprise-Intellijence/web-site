@@ -9,9 +9,17 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Money } from './money';
 
-export interface HttpHeaders /*extends null<String, Array>*/ { 
-  [key: string]: Array<string>;
-
-
+export interface CustomMoney { 
+    price?: number;
+    currency?: CustomMoney.CurrencyEnum;
+    money?: Money;
+}
+export namespace CustomMoney {
+    export type CurrencyEnum = 'EUR' | 'USD';
+    export const CurrencyEnum = {
+        EUR: 'EUR' as CurrencyEnum,
+        USD: 'USD' as CurrencyEnum
+    };
 }

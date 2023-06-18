@@ -9,12 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { User } from './user';
 
-export interface ProblemDetail { 
-    type?: string;
+export interface Review { 
+    id?: string;
+    date?: Date;
     title?: string;
-    status?: number;
-    detail?: string;
-    instance?: string;
-    properties?: { [key: string]: any; };
+    description?: string;
+    vote?: number;
+    reviewer?: User;
+    reviewed?: User;
 }

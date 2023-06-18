@@ -13,7 +13,6 @@ export class NewProductPageComponent {
   title: string = "";
   description: string = "";
   price: string = "";
-  categoryList;
   selectedCategory = "";
   selectedParentCategory = "";
   selectedChildCategory = "";
@@ -30,6 +29,5 @@ export class NewProductPageComponent {
 
   constructor(private sanitizer: DomSanitizer) {
     this.categoryList = Object.keys(ProductDTO.ProductCategoryEnum);
-    console.log("size: " + this.imagesLoaded.length);
   }
 }

@@ -53,6 +53,9 @@
               <li>
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/settings']">Settings</a>
               </li>
+              <li>
+                <a ngbDropdownItem class="rounded-2" [routerLink]="['/purchasing-page']">Purchasing-page (DEBUG)</a>
+              </li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <a ngbDropdownItem class="rounded-2" (click)="logout()">Log out</a>
@@ -81,44 +84,12 @@
 <nav class="navbar navbar-expand-sm border-bottom py-0 bg-tertiary">
   <div class="container-sm">
     <ul class="navbar-nav">
-      <li class="nav-item" ngbDropdown>
-        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarWomanDropdown" role="button"> Woman </a>
-        <div ngbDropdownMenu aria-labelledby="navbarWomanDropdown" class="gap-2 p-2 rounded-3">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
-          <hr class="dropdown-divider">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Clothes</a>
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Shoes</a>
-        </div>
-      </li>
-      <li class="nav-item" ngbDropdown>
-        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarMenDropdown" role="button"> Men </a>
-        <div ngbDropdownMenu aria-labelledby="navbarMenDropdown" class="gap-2 p-2 rounded-3">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
-          <hr class="dropdown-divider">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Clothes</a>
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">Shoes</a>
-        </div>
-      </li>
-      <li class="nav-item" ngbDropdown>
-        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarEntertainmentDropdown" role="button">Entertainment</a>
-        <div ngbDropdownMenu aria-labelledby="navbarEntertainmentDropdown" class="gap-2 p-2 rounded-3">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
-          <hr class="dropdown-divider">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 1</a>
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 2</a>
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 3</a>
-        </div>
-      </li>
-      <li class="nav-item" ngbDropdown>
-        <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarOtherDropdown" role="button"> Other </a>
-
-        <div ngbDropdownMenu aria-labelledby="navbarOtherDropdown" class="gap-2 p-2 rounded-3">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">All</a>
-          <hr class="dropdown-divider">
-          <a ngbDropdownItem class="rounded-2" [routerLink]="['/purchasing-page']">Purchasing-page</a>
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 2</a>
-          <a ngbDropdownItem class="rounded-2" [routerLink]="[]">option 3</a>
-        </div>
+      <nav-bar-menu-item title="woman" [primaryCategory]="clothingCategory" (onCategorySelected)="searchFor($event, 'FEMALE')"></nav-bar-menu-item>
+      <nav-bar-menu-item title="man" [primaryCategory]="clothingCategory" (onCategorySelected)="searchFor($event, 'MALE')"></nav-bar-menu-item>
+      <nav-bar-menu-item title="entertainment" [primaryCategory]="entertainmentCategory" (onCategorySelected)="searchFor($event)"></nav-bar-menu-item>
+      <nav-bar-menu-item title="home" [primaryCategory]="homeCategory" (onCategorySelected)="searchFor($event)"></nav-bar-menu-item>
+      <li class="nav-item">
+        <a class="nav-link" tabindex="0" role="button">Other</a>
       </li>
     </ul>
   </div>
