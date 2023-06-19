@@ -3,41 +3,41 @@
         <div class="col-12 col-sm-2">
             <div class="row">
                 <div class="col-4">
-                    <img [src]=" visitedUserProfile?.id | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px;">
+                    <img [src]=" visitedUserProfile?.getValue()?.photoProfile?.id | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px;">
                 </div>
             </div>
         </div>
         
         <div class=" col-sm-4">
             <div class="row">
-                <h4>{{visitedUserProfile?.username}}</h4>
+                <h4>{{visitedUserProfile?.getValue()?.username}}</h4>
             </div>
 
             <div class="row">
                 <div class="col col-auto">
                     <span class="fw-light">Followers: </span>
-                    <span class="fw-bold">{{visitedUserProfile?.followersNumber}}</span>
+                    <span class="fw-bold">{{visitedUserProfile?.getValue()?.followers_number}}</span>
                 </div>
 
                 <div class="col col-auto">
                     <span class="fw-light">Following: </span>
-                    <span class="fw-light">{{visitedUserProfile?.followingNumber}}</span>
+                    <span class="fw-bold">{{visitedUserProfile?.getValue()?.following_number}}</span>
                 </div>
             </div>
 
             <div class="row">
-                <span class="fw-medium">{{visitedUserProfile?.bio}}</span>
+                <span class="fw-medium">{{visitedUserProfile?.getValue()?.bio}}</span>
             </div>
         </div>
 
-        <div *ngIf="currentUserProfile?.id == visitedUserProfile?.id" class="col-12 col-sm-4">
+        <div *ngIf="currentUserProfile?.getValue()?.id == visitedUserProfile?.getValue()?.id" class="col-12 col-sm-4">
             <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>     
         </div>
 
-        <div *ngIf="currentUserProfile?.id != visitedUserProfile?.id" class="col-12 col-sm-4">
+        <div *ngIf="currentUserProfile?.getValue()?.id != visitedUserProfile?.getValue()?.id" class="col-12 col-sm-4">
             <button class="btn btn-outline-success" type="button" [routerLink]="['/messages']">Message</button>
-            <button class="btn btn-success margin-button" type="button">Follow</button>
-
+            <button *ngIf="isCurrentUserFollowingVisitedUser == false" class="btn btn-success margin-button" type="button" (click)="follow()">Follow</button>
+            <button *ngIf="isCurrentUserFollowingVisitedUser == true" class="btn btn-outline-success margin-button" type="button" (click)="follow()">Unfollow</button>
             <button class="btn btn-outline-warning margin-button" type="button">
                 <fa-icon [icon]="faCircleExclamation"></fa-icon>
             </button>

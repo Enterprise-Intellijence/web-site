@@ -24,6 +24,7 @@ export class UserProfileService {
   }
 
   updateProfile() {
+    this.currentUserProfile?.next(this.currentUser);
   }
 
   private loadCurrentUser() {
@@ -37,8 +38,4 @@ export class UserProfileService {
       this.visitedUserProfile?.next(p);
     });
   }
-
-
-
-
 }

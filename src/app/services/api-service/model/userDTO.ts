@@ -25,8 +25,8 @@ export interface UserDTO {
     role: UserDTO.RoleEnum;
     reviewsTotalSum?: number;
     reviewsNumber?: number;
-    followersNumber?: number;
-    followingNumber?: number;
+    followers_number?: number;
+    following_number?: number;
 }
 export namespace UserDTO {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
