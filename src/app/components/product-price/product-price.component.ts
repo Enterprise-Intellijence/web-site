@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CustomMoneyDTO } from 'src/app/services/api-service';
+import { ProductDTO, ProductBasicDTO, CustomMoneyDTO } from 'src/app/services/api-service';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartFull } from '@fortawesome/free-solid-svg-icons';
+import { UserLikesService } from 'src/app/services/user-likes.service';
 
 @Component({
   selector: 'product-price',
@@ -8,25 +11,46 @@ import { CustomMoneyDTO } from 'src/app/services/api-service';
 })
 export class ProductPriceComponent {
 
-  filledIcon: boolean = false;
+  productBasicDTO: ProductBasicDTO | undefined;
+
+  isFav: boolean = false;
 
   notFavButtonText: string = "Aggiungi ai preferiti";
   isFavButtonText: string = "Rimuovi dai preferiti";
-  favButtonText: string = this.notFavButtonText;
 
-  @Input() productPrice?: CustomMoneyDTO;
+  @Input() productDTO?: ProductDTO;
   priceWithProtection?: string;
+  fullHeartIcon= faHeartFull;
+  emptyHeartIcon= faHeart;
 
   clickFavButton() {
-    this.filledIcon=!this.filledIcon;
-    this.favButtonText = this.filledIcon ? this.isFavButtonText : this.notFavButtonText;
+    this.userLikesService.toggleLikeProduct(this.productBasicDTO!);
+    alert("liked");
   }
 
-  constructor() {
-    setTimeout(() => {
-      var num = this.productPrice?.price?.toString();
-      console.log(num);
-      this.priceWithProtection = num?.substring(0, num?.length-1) + '2.20';
-    }, 200);
+  clickBuyButton() {
+    alert("Acquisto effettuato");
+  }
+
+  clickOfferButton() {
+    alert("Offerta effettuata");
+  }
+
+  clickInfoButton() {
+    alert("Informazioni prodotto");
+  }
+
+  ngOnChanges() {
+    this.productBasicDTO = { ...this.productDTO!, productImages: undefined };
+    this.isFav = this.userLikesService.isProductLiked(this.productBasicDTO!);
+    console.log("ngChange" + this.isFav)
+
+  }
+
+  constructor(private userLikesService: UserLikesService) {
+    userLikesService.LikedProducts$.subscribe((products) => {
+      this.isFav = userLikesService.isProductLiked(this.productBasicDTO!);
+      console.log(this.isFav)
+    });
   }
 }
