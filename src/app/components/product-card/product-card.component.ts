@@ -26,8 +26,6 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
     this.userLikesService.LikedProducts$.subscribe(() => {
       this.userLikesProduct = this.userLikesService.isProductLiked(this.product);
     });
@@ -38,9 +36,9 @@ export class ProductCardComponent implements OnInit {
 
 
   public toggleLike() {
-
-    this.totalLikes += this.userLikesProduct ? -1 : 1;
-
-    this.userLikesService.toggleLikeProduct(this.product);
+    this.userLikesService.toggleLikeProduct(this.product).subscribe(() => {
+      this.userLikesProduct = !this.userLikesProduct;
+      this.totalLikes += this.userLikesProduct ? 1 : -1;
+    });
   }
 }
