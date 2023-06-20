@@ -14,6 +14,7 @@ import { UserImageDTO } from './userImageDTO';
 export interface UserBasicDTO { 
     id?: string;
     username: string;
+    bio?: string;
     photoProfile?: UserImageDTO;
     reviewsTotalSum?: number;
     reviewsNumber?: number;

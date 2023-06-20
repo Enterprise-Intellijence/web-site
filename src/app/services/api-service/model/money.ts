@@ -18,13 +18,13 @@ export interface Money {
     amount?: number;
     scale?: number;
     currencyUnit?: CurrencyUnit;
-    positiveOrZero?: boolean;
     minorPart?: number;
-    amountMinorLong?: number;
-    amountMinor?: number;
-    negativeOrZero?: boolean;
     amountMajor?: number;
-    amountMinorInt?: number;
     amountMajorLong?: number;
+    amountMinor?: number;
+    amountMinorInt?: number;
+    positiveOrZero?: boolean;
+    negativeOrZero?: boolean;
     amountMajorInt?: number;
+    amountMinorLong?: number;
 }
