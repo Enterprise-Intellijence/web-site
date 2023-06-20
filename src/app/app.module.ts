@@ -86,7 +86,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     NewProductPageComponent,
     LikedProductsPageComponent,
     NavBarMenuItemComponent
-  ],
+    ],
   providers: [
     HttpClient,
     ApiInterceptor,

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProductCategoriesService } from 'src/app/services/product-categories.service';
 import { ProductCategory } from 'src/app/models/product-category';
-import { ProductControllerService } from 'src/app/services/api-service';
-
+import { ProductControllerService, ProductCreateDTO } from 'src/app/services/api-service';
+import { CustomMoneyDTO } from 'src/app/services/api-service';
 @Component({
   selector: 'new-product-page',
   templateUrl: './new-product-page.component.html',
@@ -12,10 +11,13 @@ import { ProductControllerService } from 'src/app/services/api-service';
 export class NewProductPageComponent implements OnInit {
 
   imagesLoaded: Array<File> = new Array<File>();
-  filesLoaded: Array<File> = new Array<File>();
   primaryCategories: Array<ProductCategory> = new Array<ProductCategory>();
   secondaryCategories: Array<ProductCategory> = new Array<ProductCategory>();
   tertiaryCategories: Array<ProductCategory> = new Array<ProductCategory>();
+  conditionsMapping: Map<string, string> = new Map<ProductCreateDTO.ConditionEnum, string>();
+  conditions = ["Nuovo con etichetta", "Nuovo senza etichetta", "Come nuovo", "Buone condizioni", "Acettabile"];
+  currencies: string[] = [];
+  product!: ProductCreateDTO;
 
   selectedCategory?: string;
   selectedSecondaryCategory?: string;
@@ -23,6 +25,9 @@ export class NewProductPageComponent implements OnInit {
   title?: string;
   description?: string;
   price?: string;
+  currency?: string;
+  deliveryPrice?: string;
+  condition?: string;
 
 
 
@@ -30,13 +35,10 @@ export class NewProductPageComponent implements OnInit {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
-      this.filesLoaded.push(file);
-      this.imagesLoaded.push(event.target.result);
+      this.imagesLoaded.push(file);
       console.log("file: ", file);
       console.log("img: ", event.target.result);
     });
-
-    reader.readAsDataURL(file);
   }
 
   onCategorySelected(i: number) {
@@ -50,10 +52,27 @@ export class NewProductPageComponent implements OnInit {
   }
 
   uploadProduct() {
-    console.log("product uploaded");
+    if(!this.title || !this.description || !this.price || !this.deliveryPrice || this.imagesLoaded.length == 0) {
+      alert("Compilare tutti i campi.");
+    }
+    else {
+      this.product["title"] = this.title;
+      this.product["description"] = this.description;
+      this.product.productCost = {price: +this.price, currency: this.currency == "USD" ? 'USD': 'EUR'};
+      this.product.deliveryCost = {price: +this.deliveryPrice, currency: this.currency == "USD" ? 'USD': 'EUR'};
+
+      this.product.productImages = this.imagesLoaded;
+      console.log("product uploaded");
+    }
   }
 
   ngOnInit(): void {
+    var arr = Object.keys(ProductCreateDTO.ConditionEnum);
+    for (let i = 0; i < this.conditions.length; i++) {
+      this.conditionsMapping.set(this.conditions[i], arr[i]);
+    }
+    this.currencies = Object.keys(CustomMoneyDTO.CurrencyEnum);
+
     this.categoriesService.onCategoriesLoaded.subscribe(() => {
       this.primaryCategories = this.categoriesService.primaryCategories;
     });
