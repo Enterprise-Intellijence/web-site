@@ -24,10 +24,10 @@ import { PageMessageDTO } from '../model/pageMessageDTO';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
 import { ProductCategory } from '../model/productCategory';
+import { ProductCreateDTO } from '../model/productCreateDTO';
 import { ProductsIdBody } from '../model/productsIdBody';
 import { ProductsIdBody1 } from '../model/productsIdBody1';
 import { UserBasicDTO } from '../model/userBasicDTO';
-import { V1ProductsBody } from '../model/v1ProductsBody';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -72,10 +72,10 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProduct(body: V1ProductsBody, observe?: 'body', reportProgress?: boolean): Observable<V1ProductsBody>;
-    public createProduct(body: V1ProductsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<V1ProductsBody>>;
-    public createProduct(body: V1ProductsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<V1ProductsBody>>;
-    public createProduct(body: V1ProductsBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createProduct(body: ProductCreateDTO, observe?: 'body', reportProgress?: boolean): Observable<ProductsIdBody1>;
+    public createProduct(body: ProductCreateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductsIdBody1>>;
+    public createProduct(body: ProductCreateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductsIdBody1>>;
+    public createProduct(body: ProductCreateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createProduct.');
@@ -85,7 +85,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -101,7 +102,7 @@ export class ProductControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<V1ProductsBody>('post',`${this.basePath}/api/v1/products`,
+        return this.httpClient.request<ProductsIdBody1>('post',`${this.basePath}/api/v1/products`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -132,6 +133,7 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -193,7 +195,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -235,7 +238,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -276,7 +280,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -312,7 +317,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -474,7 +480,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -511,7 +518,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -570,7 +578,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -630,7 +639,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -690,7 +700,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -732,7 +743,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -768,7 +780,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -809,7 +822,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -855,7 +869,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -907,7 +922,8 @@ export class ProductControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

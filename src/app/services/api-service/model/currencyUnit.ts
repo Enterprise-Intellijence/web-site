@@ -16,6 +16,6 @@ export interface CurrencyUnit {
     decimalPlaces?: number;
     symbol?: string;
     numeric3Code?: string;
-    countryCodes?: Array<string>;
     pseudoCurrency?: boolean;
+    countryCodes?: Array<string>;
 }

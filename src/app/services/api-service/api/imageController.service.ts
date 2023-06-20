@@ -20,6 +20,8 @@ import { Observable }                                        from 'rxjs';
 import { ImagesProductBody } from '../model/imagesProductBody';
 import { PhotoprofileIdBody } from '../model/photoprofileIdBody';
 import { ProductIdBody } from '../model/productIdBody';
+import { ProductImageDTO } from '../model/productImageDTO';
+import { UserImageDTO } from '../model/userImageDTO';
 import { UsersPhotoprofileBody } from '../model/usersPhotoprofileBody';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -78,6 +80,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -118,6 +121,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -158,7 +162,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'image/jpeg'
+            'image/jpeg',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -199,7 +204,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'image/jpeg'
+            'image/jpeg',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -245,6 +251,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -296,6 +303,7 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -331,9 +339,9 @@ export class ImageControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveImageProduct(body: ImagesProductBody, productId: string, description: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public saveImageProduct(body: ImagesProductBody, productId: string, description: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public saveImageProduct(body: ImagesProductBody, productId: string, description: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public saveImageProduct(body: ImagesProductBody, productId: string, description: string, observe?: 'body', reportProgress?: boolean): Observable<ProductImageDTO>;
+    public saveImageProduct(body: ImagesProductBody, productId: string, description: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductImageDTO>>;
+    public saveImageProduct(body: ImagesProductBody, productId: string, description: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductImageDTO>>;
     public saveImageProduct(body: ImagesProductBody, productId: string, description: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
@@ -360,7 +368,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -376,7 +385,7 @@ export class ImageControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<string>('post',`${this.basePath}/api/v1/images/product`,
+        return this.httpClient.request<ProductImageDTO>('post',`${this.basePath}/api/v1/images/product`,
             {
                 body: body,
                 params: queryParameters,
@@ -396,9 +405,9 @@ export class ImageControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public savePhotoUser(body: UsersPhotoprofileBody, description: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public savePhotoUser(body: UsersPhotoprofileBody, description: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public savePhotoUser(body: UsersPhotoprofileBody, description: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public savePhotoUser(body: UsersPhotoprofileBody, description: string, observe?: 'body', reportProgress?: boolean): Observable<UserImageDTO>;
+    public savePhotoUser(body: UsersPhotoprofileBody, description: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserImageDTO>>;
+    public savePhotoUser(body: UsersPhotoprofileBody, description: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserImageDTO>>;
     public savePhotoUser(body: UsersPhotoprofileBody, description: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
@@ -418,7 +427,8 @@ export class ImageControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -434,7 +444,7 @@ export class ImageControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<string>('post',`${this.basePath}/api/v1/images/users/photo-profile`,
+        return this.httpClient.request<UserImageDTO>('post',`${this.basePath}/api/v1/images/users/photo-profile`,
             {
                 body: body,
                 params: queryParameters,

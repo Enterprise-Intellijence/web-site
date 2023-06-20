@@ -51,10 +51,11 @@ export interface User {
     reports?: Array<Report>;
     reported?: Array<Report>;
     enabled?: boolean;
-    authorities?: Array<GrantedAuthority>;
-    accountNonExpired?: boolean;
     accountNonLocked?: boolean;
+    administrator?: boolean;
+    authorities?: Array<GrantedAuthority>;
     credentialsNonExpired?: boolean;
+    accountNonExpired?: boolean;
 }
 export namespace User {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
