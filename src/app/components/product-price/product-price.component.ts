@@ -24,7 +24,7 @@ export class ProductPriceComponent {
   emptyHeartIcon= faHeart;
 
   clickFavButton() {
-    this.userLikesService.toggleLikeProduct(this.productBasicDTO!);
+    this.userLikesService.toggleLikeProduct(this.productBasicDTO!).subscribe();
     alert("liked");
   }
 
@@ -43,7 +43,7 @@ export class ProductPriceComponent {
   ngOnChanges() {
     this.productBasicDTO = { ...this.productDTO!, productImages: undefined };
     this.isFav = this.userLikesService.isProductLiked(this.productBasicDTO!);
-    console.log("ngChange" + this.isFav)
+    console.log("ngChange " + this.isFav)
 
   }
 
