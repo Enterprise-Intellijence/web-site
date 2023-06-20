@@ -18,7 +18,7 @@ import { UserBasicDTO } from './userBasicDTO';
 
 export interface HomeDTO extends ProductDTO { 
     colour: HomeDTO.ColourEnum;
-    size: SizeDTO;
+    homeSize: SizeDTO;
     homeMaterial: HomeDTO.HomeMaterialEnum;
 }
 export namespace HomeDTO {

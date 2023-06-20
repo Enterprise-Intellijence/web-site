@@ -20,9 +20,9 @@ export interface PageOrderDTO {
     content?: Array<OrderDTO>;
     number?: number;
     sort?: SortObject;
-    pageable?: PageableObject;
-    numberOfElements?: number;
     first?: boolean;
     last?: boolean;
+    numberOfElements?: number;
+    pageable?: PageableObject;
     empty?: boolean;
 }
