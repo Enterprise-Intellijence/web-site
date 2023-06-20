@@ -1,10 +1,10 @@
 <div class="container-sm">
-    <div>ARTICOLI PREFERITI</div>
-    <div class="container text-center">
-        <div class="row">
-          <div  class="col-md-4 col-sm-6 col-12" *ngFor="let item of productList">
-            <product-card [product]="item"></product-card>
-          </div>
-        </div>
-    </div>  
+  <div>ARTICOLI PREFERITI</div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-xl-2 col-md-3 col-sm-4 col-12 my-2 d-flex justify-content-center" *ngFor="let item of likedProducts">
+        <product-card [product]="item"></product-card>
+      </div>
+    </div>
+  </div>
 </div>
