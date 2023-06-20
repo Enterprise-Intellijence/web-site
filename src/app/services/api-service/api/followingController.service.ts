@@ -76,7 +76,8 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -129,7 +130,8 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -183,7 +185,8 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            'application/json',
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -212,6 +215,48 @@ export class FollowingControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public imFollowingThisUser(userId: string, observe?: 'body', reportProgress?: boolean): Observable<FollowingFollowersDTO>;
+    public imFollowingThisUser(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<FollowingFollowersDTO>>;
+    public imFollowingThisUser(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<FollowingFollowersDTO>>;
+    public imFollowingThisUser(userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling imFollowingThisUser.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<FollowingFollowersDTO>('get',`${this.basePath}/api/v1/me/following/${encodeURIComponent(String(userId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public unfollow(userId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
     public unfollow(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
     public unfollow(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
@@ -225,6 +270,7 @@ export class FollowingControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

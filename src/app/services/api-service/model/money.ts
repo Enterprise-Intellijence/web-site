@@ -12,19 +12,19 @@
 import { CurrencyUnit } from './currencyUnit';
 
 export interface Money { 
-    negative?: boolean;
     zero?: boolean;
+    negative?: boolean;
     positive?: boolean;
     amount?: number;
     scale?: number;
     currencyUnit?: CurrencyUnit;
+    positiveOrZero?: boolean;
+    minorPart?: number;
+    amountMinorLong?: number;
+    amountMinor?: number;
+    negativeOrZero?: boolean;
     amountMajor?: number;
+    amountMinorInt?: number;
     amountMajorLong?: number;
     amountMajorInt?: number;
-    amountMinor?: number;
-    amountMinorLong?: number;
-    amountMinorInt?: number;
-    minorPart?: number;
-    positiveOrZero?: boolean;
-    negativeOrZero?: boolean;
 }

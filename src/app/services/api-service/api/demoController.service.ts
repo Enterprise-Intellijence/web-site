@@ -69,6 +69,7 @@ export class DemoControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -104,6 +105,7 @@ export class DemoControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -139,6 +141,7 @@ export class DemoControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -174,6 +177,7 @@ export class DemoControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -209,6 +213,7 @@ export class DemoControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -244,6 +249,7 @@ export class DemoControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -279,6 +285,7 @@ export class DemoControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

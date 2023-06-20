@@ -18,7 +18,7 @@ import { UserBasicDTO } from './userBasicDTO';
 
 export interface ClothingDTO extends ProductDTO { 
     productGender: ClothingDTO.ProductGenderEnum;
-    size: SizeDTO;
+    clothingSize: SizeDTO;
     colour: ClothingDTO.ColourEnum;
 }
 export namespace ClothingDTO {
