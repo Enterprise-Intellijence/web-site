@@ -18,7 +18,7 @@ export class UserLikesService {
   constructor(
     private userService: UserControllerService,
     private apiAuth: ApiAuthService,
-    private alert: AlertService) {
+    private alert: AlertService) { // TODO: use toast service instead of alert service
     this.apiAuth.isLoggedIn$.subscribe(isLoggedIn => {
       if (isLoggedIn)
         this.getAllLikedProducts();
@@ -30,14 +30,15 @@ export class UserLikesService {
     if (product.id == undefined)
       return throwError(() => new Error("Product id is undefined"));
 
+    if (!this.apiAuth.isLoggedIn()) {
+      this.alert.error("You need to be logged in to like products");
+      return throwError(() => new Error("You need to be logged in to like products"));
+    }
+
+
     return this.userService.like(product.id).pipe(
       tap({
         next: () => {
-          if (!this.apiAuth.isLoggedIn()) {
-            this.alert.error("You need to be logged in to like products");
-            throw (() => new Error("You need to be logged in to like products"));
-          }
-
           this.LikedProductsSet.add(product);
           this.updateLikedProducts();
         }
@@ -51,14 +52,14 @@ export class UserLikesService {
     if (product.id == undefined)
       return throwError(() => new Error("Product id is undefined"));
 
+    if (!this.apiAuth.isLoggedIn()) {
+      this.alert.error("You need to be logged in to like products");
+      return throwError(() => new Error("You need to be logged in to like products"));
+    }
+
     return this.userService.unlike(product.id).pipe(
       tap({
         next: () => {
-          if (!this.apiAuth.isLoggedIn()) {
-            this.alert.error("You need to be logged in to like products");
-            throw (() => new Error("You need to be logged in to like products"));
-          }
-
           this.LikedProductsSet.delete(product);
           this.updateLikedProducts();
         }
