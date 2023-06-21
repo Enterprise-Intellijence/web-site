@@ -43,7 +43,7 @@ const routes: Routes = [
   },
 
   { path: 'wallet/bank-account', component: BankAccountComponent },
-  { path: 'purchasing-page', component: PurchasingPageComponent },
+  { path: 'checkout/:id', component: PurchasingPageComponent },
   { path: '**', redirectTo: 'home' }
 ];
 

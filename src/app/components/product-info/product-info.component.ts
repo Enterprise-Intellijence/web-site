@@ -8,11 +8,9 @@ import { ProductDTO, AddressDTO } from 'src/app/services/api-service';
 })
 export class ProductInfoComponent {
 
-  addressProduct?: AddressDTO;
   @Input() productInfo?: ProductDTO;
 
   constructor() {
     //this.addressProduct = this.productInfo?.address;
-    console.log(this.addressProduct);
   }
 }
