@@ -9,10 +9,12 @@ import { UserLikesService } from 'src/app/services/user-likes.service';
 })
 export class LikedProductsPageComponent {
 
-  productList!: Set<ProductBasicDTO>;
-  
+  likedProducts: ProductBasicDTO[] = [];
+
   ngOnInit(): void {
-    this.productList = this.userLikesService.LikedProductsSet;
+    this.userLikesService.LikedProducts$.subscribe((products) => {
+      this.likedProducts = products;
+    });
   }
 
   constructor(private userLikesService: UserLikesService) {

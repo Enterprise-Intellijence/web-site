@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { AddressDTO } from '../model/addressDTO';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageOrderBasicDTO } from '../model/pageOrderBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
@@ -296,6 +297,54 @@ export class UserControllerService {
         ];
 
         return this.httpClient.request<UserBasicDTO>('get',`${this.basePath}/api/v1/users/find-by-username`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getDefaultAddress(userId: string, observe?: 'body', reportProgress?: boolean): Observable<AddressDTO>;
+    public getDefaultAddress(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AddressDTO>>;
+    public getDefaultAddress(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AddressDTO>>;
+    public getDefaultAddress(userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getDefaultAddress.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (userId !== undefined && userId !== null) {
+            queryParameters = queryParameters.set('userId', <any>userId);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<AddressDTO>('get',`${this.basePath}/api/v1/users/default-address`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

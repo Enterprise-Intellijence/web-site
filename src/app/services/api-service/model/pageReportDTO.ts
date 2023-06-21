@@ -14,8 +14,8 @@ import { ReportDTO } from './reportDTO';
 import { SortObject } from './sortObject';
 
 export interface PageReportDTO { 
-    totalElements?: number;
     totalPages?: number;
+    totalElements?: number;
     size?: number;
     content?: Array<ReportDTO>;
     number?: number;

@@ -14,8 +14,8 @@ import { ProductBasicDTO } from './productBasicDTO';
 import { SortObject } from './sortObject';
 
 export interface PageProductBasicDTO { 
-    totalElements?: number;
     totalPages?: number;
+    totalElements?: number;
     size?: number;
     content?: Array<ProductBasicDTO>;
     number?: number;

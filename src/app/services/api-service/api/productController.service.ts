@@ -24,10 +24,10 @@ import { PageMessageDTO } from '../model/pageMessageDTO';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
 import { ProductCategory } from '../model/productCategory';
-import { ProductCreateDTO } from '../model/productCreateDTO';
 import { ProductsIdBody } from '../model/productsIdBody';
 import { ProductsIdBody1 } from '../model/productsIdBody1';
 import { UserBasicDTO } from '../model/userBasicDTO';
+import { V1ProductsBody } from '../model/v1ProductsBody';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -72,10 +72,10 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProduct(body: ProductCreateDTO, observe?: 'body', reportProgress?: boolean): Observable<ProductsIdBody1>;
-    public createProduct(body: ProductCreateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductsIdBody1>>;
-    public createProduct(body: ProductCreateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductsIdBody1>>;
-    public createProduct(body: ProductCreateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createProduct(body: V1ProductsBody, observe?: 'body', reportProgress?: boolean): Observable<ProductsIdBody1>;
+    public createProduct(body: V1ProductsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductsIdBody1>>;
+    public createProduct(body: V1ProductsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductsIdBody1>>;
+    public createProduct(body: V1ProductsBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createProduct.');

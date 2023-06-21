@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ProductBasicDTO, UserControllerService } from './api-service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, map, pipe, tap, throwError } from 'rxjs';
 import { ApiAuthService } from './api-auth.service';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,10 @@ export class UserLikesService {
   LikedProducts$ = new BehaviorSubject<ProductBasicDTO[]>([]);
   LikedProductsCount$ = new BehaviorSubject<number>(0);
 
-  constructor(private userService: UserControllerService, private apiAuth: ApiAuthService) {
+  constructor(
+    private userService: UserControllerService,
+    private apiAuth: ApiAuthService,
+    private alert: AlertService) { // TODO: use toast service instead of alert service
     this.apiAuth.isLoggedIn$.subscribe(isLoggedIn => {
       if (isLoggedIn)
         this.getAllLikedProducts();
@@ -22,42 +26,53 @@ export class UserLikesService {
   }
 
 
-  public likeProduct(product: ProductBasicDTO) {
+  public likeProduct(product: ProductBasicDTO): Observable<any> {
     if (product.id == undefined)
-      throw new Error("Product id is undefined");
+      return throwError(() => new Error("Product id is undefined"));
 
-    this.userService.like(product.id).subscribe({
-      next: () => {
-        this.LikedProductsSet.add(product);
-        this.updateLikedProducts();
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    if (!this.apiAuth.isLoggedIn()) {
+      this.alert.error("You need to be logged in to like products");
+      return throwError(() => new Error("You need to be logged in to like products"));
+    }
+
+
+    return this.userService.like(product.id).pipe(
+      tap({
+        next: () => {
+          this.LikedProductsSet.add(product);
+          this.updateLikedProducts();
+        }
+      })
+    );
   }
 
-  public unlikeProduct(product: ProductBasicDTO) {
-    if (product.id == undefined)
-      throw new Error("Product id is undefined");
 
-    this.userService.unlike(product.id).subscribe({
-      next: () => {
-        this.LikedProductsSet.delete(product);
-        this.updateLikedProducts();
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+
+  public unlikeProduct(product: ProductBasicDTO): Observable<any> {
+    if (product.id == undefined)
+      return throwError(() => new Error("Product id is undefined"));
+
+    if (!this.apiAuth.isLoggedIn()) {
+      this.alert.error("You need to be logged in to like products");
+      return throwError(() => new Error("You need to be logged in to like products"));
+    }
+
+    return this.userService.unlike(product.id).pipe(
+      tap({
+        next: () => {
+          this.LikedProductsSet.delete(product);
+          this.updateLikedProducts();
+        }
+      })
+    );
   }
 
-  public toggleLikeProduct(product: ProductBasicDTO) {
+  public toggleLikeProduct(product: ProductBasicDTO): Observable<any> {
     if (this.isProductLiked(product)) {
-      this.unlikeProduct(product);
+      return this.unlikeProduct(product);
     }
     else {
-      this.likeProduct(product);
+      return this.likeProduct(product);
     }
   }
 
@@ -65,7 +80,7 @@ export class UserLikesService {
     return this.LikedProductsSet.has(product);
   }
 
-  updateLikedProducts() {
+  private updateLikedProducts() {
     this.LikedProducts$.next(Array.from(this.LikedProductsSet));
     this.LikedProductsCount$.next(this.LikedProductsSet.size);
   }

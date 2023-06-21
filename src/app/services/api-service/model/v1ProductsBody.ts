@@ -9,13 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SortObject } from './sortObject';
+import { ClothingCreateDTO } from './clothingCreateDTO';
+import { EntertainmentCreateDTO } from './entertainmentCreateDTO';
+import { HomeCreateDTO } from './homeCreateDTO';
+import { ProductCreateDTO } from './productCreateDTO';
 
-export interface PageableObject { 
-    offset?: number;
-    sort?: SortObject;
-    pageNumber?: number;
-    pageSize?: number;
-    paged?: boolean;
-    unpaged?: boolean;
-}
+export type V1ProductsBody = ProductCreateDTO | ClothingCreateDTO | EntertainmentCreateDTO | HomeCreateDTO;
