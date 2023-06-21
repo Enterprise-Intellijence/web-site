@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
-import { FollowingControllerService, UserBasicDTO, UserControllerService, UserDTO, UserImageDTO } from 'src/app/services/api-service';
+import { FollowingControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
@@ -13,63 +13,65 @@ import { UserProfileService } from 'src/app/services/user-profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private userControllerService: UserControllerService,
-              private activatedRoute: ActivatedRoute,
-              private userProfileService: UserProfileService,
-              private followingControllerService: FollowingControllerService) {}
-
   faCircleExclamation = faCircleExclamation;
 
-  visitedUserProfile?: BehaviorSubject<UserDTO | undefined> = new BehaviorSubject<UserDTO | undefined>(undefined);
-  currentUserProfile?: BehaviorSubject<UserDTO | undefined> = new BehaviorSubject<UserDTO | undefined>(undefined);
+  userId: string | null = null;
 
-  isCurrentUserFollowingVisitedUser: boolean = true;
+  isFollowing: boolean = false;
 
-  private routeSubscription?: Subscription;
+  user?: UserDTO | null = null;
+  visitedUser?: UserBasicDTO;
+
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserControllerService,
+    private currentUserService: CurrentUserService,
+    private userProfileService: UserProfileService,
+    private followingService: FollowingControllerService) { }
 
   ngOnInit(): void {
+    // example route with id: http://localhost:4200/users/1
+    // example route: http://localhost:4200/users/me
 
-    this.userProfileService.currentUserProfile?.subscribe(p=>{
-      this.currentUserProfile = p? new BehaviorSubject<UserDTO | undefined>(p) : undefined;
-    });
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get('id') ?? null;
 
-    if (this.activatedRoute.snapshot.params['id']) {
-      this.routeSubscription = this.activatedRoute.params.subscribe(params => {
-        let id = params['id'];
-        this.userProfileService.loadVisitedUserProfile(id);
-        this.userProfileService.visitedUserProfile?.subscribe(p=>{
-          this.visitedUserProfile = p? new BehaviorSubject<UserDTO | undefined>(p) : undefined;
-          console.log(this.visitedUserProfile);
+      if (this.userId == 'me') {
+        this.currentUserService.user$.subscribe(user => {
+          this.user = user;
+          this.visitedUser = user as UserBasicDTO;
+        })
+      } else {
+        this.userProfileService.loadVisitedUserProfile(this.userId ?? '');
+        this.userProfileService.visitedUserProfile$.subscribe(user => {
+          this.visitedUser = user;
+          this.followingService.imFollowingThisUser(this.visitedUser?.id ?? '').subscribe(isFollowing => {
+            this.isFollowing = isFollowing;
+          });
         });
-      });
-    }
-
-    // check if current user is following visited user
+      }
+    });
   }
 
   follow() {
-    if (this.visitedUserProfile) {
-
-      let visitedUserId: any = this.visitedUserProfile.getValue()?.id;
-
-      this.followingControllerService.follow(visitedUserId).subscribe(p=>{
-        this.userProfileService.updateProfile();
+    if (this.visitedUser) {
+      this.followingService.follow(this.visitedUser.id ?? '').subscribe(() => {
+        this.isFollowing = true;
       });
 
-      this.userProfileService.loadVisitedUserProfile(visitedUserId);
+      this.visitedUser.followers_number = (this.visitedUser.followers_number ?? 0) + 1;
+      this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }
 
   unfollow() {
-    if (this.visitedUserProfile) {
-
-      let visitedUserId: any = this.visitedUserProfile.getValue()?.id;
-
-      this.followingControllerService.unfollow(visitedUserId).subscribe(p=>{
-        this.userProfileService.updateProfile();
+    if (this.visitedUser) {
+      this.followingService.unfollow(this.visitedUser.id ?? '').subscribe(() => {
+        this.isFollowing = true;
       });
 
-      this.userProfileService.loadVisitedUserProfile(visitedUserId);
+      this.visitedUser.followers_number = (this.visitedUser.followers_number ?? 0) - 1;
+      this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }
 }
