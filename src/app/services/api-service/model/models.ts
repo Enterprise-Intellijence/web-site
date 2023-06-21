@@ -39,7 +39,6 @@ export * from './pageProductBasicDTO';
 export * from './pageReportDTO';
 export * from './pageReviewDTO';
 export * from './pageUserDTO';
-export * from './pageable';
 export * from './pageableObject';
 export * from './paymentMethod';
 export * from './paymentMethodBasicDTO';
