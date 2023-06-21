@@ -1,41 +1,21 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { UserDTO } from '../services/api-service/model/userDTO';
-import { UserControllerService } from '../services/api-service/api/userController.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FollowingControllerService, UserBasicDTO, UserControllerService } from './api-service';
+import { CurrentUserService } from './current-user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserProfileService {
   
-  visitedUserProfile?: BehaviorSubject<UserDTO | undefined> = new BehaviorSubject<UserDTO | undefined>(undefined);
-  currentUserProfile?: BehaviorSubject<UserDTO | undefined> = new BehaviorSubject<UserDTO | undefined>(undefined);
+  visitedUserProfile$: BehaviorSubject<UserBasicDTO | undefined> = new BehaviorSubject<UserBasicDTO | undefined>(undefined);
+  isFollowing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public get currentUser(): UserDTO | undefined {
-    return this.currentUserProfile?.value;
-  }
+  constructor(private userService: UserControllerService) {}
 
-  public get visitedUser(): UserDTO | undefined {
-    return this.visitedUserProfile?.value;
-  }
-  
-  constructor(private userControllerService: UserControllerService) {
-    this.loadCurrentUser();
-  }
-
-  updateProfile() {
-    this.currentUserProfile?.next(this.currentUser);
-  }
-
-  private loadCurrentUser() {
-    this.userControllerService.me().subscribe(p=>{
-      this.currentUserProfile?.next(p);
-    });
-  }
-
-  public loadVisitedUserProfile(id: string) {
-    this.userControllerService.userById(id).subscribe(p=>{
-      this.visitedUserProfile?.next(p);
+  public loadVisitedUserProfile(id: string): void {
+    this.userService.userById(id).subscribe(user => {
+      this.visitedUserProfile$.next(user);
     });
   }
 }
