@@ -20,7 +20,6 @@ import { Observable }                                        from 'rxjs';
 import { OrderCreateDTO } from '../model/orderCreateDTO';
 import { OrderDTO } from '../model/orderDTO';
 import { PageOrderDTO } from '../model/pageOrderDTO';
-import { Pageable } from '../model/pageable';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -150,22 +149,24 @@ export class OrderControllerService {
     /**
      * 
      * 
-     * @param pageable 
+     * @param page 
+     * @param sizePage 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllOrdersOfUser(pageable: Pageable, observe?: 'body', reportProgress?: boolean): Observable<PageOrderDTO>;
-    public getAllOrdersOfUser(pageable: Pageable, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageOrderDTO>>;
-    public getAllOrdersOfUser(pageable: Pageable, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageOrderDTO>>;
-    public getAllOrdersOfUser(pageable: Pageable, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllOrdersOfUser(page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageOrderDTO>;
+    public getAllOrdersOfUser(page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageOrderDTO>>;
+    public getAllOrdersOfUser(page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageOrderDTO>>;
+    public getAllOrdersOfUser(page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (pageable === null || pageable === undefined) {
-            throw new Error('Required parameter pageable was null or undefined when calling getAllOrdersOfUser.');
-        }
+
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (pageable !== undefined && pageable !== null) {
-            queryParameters = queryParameters.set('pageable', <any>pageable);
+        if (page !== undefined && page !== null) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (sizePage !== undefined && sizePage !== null) {
+            queryParameters = queryParameters.set('sizePage', <any>sizePage);
         }
 
         let headers = this.defaultHeaders;

@@ -215,9 +215,9 @@ export class FollowingControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public imFollowingThisUser(userId: string, observe?: 'body', reportProgress?: boolean): Observable<FollowingFollowersDTO>;
-    public imFollowingThisUser(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<FollowingFollowersDTO>>;
-    public imFollowingThisUser(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<FollowingFollowersDTO>>;
+    public imFollowingThisUser(userId: string, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
+    public imFollowingThisUser(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
+    public imFollowingThisUser(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
     public imFollowingThisUser(userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (userId === null || userId === undefined) {
@@ -240,7 +240,7 @@ export class FollowingControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<FollowingFollowersDTO>('get',`${this.basePath}/api/v1/me/following/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<boolean>('get',`${this.basePath}/api/v1/me/following/${encodeURIComponent(String(userId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
