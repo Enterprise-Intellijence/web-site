@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ClothingDTO, ProductControllerService, SizeDTO } from './api-service';
+import { ProductControllerService } from './api-service';
+import { SizeDTO } from './api-service/model/sizeDTO';
 import { Subject } from 'rxjs';
 import { ProductCategory } from '../models/product-category';
 import { ProductCategoriesService } from './product-categories.service';

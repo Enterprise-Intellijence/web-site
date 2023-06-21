@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCategoriesService } from 'src/app/services/product-categories.service';
 import { ProductCategory } from 'src/app/models/product-category';
-import { ProductControllerService, ProductCreateDTO } from 'src/app/services/api-service';
-import { CustomMoneyDTO } from 'src/app/services/api-service';
+import { ProductControllerService } from 'src/app/services/api-service';
+import { ProductCreateDTO } from 'src/app/services/api-service/model/productCreateDTO';
+import { SizeDTO } from 'src/app/services/api-service/model/sizeDTO';
+import { CustomMoneyDTO } from 'src/app/services/api-service/model/customMoneyDTO';
+import { ProductSizesService } from 'src/app/services/product-sizes.service';
+import { ClothingCreateDTO } from 'src/app/services/api-service/model/clothingCreateDTO';
 @Component({
   selector: 'new-product-page',
   templateUrl: './new-product-page.component.html',
@@ -20,6 +24,8 @@ export class NewProductPageComponent implements OnInit {
   visibilitiesMapping: Map<string, string> = new Map<string, string>();
   conditions = ["Nuovo con etichetta", "Nuovo senza etichetta", "Come nuovo", "Buone condizioni", "Acettabile"];
   visibilities = ["Pubblico", "Privato"];
+  prodSizes: Array<SizeDTO> = new Array<SizeDTO>();
+  categorySizes: SizeDTO[] = [];
   currencies: string[] = [];
   product!: ProductCreateDTO;
 
@@ -56,13 +62,21 @@ export class NewProductPageComponent implements OnInit {
     this.secondaryCategories = this.primaryCategories[i].childCategories;
     this.selectedSecondaryCategory = "";
     this.selectedTertiaryCategory = "";
+    this.categorySizes = this.productSizesService.getSizesForCategory(this.primaryCategories[i]);
+    console.log("cat size: ", this.categorySizes);
   }
 
   onSecondaryCategorySelected(i: number) {
     console.log("selected cat: ", i);
     this.tertiaryCategories = this.secondaryCategories[i].childCategories;
     this.selectedTertiaryCategory = "";
+    this.categorySizes = this.productSizesService.getSizesForCategory(this.secondaryCategories[i]);
+    console.log("cat size2: ", this.categorySizes);
+  }
 
+  onTertiaryCategorySelected(i: number) {
+    this.categorySizes = this.productSizesService.getSizesForCategory(this.tertiaryCategories[i]);
+    console.log("cat size2: ", this.categorySizes);
   }
 
   deleteImage(i: number) {
@@ -101,11 +115,17 @@ export class NewProductPageComponent implements OnInit {
     this.categoriesService.onCategoriesLoaded.subscribe(() => {
       this.primaryCategories = this.categoriesService.primaryCategories;
     });
+
+    this.productSizesService.onSizesLoaded.subscribe(() => {
+      this.prodSizes = this.productSizesService.allSizes;
+      console.log("sizes: ", this.prodSizes);
+    });
   }
 
   constructor(
     private categoriesService: ProductCategoriesService,
-    private productService: ProductControllerService) {
+    private productService: ProductControllerService,
+    private productSizesService: ProductSizesService) {
   }
   
 }
