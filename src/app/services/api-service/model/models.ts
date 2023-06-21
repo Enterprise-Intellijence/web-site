@@ -3,6 +3,7 @@ export * from './addressCreateDTO';
 export * from './addressDTO';
 export * from './adminProductsBody';
 export * from './clothingDTO';
+export * from './conversationDTO';
 export * from './currencyUnit';
 export * from './customMoney';
 export * from './customMoneyDTO';

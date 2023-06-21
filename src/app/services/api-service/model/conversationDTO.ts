@@ -9,13 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SortObject } from './sortObject';
+import { MessageDTO } from './messageDTO';
+import { ProductBasicDTO } from './productBasicDTO';
+import { UserBasicDTO } from './userBasicDTO';
 
-export interface PageableObject { 
-    offset?: number;
-    sort?: SortObject;
-    pageNumber?: number;
-    pageSize?: number;
-    paged?: boolean;
-    unpaged?: boolean;
+export interface ConversationDTO { 
+    productBasicDTO?: ProductBasicDTO;
+    otherUser: UserBasicDTO;
+    lastMessage: MessageDTO;
+    unreadMessages: boolean;
+    conversationId?: string;
 }
