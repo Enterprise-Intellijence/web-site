@@ -40,6 +40,8 @@ import { ReviewCardComponent } from './components/review-card/review-card.compon
 import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
 import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
+import { ClosetComponent } from './components/closet/closet.component';
+import { ReviewComponent } from './components/review/review.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -47,7 +49,6 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   acceptedFiles: 'image/*',
   createImageThumbnails: true
 };
-
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -85,7 +86,9 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ReviewCardComponent,
     NewProductPageComponent,
     LikedProductsPageComponent,
-    NavBarMenuItemComponent
+    NavBarMenuItemComponent,
+    ClosetComponent,
+    ReviewComponent
     ],
   providers: [
     HttpClient,
