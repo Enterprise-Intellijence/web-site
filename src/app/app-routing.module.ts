@@ -14,6 +14,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
+import { ProductComponent } from './pages/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,7 +27,7 @@ const routes: Routes = [
   { path: 'liked-products', component: LikedProductsPageComponent },
   { path: 'messages', component: MessagesPageComponent },
   { path: 'products/new', component: NewProductPageComponent },
-  // { path: 'products/:id', component: ProductPageComponent },
+  { path: 'products/:id', component: ProductComponent },
   // { path: 'search', component: SearchPageComponent },
   { path: 'login', component: LoginPageComponent },
   // { path: 'register', component: RegisterPageComponent },

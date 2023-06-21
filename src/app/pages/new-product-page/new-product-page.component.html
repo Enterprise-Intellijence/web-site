@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-sm-2" *ngIf="selectedSecondaryCategory">
                     <select class="form-select" placeholder="Seleziona una categoria" [(ngModel)]="selectedTertiaryCategory">
-                        <option *ngFor="let c of tertiaryCategories" [ngValue]="c.name">{{c.name}}</option>
+                        <option *ngFor="let c of tertiaryCategories; let i=index" [ngValue]="c.name" (click)="onTertiaryCategorySelected(i)">{{c.name}}</option>
                     </select>               
                 </div>
             </div>
