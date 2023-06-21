@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { ConversationDTO } from '../model/conversationDTO';
 import { MessageCreateDTO } from '../model/messageCreateDTO';
 import { MessageDTO } from '../model/messageDTO';
 import { PageMessageDTO } from '../model/pageMessageDTO';
@@ -152,17 +153,17 @@ export class MessageControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllMyConversations(observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public getAllMyConversations(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public getAllMyConversations(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getAllMyConversations(observe?: 'body', reportProgress?: boolean): Observable<Array<ConversationDTO>>;
+    public getAllMyConversations(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ConversationDTO>>>;
+    public getAllMyConversations(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ConversationDTO>>>;
     public getAllMyConversations(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
+            '*/*',
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -173,7 +174,7 @@ export class MessageControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/messages/conversations`,
+        return this.httpClient.request<Array<ConversationDTO>>('get',`${this.basePath}/api/v1/messages/conversations`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
