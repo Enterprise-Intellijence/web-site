@@ -1,6 +1,6 @@
 <div class="row">
     <table>
-        <tr *ngFor="let p of productPage | slice: (page-1) * pageSize : page * pageSize">
+        <tr *ngFor="let p of productList| slice: (page-1) * pageSize : page * pageSize">
           <product-card [product]="p"></product-card>
         </tr>
     </table>
