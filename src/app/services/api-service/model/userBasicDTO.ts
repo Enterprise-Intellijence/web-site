@@ -13,11 +13,11 @@ import { UserImageDTO } from './userImageDTO';
 
 export interface UserBasicDTO { 
     id?: string;
-    username: string;
+    username?: string;
     bio?: string;
     photoProfile?: UserImageDTO;
     reviewsTotalSum?: number;
-    reviewsNumber?: number;
-    followersNumber?: number;
-    followingNumber?: number;
+    reviews_number?: number;
+    followers_number?: number;
+    following_number?: number;
 }
