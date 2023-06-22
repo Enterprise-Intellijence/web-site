@@ -12,7 +12,6 @@
 import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductCategoryDTO } from './productCategoryDTO';
 import { ProductDTO } from './productDTO';
-import { ProductImageDTO } from './productImageDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface EntertainmentDTO extends ProductDTO { 

@@ -13,6 +13,7 @@ import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductCategoryDTO } from './productCategoryDTO';
 
 export interface ProductCreateDTO { 
+    type?: string;
     title?: string;
     description?: string;
     productCost: CustomMoneyDTO;

@@ -14,8 +14,8 @@ import { ReviewDTO } from './reviewDTO';
 import { SortObject } from './sortObject';
 
 export interface PageReviewDTO { 
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<ReviewDTO>;
     number?: number;

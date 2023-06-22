@@ -60,15 +60,20 @@ export class ReviewControllerService {
     /**
      * 
      * 
+     * @param userId 
      * @param page 
      * @param sizePage 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public allReviewReceived(page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageReviewDTO>;
-    public allReviewReceived(page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageReviewDTO>>;
-    public allReviewReceived(page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageReviewDTO>>;
-    public allReviewReceived(page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public allReviewReceived(userId: string, page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageReviewDTO>;
+    public allReviewReceived(userId: string, page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageReviewDTO>>;
+    public allReviewReceived(userId: string, page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageReviewDTO>>;
+    public allReviewReceived(userId: string, page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling allReviewReceived.');
+        }
 
 
 
@@ -96,7 +101,7 @@ export class ReviewControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageReviewDTO>('get',`${this.basePath}/api/v1/reviews/received`,
+        return this.httpClient.request<PageReviewDTO>('get',`${this.basePath}/api/v1/reviews/${encodeURIComponent(String(userId))}/received`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -110,15 +115,20 @@ export class ReviewControllerService {
     /**
      * 
      * 
+     * @param userId 
      * @param page 
      * @param sizePage 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public allReviewSent(page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageReviewDTO>;
-    public allReviewSent(page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageReviewDTO>>;
-    public allReviewSent(page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageReviewDTO>>;
-    public allReviewSent(page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public allReviewSent(userId: string, page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageReviewDTO>;
+    public allReviewSent(userId: string, page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageReviewDTO>>;
+    public allReviewSent(userId: string, page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageReviewDTO>>;
+    public allReviewSent(userId: string, page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling allReviewSent.');
+        }
 
 
 
@@ -146,7 +156,7 @@ export class ReviewControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageReviewDTO>('get',`${this.basePath}/api/v1/reviews/sent`,
+        return this.httpClient.request<PageReviewDTO>('get',`${this.basePath}/api/v1/reviews/${encodeURIComponent(String(userId))}/sent`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
