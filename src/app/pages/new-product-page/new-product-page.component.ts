@@ -239,7 +239,7 @@ export class NewProductPageComponent implements OnInit {
     this.currencies = Object.keys(CustomMoneyDTO.CurrencyEnum);
     this.genders = Object.keys(ClothingCreateDTO.ProductGenderEnum);
     this.colours = Object.keys(ClothingCreateDTO.ColourEnum);
-    this.languages = Object.keys(EntertainmentCreateDTO.EntertainmentLanguageEnum);
+    this.languages = Object.values(EntertainmentCreateDTO.EntertainmentLanguageEnum);
     this.materials = Object.keys(HomeCreateDTO.HomeMaterialEnum);
 
     this.productSizesService.onSizesLoaded.subscribe((sizes) => {
