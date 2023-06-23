@@ -145,24 +145,34 @@ export class ImageControllerService {
     /**
      * 
      * 
-     * @param id 
+     * @param type 
+     * @param folderName 
+     * @param fileName 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getImageProduct(id: string, observe?: 'body', reportProgress?: boolean): Observable<Array<string>>;
-    public getImageProduct(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<string>>>;
-    public getImageProduct(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<string>>>;
-    public getImageProduct(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getImage(type: string, folderName: string, fileName: string, observe?: 'body', reportProgress?: boolean): Observable<Blob>;
+    public getImage(type: string, folderName: string, fileName: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Blob>>;
+    public getImage(type: string, folderName: string, fileName: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Blob>>;
+    public getImage(type: string, folderName: string, fileName: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getImageProduct.');
+        if (type === null || type === undefined) {
+            throw new Error('Required parameter type was null or undefined when calling getImage.');
+        }
+
+        if (folderName === null || folderName === undefined) {
+            throw new Error('Required parameter folderName was null or undefined when calling getImage.');
+        }
+
+        if (fileName === null || fileName === undefined) {
+            throw new Error('Required parameter fileName was null or undefined when calling getImage.');
         }
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'image/jpeg',
+            'image/png',
             '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
@@ -174,49 +184,7 @@ export class ImageControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<string>>('get',`${this.basePath}/api/v1/images/product/${encodeURIComponent(String(id))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getUserProfilePhoto(id: string, observe?: 'body', reportProgress?: boolean): Observable<Array<string>>;
-    public getUserProfilePhoto(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<string>>>;
-    public getUserProfilePhoto(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<string>>>;
-    public getUserProfilePhoto(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getUserProfilePhoto.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'image/jpeg',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<string>>('get',`${this.basePath}/api/v1/images/users/photo-profile/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<Blob>('get',`${this.basePath}/api/v1/images/${encodeURIComponent(String(type))}/${encodeURIComponent(String(folderName))}/${encodeURIComponent(String(fileName))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

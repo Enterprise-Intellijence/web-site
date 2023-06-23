@@ -23,6 +23,7 @@ export interface ProductCreateDTO {
     visibility?: ProductCreateDTO.VisibilityEnum;
     productCategory?: ProductCategoryDTO;
     productImages?: Array<Blob>;
+    type: string;
 }
 export namespace ProductCreateDTO {
     export type ConditionEnum = 'NEW_WITH_TAG' | 'NEW_WITHOUT_TAG' | 'VERY_GOOD' | 'GOOD' | 'ACCEPTABLE';

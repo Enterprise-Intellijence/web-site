@@ -12,7 +12,6 @@
 import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductCategoryDTO } from './productCategoryDTO';
 import { ProductDTO } from './productDTO';
-import { ProductImageDTO } from './productImageDTO';
 import { SizeDTO } from './sizeDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
