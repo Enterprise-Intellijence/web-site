@@ -20,7 +20,7 @@ export class ProductCardComponent implements OnInit {
 
   basePath: string = "https://localhost:8443/api/v1/";
 
-  cardImage?: string; 
+  cardImage?: string;
 
   usernameImage?: string;
 
@@ -33,7 +33,6 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("prod: ", this.product);
     this.usernameImage = this.basePath + this.product.seller?.photoProfile?.urlPhoto;
 
     if(this.product && this.product.productImages)

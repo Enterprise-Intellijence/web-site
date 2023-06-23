@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Register</h1>
+  </div>
+  <div class="card-body">
+
+    <form #registerForm="ngForm" (ngSubmit)="onRegister()" role="form">
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input ngModel type="username" #usernameField="ngModel" [(ngModel)]="username" name="username" class="form-control" id="username" [value]="username" aria-describedby="usernameHelp" required>
+        <div *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="usernameField.errors?.['required']">Username is required.</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input ngModel type="email" #emailField="ngModel" [(ngModel)]="email" name="email" class="form-control" id="email" [value]="email" aria-describedby="emailHelp" required email="true">
+        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="emailField.errors?.['required']">Email is required.</div>
+          <div *ngIf="emailField.errors?.['email']">Email is not valid.</div>
+        </div>
+      </div>
+
+
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input ngModel type="password" #passwordField="ngModel" [ngModel]="password" (ngModelChange)="setPassword($event)" name="password" class="form-control" [value]="password" id="password" required minlength="8">
+
+        <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="passwordField.errors?.['required']"> Password is required. </div>
+          <div *ngIf="passwordField.errors?.['minlength']"> Password must be at least 8 characters long. </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input ngModel type="password" #confirmPasswordField="ngModel" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control" [value]="confirmPassword" id="confirmPassword" required passwordMatch="password">
+
+        <div *ngIf="confirmPasswordField.invalid && (confirmPasswordField.dirty || confirmPasswordField.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="confirmPasswordField.errors?.['required']"> Confirm Password is required. </div>
+          <div *ngIf="confirmPasswordField.errors?.['passwordMatch']"> Passwords must match. </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
+        <!-- spinner -->
+        <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1">
+          <span class="visually-hidden">Loading...</span>
+        </span>
+        Register
+
+      </button>
+    </form>
+  </div>
+</div>
