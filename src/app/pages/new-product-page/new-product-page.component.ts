@@ -7,8 +7,8 @@ import { SizeDTO } from 'src/app/services/api-service';
 import { CustomMoneyDTO } from 'src/app/services/api-service';
 import { ProductSizesService } from 'src/app/services/product-sizes.service';
 import { ClothingCreateDTO } from 'src/app/services/api-service';
-import { FaStackItemSizeDirective } from '@fortawesome/angular-fontawesome';
-
+import { HttpClient } from '@angular/common/http';
+import { ProductImagesService } from 'src/app/services/product-images.service';
 @Component({
   selector: 'new-product-page',
   templateUrl: './new-product-page.component.html',
@@ -186,18 +186,12 @@ export class NewProductPageComponent implements OnInit {
       console.log("response: ", p);
       // upload images
 
-      const fd: FormData = new FormData();
-      fd.append('file', this.filesLoaded[0]);
-      let body: ImagesProductBody = {
-        multipartFile: fd
-      };
-      this.imageService.saveImageProduct(body, p.id!, p.description!).subscribe(res => {
-        console.log("image uploaded!");
-        console.log("response: ", res);
+      this.filesLoaded.forEach(f => {
+        this.imageService.saveImage(f, p.id!, p.description!).subscribe(res => {
+          console.log("res", res);
+        });
       });
-
     });
-
   }
 
 
@@ -225,7 +219,6 @@ export class NewProductPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // TODO: fails on first load, works on refresh 
     this.categoriesService.onCategoriesLoaded.subscribe(() => {
       if (this.categoriesService.areCategoriesLoaded)
         this.primaryCategories = this.categoriesService.primaryCategories;
@@ -261,7 +254,7 @@ export class NewProductPageComponent implements OnInit {
     private categoriesService: ProductCategoriesService,
     private productService: ProductControllerService,
     private productSizesService: ProductSizesService,
-    private imageService: ImageControllerService) {
+    private imageService: ProductImagesService) {
   }
 
 }

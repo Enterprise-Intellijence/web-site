@@ -11,5 +11,5 @@
  */
 
 export interface ImagesProductBody { 
-    multipartFile?: FormData;
+    multipartFile?: Blob;
 }
