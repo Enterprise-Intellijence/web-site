@@ -9,13 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SortObject } from './sortObject';
 
-export interface PageableObject { 
-    offset?: number;
-    sort?: SortObject;
-    pageNumber?: number;
-    pageSize?: number;
-    paged?: boolean;
-    unpaged?: boolean;
+export interface MediaType { 
+    type?: string;
+    subtype?: string;
+    parameters?: { [key: string]: string; };
+    qualityValue?: number;
+    wildcardType?: boolean;
+    wildcardSubtype?: boolean;
+    subtypeSuffix?: string;
+    concrete?: boolean;
+    charset?: string;
 }

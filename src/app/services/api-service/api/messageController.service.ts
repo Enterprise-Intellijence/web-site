@@ -21,6 +21,7 @@ import { ConversationDTO } from '../model/conversationDTO';
 import { MessageCreateDTO } from '../model/messageCreateDTO';
 import { MessageDTO } from '../model/messageDTO';
 import { PageMessageDTO } from '../model/pageMessageDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';

@@ -11,6 +11,7 @@
  */
 import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductCategoryDTO } from './productCategoryDTO';
+import { ProductImageDTO } from './productImageDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface ProductDTO { 
@@ -31,7 +32,7 @@ export interface ProductDTO {
     availability?: ProductDTO.AvailabilityEnum;
     productCategory?: ProductCategoryDTO;
     usersThatLiked?: Array<UserBasicDTO>;
-    productImages?: Array<Blob>;
+    productImages?: Array<ProductImageDTO>;
     type: string;
 }
 export namespace ProductDTO {

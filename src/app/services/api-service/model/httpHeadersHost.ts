@@ -9,13 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SortObject } from './sortObject';
+import { HttpHeadersHostAddress } from './httpHeadersHostAddress';
 
-export interface PageableObject { 
-    offset?: number;
-    sort?: SortObject;
-    pageNumber?: number;
-    pageSize?: number;
-    paged?: boolean;
-    unpaged?: boolean;
+export interface HttpHeadersHost { 
+    address?: HttpHeadersHostAddress;
+    port?: number;
+    unresolved?: boolean;
+    hostName?: string;
+    hostString?: string;
 }
