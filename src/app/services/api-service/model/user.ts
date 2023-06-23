@@ -53,8 +53,8 @@ export interface User {
     enabled?: boolean;
     administrator?: boolean;
     authorities?: Array<GrantedAuthority>;
-    accountNonExpired?: boolean;
     credentialsNonExpired?: boolean;
+    accountNonExpired?: boolean;
     accountNonLocked?: boolean;
 }
 export namespace User {
