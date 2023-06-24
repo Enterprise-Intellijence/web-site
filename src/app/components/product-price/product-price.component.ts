@@ -14,8 +14,6 @@ export class ProductPriceComponent implements OnChanges {
 
   isFav: boolean = false;
 
-  productBasicDTO: ProductBasicDTO | undefined
-
   notFavButtonText: string = "Aggiungi ai preferiti";
   isFavButtonText: string = "Rimuovi dai preferiti";
 
@@ -25,7 +23,7 @@ export class ProductPriceComponent implements OnChanges {
   emptyHeartIcon= faHeart;
 
   clickFavButton() {
-    this.userLikesService.toggleLikeProduct(this.productBasicDTO!).subscribe();
+    this.userLikesService.toggleLikeProductById(this.productDTO?.id!).subscribe();
     alert("liked");
   }
 
@@ -48,7 +46,7 @@ export class ProductPriceComponent implements OnChanges {
 
   constructor(private userLikesService: UserLikesService, private router: Router) {
     userLikesService.LikedProducts$.subscribe((products) => {
-      this.isFav = userLikesService.isProductLiked(this.productBasicDTO!);
+      this.isFav = userLikesService.isProductLikedById(this.productDTO?.id!);
       console.log(this.isFav)
     });
   }

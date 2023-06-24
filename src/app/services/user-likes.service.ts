@@ -109,7 +109,7 @@ export class UserLikesService {
 
   }
 
-  isProductLikedById(id: string) {
+  public isProductLikedById(id: string) {
     return this.LikedProductsIdSet.has(id);
   }
 
@@ -117,14 +117,6 @@ export class UserLikesService {
     return this.LikedProductsSet.has(product) || this.isProductLikedById(product.id!);
   }
 
-  public isProductLikedById(id: string) {
-    let found = false
-    this.LikedProductsSet.forEach(element => {
-      if(element.id == id)
-        found = true
-    });
-    return found
-  }
 
   private updateLikedProducts() {
     this.LikedProducts$.next(this.LikedProductsSet);
