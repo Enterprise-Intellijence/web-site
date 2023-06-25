@@ -14,15 +14,15 @@ import { ReviewDTO } from './reviewDTO';
 import { SortObject } from './sortObject';
 
 export interface PageReviewDTO { 
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<ReviewDTO>;
     number?: number;
     sort?: SortObject;
+    pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
     numberOfElements?: number;
-    pageable?: PageableObject;
     empty?: boolean;
 }

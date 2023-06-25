@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductControllerService } from './api-service';
-import { SizeDTO } from './api-service/model/sizeDTO';
-import { Subject } from 'rxjs';
+import { SizeDTO } from './api-service';
+import { BehaviorSubject } from 'rxjs';
 import { ProductCategory } from '../models/product-category';
 import { ProductCategoriesService } from './product-categories.service';
 
@@ -12,7 +12,11 @@ export class ProductSizesService {
 
   allSizes: SizeDTO[] = [];
 
-  onSizesLoaded = new Subject<SizeDTO[]>();
+  get areSizesLoaded() {
+    return this.allSizes.length > 0;
+  }
+  
+  onSizesLoaded = new BehaviorSubject<SizeDTO[]>([]);
 
 
   constructor(private apiProductService: ProductControllerService) {

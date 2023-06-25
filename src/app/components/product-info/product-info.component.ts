@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProductDTO, AddressDTO } from 'src/app/services/api-service';
+import { ProductDTO, AddressDTO, UserControllerService } from 'src/app/services/api-service';
 
 @Component({
   selector: 'product-info',
@@ -8,11 +8,12 @@ import { ProductDTO, AddressDTO } from 'src/app/services/api-service';
 })
 export class ProductInfoComponent {
 
-  addressProduct?: AddressDTO;
+  address: AddressDTO | undefined;
   @Input() productInfo?: ProductDTO;
 
-  constructor() {
-    //this.addressProduct = this.productInfo?.address;
-    console.log(this.addressProduct);
+  constructor(private userService: UserControllerService) {
+    userService.getDefaultAddress(this.productInfo?.seller?.id!).subscribe((address_) => {
+      this.address = address_;
+    })
   }
 }

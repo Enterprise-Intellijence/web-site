@@ -14,15 +14,15 @@ import { PaymentMethodBasicDTO } from './paymentMethodBasicDTO';
 import { SortObject } from './sortObject';
 
 export interface PagePaymentMethodBasicDTO { 
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<PaymentMethodBasicDTO>;
     number?: number;
     sort?: SortObject;
+    pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
     numberOfElements?: number;
-    pageable?: PageableObject;
     empty?: boolean;
 }

@@ -1,12 +1,12 @@
 <div class="card shadow cursor-pointer" style="max-width: 20rem;" [routerLink]="['/products', product.id]">
 
   <div class="card-header text-truncate cursor-pointer" [routerLink]="['/users', product.seller?.id]">
-    <img src="https://via.placeholder.com/50" alt="" class="rounded-circle" height="26px">
+    <img [src]="usernameImage" alt="" class="rounded-circle" height="26px">
     <span class="ms-2">{{product.seller?.username}}</span>
   </div>
 
   <div class="ratio ratio-1x1" style="position: relative;">
-    <img src="https://images1.vinted.net/t/01_02517_Pubqy93oy3L83AUu6AiFuKS3/f800/1684145820.jpeg?s=acf36b8e6d1facfe02851f20ca4041a5dd75e0df" class="card-img-top rounded-0" style="object-fit: cover;" [alt]="product.description">
+    <img [src]="cardImage" class="card-img-top rounded-0" style="object-fit: cover;" [alt]="product.description">
   </div>
   <div class="card-body">
     <h5 class="card-title">{{product.title}}</h5>

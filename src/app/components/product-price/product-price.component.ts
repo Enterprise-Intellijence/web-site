@@ -3,6 +3,7 @@ import { ProductDTO, ProductBasicDTO, CustomMoneyDTO } from 'src/app/services/ap
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartFull } from '@fortawesome/free-solid-svg-icons';
 import { UserLikesService } from 'src/app/services/user-likes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'product-price',
@@ -29,6 +30,7 @@ export class ProductPriceComponent {
   }
 
   clickBuyButton() {
+    this.router.navigate(["/checkout", this.productDTO?.id]);
     alert("Acquisto effettuato");
   }
 
@@ -47,7 +49,7 @@ export class ProductPriceComponent {
 
   }
 
-  constructor(private userLikesService: UserLikesService) {
+  constructor(private userLikesService: UserLikesService, private router: Router) {
     userLikesService.LikedProducts$.subscribe((products) => {
       this.isFav = userLikesService.isProductLiked(this.productBasicDTO!);
       console.log(this.isFav)

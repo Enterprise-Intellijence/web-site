@@ -49,6 +49,10 @@ export class ApiAuthService {
     this.isLoggedIn$.next(true);
   }
 
+  public register(username: string, email: string, password: string) {
+    return this.userService.register(username, email, password);
+  }
+
 
   saveTokens() {
     localStorage.setItem('accessJWT', this.encodedAccessJWT || '');
