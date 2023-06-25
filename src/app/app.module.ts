@@ -74,7 +74,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ProductPriceComponent,
     NotificationsComponent,
     ProductImagesComponent,
-    ProductComponent,
+    ProductComponent,    
     ProductInfoComponent,
     HomePageComponent,
     BadgeTextPipe,

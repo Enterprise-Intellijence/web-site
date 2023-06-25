@@ -13,6 +13,7 @@ import { Address } from './address';
 import { Following } from './following';
 import { GrantedAuthority } from './grantedAuthority';
 import { Message } from './message';
+import { Notification } from './notification';
 import { Offer } from './offer';
 import { Order } from './order';
 import { PaymentMethod } from './paymentMethod';
@@ -50,12 +51,13 @@ export interface User {
     status?: User.StatusEnum;
     reports?: Array<Report>;
     reported?: Array<Report>;
+    notifications?: Array<Notification>;
     enabled?: boolean;
-    authorities?: Array<GrantedAuthority>;
     administrator?: boolean;
+    authorities?: Array<GrantedAuthority>;
+    credentialsNonExpired?: boolean;
     accountNonExpired?: boolean;
     accountNonLocked?: boolean;
-    credentialsNonExpired?: boolean;
 }
 export namespace User {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';

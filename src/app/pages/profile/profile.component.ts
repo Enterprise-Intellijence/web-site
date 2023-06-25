@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
         this.isFollowing = true;
       });
 
-      this.visitedUser.followers_number = (this.visitedUser.followers_number ?? 0) + 1;
+      this.visitedUser.followersNumber = (this.visitedUser.followersNumber ?? 0) + 1;
       this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }
@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
         this.isFollowing = true;
       });
 
-      this.visitedUser.followers_number = (this.visitedUser.followers_number ?? 0) - 1;
+      this.visitedUser.followersNumber = (this.visitedUser.followersNumber ?? 0) - 1;
       this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }

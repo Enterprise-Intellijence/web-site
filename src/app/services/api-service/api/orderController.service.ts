@@ -20,7 +20,6 @@ import { Observable }                                        from 'rxjs';
 import { OrderCreateDTO } from '../model/orderCreateDTO';
 import { OrderDTO } from '../model/orderDTO';
 import { PageOrderDTO } from '../model/pageOrderDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';

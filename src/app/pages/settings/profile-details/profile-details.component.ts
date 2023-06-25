@@ -4,7 +4,6 @@ import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { UserDTO } from 'src/app/services/api-service';
-import { AlertModule } from 'src/app/components/alerts/alert.module';
 
 @Component({
   selector: 'profile-details',
@@ -18,7 +17,7 @@ export class ProfileDetailsComponent {
   bioText: string = "This is a long bio just to test how it is displayed in the textarea";
   maxBioLength: number = 500;
   // TODO: Get profile pic from user service
-  profilePic: string = "";
+  profilePic?: string = "";
   
   public type: string = 'component';
   public disabled: boolean = false;
@@ -40,6 +39,9 @@ export class ProfileDetailsComponent {
     this.currentUserService.user$.subscribe(user => {
       this.user = user;
       this.textAreaText = user?.bio;
+      this.profilePic = user?.photoProfile?.urlPhoto;
+      console.log("user: ", this.user);
+      console.log("profilePic: ", this.profilePic);
     });
   }
   
