@@ -9,15 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { NotificationDTO } from './notificationDTO';
 import { PageableObject } from './pageableObject';
-import { PaymentMethodBasicDTO } from './paymentMethodBasicDTO';
 import { SortObject } from './sortObject';
 
-export interface PagePaymentMethodBasicDTO { 
+export interface PageNotificationDTO { 
     totalElements?: number;
     totalPages?: number;
     size?: number;
-    content?: Array<PaymentMethodBasicDTO>;
+    content?: Array<NotificationDTO>;
     number?: number;
     sort?: SortObject;
     first?: boolean;

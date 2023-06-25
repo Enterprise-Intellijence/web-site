@@ -20,9 +20,9 @@ export interface PageReviewDTO {
     content?: Array<ReviewDTO>;
     number?: number;
     sort?: SortObject;
-    pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
     numberOfElements?: number;
+    pageable?: PageableObject;
     empty?: boolean;
 }
