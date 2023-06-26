@@ -45,6 +45,13 @@ import { LoginFormComponent } from './components/auth/login-form/login-form.comp
 import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
 import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
 import { PasswordMatchValidatorDirective } from './directives/forms/passwordMatch.directive';
+import { AdministrationComponent } from './pages/administration/administration.component';
+import { CategoryComponent } from './pages/administration/category/category.component';
+import { ManageSizesComponent } from './pages/administration/manage-sizes/manage-sizes.component';
+import { ProductsComponent } from './pages/administration/products/products.component';
+import { ReportsComponent } from './pages/administration/reports/reports.component';
+import { UsersComponent } from './pages/administration/users/users.component';
+import { ReportSingleViewComponent } from './pages/administration/report-single-view/report-single-view.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -95,7 +102,14 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     LoginFormComponent,
     RegisterFormComponent,
     ConfirmRegistrationEmailComponent,
-    PasswordMatchValidatorDirective
+    PasswordMatchValidatorDirective,
+    AdministrationComponent,
+    CategoryComponent,
+    ManageSizesComponent,
+    ProductsComponent,
+    ReportsComponent,
+    UsersComponent,
+    ReportSingleViewComponent
     ],
   providers: [
     HttpClient,
