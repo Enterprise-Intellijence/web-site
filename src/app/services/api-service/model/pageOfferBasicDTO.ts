@@ -20,9 +20,9 @@ export interface PageOfferBasicDTO {
     content?: Array<OfferBasicDTO>;
     number?: number;
     sort?: SortObject;
+    numberOfElements?: number;
     pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
-    numberOfElements?: number;
     empty?: boolean;
 }

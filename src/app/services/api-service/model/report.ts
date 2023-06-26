@@ -19,7 +19,9 @@ export interface Report {
     reportedUser?: User;
     reportedProduct?: Product;
     date?: Date;
+    lastUpdate?: Date;
     status?: Report.StatusEnum;
+    adminFollowedReport?: User;
 }
 export namespace Report {
     export type StatusEnum = 'PENDING' | 'CLOSED';

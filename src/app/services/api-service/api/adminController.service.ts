@@ -19,7 +19,6 @@ import { Observable }                                        from 'rxjs';
 
 import { AdminProductsBody } from '../model/adminProductsBody';
 import { PageUserDTO } from '../model/pageUserDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 import { UserDTO } from '../model/userDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
