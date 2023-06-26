@@ -28,7 +28,6 @@
     "@types/gapi": "^0.0.44",
     "bootstrap": "^5.2.3",
     "jwt-decode": "^3.1.2",
-    "ng-gapi": "^0.0.94",
     "ngx-dropzone-wrapper": "^14.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
