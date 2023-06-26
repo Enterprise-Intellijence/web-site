@@ -9,7 +9,6 @@ import { DemoControllerService } from './api/demoController.service';
 import { FollowingControllerService } from './api/followingController.service';
 import { ImageControllerService } from './api/imageController.service';
 import { MessageControllerService } from './api/messageController.service';
-import { NotificationControllerService } from './api/notificationController.service';
 import { OfferControllerService } from './api/offerController.service';
 import { OrderControllerService } from './api/orderController.service';
 import { PaymentMethodControllerService } from './api/paymentMethodController.service';
@@ -31,7 +30,6 @@ import { UserControllerService } from './api/userController.service';
     FollowingControllerService,
     ImageControllerService,
     MessageControllerService,
-    NotificationControllerService,
     OfferControllerService,
     OrderControllerService,
     PaymentMethodControllerService,

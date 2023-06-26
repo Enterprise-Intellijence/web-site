@@ -22,8 +22,9 @@
         <div class="col-6 text-left float-start fw-semibold">
             <p>Bio</p>
         </div>
+
         <div class="col-6">
-            <textarea  class="form-control" id="floatingTextArea" placeholder="Wow. Such empty!" maxlength="{{maxBioLength}}" [(ngModel)]="textAreaText"></textarea>
+            <textarea  class="form-control" id="floatingTextArea" [(ngModel)]="textAreaText" placeholder="Enter your bio here">{{bioText}}</textarea>
         </div>
     </div>
 
@@ -32,7 +33,7 @@
 
         </div>
         <div class="col-6 fw-semibold">
-            <button class="btn btn-sm btn-primary float-end" type="button" (click)="save()">Save</button>
+            <button class="btn btn-sm btn-primary float-end" type="button">Save</button>
         </div>
     </div>
 </div>
@@ -94,7 +95,7 @@
             </div>
 
             <div class="basic-container mb-4">
-                <alert></alert>
+
                 <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
                     <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
                       <dropzone *ngIf="type === 'component'" class="dropzone-container" [config]="config" [disabled]="disabled" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto" [message]="'Click or drag images here to upload'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>

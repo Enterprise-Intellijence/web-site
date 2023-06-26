@@ -9,13 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SortObject } from './sortObject';
+import { ResponseStatusExceptionCauseStackTrace } from './responseStatusExceptionCauseStackTrace';
 
-export interface PageableObject { 
-    offset?: number;
-    sort?: SortObject;
-    pageNumber?: number;
-    pageSize?: number;
-    paged?: boolean;
-    unpaged?: boolean;
+export interface ResponseStatusExceptionCauseSuppressed { 
+    stackTrace?: Array<ResponseStatusExceptionCauseStackTrace>;
+    message?: string;
+    localizedMessage?: string;
 }

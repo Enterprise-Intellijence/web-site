@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductDTO } from 'src/app/services/api-service';
 import { ActivatedRoute } from '@angular/router';
 import { ProductControllerService } from 'src/app/services/api-service';
+
 @Component({
   selector: 'product',
   templateUrl: './product.component.html',

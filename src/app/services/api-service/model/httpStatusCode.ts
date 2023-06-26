@@ -9,13 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SortObject } from './sortObject';
 
-export interface PageableObject { 
-    offset?: number;
-    sort?: SortObject;
-    pageNumber?: number;
-    pageSize?: number;
-    paged?: boolean;
-    unpaged?: boolean;
+export interface HttpStatusCode { 
+    error?: boolean;
+    is4xxClientError?: boolean;
+    is5xxServerError?: boolean;
+    is1xxInformational?: boolean;
+    is2xxSuccessful?: boolean;
+    is3xxRedirection?: boolean;
 }

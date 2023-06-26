@@ -1,9 +1,7 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
-import { CurrentUserService } from 'src/app/services/current-user.service';
-import { UserDTO } from 'src/app/services/api-service';
 
 @Component({
   selector: 'profile-details',
@@ -17,13 +15,12 @@ export class ProfileDetailsComponent {
   bioText: string = "This is a long bio just to test how it is displayed in the textarea";
   maxBioLength: number = 500;
   // TODO: Get profile pic from user service
-  profilePic?: string = "";
-  
+  profilePic: string = "";
+
   public type: string = 'component';
+
   public disabled: boolean = false;
 
-  user: UserDTO | null = null;
-  
   public config: DropzoneConfigInterface = {
     clickable: true,
     maxFiles: 1,
@@ -32,19 +29,6 @@ export class ProfileDetailsComponent {
     cancelReset: null
   };
 
-  constructor(public alertService: AlertService,
-              private currentUserService: CurrentUserService) {}
-
-  ngOnInit() {
-    this.currentUserService.user$.subscribe(user => {
-      this.user = user;
-      this.textAreaText = user?.bio;
-      this.profilePic = user?.photoProfile?.urlPhoto;
-      console.log("user: ", this.user);
-      console.log("profilePic: ", this.profilePic);
-    });
-  }
-  
   @ViewChild(DropzoneComponent, { static: false }) componentRef?: DropzoneComponent;
   @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
 
@@ -80,7 +64,6 @@ export class ProfileDetailsComponent {
 
   public onUploadInit(args: any): void {
     console.log('onUploadInit:', args);
-    this.alertService.success('File uploaded');
   }
 
   public onUploadError(args: any): void {
@@ -95,14 +78,5 @@ export class ProfileDetailsComponent {
     this.config.cancelReset = 0;
   }
 
-  public save() {
-
-    if (this.textAreaText == '') {
-      this.user!.bio = "Wow. Such empty.";
-    } else {
-      this.user!.bio = this.textAreaText;
-    }
-    this.currentUserService.updateUser(this.user!);
-  }
-
+  constructor(public alertService: AlertService) {}
 }

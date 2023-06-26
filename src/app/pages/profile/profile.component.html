@@ -3,70 +3,26 @@
         <div class="col-12 col-sm-2">
             <div class="row">
                 <div class="col-4">
-                    <img [src]="" class="rounded-circle" style="width: 200px; height: 200px;">
+                    <img [src]="user?.photoProfile?.id | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px;">
                 </div>
             </div>
         </div>
-        
-        <div class=" col-sm-4">
-            <div class="row">
-                <h4>{{visitedUser?.username}}</h4>
-            </div>
 
-            
-            <div class="row">
-                <div class="col col-auto">
-                    <span class="fw-light">Followers: </span>
-                    <span class="fw-bold">{{visitedUser?.followersNumber}}</span>
-                </div>
-                
-                <div class="col col-auto">
-                    <span class="fw-light">Following: </span>
-                    <span class="fw-bold">{{visitedUser?.followingNumber}}</span>
-                </div>
-            </div>
-            
-            <div class="row mt-2">
-                <div class="col col-auto">
-                    <span class="fw-light">Reviews: </span>
-                    <span class="fw-bold">{{visitedUser?.reviewsNumber}}</span>
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <span class="fw-bold">Bio</span>
-                <span class="fw-light">{{visitedUser?.bio}}</span>
-            </div>
+        <div class="col-sm-4">
+            <h4>{{user?.username}}</h4>
         </div>
 
-        <div *ngIf="user?.id == visitedUser?.id" class="col-12 col-sm-4">
-            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>     
+        <div *ngIf="isCurrentUser" class="col-12 col-sm-4">
+            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>
         </div>
 
-        <div *ngIf="user?.id != visitedUser?.id" class="col-12 col-sm-4">
+        <div *ngIf="!isCurrentUser" class="col-12 col-sm-4">
             <button class="btn btn-outline-success" type="button" [routerLink]="['/messages']">Message</button>
-            <button *ngIf="isFollowing == false" class="btn btn-success margin-button" type="button" (click)="follow()">Follow</button>
-            <button *ngIf="isFollowing == true" class="btn btn-outline-success margin-button" type="button" (click)="unfollow()">Unfollow</button>
+            <button class="btn btn-success margin-button" type="button">Follow</button>
+
             <button class="btn btn-outline-warning margin-button" type="button">
                 <fa-icon [icon]="faCircleExclamation"></fa-icon>
             </button>
         </div>
-    </div>
-
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li ngbNavItem>
-          <button ngbNavLink>Closet</button>
-          <ng-template ngbNavContent>
-            <closet></closet>
-          </ng-template>
-        </li>
-        <li ngbNavItem>
-          <button ngbNavLink>Reviews</button>
-          <ng-template ngbNavContent>
-            
-          </ng-template>
-        </li>
-      </ul>
-      <div [ngbNavOutlet]="nav">
     </div>
 </div>
