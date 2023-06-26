@@ -1,8 +1,8 @@
 <div class="col mt-3 offset-2">
     <div class="row align-items-center">
         <table id="grid-table">
-            <tr *ngFor="let p of reviewPageMap.get(pageNumber)">
-                <review-card [review]="p"></review-card>
+            <tr *ngFor="let r of reviewPageMap.get(pageNumber)">
+                <review-card [review]="r"></review-card>
             </tr>
         </table>
     

@@ -1,41 +1,32 @@
-import { Component } from '@angular/core';
-import { ProductBasicDTO, ReviewControllerService, ReviewDTO, UserDTO } from 'src/app/services/api-service';
-import { CurrentUserService } from 'src/app/services/current-user.service';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ReviewControllerService, ReviewDTO, UserBasicDTO, UserDTO } from 'src/app/services/api-service';
 
 @Component({
   selector: 'review',
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.scss']
 })
-export class ReviewComponent {
+export class ReviewComponent implements OnChanges {
 
-  user: UserDTO | null = null;
+  @Input() user: UserBasicDTO | null = null;
   reviewPageMap: Map<number, Array<ReviewDTO>> = new Map<number, Array<ReviewDTO>>();
   pageNumber: number = 0;
   pageSize: number = 10;
   totalElements: number = 0;
   totalPages: number = 0;
 
-  constructor(private currentUserService: CurrentUserService,
-              private reviewService: ReviewControllerService) { }
+  constructor(private reviewService: ReviewControllerService) { }
 
-  ngOnInit(): void {
-    this.currentUserService.user$.subscribe(user => {
-      this.user = user;
-      this.loadReviews();
-    })
+  ngOnChanges(): void {
+    this.loadReviews();
   }
 
   loadReviews() {
-
-    let userId = this.user?.id;
-
-    this.reviewService.allReviewReceived(this.pageNumber - 1, this.pageSize).subscribe(page => {
+    this.reviewService.allReviewReceived(this.user?.id!, this.pageNumber - 1, this.pageSize).subscribe(page => {
       this.reviewPageMap.set(this.pageNumber, page.content!);
       this.totalPages = page.totalPages!;
       this.totalElements = page.totalElements!;
       console.log(page);
-
     });
   }
 
