@@ -51,14 +51,13 @@ export interface User {
     status?: User.StatusEnum;
     reports?: Array<Report>;
     reported?: Array<Report>;
-    adminFollowedMyReport?: Array<Report>;
     notifications?: Array<Notification>;
     enabled?: boolean;
     administrator?: boolean;
     authorities?: Array<GrantedAuthority>;
-    accountNonLocked?: boolean;
-    accountNonExpired?: boolean;
     credentialsNonExpired?: boolean;
+    accountNonExpired?: boolean;
+    accountNonLocked?: boolean;
 }
 export namespace User {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
