@@ -8,6 +8,5 @@ import { ReviewDTO } from 'src/app/services/api-service';
 })
 export class ReviewCardComponent {
 
-  @Input() review: ReviewDTO = {id: "1", date: new Date(), title: "recensione", description: "sono una recensione", vote: 5, reviewed: undefined, reviewer: undefined}; 
-  dateString?: string = this.review.date?.toDateString();
+  @Input() review!: ReviewDTO;
 }
