@@ -19,7 +19,9 @@ export interface ReportDTO {
     reportedUser?: UserBasicDTO;
     reportedProduct?: ProductBasicDTO;
     date?: Date;
+    lastUpdate?: Date;
     status?: ReportDTO.StatusEnum;
+    adminFollowedReport?: UserBasicDTO;
 }
 export namespace ReportDTO {
     export type StatusEnum = 'PENDING' | 'CLOSED';

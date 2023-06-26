@@ -109,13 +109,14 @@ export class UserLikesService {
 
   }
 
-  isProductLikedById(id: string) {
+  public isProductLikedById(id: string) {
     return this.LikedProductsIdSet.has(id);
   }
 
   public isProductLiked(product: ProductBasicDTO) {
     return this.LikedProductsSet.has(product) || this.isProductLikedById(product.id!);
   }
+
 
   private updateLikedProducts() {
     this.LikedProducts$.next(this.LikedProductsSet);
