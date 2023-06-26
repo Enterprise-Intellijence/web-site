@@ -53,20 +53,25 @@
         </div>
     </div>
 
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li ngbNavItem>
-          <button ngbNavLink>Closet</button>
-          <ng-template ngbNavContent>
-            <closet></closet>
-          </ng-template>
-        </li>
-        <li ngbNavItem>
-          <button ngbNavLink>Reviews</button>
-          <ng-template ngbNavContent>
-            
-          </ng-template>
-        </li>
-      </ul>
-      <div [ngbNavOutlet]="nav">
+    <div class="row">
+        <div class="col-12 col-sm-2">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
+                <li *ngIf="user?.id == visitedUser?.id" ngbNavItem>
+                  <button class="btn-primary" ngbNavLink>Closet</button>
+                  <ng-template ngbNavContent>
+                    <closet></closet>
+                  </ng-template>
+                </li>
+        
+                <li ngbNavItem>
+                  <button class="btn-primary" ngbNavLink>Reviews</button>
+                  <ng-template ngbNavContent>
+                    <review></review>
+                  </ng-template>
+                </li>
+        
+            </ul>
+            <div [ngbNavOutlet]="nav"></div>
+        </div>
     </div>
 </div>

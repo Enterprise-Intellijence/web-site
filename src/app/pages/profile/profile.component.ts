@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
   unfollow() {
     if (this.visitedUser) {
       this.followingService.unfollow(this.visitedUser.id ?? '').subscribe(() => {
-        this.isFollowing = true;
+        this.isFollowing = false;
       });
 
       this.visitedUser.followers_number = (this.visitedUser.followers_number ?? 0) - 1;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PageProductBasicDTO, ProductBasicDTO, UserDTO } from 'src/app/services/api-service';
+import { ProductBasicDTO, UserDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -11,9 +11,11 @@ import { ProductService } from 'src/app/services/product.service';
 export class ClosetComponent {
 
   user: UserDTO | null = null;
-  productList: Array<ProductBasicDTO> = []; 
-  page: number = 1;
+  productPageMap: Map<number, Array<ProductBasicDTO>> = new Map<number, Array<ProductBasicDTO>>();
+  pageNumber: number = 0;
   pageSize: number = 10;
+  totalElements: number = 0;
+  totalPages: number = 0;
 
   constructor(private currentUserService: CurrentUserService,
     private productService: ProductService) { }
@@ -28,10 +30,16 @@ export class ClosetComponent {
   loadProducts() {
     this.productService.getFilteredProducts({
       userId: this.user?.id,
-      page: this.page,
-      sizePage: this.pageSize
+      page: this.pageNumber - 1,
+      sizePage: this.pageSize,
     }).subscribe(page => {
-      this.productList = page.content!;
+      this.productPageMap.set(this.pageNumber, page.content!);
+      this.totalPages = page.totalPages!;
+      this.totalElements = page.totalElements!;
     });
+  }
+
+  changePage() {
+    this.loadProducts();
   }
 }
