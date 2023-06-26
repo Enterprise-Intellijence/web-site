@@ -1,6 +1,6 @@
 import { NgModule, Provider, forwardRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +45,9 @@ import { LoginFormComponent } from './components/auth/login-form/login-form.comp
 import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
 import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
 import { PasswordMatchValidatorDirective } from './directives/forms/passwordMatch.directive';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap'; 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -95,7 +98,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     LoginFormComponent,
     RegisterFormComponent,
     ConfirmRegistrationEmailComponent,
-    PasswordMatchValidatorDirective
+    PasswordMatchValidatorDirective,
     ],
   providers: [
     HttpClient,
@@ -128,6 +131,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     })),
     FormsModule,
     NgbdModalFocus,
+    UserCardComponent,
   ]
 })
 export class AppModule { }

@@ -1,16 +1,18 @@
-<div class="card mt-2 product-page" style="width: 18rem;">
+<div class="card mt-2 product-page">
     <div class="card-body">
         <h2 class="card-title">{{productDTO?.productCost?.price | currency:productDTO?.productCost?.currency}}</h2>
         <h5 class="card-subtitle mb-2 text-muted">
             {{(productDTO?.productCost?.price! + (productDTO?.productCost?.price!/100*7) ) | currency:productDTO?.productCost?.currency}} includes product insurance
         </h5>
         <hr class="product-page"/>
-        <button type="button" (click)="clickBuyButton()" class="btn btn-primary btn-block product-btn">Acquista</button>
-        <button type="button" (click)="clickOfferButton()" class="btn btn-outline-primary btn-block product-btn">Fai un offerta</button>
-        <button type="button" (click)="clickInfoButton()" class="btn btn-outline-primary btn-block product-btn">Chiedi informazioni</button>
-        <button type="button" (click)="clickFavButton()"class="btn btn-outline-secondary btn-block product-btn">
-            <fa-icon [icon]="isFav ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
-            {{isFav ? isFavButtonText : notFavButtonText}}
-        </button>
+        <div class="d-grid gap-2 col-10 mx-auto">
+            <button type="button" (click)="clickBuyButton()" class="btn btn-primary btn-block">Acquista</button>
+            <button type="button" (click)="clickOfferButton()" class="btn btn-outline-primary btn-block">Fai un offerta</button>
+            <button type="button" (click)="clickInfoButton()" class="btn btn-outline-primary btn-block">Chiedi informazioni</button>
+            <button type="button" (click)="clickFavButton()"class="btn btn-outline-secondary btn-block">
+                <fa-icon [icon]="isFav ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
+                {{isFav ? isFavButtonText : notFavButtonText}}
+            </button>
+        </div>
     </div>
 </div>
