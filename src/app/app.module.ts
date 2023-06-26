@@ -48,6 +48,8 @@ import { ClosetComponent } from './components/closet/closet.component';
 import { ReviewComponent } from './components/review/review.component';
 import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
 
+
+
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   url: 'https://httpbin.org/post',
@@ -60,6 +62,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
   useExisting: forwardRef(() => ApiInterceptor),
   multi: true
 };
+
 
 @NgModule({
   declarations: [
@@ -74,7 +77,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ProductPriceComponent,
     NotificationsComponent,
     ProductImagesComponent,
-    ProductComponent,    
+    ProductComponent,
     ProductInfoComponent,
     HomePageComponent,
     BadgeTextPipe,
@@ -99,7 +102,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     PasswordMatchValidatorDirective,
     ClosetComponent,
     ReviewComponent
-    ],
+  ],
   providers: [
     HttpClient,
     ApiInterceptor,
