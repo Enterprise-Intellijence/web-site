@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ProductCategory } from '../models/product-category';
 import { ProductControllerService, ProductDTO } from './api-service';
-import { Observable, Subject, map } from 'rxjs';
-import { ProductCategoryDTO } from './api-service/model/productCategoryDTO';
+import { Observable, BehaviorSubject, map } from 'rxjs';
+import { ProductCategoryDTO } from './api-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,9 @@ export class ProductCategoriesService {
   /**
    * Emits when the categories are loaded
    */
-  onCategoriesLoaded = new Subject<ProductCategory[]>();
+  onCategoriesLoaded = new BehaviorSubject<ProductCategory[]>([]);
+
+  public get areCategoriesLoaded() { return this.allCategories.length > 0; }
 
   allCategories: ProductCategory[] = [];
   primaryCategories: ProductCategory[] = [];

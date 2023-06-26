@@ -14,15 +14,15 @@ import { SortObject } from './sortObject';
 import { UserDTO } from './userDTO';
 
 export interface PageUserDTO { 
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<UserDTO>;
     number?: number;
     sort?: SortObject;
-    first?: boolean;
-    last?: boolean;
     numberOfElements?: number;
     pageable?: PageableObject;
+    first?: boolean;
+    last?: boolean;
     empty?: boolean;
 }

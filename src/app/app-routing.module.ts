@@ -7,7 +7,7 @@ import { NotificationsComponent } from './pages/settings/notifications/notificat
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsComponent } from './pages/settings/settings.component';
-import{ ProfileComponent } from './pages/profile/profile.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -15,6 +15,7 @@ import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page
 import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
 import { ProductComponent } from './pages/product/product.component';
+import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'products/:id', component: ProductComponent },
   // { path: 'search', component: SearchPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'confirm-registration-email', component: ConfirmRegistrationEmailComponent },
   // { path: 'register', component: RegisterPageComponent },
   {
     path: 'settings', component: SettingsComponent, children: [
@@ -44,7 +46,7 @@ const routes: Routes = [
   },
 
   { path: 'wallet/bank-account', component: BankAccountComponent },
-  { path: 'purchasing-page', component: PurchasingPageComponent },
+  { path: 'checkout/:id', component: PurchasingPageComponent },
   { path: '**', redirectTo: 'home' }
 ];
 

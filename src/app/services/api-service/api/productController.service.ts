@@ -23,10 +23,10 @@ import { OrderBasicDTO } from '../model/orderBasicDTO';
 import { PageMessageDTO } from '../model/pageMessageDTO';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
+import { ProductBasicDTO } from '../model/productBasicDTO';
 import { ProductCategory } from '../model/productCategory';
 import { ProductsIdBody } from '../model/productsIdBody';
 import { ProductsIdBody1 } from '../model/productsIdBody1';
-import { UserBasicDTO } from '../model/userBasicDTO';
 import { V1ProductsBody } from '../model/v1ProductsBody';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -146,70 +146,6 @@ export class ProductControllerService {
 
         return this.httpClient.request<any>('delete',`${this.basePath}/api/v1/products/${encodeURIComponent(String(id))}`,
             {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param userBasicDTO 
-     * @param page 
-     * @param size 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getAllPagedBySellerId(userBasicDTO: UserBasicDTO, page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PageProductBasicDTO>;
-    public getAllPagedBySellerId(userBasicDTO: UserBasicDTO, page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageProductBasicDTO>>;
-    public getAllPagedBySellerId(userBasicDTO: UserBasicDTO, page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageProductBasicDTO>>;
-    public getAllPagedBySellerId(userBasicDTO: UserBasicDTO, page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (userBasicDTO === null || userBasicDTO === undefined) {
-            throw new Error('Required parameter userBasicDTO was null or undefined when calling getAllPagedBySellerId.');
-        }
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getAllPagedBySellerId.');
-        }
-
-        if (size === null || size === undefined) {
-            throw new Error('Required parameter size was null or undefined when calling getAllPagedBySellerId.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (userBasicDTO !== undefined && userBasicDTO !== null) {
-            queryParameters = queryParameters.set('userBasicDTO', <any>userBasicDTO);
-        }
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<PageProductBasicDTO>('get',`${this.basePath}/api/v1/products/wardrobe`,
-            {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -493,6 +429,56 @@ export class ProductControllerService {
         ];
 
         return this.httpClient.request<PageProductBasicDTO>('get',`${this.basePath}/api/v1/products/filter`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param page 
+     * @param size 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getMyProducts(page?: number, size?: number, observe?: 'body', reportProgress?: boolean): Observable<PageProductBasicDTO>;
+    public getMyProducts(page?: number, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageProductBasicDTO>>;
+    public getMyProducts(page?: number, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageProductBasicDTO>>;
+    public getMyProducts(page?: number, size?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (page !== undefined && page !== null) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (size !== undefined && size !== null) {
+            queryParameters = queryParameters.set('size', <any>size);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<PageProductBasicDTO>('get',`${this.basePath}/api/v1/products/me`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -793,6 +779,48 @@ export class ProductControllerService {
         ];
 
         return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/sizes`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public productBasicById(id: string, observe?: 'body', reportProgress?: boolean): Observable<ProductBasicDTO>;
+    public productBasicById(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductBasicDTO>>;
+    public productBasicById(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductBasicDTO>>;
+    public productBasicById(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling productBasicById.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<ProductBasicDTO>('get',`${this.basePath}/api/v1/products/basic/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

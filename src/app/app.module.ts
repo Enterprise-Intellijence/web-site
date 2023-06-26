@@ -40,6 +40,11 @@ import { ReviewCardComponent } from './components/review-card/review-card.compon
 import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
 import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
+import { CamelCasePipe } from './pipes/camel-case.pipe';
+import { LoginFormComponent } from './components/auth/login-form/login-form.component';
+import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
+import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
+import { PasswordMatchValidatorDirective } from './directives/forms/passwordMatch.directive';
 import { ClosetComponent } from './components/closet/closet.component';
 import { ReviewComponent } from './components/review/review.component';
 
@@ -86,6 +91,11 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ReviewCardComponent,
     NewProductPageComponent,
     LikedProductsPageComponent,
+    CamelCasePipe,
+    LoginFormComponent,
+    RegisterFormComponent,
+    ConfirmRegistrationEmailComponent,
+    PasswordMatchValidatorDirective
     NavBarMenuItemComponent,
     ClosetComponent,
     ReviewComponent

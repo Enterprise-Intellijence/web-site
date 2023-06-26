@@ -9,7 +9,7 @@ import { UserLikesService } from 'src/app/services/user-likes.service';
 })
 export class LikedProductsPageComponent {
 
-  likedProducts: ProductBasicDTO[] = [];
+  likedProducts = new Set<ProductBasicDTO>();
 
   ngOnInit(): void {
     this.userLikesService.LikedProducts$.subscribe((products) => {

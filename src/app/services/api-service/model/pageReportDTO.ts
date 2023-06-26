@@ -14,15 +14,15 @@ import { ReportDTO } from './reportDTO';
 import { SortObject } from './sortObject';
 
 export interface PageReportDTO { 
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<ReportDTO>;
     number?: number;
     sort?: SortObject;
-    first?: boolean;
-    last?: boolean;
     numberOfElements?: number;
     pageable?: PageableObject;
+    first?: boolean;
+    last?: boolean;
     empty?: boolean;
 }

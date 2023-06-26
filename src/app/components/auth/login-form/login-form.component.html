@@ -1,0 +1,40 @@
+<div class="card">
+
+
+  <div class="card-header">
+    <h1>Login</h1>
+  </div>
+  <div class="card-body">
+
+    <form #loginForm="ngForm" (ngSubmit)="onLogin()" role="form">
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input ngModel type="username" #usernameField="ngModel" [ngModel]="username" (ngModelChange)="setUsername($event)" name="username" class="form-control" id="username" [value]="username" aria-describedby="usernameHelp" required>
+        <div *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)" class="alert alert-danger">
+          <div *ngIf="usernameField.errors?.['required']">
+            Username is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input ngModel type="password" #passwordField="ngModel" [ngModel]="password" (ngModelChange)="setPassword($event)" name="password" class="form-control" [value]="password" id="password" required>
+
+        <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="alert alert-danger">
+          <div *ngIf="passwordField.errors?.['required']">
+            Password is required.
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+        <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1">
+          <span class="visually-hidden">Loading...</span>
+        </span>
+        Login
+      </button>
+    </form>
+  </div>
+</div>

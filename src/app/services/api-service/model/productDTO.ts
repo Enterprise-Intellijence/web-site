@@ -33,6 +33,7 @@ export interface ProductDTO {
     productCategory?: ProductCategoryDTO;
     usersThatLiked?: Array<UserBasicDTO>;
     productImages?: Array<ProductImageDTO>;
+    type: string;
 }
 export namespace ProductDTO {
     export type ConditionEnum = 'NEW_WITH_TAG' | 'NEW_WITHOUT_TAG' | 'VERY_GOOD' | 'GOOD' | 'ACCEPTABLE';

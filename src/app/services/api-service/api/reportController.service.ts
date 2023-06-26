@@ -210,4 +210,54 @@ export class ReportControllerService {
         );
     }
 
+    /**
+     * 
+     * 
+     * @param page 
+     * @param size 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getReportsMeManaging(page?: number, size?: number, observe?: 'body', reportProgress?: boolean): Observable<PageReportDTO>;
+    public getReportsMeManaging(page?: number, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageReportDTO>>;
+    public getReportsMeManaging(page?: number, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageReportDTO>>;
+    public getReportsMeManaging(page?: number, size?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (page !== undefined && page !== null) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (size !== undefined && size !== null) {
+            queryParameters = queryParameters.set('size', <any>size);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<PageReportDTO>('get',`${this.basePath}/api/v1/reports/working`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
 }

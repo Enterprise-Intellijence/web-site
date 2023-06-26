@@ -683,9 +683,9 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public register(username: string, email: string, password: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public register(username: string, email: string, password: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public register(username: string, email: string, password: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public register(username: string, email: string, password: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public register(username: string, email: string, password: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public register(username: string, email: string, password: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public register(username: string, email: string, password: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (username === null || username === undefined) {
@@ -715,7 +715,6 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json',
             '*/*'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
@@ -727,7 +726,7 @@ export class UserControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<string>('post',`${this.basePath}/api/v1/users/register`,
+        return this.httpClient.request<any>('post',`${this.basePath}/api/v1/users/register`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
