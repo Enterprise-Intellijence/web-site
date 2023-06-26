@@ -24,9 +24,9 @@ export interface UserDTO {
     paymentMethods?: Array<PaymentMethodDTO>;
     role: UserDTO.RoleEnum;
     reviewsTotalSum?: number;
-    reviewsNumber?: number;
-    followersNumber?: number;
-    followingNumber?: number;
+    reviews_number?: number;
+    followers_number?: number;
+    following_number?: number;
 }
 export namespace UserDTO {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
