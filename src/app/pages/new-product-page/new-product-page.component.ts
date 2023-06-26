@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCategoriesService } from 'src/app/services/product-categories.service';
 import { ProductCategory } from 'src/app/models/product-category';
-import { EntertainmentCreateDTO, HomeCreateDTO, ImageControllerService, ImagesProductBody, ProductControllerService } from 'src/app/services/api-service';
+import { EntertainmentCreateDTO, HomeCreateDTO, ProductControllerService } from 'src/app/services/api-service';
 import { ProductCreateDTO } from 'src/app/services/api-service';
 import { SizeDTO } from 'src/app/services/api-service';
 import { CustomMoneyDTO } from 'src/app/services/api-service';
 import { ProductSizesService } from 'src/app/services/product-sizes.service';
 import { ClothingCreateDTO } from 'src/app/services/api-service';
-import { HttpClient } from '@angular/common/http';
-import { ProductImagesService } from 'src/app/services/product-images.service';
+import { UploadImagesService } from 'src/app/services/upload-images.service';
+
 @Component({
   selector: 'new-product-page',
   templateUrl: './new-product-page.component.html',
@@ -187,7 +187,7 @@ export class NewProductPageComponent implements OnInit {
       // upload images
 
       this.filesLoaded.forEach(f => {
-        this.imageService.saveImage(f, p.id!, p.description!).subscribe(res => {
+        this.imageService.saveProductImage(f, p.id!, p.description!).subscribe(res => {
           console.log("res", res);
         });
       });
@@ -254,7 +254,7 @@ export class NewProductPageComponent implements OnInit {
     private categoriesService: ProductCategoriesService,
     private productService: ProductControllerService,
     private productSizesService: ProductSizesService,
-    private imageService: ProductImagesService) {
+    private imageService: UploadImagesService) {
   }
 
 }

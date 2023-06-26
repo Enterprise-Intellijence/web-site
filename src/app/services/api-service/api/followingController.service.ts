@@ -19,7 +19,6 @@ import { Observable }                                        from 'rxjs';
 
 import { FollowingFollowersDTO } from '../model/followingFollowersDTO';
 import { PageFollowingFollowersDTO } from '../model/pageFollowingFollowersDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';

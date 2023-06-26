@@ -1,8 +1,8 @@
 <div class="card mt-2 product-page" style="width: 18rem;">
     <div class="card-body">
-        <h2 class="card-title">{{productBasicDTO?.productCost?.price | currency:productBasicDTO?.productCost?.currency}}</h2>
+        <h2 class="card-title">{{productDTO?.productCost?.price | currency:productDTO?.productCost?.currency}}</h2>
         <h5 class="card-subtitle mb-2 text-muted">
-            {{(productBasicDTO?.productCost?.price! + (productBasicDTO?.productCost?.price!/100*7) ) | currency:productBasicDTO?.productCost?.currency}} include la Protezione acquisti
+            {{(productDTO?.productCost?.price! + (productDTO?.productCost?.price!/100*7) ) | currency:productDTO?.productCost?.currency}} includes product insurance
         </h5>
         <hr class="product-page"/>
         <button type="button" (click)="clickBuyButton()" class="btn btn-primary btn-block product-btn">Acquista</button>

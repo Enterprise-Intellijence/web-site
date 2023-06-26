@@ -21,7 +21,6 @@ import { AddressCreateDTO } from '../model/addressCreateDTO';
 import { AddressDTO } from '../model/addressDTO';
 import { DeliveryCreateDTO } from '../model/deliveryCreateDTO';
 import { DeliveryDTO } from '../model/deliveryDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
