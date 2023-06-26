@@ -3,12 +3,22 @@
   <div class="row">
     <div class="col-12 col-md-6 col-lg-5 mt-4">
       <div class="row-col">
-        <div>
-          <button class="btn btn-primary" id="google-btn">
-            Sign in with Google
-          </button>
+          <div id="g_id_onload"
+              data-client_id="1049827257011-ete5d6u7kjq601i6ra2ukaus5nsd3het.apps.googleusercontent.com"
+              data-context="signin"
+              data-login_uri="http://localhost:4200/login-with-google-redirect"
+              data-itp_support="true">
+          </div>
 
-        </div>
+        <div class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="continue_with"
+            data-size="large"
+            data-locale="en-US"
+            data-logo_alignment="left">
+          </div>
         <login-form></login-form>
       </div>
     </div>

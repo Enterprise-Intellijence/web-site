@@ -33,6 +33,7 @@ const routes: Routes = [
   // { path: 'search', component: SearchPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'confirm-registration-email', component: ConfirmRegistrationEmailComponent },
+  { path: 'login-with-google-redirect', component: ProfileComponent },
   // { path: 'register', component: RegisterPageComponent },
   {
     path: 'settings', component: SettingsComponent, children: [
