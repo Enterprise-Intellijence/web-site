@@ -95,7 +95,10 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     LoginFormComponent,
     RegisterFormComponent,
     ConfirmRegistrationEmailComponent,
-    PasswordMatchValidatorDirective
+    PasswordMatchValidatorDirective,
+    NavBarMenuItemComponent,
+    ClosetComponent,
+    ReviewComponent
     ],
   providers: [
     HttpClient,

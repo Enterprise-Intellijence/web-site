@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { ProductBasicDTO, UserDTO } from 'src/app/services/api-service';
-import { CurrentUserService } from 'src/app/services/current-user.service';
+import { Component, Input, OnChanges } from '@angular/core';
+import { ProductBasicDTO, UserBasicDTO } from 'src/app/services/api-service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -8,23 +7,20 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './closet.component.html',
   styleUrls: ['./closet.component.scss']
 })
-export class ClosetComponent {
+export class ClosetComponent implements OnChanges {
 
-  user: UserDTO | null = null;
+  @Input() user: UserBasicDTO | null = null;
   productPageMap: Map<number, Array<ProductBasicDTO>> = new Map<number, Array<ProductBasicDTO>>();
   pageNumber: number = 0;
   pageSize: number = 10;
   totalElements: number = 0;
   totalPages: number = 0;
 
-  constructor(private currentUserService: CurrentUserService,
+  constructor(
     private productService: ProductService) { }
 
-  ngOnInit(): void {
-    this.currentUserService.user$.subscribe(user => {
-      this.user = user;
-      this.loadProducts();
-    })
+  ngOnChanges(): void {
+    this.loadProducts();
   }
 
   loadProducts() {
