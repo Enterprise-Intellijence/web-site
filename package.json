@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@ng-bootstrap/ng-bootstrap": "^14.1.1",
     "@popperjs/core": "^2.11.7",
+    "@types/gapi": "^0.0.44",
     "bootstrap": "^5.2.3",
     "jwt-decode": "^3.1.2",
     "ngx-dropzone-wrapper": "^14.0.0",
