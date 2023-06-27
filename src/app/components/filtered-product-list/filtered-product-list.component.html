@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-xl-2 col-md-3 col-sm-4 col-12 my-2 d-flex justify-content-center" *ngFor="let item of products!.content">
+    <div class="col-xl-2 col-md-3 col-sm-4 col-12 my-2 d-flex justify-content-center" *ngFor="let item of products?.content">
       <product-card [product]="item"></product-card>
     </div>
-    <hr />
     <div class="d-flex justify-content-between p-2">
       <ngb-pagination
         [collectionSize]="numberElements"

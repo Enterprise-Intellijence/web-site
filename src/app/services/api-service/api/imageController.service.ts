@@ -21,7 +21,6 @@ import { ImagesProductBody } from '../model/imagesProductBody';
 import { PhotoprofileIdBody } from '../model/photoprofileIdBody';
 import { ProductIdBody } from '../model/productIdBody';
 import { ProductImageDTO } from '../model/productImageDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 import { UserImageDTO } from '../model/userImageDTO';
 import { UsersPhotoprofileBody } from '../model/usersPhotoprofileBody';
 
