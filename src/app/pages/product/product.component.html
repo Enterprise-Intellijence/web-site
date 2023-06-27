@@ -23,5 +23,8 @@
         <h4>More articles by the seller</h4>
         <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1"></span>
         <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSeller!"></filtered-product-list>
+        <hr />
+        <h4>Similar items</h4>
+        <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSimilar!"></filtered-product-list>
     </div>
 </div>

@@ -19,14 +19,20 @@ export class ProductComponent implements OnInit{
   isWaitingForResponse: Boolean = true;
 
   filterSeller: FilterOptions | undefined
+  filterSimilar: FilterOptions | undefined
 
   loadProduct(): void {
     this.productService.productById(this.id).subscribe(p => {
       this.product = p;
 
       this.filterSeller = new FilterOptions()
+      this.filterSimilar = new FilterOptions()
       
       this.filterSeller.userId = this.product?.seller?.id
+
+      this.filterSimilar.primaryCat = this.product?.productCategory?.primaryCat
+      this.filterSimilar.secondaryCat = this.product?.productCategory?.secondaryCat
+      this.filterSimilar.tertiaryCat = this.product?.productCategory?.tertiaryCat
 
       if(this.product?.seller?.reviewsTotalSum === 0 || this.product?.seller?.reviewsTotalSum == undefined)
         this.rating = 0;
