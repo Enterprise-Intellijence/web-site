@@ -10,12 +10,13 @@
  * Do not edit the class manually.
  */
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    numeric3Code?: string;
-    pseudoCurrency?: boolean;
-    countryCodes?: Array<string>;
+export interface ResponseStatusExceptionCauseStackTrace { 
+    classLoaderName?: string;
+    moduleName?: string;
+    moduleVersion?: string;
+    methodName?: string;
+    fileName?: string;
+    lineNumber?: number;
+    nativeMethod?: boolean;
+    className?: string;
 }

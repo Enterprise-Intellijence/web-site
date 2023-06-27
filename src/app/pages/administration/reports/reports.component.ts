@@ -12,6 +12,7 @@ import {
 import { DecimalPipe, NgFor } from '@angular/common';
 import {PageableObject, PageReportDTO, Report, ReportControllerService, ReportDTO} from "../../../services/api-service";
 import {NgbNavChangeEvent} from "@ng-bootstrap/ng-bootstrap";
+import {single} from "rxjs";
 
 @Component({
   selector: 'reports',
@@ -30,6 +31,10 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
   active:any;
   disabled = true;
 
+  myFollowingReports?: PageReportDTO;
+
+  singleReportDTO?: ReportDTO;
+
 
   constructor(private reportService: ReportControllerService) {
   }
@@ -41,7 +46,6 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
 
     this.pageNumberClosed=1
     this.pageSizeClosed=5
-    this.refreshReportsClosed();
     }
 
   refreshReportsPending() {
@@ -58,8 +62,6 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
   }
 
   refreshReportsClosed() {
-    console.log("entro")
-
     this.reportService.getReportsByStatus(Report.StatusEnum.CLOSED,this.pageNumberClosed-1,this.pageSizeClosed).subscribe({
       next: (page: PageReportDTO )=>{
         this.reportsClosed = page;
@@ -68,6 +70,14 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
       },
       error:(error: any)=>{
         console.error(error);
+      }
+    })
+  }
+
+  getMyFollowingReports(){
+    this.reportService.getReportsMeManaging(0,10).subscribe({
+      next: (page: PageReportDTO)=>{
+        this.myFollowingReports = page;
       }
     })
   }
@@ -84,9 +94,16 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
     }
   }
   onNavChange(changeEvent: NgbNavChangeEvent) {
-    if (changeEvent.nextId === 3) {
-      changeEvent.preventDefault();
+    if (changeEvent.nextId === 1) {
+      this.refreshReportsPending()
     }
+    else if(changeEvent.nextId ===2){
+      this.refreshReportsClosed()
+
+    }
+    else
+      this.getMyFollowingReports()
+
   }
 
   toggleDisabled() {
@@ -94,5 +111,19 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
     if (this.disabled) {
       this.active = 1;
     }
+  }
+
+  followReport(report: ReportDTO) {
+    this.reportService.updateReport(report.id!).subscribe({
+      next:(value: ReportDTO)=>{
+        report = value
+        this.refreshReportsPending()
+      }
+    })
+  }
+
+  openReport(report: ReportDTO) {
+    this.singleReportDTO = report
+
   }
 }

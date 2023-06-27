@@ -9,13 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ResponseStatusExceptionCauseStackTrace } from './responseStatusExceptionCauseStackTrace';
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    numeric3Code?: string;
-    pseudoCurrency?: boolean;
-    countryCodes?: Array<string>;
+export interface ResponseStatusExceptionCauseSuppressed { 
+    stackTrace?: Array<ResponseStatusExceptionCauseStackTrace>;
+    message?: string;
+    localizedMessage?: string;
 }

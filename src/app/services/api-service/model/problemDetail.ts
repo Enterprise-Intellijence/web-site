@@ -10,12 +10,11 @@
  * Do not edit the class manually.
  */
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    numeric3Code?: string;
-    pseudoCurrency?: boolean;
-    countryCodes?: Array<string>;
+export interface ProblemDetail { 
+    type?: string;
+    title?: string;
+    status?: number;
+    detail?: string;
+    instance?: string;
+    properties?: { [key: string]: any; };
 }
