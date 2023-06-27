@@ -55,7 +55,7 @@ import { ReportsComponent } from './pages/administration/reports/reports.compone
 import { UsersComponent } from './pages/administration/users/users.component';
 import { ReportSingleViewComponent } from './pages/administration/report-single-view/report-single-view.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { SearchPageComponent } from './page/search-page/search-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -117,6 +117,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ReportSingleViewComponent,
     FooterComponent,
     SearchPageComponent
+
     ],
   providers: [
     HttpClient,
