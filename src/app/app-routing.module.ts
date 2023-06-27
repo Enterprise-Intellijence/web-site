@@ -25,6 +25,7 @@ import {ManageSizesComponent} from "./pages/administration/manage-sizes/manage-s
 import {
   ReportSingleViewComponent
 } from "./pages/administration/report-single-view/report-single-view.component";
+import {SearchPageComponent} from "./pages/search-page/search-page.component";
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'liked-products', component: LikedProductsPageComponent },
   { path: 'messages', component: MessagesPageComponent },
   { path: 'products/new', component: NewProductPageComponent },
+  {path: 'search-page',component: SearchPageComponent},
   { path: 'products/:id', component: ProductComponent },
   // { path: 'search', component: SearchPageComponent },
   { path: 'login', component: LoginPageComponent },

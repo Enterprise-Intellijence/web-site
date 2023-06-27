@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faEnvelope, faHeart, faRightFromBracket, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ProductCategory } from 'src/app/models/product-category';
 import { ApiAuthService } from 'src/app/services/api-auth.service';
-import { ClothingDTO } from 'src/app/services/api-service';
+import { ClothingDTO, UserDTO } from 'src/app/services/api-service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ProductCategoriesService } from 'src/app/services/product-categories.service';
 import { UserLikesService } from 'src/app/services/user-likes.service';
 
@@ -26,6 +27,8 @@ export class NavBarComponent implements OnInit {
   unreadMessages: number = 2;
   likedProductsCount: number = 4;
 
+  currentUser: UserDTO | null = null;
+
   clothingCategory?: ProductCategory;
   homeCategory?: ProductCategory;
   entertainmentCategory?: ProductCategory;
@@ -34,7 +37,7 @@ export class NavBarComponent implements OnInit {
   constructor(private UserLikesService: UserLikesService,
     private apiAuth: ApiAuthService,
     private categoriesService: ProductCategoriesService,
-    // to redirect to the search page
+    private currentUserService: CurrentUserService,
     private route: Router
     ) { }
 
@@ -45,6 +48,10 @@ export class NavBarComponent implements OnInit {
 
     this.UserLikesService.LikedProductsCount$.subscribe((count) => {
       this.likedProductsCount = count;
+    });
+
+    this.currentUserService.user$.subscribe((user) => {
+      this.currentUser = user;
     });
 
     this.categoriesService.onCategoriesLoaded.subscribe(() => {
@@ -61,10 +68,31 @@ export class NavBarComponent implements OnInit {
 
 
   searchFor($event: ProductCategory, gender?: ClothingDTO.ProductGenderEnum) {
-    console.log("searching for:", $event.name, "for gender: ", gender);
-    this.route.navigate(['/search'], {
+    //console.log("searching for:", $event.name, "for gender: ", gender);
+    let child : String | undefined;
+    let secondary : String | undefined;
+    let primary : String | undefined;
+    const categoryPath = $event.getCategoryPath()
+
+    if(categoryPath.length>2) {
+      child = categoryPath[categoryPath.length - 1].rawName;
+      secondary = categoryPath[categoryPath.length - 2].rawName;
+      primary = categoryPath[categoryPath.length - 3].rawName;
+    }
+    else if(categoryPath.length>1){
+      secondary = categoryPath[categoryPath.length - 1].rawName;
+      primary = categoryPath[categoryPath.length - 2].rawName;
+    }
+    else
+      primary = categoryPath[categoryPath.length - 1].rawName;
+
+
+    this.route.navigate(['/search-page'], {
       queryParams: {
-        category: $event.rawName,
+        primary: primary,
+        secondary: secondary,
+        child: child,
+        gender:gender
       }
     });
   }
