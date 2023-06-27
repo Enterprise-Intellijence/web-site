@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MostRequestProductComponent } from './most-request-product.component';
+import { FilteredProductListComponent } from './filtered-product-list.component';
 
 describe('MostRequestProductComponent', () => {
-  let component: MostRequestProductComponent;
-  let fixture: ComponentFixture<MostRequestProductComponent>;
+  let component: FilteredProductListComponent;
+  let fixture: ComponentFixture<FilteredProductListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MostRequestProductComponent ]
+      declarations: [ FilteredProductListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MostRequestProductComponent);
+    fixture = TestBed.createComponent(FilteredProductListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
