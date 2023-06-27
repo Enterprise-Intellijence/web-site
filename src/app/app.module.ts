@@ -122,7 +122,6 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ReportSingleViewComponent,
     FooterComponent,
     SearchPageComponent
-
     ],
   providers: [
     HttpClient,
