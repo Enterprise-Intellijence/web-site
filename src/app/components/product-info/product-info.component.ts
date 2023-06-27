@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProductDTO, AddressDTO, UserControllerService } from 'src/app/services/api-service';
 
 @Component({
@@ -12,14 +12,14 @@ export class ProductInfoComponent implements OnChanges {
   @Input() productInfo?: ProductDTO;
 
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     if(this.productInfo){
       this.userService.getDefaultAddress(this.productInfo?.seller?.id!).subscribe((address_) => {
         this.address = address_;
+        console.log(this.address)
       })
     }
 
-    console.log(this.address)
   }
 
   constructor(private userService: UserControllerService) { }
