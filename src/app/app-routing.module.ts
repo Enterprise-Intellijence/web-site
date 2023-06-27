@@ -16,6 +16,16 @@ import { NewProductPageComponent } from './pages/new-product-page/new-product-pa
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
 import { ProductComponent } from './pages/product/product.component';
 import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
+import { AdministrationComponent } from './pages/administration/administration.component';
+import {CategoryComponent} from "./pages/administration/category/category.component";
+import {ReportsComponent} from "./pages/administration/reports/reports.component";
+import {UsersComponent} from "./pages/administration/users/users.component";
+import {ProductsComponent} from "./pages/administration/products/products.component";
+import {ManageSizesComponent} from "./pages/administration/manage-sizes/manage-sizes.component";
+import {
+  ReportSingleViewComponent
+} from "./pages/administration/report-single-view/report-single-view.component";
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -44,6 +54,15 @@ const routes: Routes = [
       { path: 'payments', component: PaymentsComponent },
     ]
   },
+  {path: 'administration', component: AdministrationComponent , children:[
+     { path: '', redirectTo: 'reports', pathMatch: 'full' },
+      { path: 'reports', component: ReportsComponent},
+      {path:  'report/id:',component:ReportSingleViewComponent},
+      { path: 'users', component: UsersComponent },
+      { path: 'products', component: ProductsComponent },
+      { path: 'category', component: CategoryComponent },
+      { path: 'manage-sizes', component: ManageSizesComponent },
+    ]},
 
   { path: 'wallet/bank-account', component: BankAccountComponent },
   { path: 'checkout/:id', component: PurchasingPageComponent },

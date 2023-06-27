@@ -6,7 +6,7 @@
 
   /* You can use this class anywhere you place a div that is placed on the top of the body,
       see the setting/account-settings page for reference. */
-  
+
   @extend .container;
   @extend .shadow-sm;
   @extend .mt-4;
@@ -34,4 +34,11 @@
   height: 200px;
   padding: 10px;
 }
-    
+
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}

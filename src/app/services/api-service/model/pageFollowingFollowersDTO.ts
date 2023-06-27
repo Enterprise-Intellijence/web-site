@@ -24,5 +24,6 @@ export interface PageFollowingFollowersDTO {
     last?: boolean;
     numberOfElements?: number;
     pageable?: PageableObject;
+
     empty?: boolean;
 }

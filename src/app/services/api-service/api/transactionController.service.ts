@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { ResponseStatusException } from '../model/responseStatusException';
 import { TransactionCreateDTO } from '../model/transactionCreateDTO';
 import { TransactionDTO } from '../model/transactionDTO';
 

@@ -27,4 +27,5 @@ export interface Money {
     positiveOrZero?: boolean;
     negativeOrZero?: boolean;
     amount?: number;
+
 }
