@@ -46,9 +46,7 @@ export class ProductComponent implements OnInit{
             this.loadProduct();
           }
         });
-
   }
-
 
   constructor(private productService: ProductControllerService, private route: ActivatedRoute) {
   }
