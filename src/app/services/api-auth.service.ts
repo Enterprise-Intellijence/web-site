@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 import { UserControllerService } from './api-service';
 
@@ -71,6 +71,10 @@ export class ApiAuthService {
       this.accessJWT = jwtDecode(this.encodedAccessJWT);
       this.refreshJWT = jwtDecode(this.encodedRefreshJWT);
     }
+  }
+
+  public googleLogin(credentials: string): Observable<any> {
+    return this.userService.googleAuth(credentials).pipe(tap(response => this.handleAuthenticateResponse(response)));
   }
 
   public logout() {
