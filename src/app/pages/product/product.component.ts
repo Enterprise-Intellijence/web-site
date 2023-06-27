@@ -9,12 +9,13 @@ import { Config } from 'src/app/models/config';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, OnChanges {
+export class ProductComponent implements OnInit{
 
   private id!: string;
   product?: ProductDTO;
   rating?: number; 
   images: String[] = []
+  isWaitingForResponse: Boolean = true;
 
   filterSeller: FilterOptions | undefined
 
@@ -23,19 +24,18 @@ export class ProductComponent implements OnInit, OnChanges {
       this.product = p;
 
       this.filterSeller = new FilterOptions()
-      console.log(p)
       
       this.filterSeller.userId = this.product?.seller?.id
 
-      if(this.product?.seller?.reviewsTotalSum === 0 || this.product?.seller?.reviewsTotalSum == undefined){
+      if(this.product?.seller?.reviewsTotalSum === 0 || this.product?.seller?.reviewsTotalSum == undefined)
         this.rating = 0;
-      }
       else
-      {  this.rating = this.product?.seller?.reviewsTotalSum!/this.product?.seller?.reviews_number!;}
+        this.rating = this.product?.seller?.reviewsTotalSum!/this.product?.seller?.reviews_number!;
 
       this.product.productImages?.forEach(element => {
         this.images.push(Config.basePath + element.urlPhoto!)
       });
+      this.isWaitingForResponse = false;
     });
   }
 
@@ -49,9 +49,6 @@ export class ProductComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnChanges(): void {
-
-  }
 
   constructor(private productService: ProductControllerService, private route: ActivatedRoute) {
   }

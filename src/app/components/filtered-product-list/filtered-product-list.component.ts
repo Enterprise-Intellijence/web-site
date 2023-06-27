@@ -13,7 +13,7 @@ export class FilteredProductListComponent implements OnInit,OnChanges {
   @Input() filter!: FilterOptions
   products?: PageProductBasicDTO = { content: [] };
   numberElements: any;
-  page: any;
+  page: number = 1;
   pageSize: any;
 
   constructor(private productService: ProductService) {
