@@ -9,7 +9,7 @@
     <img [src]="cardImage" class="card-img-top rounded-0" style="object-fit: cover;" [alt]="product.description">
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{product.title}}</h5>
+    <h5 class="card-title" style="max-width: 90%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{product.title}}</h5>
     <div class="row">
       <div class="col card-text">
         <span class="fw-medium">{{product.productCost.price | currency:product.productCost.currency}}</span>
@@ -26,3 +26,4 @@
 
     </div>
   </div>
+</div>
