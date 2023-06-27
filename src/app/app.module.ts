@@ -22,7 +22,7 @@ import { NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
+import { FilteredProductListComponent } from './components/filtered-product-list/filtered-product-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
@@ -54,6 +54,7 @@ import { ProductsComponent } from './pages/administration/products/products.comp
 import { ReportsComponent } from './pages/administration/reports/reports.component';
 import { UsersComponent } from './pages/administration/users/users.component';
 import { ReportSingleViewComponent } from './pages/administration/report-single-view/report-single-view.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -81,12 +82,12 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ProductPriceComponent,
     NotificationsComponent,
     ProductImagesComponent,
-    ProductComponent,    
+    ProductComponent,
     ProductInfoComponent,
     HomePageComponent,
     BadgeTextPipe,
     ProductCardComponent,
-    MostRequestProductComponent,
+    FilteredProductListComponent,
     ProfileComponent,
     DefaultProfilePicPipe,
     DefaultProductPicPipe,
@@ -105,14 +106,15 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ConfirmRegistrationEmailComponent,
     PasswordMatchValidatorDirective,
     ClosetComponent,
-    ReviewComponent
+    ReviewComponent,
     AdministrationComponent,
     CategoryComponent,
     ManageSizesComponent,
     ProductsComponent,
     ReportsComponent,
     UsersComponent,
-    ReportSingleViewComponent
+    ReportSingleViewComponent,
+    FooterComponent
     ],
   providers: [
     HttpClient,
