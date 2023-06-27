@@ -39,12 +39,14 @@ import { ApiModule, Configuration, UserControllerService } from './services/api-
 import { ReviewCardComponent } from './components/review-card/review-card.component';
 import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
-import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
 import { CamelCasePipe } from './pipes/camel-case.pipe';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
 import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
 import { PasswordMatchValidatorDirective } from './directives/forms/passwordMatch.directive';
+import { ClosetComponent } from './components/closet/closet.component';
+import { ReviewComponent } from './components/review/review.component';
+import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { CategoryComponent } from './pages/administration/category/category.component';
 import { ManageSizesComponent } from './pages/administration/manage-sizes/manage-sizes.component';
@@ -59,7 +61,6 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   acceptedFiles: 'image/*',
   createImageThumbnails: true
 };
-
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -80,7 +81,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ProductPriceComponent,
     NotificationsComponent,
     ProductImagesComponent,
-    ProductComponent,
+    ProductComponent,    
     ProductInfoComponent,
     HomePageComponent,
     BadgeTextPipe,
@@ -103,6 +104,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     RegisterFormComponent,
     ConfirmRegistrationEmailComponent,
     PasswordMatchValidatorDirective,
+    ClosetComponent,
+    ReviewComponent
     AdministrationComponent,
     CategoryComponent,
     ManageSizesComponent,

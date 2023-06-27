@@ -51,7 +51,6 @@ export interface User {
     status?: User.StatusEnum;
     reports?: Array<Report>;
     reported?: Array<Report>;
-    adminFollowedMyReport?: Array<Report>;
     notifications?: Array<Notification>;
     enabled?: boolean;
     administrator?: boolean;
