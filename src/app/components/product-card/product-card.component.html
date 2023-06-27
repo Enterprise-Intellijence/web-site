@@ -1,11 +1,11 @@
 <div class="card shadow cursor-pointer" style="max-width: 20rem;" [routerLink]="['/products', product.id]">
 
   <div class="card-header text-truncate cursor-pointer" [routerLink]="['/users', product.seller?.id]">
-    <img [src]="usernameImage" alt="" class="rounded-circle" height="26px">
+    <img [src]="usernameImage" alt="" class="rounded-circle" width="26px" height="26px">
     <span class="ms-2">{{product.seller?.username}}</span>
   </div>
 
-  <div class="ratio ratio-1x1" style="position: relative;">
+  <div class="ratio ratio-1x1" style="min-block-size: 200px;">
     <img [src]="cardImage" class="card-img-top rounded-0" style="object-fit: cover;" [alt]="product.description">
   </div>
   <div class="card-body">
