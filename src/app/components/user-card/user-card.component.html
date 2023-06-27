@@ -1,0 +1,22 @@
+<div class="card mt-2 user-card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <img [src]="sellerPic" class="img-thumbnail rounded-circle" alt="...">
+            </div>
+            <div class="col">
+                <div class="row">
+                    <h5 style="white-space: nowrap;">{{seller?.username}}</h5>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <ngb-rating [rate]="rating!"></ngb-rating>
+                    </div>
+                    <div class="col">
+                        <p class="card-text" style="white-space: nowrap;">({{rating}})</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

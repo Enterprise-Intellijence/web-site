@@ -16,35 +16,38 @@ export class ProfileComponent implements OnInit {
   faCircleExclamation = faCircleExclamation;
 
   userId: string | null = null;
-
   isFollowing: boolean = false;
-
   user?: UserDTO | null = null;
   visitedUser?: UserBasicDTO;
+  userImage?: string = '';
+  emptyBio: string = 'Wow, such empty.';
+
+  basePath: string = "https://localhost:8443/api/v1/";
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserControllerService,
     private currentUserService: CurrentUserService,
     private userProfileService: UserProfileService,
     private followingService: FollowingControllerService) { }
 
   ngOnInit(): void {
-    // example route with id: http://localhost:4200/users/1
-    // example route: http://localhost:4200/users/me
-
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('id') ?? null;
-
+      
       if (this.userId == 'me') {
         this.currentUserService.user$.subscribe(user => {
           this.user = user;
           this.visitedUser = user as UserBasicDTO;
+          this.userImage = this.basePath + this.visitedUser?.photoProfile?.urlPhoto;
+          this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
         })
       } else {
         this.userProfileService.loadVisitedUserProfile(this.userId ?? '');
         this.userProfileService.visitedUserProfile$.subscribe(user => {
+          this.userImage = this.basePath + this.visitedUser?.photoProfile?.urlPhoto;
           this.visitedUser = user;
+          this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
+          
           this.followingService.imFollowingThisUser(this.visitedUser?.id ?? '').subscribe(isFollowing => {
             this.isFollowing = isFollowing;
           });

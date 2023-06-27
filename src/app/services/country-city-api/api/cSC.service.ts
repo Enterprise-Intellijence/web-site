@@ -306,11 +306,14 @@ export class CSCService {
     public countriesGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Country>>>;
     public countriesGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Country>>>;
     public countriesGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        
+        console.log("http request at api");
 
         let headers = this.defaultHeaders;
 
         // authentication (ApiKeyAuth) required
         if (this.configuration.apiKeys && this.configuration.apiKeys["X-CSCAPI-KEY"]) {
+            console.log("apiKey: ", this.configuration.apiKeys["X-CSCAPI-KEY"]);
             headers = headers.set('X-CSCAPI-KEY', this.configuration.apiKeys["X-CSCAPI-KEY"]);
         }
 

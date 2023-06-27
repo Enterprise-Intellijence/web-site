@@ -1,51 +1,53 @@
-<div class="card card-body product-page mt-2" style="min-width: 18rem;">
+<div class="card product-page mt-2">
 
-    <div class="card-title">
-        <div class="col-12">
-            <h2>{{productInfo?.title}}</h2> 
+    <div class="card-body">
+        <div class="card-title">
+            <div class="col-12">
+                <h2>{{productInfo?.title}}</h2> 
+            </div>
         </div>
+        <!--
+        <div class="row align-items-center">
+            <h5>{{productInfo?.description}}</h5> 
+        </div>
+        -->
+        <hr />
+
+        <div class="row align-items-center">
+            <div class="col-6">
+                <h6>Condition:</h6>
+            </div>
+            <div class="col" style="text-align: right;">
+                <h6>{{productInfo?.condition?.replaceAll('_',' ') | camelCase}}</h6>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-6">
+                <h6>Address:</h6>
+            </div>
+            <div class="col" style="text-align: right;">
+                <h6>{{address?.country}}, {{address?.city}}</h6>
+            </div>
+        </div>
+        
+        <div class="row align-items-center">
+            <div class="col-6">
+                <h6>Views:</h6>
+            </div>
+            <div class="col" style="text-align: right;">
+                <h6>{{productInfo?.views}}</h6>
+            </div>
+
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-6">
+                <h6>Upload date:</h6>
+            </div>
+            <div class="col" style="text-align: right;">
+                <h6>{{productInfo?.uploadDate | date}}</h6>
+            </div>
     </div>
-
-    <div class="row align-items-center">
-        <h5>{{productInfo?.description}}</h5> 
-    </div>
-
-    <hr />
-
-    <div class="row align-items-center">
-        <div class="col-6">
-            <h6>Condition:</h6>
-        </div>
-        <div class="col" style="text-align: right;">
-            <h6>{{productInfo?.condition?.replaceAll('_',' ') | camelCase}}</h6>
-        </div>
-    </div>
-
-    <div class="row align-items-center">
-        <div class="col-6">
-            <h6>Address:</h6>
-        </div>
-        <div class="col" style="text-align: right;">
-            <h6>{{address?.country}}, {{address?.city}}</h6>
-        </div>
-    </div>
-    
-    <div class="row align-items-center">
-        <div class="col-6">
-            <h6>Views:</h6>
-        </div>
-        <div class="col" style="text-align: right;">
-            <h6>{{productInfo?.views}}</h6>
-        </div>
-
-    </div>
-
-    <div class="row align-items-center">
-        <div class="col-6">
-            <h6>Upload date:</h6>
-        </div>
-        <div class="col" style="text-align: right;">
-            <h6>{{productInfo?.uploadDate | date}}</h6>
-        </div>
     </div>
 </div>

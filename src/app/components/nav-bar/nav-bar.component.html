@@ -2,7 +2,10 @@
   <div class="container-sm py-2">
     <div class="row align-items-center gx-5">
       <div class="col-auto">
-        <a class="navbar-brand" [routerLink]="['/home']">NOME APP</a>
+        <a class="navbar-brand" [routerLink]="['/home']">
+          <img src="assets/images/svinted-1.png" alt="logo" width="30" height="30" class="d-inline-block align-text-top">
+          <span class="ms-2 mt-1 d-inline-block align-text-top">Svinted</span>
+        </a>
       </div>
 
 
@@ -50,7 +53,7 @@
                 <!-- <button ngbDropdownToggle class="btn btn-outline-primary " [routerLink]="['/users', {{user.id}}]"></button> -->
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/users/me']">Profile</a>
               </li>
-              <li *ngIf="isLoggedIn"  >
+              <li *ngIf="isLoggedIn && (currentUser?.role == 'ADMIN' || currentUser?.role == 'SUPER_ADMIN')">
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/administration']">Admin Dashboard</a>
               </li>
               <li>
