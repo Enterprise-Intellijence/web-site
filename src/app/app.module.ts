@@ -56,8 +56,6 @@ import { UsersComponent } from './pages/administration/users/users.component';
 import { ReportSingleViewComponent } from './pages/administration/report-single-view/report-single-view.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { ApiModule as CountryCityModule, Configuration as CountryCiyConfig } from './services/country-city-api';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -108,7 +106,17 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     LoginFormComponent,
     RegisterFormComponent,
     ConfirmRegistrationEmailComponent,
-    PasswordMatchValidatorDirective
+    PasswordMatchValidatorDirective,
+    UsersComponent,
+    ClosetComponent,
+    ReviewComponent,
+    AdministrationComponent,
+    CategoryComponent,
+    ManageSizesComponent,
+    ProductsComponent,
+    ReportsComponent,
+    ReportSingleViewComponent,
+    FooterComponent
     ],
   providers: [
     HttpClient,

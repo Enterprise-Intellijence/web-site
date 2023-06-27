@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit {
         if(this.product?.seller?.reviewsTotalSum == 0 || this.product?.seller?.reviewsTotalSum == undefined)
           this.rating = 0;
         else
-          this.rating = this.product?.seller?.reviewsTotalSum!/this.product?.seller?.reviewsNumber!;
+          this.rating = this.product?.seller?.reviewsTotalSum!/this.product?.seller?.reviews_number!;
 
   }
 
