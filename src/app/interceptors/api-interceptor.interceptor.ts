@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ApiAuthService } from '../services/api-auth.service';
+import { Config } from '../models/config';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
@@ -15,6 +16,9 @@ export class ApiInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // Apply the headers
+    if (!request.url.startsWith(Config.basePath)) {
+      return next.handle(request);
+    }
 
     if (this.apiAuth.isLoggedIn()) {
       request = this.addAuthHeader(request);

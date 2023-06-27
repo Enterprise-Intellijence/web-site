@@ -13,8 +13,16 @@ export class ProductImagesComponent {
 
   image: String = this.thumbnails[0];
 
+  curr_index: any | undefined
+  imgSrc: String | undefined
+
   changeImage(index: number) {
+    this.curr_index = index
     this.image = this.thumbnails[index];
+  }
+  
+  openImage(){
+    this.imgSrc = this.thumbnails[this.curr_index]
   }
 
 }

@@ -1,19 +1,19 @@
-<div class="row mt-4">
-    <div class="col-6">
-        <product-images></product-images>
-    </div>
-    <div class="col-6">
-        <div class="row">
-            <div class="col-6">
-                <product-info [productInfo]="product"></product-info>
+<div class="container">
+    <div class="row mt-4 justify-content-center">
+        <div class="col-8">
+            <div class="row-col">
+                <product-images></product-images>
+                <hr style="margin-top: 2rem; margin-bottom: 2rem;"/>
+                <p style="word-wrap: break-word;">{{product?.description}}</p>
             </div>
-            <div class="col-auto">
+        </div>
+        <div class="col-1 d-none"></div>
+        <div class="col-6 col-lg-3 col-md-8">
+            <div class="row-col">
+                <product-info [productInfo]="product"></product-info>
                 <product-price [productDTO]="product"></product-price>
+                <user-card [seller]="product?.seller" [rating]="rating"></user-card>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <!-- sezione con cards -->
 </div>
