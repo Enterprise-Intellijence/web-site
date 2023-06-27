@@ -107,17 +107,11 @@ export class ProfileDetailsComponent {
     this.config.cancelReset = 0;
   }
 
-  // TODO: errore nella richiesta http, user.getBio() restituisce null
   public save() {
     if (this.textAreaText !== this.bioText) {
       this.user!.bio = this.textAreaText;
       console.log("save");
       this.currentUserService.updateUser(this.user!);
-    
-      /*console.log("path: ", Config.basePath + "users/" + this.user?.id);
-      this.http.put(Config.basePath + "users/" + this.user?.id, this.user).subscribe(res => {
-        console.log("res: ", res);
-      });*/
     }
   }
 
