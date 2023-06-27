@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiAuthService } from 'src/app/services/api-auth.service';
 
+declare const gapi: any;
+
 @Component({
   selector: 'login-page',
   templateUrl: './login-page.component.html',
@@ -10,4 +12,5 @@ import { ApiAuthService } from 'src/app/services/api-auth.service';
 export class LoginPageComponent {
 
   constructor() { }
+
 }

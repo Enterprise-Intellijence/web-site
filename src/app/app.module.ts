@@ -59,6 +59,8 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ApiModule as CountryCityModule, Configuration as CountryCiyConfig } from './services/country-city-api';
 
+
+
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
   url: 'https://httpbin.org/post',
@@ -71,6 +73,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
   useExisting: forwardRef(() => ApiInterceptor),
   multi: true
 };
+
 
 @NgModule({
   declarations: [
@@ -119,7 +122,6 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ReportSingleViewComponent,
     FooterComponent,
     SearchPageComponent
-
     ],
   providers: [
     HttpClient,
