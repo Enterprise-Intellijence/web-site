@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProductCategory } from 'src/app/models/product-category';
+import {provideRouter} from "@angular/router";
 
 @Component({
   selector: 'nav-bar-menu-item',

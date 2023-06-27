@@ -1,35 +1,36 @@
-<div class="container-sm py-2 mt-4">
+<div class="container-sm mt-4">
     <div class="row">
-        <div class="col-4 col-sm-2">
+
+        <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
             <div class="row">
                 <div class="col-4">
                     <img [src]="userImage | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px;">
                 </div>
             </div>
         </div>
-        
+
         <div class=" col-6">
             <div class="row">
                 <h4>{{visitedUser?.username}}</h4>
             </div>
 
-            
+
             <div class="row">
-                <div class="col col-auto">
+                <div class="col col-12">
                     <span class="fw-light">Followers: </span>
-                    <span class="fw-bold">{{visitedUser?.followers_number}}</span>
+                    <span class="fw-bold">{{visitedUser?.followersNumber}}</span>
                 </div>
-                
+
                 <div class="col col-auto">
                     <span class="fw-light">Following: </span>
-                    <span class="fw-bold">{{visitedUser?.following_number}}</span>
+                    <span class="fw-bold">{{visitedUser?.followingNumber }}</span>
                 </div>
             </div>
-            
+
             <div class="row mt-2">
-                <div class="col col-auto">
+                <div class="col col-12">
                     <span class="fw-light">Reviews: </span>
-                    <span class="fw-bold">{{visitedUser?.reviews_number}}</span>
+                    <span class="fw-bold">{{visitedUser?.reviewsNumber}}</span>
                 </div>
             </div>
 
@@ -40,17 +41,9 @@
         </div>
 
         <div *ngIf="user?.id == visitedUser?.id" class="col-4">
-            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>     
+            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>
         </div>
 
-        <div *ngIf="user?.id != visitedUser?.id" class="col-4">
-            <button class="btn btn-outline-success" type="button" [routerLink]="['/messages']">Message</button>
-            <button *ngIf="isFollowing == false" class="btn btn-success margin-button" type="button" (click)="follow()">Follow</button>
-            <button *ngIf="isFollowing == true" class="btn btn-outline-success margin-button" type="button" (click)="unfollow()">Unfollow</button>
-            <button class="btn btn-outline-warning margin-button" type="button">
-                <fa-icon [icon]="faCircleExclamation"></fa-icon>
-            </button>
-        </div>
     </div>
 
     <div class="row row-eq-height row-bottom">
@@ -62,14 +55,14 @@
                     <closet [visitedUser]="visitedUser ?? null"></closet>
                   </ng-template>
                 </li>
-        
+
                 <li ngbNavItem>
                   <button class="btn-primary" ngbNavLink>Reviews</button>
                   <ng-template ngbNavContent>
                     <review [visitedUser]="visitedUser ?? null"></review>
                   </ng-template>
                 </li>
-        
+
             </ul>
             <div [ngbNavOutlet]="nav"></div>
         </div>

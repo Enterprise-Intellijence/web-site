@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { PageProductBasicDTO, ProductBasicDTO, ProductControllerService } from "../../services/api-service";
 import {FilterOptions} from "../../models/filter-options";
 import {ProductService} from "../../services/product.service";
@@ -9,11 +9,11 @@ import {ProductService} from "../../services/product.service";
   styleUrls: ['./filtered-product-list.component.scss'],
 
 })
-export class FilteredProductListComponent implements OnInit {
+export class FilteredProductListComponent implements OnInit,OnChanges {
   @Input() filter!: FilterOptions
-  products?: PageProductBasicDTO
+  products?: PageProductBasicDTO = { content: [] };
   numberElements: any;
-  page: any;
+  page: number = 1;
   pageSize: any;
 
   constructor(private productService: ProductService) {
@@ -24,6 +24,12 @@ export class FilteredProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshProducts()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['filter']) {
+      this.refreshProducts();
+    }
   }
 
 
