@@ -8,7 +8,7 @@ import { ReviewControllerService, ReviewDTO, UserBasicDTO, UserDTO } from 'src/a
 })
 export class ReviewComponent implements OnChanges {
 
-  @Input() user: UserBasicDTO | null = null;
+  @Input() visitedUser: UserBasicDTO | null = null;
   reviewPageMap: Map<number, Array<ReviewDTO>> = new Map<number, Array<ReviewDTO>>();
   pageNumber: number = 0;
   pageSize: number = 10;
@@ -22,7 +22,7 @@ export class ReviewComponent implements OnChanges {
   }
 
   loadReviews() {
-    this.reviewService.allReviewReceived(this.user?.id!, this.pageNumber - 1, this.pageSize).subscribe(page => {
+    this.reviewService.allReviewReceived(this.visitedUser?.id!, this.pageNumber - 1, this.pageSize).subscribe(page => {
       this.reviewPageMap.set(this.pageNumber, page.content!);
       this.totalPages = page.totalPages!;
       this.totalElements = page.totalElements!;

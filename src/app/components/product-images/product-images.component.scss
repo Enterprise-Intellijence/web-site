@@ -1,18 +1,19 @@
-.img-size {
-    width:  15cm;
-    height: 10cm;
-}
-
-.thumbnail-size {
-    float: left;
-    width:  100px;
-    height: 100px;
-    object-fit: cover;
-}
-
 @media screen and (max-width: 770px) {
     .div {
         clear: left;
         width: 100%;
     }
 };
+
+.main-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-container {
+    display: flex; /* Make parent a flex-container */
+    justify-content: center; /* Centers child horizontally */
+    align-items: center; /* Centers child vertically */
+}
