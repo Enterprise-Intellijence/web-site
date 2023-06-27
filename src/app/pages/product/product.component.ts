@@ -1,9 +1,10 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductDTO } from 'src/app/services/api-service';
 import { ActivatedRoute } from '@angular/router';
 import { ProductControllerService } from 'src/app/services/api-service';
 import { FilterOptions } from 'src/app/models/filter-options';
 import { Config } from 'src/app/models/config';
+
 @Component({
   selector: 'product',
   templateUrl: './product.component.html',
@@ -46,6 +47,9 @@ export class ProductComponent implements OnInit{
             this.loadProduct();
           }
         });
+  }
+
+  goToSellerProfile(){
   }
 
   constructor(private productService: ProductControllerService, private route: ActivatedRoute) {

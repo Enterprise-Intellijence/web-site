@@ -14,7 +14,7 @@
                 <product-info *ngIf="!isWaitingForResponse" [productInfo]="product"></product-info>
                 <product-price *ngIf="!isWaitingForResponse" [productDTO]="product"></product-price>
                 <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1"></span>
-                <user-card *ngIf="!isWaitingForResponse" [seller]="product?.seller" [rating]="rating"></user-card>
+                <user-card style="cursor: pointer;" [routerLink]="['/users', product?.seller?.id]" *ngIf="!isWaitingForResponse" [seller]="product?.seller" [rating]="rating"></user-card>
             </div>
         </div>
         

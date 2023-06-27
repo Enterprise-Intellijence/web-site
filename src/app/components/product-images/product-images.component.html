@@ -1,6 +1,6 @@
 <div class="row mt-2">
     <div class="col-2">
-        <ul style="list-style-type:none;">
+        <ul style="list-style-type:none; overflow: scroll; max-height: 25rem;">
             <div *ngFor="let t of thumbnails; let index=index" style="min-width: 50px; max-width: 70px; margin-bottom: 1rem;">
                 <li><img (mouseover)="changeImage(index)" src="{{t}}" class="img-thumbnail card-image-top rounded-0 ratio ratio-1x1" style="object-fit: cover; max-block-size: 70px;"></li>
             </div>
