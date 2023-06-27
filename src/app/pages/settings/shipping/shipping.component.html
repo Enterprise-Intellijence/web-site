@@ -1,8 +1,65 @@
-<div class="basic-container">
-    <div class = "row fw-lighter">
+<div *ngFor="let a of addresses; let i=index;">
+    <div class="basic-container">
+        <div class="row fw-lighter" *ngIf="a.id === defaultAddress?.id; else notDefault">
+            <span>Default Address</span>
+        </div>
+        <ng-template #notDefault class="row fw-lighter">
+            <span>Your address</span>
+        </ng-template>
+        <div class = "row">
+            <div class="col-6 fw-semibold mt-3">
+                <span>Country</span>
+            </div>
+            <div class="col-6 fw-semibold mt-2">
+                <input name="country" class="form-control" [(ngModel)]="a.country">
+            </div>
+        </div>
+        <div class = "row">
+            <div class="col-6 fw-semibold mt-3">
+                <span>City</span>
+            </div>
+            <div class="col-6 fw-semibold mt-2">
+                <input name="city" class="form-control" [(ngModel)]="a.city">
+            </div>
+        </div>
+        <div class = "row">
+            <div class="col-6 fw-semibold mt-3">
+                <span>Street</span>
+            </div>
+            <div class="col-6 fw-semibold mt-2">
+                <input name="street" class="form-control" [(ngModel)]="a.street">
+            </div>
+        </div>
+        <div class = "row">
+            <div class="col-6 fw-semibold mt-3">
+                <span>Postal code</span>
+            </div>
+            <div class="col-6 fw-semibold mt-2">
+                <input name="zipcode" class="form-control" [(ngModel)]="a.zipCode">
+            </div>
+        </div>
+        <div class = "row">
+            <div class="col-6 fw-semibold mt-3">
+                <span>Phone number</span>
+            </div>
+            <div class="col-6 fw-semibold mt-2">
+                <input name="street" class="form-control" [(ngModel)]="a.phoneNumber">
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+        <div *ngIf="a.id !== defaultAddress?.id">
+            <button type="button" class="btn btn-danger" (click)="deleteAddress(a,i)">Delete</button>
+        </div>
+        <button type="button" class="btn btn-primary ml-2" (click)="updateAddress(a)">Save</button>
+    </div>        
+</div>
+
+<div class="basic-container mb-5">
+    <div class="row fw-lighter">
         <span>Your address</span>
     </div>
-    <div class = "row">
+    <div class="row">
         <div class="col-6 fw-semibold mt-3">
             <span>Add address</span>
         </div>
@@ -15,9 +72,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 <!--Modal -->
@@ -36,57 +90,53 @@
         <form>
             <div class="container border-bottom p-2 shadow-sm">
                 <div class = "row fw-lighter">
-                    <span>Country</span>
+                    <div class="col-6">
+                        <span>Country</span>
+                    </div>
+                    <div class="col-6" *ngIf="country">
+                        <span>City</span>
+                    </div>                
                 </div>
-                <div class = "row">
+                <div class="row">
                     <div class="col-6 fw-bold mt-2">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select country</option>
-                            <option value="1">Italy</option>
-                            <option value="2">France</option>
-                            <option value="3">Russia</option>
-                        </select>
+                        <select class="form-select" placeholder="Seleziona un paese">
+                            <option *ngFor="let c of countries; let i=index;" (click)="onCountrySelected(c)" [ngValue]="c.name">{{c.name}}</option>
+                        </select>   
+                    </div>
+                    <div class="col-6 fw-bold mt-2" *ngIf="country">
+                        <select class="form-select" placeholder="Seleziona una città">
+                            <option *ngFor="let c of cities; let i=index;" (click)="city=c" [ngValue]="c.name">{{c.name}}</option>
+                        </select>   
                     </div>
                     <span class="border-bottom mt-2"></span>
                     <div class = "row fw-lighter mt-2">
-                        <span>Name and Lastname</span>
+                        <span>Street</span>
                     </div>
                     <div class="col-xs-4 mt-2">
-                        <input class="form-control" id="ex3" type="text">
-                    </div>
-                    <span class="border-bottom mt-2"></span>
-                    <div class = "row fw-lighter mt-2">
-                        <span>Address 1</span>
-                    </div>
-                    <div class="col-xs-4 mt-2">
-                        <input class="form-control" id="ex3" type="text">
-                    </div>
-                    <span class="border-bottom mt-2"></span>
-                    <div class = "row fw-lighter mt-2">
-                        <span>Address 2 (optional)</span>
-                    </div>
-                    <div class="col-xs-4 mt-2">
-                        <input class="form-control" id="ex3" type="text">
+                        <input class="form-control" name="street" [(ngModel)]="street">
                     </div>
                     <span class="border-bottom mt-2"></span>
                     <div class = "row fw-lighter mt-2">
                         <span>Postal Code</span>
                     </div>
                     <div class="col-xs-4 mt-2">
-                        <input class="form-control" id="ex3" type="text">
+                        <input class="form-control" name="zip" [(ngModel)]="zipCode">
                     </div>
-            
-                </div>
-            
-            
-            
+                    <span class="border-bottom mt-2"></span>
+                    <div class = "row fw-lighter mt-2">
+                        <span>Phone number</span>
+                    </div>
+                    <div class="col-xs-4 mt-2">
+                        <input class="form-control" name="phone" [(ngModel)]="phoneNumber">
+                    </div>
+                </div>  
             </div>
         </form>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveNewAddress()">Save</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
 

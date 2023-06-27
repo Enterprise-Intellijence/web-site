@@ -2,11 +2,32 @@
     <div class="col-2">
         <ul style="list-style-type:none;">
             <div *ngFor="let t of thumbnails; let index=index">
-                <li><img (mouseover)="changeImage(index)" src="{{t}}" class="img-thumbnail thumbnail-size"></li>
+                <li><img (mouseover)="changeImage(index)" src="{{t}}" class="img-thumbnail"></li>
             </div>
         </ul>
     </div>
     <div class="col-10">
-      <img [src]="image" class="w-100 shadow-1-strong rounded mb-4 img-size"/>
+        <div class="image-container rounded" style="max-height: 25rem; overflow: hidden;">
+        <img [src]="image"  style="object-fit: cover; cursor: pointer;" class="w-100 shadow-1-strong modal-hover-opacity"
+            (click)="openImage()"
+            data-toggle="modal" data-target="#imageModal"/>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" #closebutton class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                <img
+                [src]="imgSrc"
+                style="max-width:100%;cursor:pointer"
+                class="modal-hover-opacity"
+                /> 
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
