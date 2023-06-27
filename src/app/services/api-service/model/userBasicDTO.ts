@@ -17,7 +17,7 @@ export interface UserBasicDTO {
     bio?: string;
     photoProfile?: UserImageDTO;
     reviewsTotalSum?: number;
-    reviews_number?: number;
-    followers_number?: number;
-    following_number?: number;
+    reviewsNumber?: number;
+    followersNumber?: number;
+    followingNumber?: number;
 }

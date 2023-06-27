@@ -25,9 +25,9 @@ export interface UserDTO {
     paymentMethods?: Array<PaymentMethodDTO>;
     role: UserDTO.RoleEnum;
     reviewsTotalSum?: number;
-    reviews_number?: number;
-    followers_number?: number;
-    following_number?: number;
+    reviewsNumber?: number;
+    followersNumber?: number;
+    followingNumber?: number;
 }
 export namespace UserDTO {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
@@ -35,12 +35,13 @@ export namespace UserDTO {
         LOCAL: 'LOCAL' as ProviderEnum,
         GOOGLE: 'GOOGLE' as ProviderEnum
     };
-    export type StatusEnum = 'ACTIVE' | 'BANNED' | 'HIDDEN' | 'HOLIDAY';
+    export type StatusEnum = 'ACTIVE' | 'BANNED' | 'HIDDEN' | 'HOLIDAY' | 'CANCELLED';
     export const StatusEnum = {
         ACTIVE: 'ACTIVE' as StatusEnum,
         BANNED: 'BANNED' as StatusEnum,
         HIDDEN: 'HIDDEN' as StatusEnum,
-        HOLIDAY: 'HOLIDAY' as StatusEnum
+        HOLIDAY: 'HOLIDAY' as StatusEnum,
+        CANCELLED: 'CANCELLED' as StatusEnum
     };
     export type RoleEnum = 'ADMIN' | 'USER' | 'SUPER_ADMIN';
     export const RoleEnum = {

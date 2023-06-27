@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('id') ?? null;
-      
+
       if (this.userId == 'me') {
         this.currentUserService.user$.subscribe(user => {
           this.user = user;
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
           this.userImage = this.basePath + this.visitedUser?.photoProfile?.urlPhoto;
           this.visitedUser = user;
           this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
-          
+
           this.followingService.imFollowingThisUser(this.visitedUser?.id ?? '').subscribe(isFollowing => {
             this.isFollowing = isFollowing;
           });
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
         this.isFollowing = true;
       });
 
-      this.visitedUser.followers_number = (this.visitedUser.followers_number ?? 0) + 1;
+      this.visitedUser.followersNumber = (this.visitedUser.followersNumber ?? 0) + 1;
       this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }
@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit {
         this.isFollowing = false;
       });
 
-      this.visitedUser.followers_number = (this.visitedUser.followers_number ?? 0) - 1;
+      this.visitedUser.followersNumber = (this.visitedUser.followersNumber ?? 0) - 1;
       this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }

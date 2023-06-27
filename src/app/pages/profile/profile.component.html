@@ -7,29 +7,29 @@
                 </div>
             </div>
         </div>
-        
+
         <div class=" col-6">
             <div class="row">
                 <h4>{{visitedUser?.username}}</h4>
             </div>
 
-            
+
             <div class="row">
                 <div class="col col-auto">
                     <span class="fw-light">Followers: </span>
-                    <span class="fw-bold">{{visitedUser?.followers_number}}</span>
+                    <span class="fw-bold">{{visitedUser?.followersNumber}}</span>
                 </div>
-                
+
                 <div class="col col-auto">
                     <span class="fw-light">Following: </span>
-                    <span class="fw-bold">{{visitedUser?.following_number}}</span>
+                    <span class="fw-bold">{{visitedUser?.followingNumber }}</span>
                 </div>
             </div>
-            
+
             <div class="row mt-2">
                 <div class="col col-auto">
                     <span class="fw-light">Reviews: </span>
-                    <span class="fw-bold">{{visitedUser?.reviews_number}}</span>
+                    <span class="fw-bold">{{visitedUser?.reviewsNumber}}</span>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
         </div>
 
         <div *ngIf="user?.id == visitedUser?.id" class="col-4">
-            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>     
+            <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">Edit Profile</button>
         </div>
 
         <div *ngIf="user?.id != visitedUser?.id" class="col-4">
@@ -62,14 +62,14 @@
                     <closet [visitedUser]="visitedUser ?? null"></closet>
                   </ng-template>
                 </li>
-        
+
                 <li ngbNavItem>
                   <button class="btn-primary" ngbNavLink>Reviews</button>
                   <ng-template ngbNavContent>
                     <review [visitedUser]="visitedUser ?? null"></review>
                   </ng-template>
                 </li>
-        
+
             </ul>
             <div [ngbNavOutlet]="nav"></div>
         </div>
