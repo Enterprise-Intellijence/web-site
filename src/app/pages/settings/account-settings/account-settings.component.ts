@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserDTO } from 'src/app/services/api-service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 @Component({
   selector: 'account-settings',
   templateUrl: './account-settings.component.html',
@@ -6,8 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AccountSettingsComponent {
 
-  email?: string;
-  profileName?: string = 'Your current profile name';
+  user: UserDTO | null = null;
   
-  constructor() {}
+  constructor(private currentUserService: CurrentUserService) {}
+
+  ngOnInit(): void {
+    this.currentUserService.user$.subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  save() {
+    console.log('Saving...');
+    this.currentUserService.updateUser(this.user as UserDTO);
+  }
 }

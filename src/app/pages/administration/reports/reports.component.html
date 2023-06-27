@@ -1,0 +1,97 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="onNavChange($event)" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <button ngbNavLink>Pending</button>
+    <ng-template ngbNavContent>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Created</th>
+          <th scope="col">Last update</th>
+          <th scope="col">Status</th>
+          <th scope="col">Admin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let report of reportsPending?.content">
+          <th scope="row" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" >{{ report.id }}</th>
+          <td>{{report.date|date: 'short'}}</td>
+          <td>{{report.lastUpdate|date:'short'}}</td>
+          <td>{{report.status}}</td>
+          <td style="text-align: center">{{(report.adminFollowedReport!==null)?(report.adminFollowedReport!.username):"-"}}</td>
+          <td><button [disabled]="report.adminFollowedReport !== null" class="btn btn-outline-light text-black border-0 mb-2 text-start col-12"
+                      type="button" (click)="followReport(report)"><span [ngClass]="{'red-text': report.adminFollowedReport !== null, 'green-text': report.adminFollowedReport === null}">FOLLOW</span> </button> </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="totalNumberPending"
+          [(page)]="pageNumberPending"
+          [pageSize]="pageSizePending"
+          (pageChange)="refreshReportsPending()"
+        >
+        </ngb-pagination>
+      </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <button ngbNavLink >Closed</button>
+    <ng-template ngbNavContent><table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Created</th>
+        <th scope="col">Last update</th>
+        <th scope="col">Status</th>
+        <th scope="col">Admin</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let report of reportsClosed?.content">
+        <th scope="row" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" >{{ report.id }}</th>
+        <td>{{report.date|date: 'short'}}</td>
+        <td>{{report.lastUpdate|date:'short'}}</td>
+        <td>{{report.status}}</td>
+        <td style="text-align: center">{{(report.adminFollowedReport!==null)?(report.adminFollowedReport!.username):"-"}}</td>
+              </tr>
+      </tbody>
+    </table>
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="totalNumberClosed"
+          [(page)]="pageNumberClosed"
+          [pageSize]="pageSizeClosed"
+          (pageChange)="refreshReportsPending()"
+        >
+        </ngb-pagination>
+
+      </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3">
+    <button ngbNavLink>Following Reports</button>
+    <ng-template ngbNavContent>
+      <div>
+        Report list: {{myFollowingReports?.totalElements}}
+        <div ngbDropdown class="d-inline-block">
+          <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >
+            Open Report
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+            <button ngbDropdownItem style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" *ngFor="let report of myFollowingReports?.content" (click)=openReport(report)>{{report.id}}</button>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4" *ngIf="singleReportDTO"><report-single-view [report]="singleReportDTO"></report-single-view>
+
+    </div>
+
+    </ng-template>
+  </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+

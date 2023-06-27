@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { PageReviewDTO } from '../model/pageReviewDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 import { ReviewCreateDTO } from '../model/reviewCreateDTO';
 import { ReviewDTO } from '../model/reviewDTO';
 

@@ -49,7 +49,7 @@
             </div>
 
             <div class="basic-container mb-4">
-
+                <alert></alert>
                 <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
                     <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
                       <dropzone *ngIf="type === 'component'" class="dropzone-container" [config]="config" [disabled]="disabled" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto" [message]="'Click or drag images here to upload'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>

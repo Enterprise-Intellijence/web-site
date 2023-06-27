@@ -1,4 +1,10 @@
 <div class="container-sm">
-  <div>ARTICOLI PIù RICHIESTI</div>
-  <most-request-product></most-request-product>
+  <div class="basic-container">
+      <div>MOST LIKED PRODUCTS</div>
+      <filtered-product-list [filter]="filterMostRequest"></filtered-product-list>
+  </div>
+  <div class="basic-container">
+  <div>MOST RECENT PRODUCTS</div>
+  <filtered-product-list [filter]="filterMostRecent"></filtered-product-list>
+  </div>
 </div>

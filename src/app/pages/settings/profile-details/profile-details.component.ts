@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
@@ -27,7 +27,6 @@ export class ProfileDetailsComponent {
   public disabled: boolean = false;
 
   user: UserDTO | null = null;
-
   public config: DropzoneConfigInterface = {
     clickable: true,
     maxFiles: 1,
@@ -36,6 +35,7 @@ export class ProfileDetailsComponent {
     cancelReset: null
   };
 
+  
   @ViewChild(DropzoneComponent, { static: false }) componentRef?: DropzoneComponent;
   @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
 
@@ -71,6 +71,7 @@ export class ProfileDetailsComponent {
 
   public onUploadInit(args: any): void {
     console.log('onUploadInit:', args);
+    this.alertService.success('File uploaded');
   }
 
   public onUploadError(args: any): void {
@@ -129,6 +130,5 @@ export class ProfileDetailsComponent {
   constructor(
     public alertService: AlertService,
     private currentUserService: CurrentUserService,
-    private uploadImageService: UploadImagesService,
-    private http: HttpClient) {}
+    private uploadImageService: UploadImagesService) {}
 }

@@ -20,9 +20,10 @@ export interface PageFollowingFollowersDTO {
     content?: Array<FollowingFollowersDTO>;
     number?: number;
     sort?: SortObject;
-    numberOfElements?: number;
-    pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
+    numberOfElements?: number;
+    pageable?: PageableObject;
+
     empty?: boolean;
 }

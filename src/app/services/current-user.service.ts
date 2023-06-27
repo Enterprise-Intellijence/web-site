@@ -11,7 +11,8 @@ export class CurrentUserService {
   user: UserDTO | null = null;
   user$ = new BehaviorSubject<UserDTO | null>(null);
 
-  constructor(private userService: UserControllerService, private apiAuth: ApiAuthService) {
+  constructor(private userService: UserControllerService,
+              private apiAuth: ApiAuthService) {
     this.apiAuth.isLoggedIn$.subscribe(isLoggedIn => {
       if (isLoggedIn)
         this.getUser();
@@ -28,7 +29,6 @@ export class CurrentUserService {
   }
 
   updateUser(user: UserDTO) {
-    console.log(user);
     this.userService.replaceUser(user, user.id ?? '').subscribe({
       next: () => {
         this.user = user;
@@ -37,5 +37,4 @@ export class CurrentUserService {
       }
     });
   }
-
 }

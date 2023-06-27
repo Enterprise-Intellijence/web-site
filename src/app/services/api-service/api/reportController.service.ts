@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { PageReportDTO } from '../model/pageReportDTO';
 import { ReportDTO } from '../model/reportDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -252,6 +253,48 @@ export class ReportControllerService {
         return this.httpClient.request<PageReportDTO>('get',`${this.basePath}/api/v1/reports/working`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateReport(id: string, observe?: 'body', reportProgress?: boolean): Observable<ReportDTO>;
+    public updateReport(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportDTO>>;
+    public updateReport(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportDTO>>;
+    public updateReport(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling updateReport.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<ReportDTO>('put',`${this.basePath}/api/v1/reports/${encodeURIComponent(String(id))}`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

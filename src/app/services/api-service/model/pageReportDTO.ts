@@ -20,9 +20,9 @@ export interface PageReportDTO {
     content?: Array<ReportDTO>;
     number?: number;
     sort?: SortObject;
-    numberOfElements?: number;
     pageable?: PageableObject;
     first?: boolean;
     last?: boolean;
+    numberOfElements?: number;
     empty?: boolean;
 }

@@ -20,19 +20,27 @@ export interface UserDTO {
     bio?: string;
     photoProfile?: UserImageDTO;
     provider: UserDTO.ProviderEnum;
+    status?: UserDTO.StatusEnum;
     addresses?: Array<AddressDTO>;
     paymentMethods?: Array<PaymentMethodDTO>;
     role: UserDTO.RoleEnum;
     reviewsTotalSum?: number;
-    reviewsNumber?: number;
-    followersNumber?: number;
-    followingNumber?: number;
+    reviews_number?: number;
+    followers_number?: number;
+    following_number?: number;
 }
 export namespace UserDTO {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
     export const ProviderEnum = {
         LOCAL: 'LOCAL' as ProviderEnum,
         GOOGLE: 'GOOGLE' as ProviderEnum
+    };
+    export type StatusEnum = 'ACTIVE' | 'BANNED' | 'HIDDEN' | 'HOLIDAY';
+    export const StatusEnum = {
+        ACTIVE: 'ACTIVE' as StatusEnum,
+        BANNED: 'BANNED' as StatusEnum,
+        HIDDEN: 'HIDDEN' as StatusEnum,
+        HOLIDAY: 'HOLIDAY' as StatusEnum
     };
     export type RoleEnum = 'ADMIN' | 'USER' | 'SUPER_ADMIN';
     export const RoleEnum = {

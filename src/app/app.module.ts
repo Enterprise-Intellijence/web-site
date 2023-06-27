@@ -22,7 +22,7 @@ import { NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-import { MostRequestProductComponent } from './components/most-request-product/most-request-product.component';
+import { FilteredProductListComponent } from './components/filtered-product-list/filtered-product-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
 import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
@@ -39,12 +39,22 @@ import { ApiModule as BackendApiModule, Configuration as BackendApiConfig, UserC
 import { ReviewCardComponent } from './components/review-card/review-card.component';
 import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
-import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
 import { CamelCasePipe } from './pipes/camel-case.pipe';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { RegisterFormComponent } from './components/auth/register-form/register-form.component';
 import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
 import { PasswordMatchValidatorDirective } from './directives/forms/passwordMatch.directive';
+import { ClosetComponent } from './components/closet/closet.component';
+import { ReviewComponent } from './components/review/review.component';
+import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
+import { AdministrationComponent } from './pages/administration/administration.component';
+import { CategoryComponent } from './pages/administration/category/category.component';
+import { ManageSizesComponent } from './pages/administration/manage-sizes/manage-sizes.component';
+import { ProductsComponent } from './pages/administration/products/products.component';
+import { ReportsComponent } from './pages/administration/reports/reports.component';
+import { UsersComponent } from './pages/administration/users/users.component';
+import { ReportSingleViewComponent } from './pages/administration/report-single-view/report-single-view.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap'; 
@@ -56,7 +66,6 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   acceptedFiles: 'image/*',
   createImageThumbnails: true
 };
-
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -82,7 +91,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     HomePageComponent,
     BadgeTextPipe,
     ProductCardComponent,
-    MostRequestProductComponent,
+    FilteredProductListComponent,
     ProfileComponent,
     DefaultProfilePicPipe,
     DefaultProductPicPipe,
@@ -99,7 +108,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     LoginFormComponent,
     RegisterFormComponent,
     ConfirmRegistrationEmailComponent,
-    PasswordMatchValidatorDirective,
+    PasswordMatchValidatorDirective
     ],
   providers: [
     HttpClient,
