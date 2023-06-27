@@ -27,4 +27,15 @@ export class CurrentUserService {
     });
   }
 
+  updateUser(user: UserDTO) {
+    console.log(user);
+    this.userService.replaceUser(user, user.id ?? '').subscribe({
+      next: () => {
+        this.user = user;
+        this.user$.next(user);
+        console.log(user);
+      }
+    });
+  }
+
 }

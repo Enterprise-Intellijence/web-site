@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
+import { UserDTO } from 'src/app/services/api-service';
+import { Config } from 'src/app/models/config';
+import { UploadImagesService } from 'src/app/services/upload-images.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'profile-details',
@@ -12,14 +17,16 @@ import { AlertService } from 'src/app/services/alert.service';
 export class ProfileDetailsComponent {
 
   textAreaText?: string;
-  bioText: string = "This is a long bio just to test how it is displayed in the textarea";
+  bioText?: string;
   maxBioLength: number = 500;
   // TODO: Get profile pic from user service
   profilePic: string = "";
+  newProfilePic?: File;
 
   public type: string = 'component';
-
   public disabled: boolean = false;
+
+  user: UserDTO | null = null;
 
   public config: DropzoneConfigInterface = {
     clickable: true,
@@ -72,11 +79,62 @@ export class ProfileDetailsComponent {
 
   public onUploadSuccess(args: any): void {
     console.log('onUploadSuccess:', args);
+    this.processFile(args);
+  }
+
+  processFile(imageInput: any) {
+    
+    const file: File = imageInput[0];
+    const reader = new FileReader();
+    console.log("args: ", file);
+
+    reader.addEventListener('load', (event: any) => {
+      this.newProfilePic = file;
+      this.profilePic = event.target.result;
+      console.log("event.target: ", event.target.result);
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  public saveNewProfilePic() {
+    this.uploadImageService.updateUserImage(this.newProfilePic!, this.user?.id!).subscribe(res => {
+      console.log("res");
+    });
   }
 
   public close() {
     this.config.cancelReset = 0;
   }
 
-  constructor(public alertService: AlertService) {}
+  // TODO: errore nella richiesta http, user.getBio() restituisce null
+  public save() {
+    if (this.textAreaText !== this.bioText) {
+      this.user!.bio = this.textAreaText;
+      console.log("save");
+      this.currentUserService.updateUser(this.user!);
+    
+      /*console.log("path: ", Config.basePath + "users/" + this.user?.id);
+      this.http.put(Config.basePath + "users/" + this.user?.id, this.user).subscribe(res => {
+        console.log("res: ", res);
+      });*/
+    }
+  }
+
+
+  ngOnInit() {
+    this.currentUserService.user$.subscribe(user => {
+      this.user = user;
+      this.textAreaText = user?.bio;
+      this.bioText = user?.bio;
+      this.profilePic = Config.basePath + user?.photoProfile?.urlPhoto;
+      console.log("photo: ", this.profilePic);
+    });
+  }
+
+  constructor(
+    public alertService: AlertService,
+    private currentUserService: CurrentUserService,
+    private uploadImageService: UploadImagesService,
+    private http: HttpClient) {}
 }

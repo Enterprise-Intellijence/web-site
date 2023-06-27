@@ -10,7 +10,7 @@
                     <img [src]="profilePic | defaultProfilePic" class = "rounded float-end" style = "width: 50px;">
                 </div>
                 <div class="col-6 fw-semibold">
-                    <button class="btn btn-sm btn-outline-primary float-end" type="button"  data-bs-toggle="modal" data-bs-target="#changePhotoModal" (click)="resetDropzoneUploads()">Change photo</button>
+                    <button class="btn btn-sm btn-outline-primary float-end" type="button" data-bs-toggle="modal" data-bs-target="#changePhotoModal" (click)="resetDropzoneUploads()">Change photo</button>
                 </div>
             </div>
         </div>
@@ -22,54 +22,8 @@
         <div class="col-6 text-left float-start fw-semibold">
             <p>Bio</p>
         </div>
-
         <div class="col-6">
-            <textarea  class="form-control" id="floatingTextArea" [(ngModel)]="textAreaText" placeholder="Enter your bio here">{{bioText}}</textarea>
-        </div>
-    </div>
-
-    <div *ngIf="bioText != textAreaText" class = "row align-items-center">
-        <div class="col-6">
-
-        </div>
-        <div class="col-6 fw-semibold">
-            <button class="btn btn-sm btn-primary float-end" type="button">Save</button>
-        </div>
-    </div>
-</div>
-
-
-<div class="basic-container">
-    <div class = "row fw-lighter">
-        <span>Your position</span>
-    </div>
-    <div class = "row">
-        <div class="col-8 fw-semibold mt-3">
-            <span>Country</span>
-        </div>
-        <div class="col-4 fw-semibold mt-2">
-            <div class="dropdown">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Country</option>
-                    <option value="1">Italy</option>
-                    <option value="2">France</option>
-                    <option value="3">Russia</option>
-                </select>
-            </div>
-        </div>
-        <span class="border-bottom mt-2"></span>
-        <div class="col-8 fw-semibold mt-3">
-            <span>City</span>
-        </div>
-        <div class="col-4 fw-semibold mt-2">
-            <div class="dropdown">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>City</option>
-                    <option value="1">Lamezia</option>
-                    <option value="2">Montalto Uffugo</option>
-                    <option value="3">MaremmaBovaiola</option>
-                </select>
-            </div>
+            <textarea  class="form-control" id="floatingTextArea" [(ngModel)]="textAreaText" placeholder="Wow. Such empty."></textarea>
         </div>
     </div>
 </div>
@@ -109,11 +63,19 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveNewProfilePic()">Save</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="close()">Close</button>
         </div>
 
       </div>
     </div>
-  </div>
+</div>
 
+<div *ngIf="bioText != textAreaText" class = "row align-items-center mt-4">
+    <div class="col-6">
+
+    </div>
+    <div class="col-6 fw-semibold">
+        <button class="btn btn-sm btn-primary float-end" type="button" (click)="save()">Save</button>
+    </div>
+</div>

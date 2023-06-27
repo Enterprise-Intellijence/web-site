@@ -35,7 +35,7 @@ import { DropzoneModule, DropzoneConfigInterface, DROPZONE_CONFIG } from 'ngx-dr
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { ApiModule, Configuration, UserControllerService } from './services/api-service';
+import { ApiModule as BackendApiModule, Configuration as BackendApiConfig, UserControllerService } from './services/api-service';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
 import { NewProductPageComponent } from './pages/new-product-page/new-product-page.component';
 import { LikedProductsPageComponent } from './pages/liked-products-page/liked-products-page.component';
@@ -48,6 +48,7 @@ import { PasswordMatchValidatorDirective } from './directives/forms/passwordMatc
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { ApiModule as CountryCityModule, Configuration as CountryCiyConfig } from './services/country-city-api';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -125,9 +126,12 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     HttpClientModule,
     AlertModule,
     DropzoneModule,
-    ApiModule.forRoot(() => new Configuration({
+    BackendApiModule.forRoot(() => new BackendApiConfig({
       withCredentials: false,
       basePath: 'https://localhost:8443'
+    })),
+    CountryCityModule.forRoot(() => new CountryCiyConfig({
+      apiKeys: {"X-CSCAPI-KEY": "ZXJ6emFVYUxmWnhxN2YzZnpQWFY3TENnRmF2SUd6cHZxTWdvRGdKWQ=="}
     })),
     FormsModule,
     NgbdModalFocus,
