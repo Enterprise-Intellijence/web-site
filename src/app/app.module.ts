@@ -47,6 +47,13 @@ import { PasswordMatchValidatorDirective } from './directives/forms/passwordMatc
 import { ClosetComponent } from './components/closet/closet.component';
 import { ReviewComponent } from './components/review/review.component';
 import { NavBarMenuItemComponent } from './components/nav-bar-menu-item/nav-bar-menu-item.component';
+import { AdministrationComponent } from './pages/administration/administration.component';
+import { CategoryComponent } from './pages/administration/category/category.component';
+import { ManageSizesComponent } from './pages/administration/manage-sizes/manage-sizes.component';
+import { ProductsComponent } from './pages/administration/products/products.component';
+import { ReportsComponent } from './pages/administration/reports/reports.component';
+import { UsersComponent } from './pages/administration/users/users.component';
+import { ReportSingleViewComponent } from './pages/administration/report-single-view/report-single-view.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -99,6 +106,13 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     PasswordMatchValidatorDirective,
     ClosetComponent,
     ReviewComponent
+    AdministrationComponent,
+    CategoryComponent,
+    ManageSizesComponent,
+    ProductsComponent,
+    ReportsComponent,
+    UsersComponent,
+    ReportSingleViewComponent
     ],
   providers: [
     HttpClient,
