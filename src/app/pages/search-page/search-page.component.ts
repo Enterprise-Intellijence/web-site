@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProductCategory} from "../../models/product-category";
 import {ActivatedRoute} from "@angular/router";
 import {FilterOptions} from "../../models/filter-options";
+import {ProductCategoryDTO, ProductControllerService} from "../../services/api-service";
 
 @Component({
   selector: 'search-page',
@@ -16,12 +17,26 @@ export class SearchPageComponent implements OnInit{
   gender?: string
   filterOptions!: FilterOptions;
 
+  primaryList?: Array<String>
+  secondaryList?: Array<String>
+  tertiaryList?: Array<String>
 
-  constructor(private activeRoute: ActivatedRoute) {
+  tempList?: Array<ProductCategoryDTO>
+
+
+
+
+  constructor(private activeRoute: ActivatedRoute, private productService : ProductControllerService) {
 
   }
 
   ngOnInit(): void {
+    this.productService.getCategoriesList().subscribe({
+      next:(value:any)=>{
+        this.tempList = value
+      }
+    })
+    this.buildFilterBar();
     this.setRouteSubscribe();
   }
 
@@ -48,6 +63,12 @@ export class SearchPageComponent implements OnInit{
       this.gender = params['gender'];
       this.updateFilter();
     })
+  }
+
+  buildFilterBar(){
+
+
+
   }
 
 }

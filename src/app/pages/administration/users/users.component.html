@@ -3,26 +3,38 @@
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col" >Reporter</th>
-    <th scope="col" >Reported</th>
-    <th scope="col" >Description</th>
-    <th scope="col" >Product</th>
-    <th scope="col" >Date</th>
+    <th scope="col" >Username</th>
+    <th scope="col" >Email</th>
     <th scope="col" >Status</th>
+    <th scope="col" >Role</th>
+    <th scope="col" ></th>
+    <th *ngIf="loggedUser?.role === 'SUPER_ADMIN'" scope="col" ></th>
+    <th scope="col" ></th>
+
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let user of admins.content">
-    <th scope="row">{{ user.id }}</th>
+    <th scope="row" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ user.id }}</th>
     <td>{{ user.username }}</td>
     <td>{{ user.email}}</td>
+    <td>{{user.status}}</td>
     <td>{{ user.role}}</td>
-    <td>STATE</td>
-    <td><button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12"
+    <button class="btn btn-outline-primary position-relative" [routerLink]="['']" (click)="sendMessageTo()">
+      <fa-icon [icon]="messagesIcon"></fa-icon>
+    </button>
+    <td><button *ngIf="loggedUser?.role === 'SUPER_ADMIN'" class="btn btn-outline-light text-black border-0 mb-2 text-start col-12"
                 type="button">
 <!--                [ngClass]="{'red-text': reports.status === 'PENDING', 'green-text': reports.status !== 'PENDING'}"
                 (click)="closeReport(reports)">-->
       BAN</button> </td>
+
+    <td><button class="btn btn " *ngIf="loggedUser?.role === 'SUPER_ADMIN'"
+                type="button">
+      <!--                [ngClass]="{'red-text': reports.status === 'PENDING', 'green-text': reports.status !== 'PENDING'}"
+                      (click)="closeReport(reports)">-->
+      DEMOTE</button> </td>
+
   </tr>
   </tbody>
 </table>
@@ -30,55 +42,10 @@
   <ngb-pagination
     [collectionSize]="admins.totalElements!"
     [(page)]="admins.number!"
+    [maxSize]="5"
     [pageSize]="admins.size!"
     (pageChange)="refreshAdmins()"
   >
   </ngb-pagination>
-
-  <!--  <select class="form-select" style="width: auto" [(ngModel)]="reports.numberOfElements" (ngModelChange)="refreshReports()">
-      <option [ngValue]="2">2 items per page</option>
-      <option [ngValue]="4">4 items per page</option>
-      <option [ngValue]="6">6 items per page</option>
-    </select>-->
 </div>
-<!--
-<p>CLOSED REPORT</p>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col" >Reporter</th>
-    <th scope="col" >Reported</th>
-    <th scope="col" >Description</th>
-    <th scope="col" >Product</th>
-    <th scope="col" >Date</th>
-    <th scope="col" >Status</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let reports of reportsClosed.content">
-    <th scope="row">{{ reports.id }}</th>
-    <td>{{ reports.reporterUser!.username }}</td>
-    <td>{{ reports.reportedUser!.username }}</td>
-    <td>{{reports.description}}</td>
-    <td>{{(reports.reportedProduct!==null)? (reports.reportedProduct!.id):"not referenced"}}</td>
-    <td>{{reports.date|date: 'short'}}</td>
-    <td>{{reports.status}}</td>
-  </tr>
-  </tbody>
-</table>
-<div class="d-flex justify-content-between p-2">
-  <ngb-pagination
-    [collectionSize]="totalNumberClosed"
-    [(page)]="pageNumberClosed"
-    [pageSize]="pageSizeClosed"
-    (pageChange)="refreshReportsClosed()"
-  >
-  </ngb-pagination>
 
-  &lt;!&ndash;  <select class="form-select" style="width: auto" [(ngModel)]="reports.numberOfElements" (ngModelChange)="refreshReports()">
-      <option [ngValue]="2">2 items per page</option>
-      <option [ngValue]="4">4 items per page</option>
-      <option [ngValue]="6">6 items per page</option>
-    </select>&ndash;&gt;
-</div>-->

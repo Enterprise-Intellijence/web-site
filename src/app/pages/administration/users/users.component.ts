@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminControllerService, PageUserDTO, UserControllerService} from "../../../services/api-service";
+import {AdminControllerService, PageUserDTO, UserControllerService, UserDTO} from "../../../services/api-service";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import {CurrentUserService} from "../../../services/current-user.service";
 
 @Component({
   selector: 'users',
@@ -11,11 +13,23 @@ export class UsersComponent implements OnInit{
 
   users!:PageUserDTO
 
-  constructor(private adminService:AdminControllerService) {
+  messagesIcon = faEnvelope;
+
+  loggedUser: UserDTO | null | undefined;
+
+
+
+
+
+
+  constructor(private adminService:AdminControllerService, private currentUser: CurrentUserService) {
+    if(this.currentUser!=null){
+      this.loggedUser = this.currentUser?.user;
+    }
   }
 
   ngOnInit(): void {
-    this.adminService.getUsers(0,10).subscribe({
+    this.adminService.getUsers(0,5).subscribe({
       next:(page:PageUserDTO)=>{
         this.admins = page
       },
@@ -29,4 +43,10 @@ export class UsersComponent implements OnInit{
   refreshAdmins() {
 
   }
+
+  sendMessageTo() {
+
+  }
+
+
 }
