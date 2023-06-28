@@ -13,9 +13,9 @@ export class PurchasingPageComponent {
   constructor(private router: Router) {}
 
   // TODO: Get product pic from product service
-  productPic: String = "";
-  productName?: String = "Product name here";
-  productDescription?: String = "Product description here";
+  productPic: string = "";
+  productName?: string = "Product name here";
+  productDescription?: string = "Product description here";
   productPrice?: Number = 15;
 
   faPlusIcon = faPlus;
@@ -28,7 +28,7 @@ export class PurchasingPageComponent {
   secureCode?: string = "example: 123";
   error: boolean = false;
 
- 
+
 
 
   ngOnInit(){}

@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit{
         this.rating = this.product?.seller?.reviewsTotalSum!/this.product?.seller?.reviewsNumber!;
 
       this.product.productImages?.forEach(element => {
-        this.images.push(Config.basePath + element.urlPhoto!);
+        this.images.push(element.urlPhoto!);
       });
       this.isWaitingForResponse = false;
     });

@@ -36,7 +36,7 @@
                 <div class="col-6 fw-semibold mt-2">
                   <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#addressModal">
                     <fa-icon [icon]="faPlusIcon">
-        
+
                     </fa-icon>
                   </button>
                 </div>
@@ -55,7 +55,7 @@
                 <div class="col-6 fw-semibold mt-2">
                   <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#paymentMethodModal">
                     <fa-icon [icon]="faPlusIcon">
-        
+
                     </fa-icon>
                   </button>
                 </div>
@@ -139,13 +139,13 @@
 <div class="modal" id="paymentMethodModal">
     <div class="modal-dialog">
       <div class="modal-content">
-  
+
         <!-- Modal Header -->
         <div class="modal-header">
             <h4 class="modal-title">Add credit card</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-  
+
         <!-- Modal body -->
         <div class="modal-body">
           <form>
@@ -160,7 +160,7 @@
                     <div class="col-12 ml-2">
                         <span>Card's holder name</span>
                     </div>
-            
+
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control border-0" placeholder="{{profileName}}">
                     </div>
@@ -171,7 +171,7 @@
                     <div class="col-12 ml-2">
                         <span>Number of the card</span>
                     </div>
-            
+
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control border-0" placeholder="{{cardNumber}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
@@ -183,7 +183,7 @@
                     <div class="col-12 ml-2">
                         <span>Expiration Day</span>
                     </div>
-            
+
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control border-0" placeholder="{{expirationDay}}" (input)="formatDateInput($event)" [ngClass]="{ 'error': error }">
                         <div class="error-message mt-2" *ngIf="error">Invalid month, try again.</div>
@@ -196,7 +196,7 @@
                     <div class="col-12 ml-2">
                         <span>Secure code</span>
                     </div>
-            
+
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control border-0" placeholder="{{secureCode}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
@@ -204,13 +204,13 @@
             </div>
           </form>
         </div>
-  
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
-  
+
       </div>
     </div>
 </div>
@@ -219,13 +219,13 @@
 <div class="modal" id="addressModal">
     <div class="modal-dialog">
       <div class="modal-content">
-  
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Add address</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-  
+
         <!-- Modal body -->
         <div class="modal-body">
           <form>
@@ -270,21 +270,21 @@
                       <div class="col-xs-4 mt-2">
                           <input class="form-control" id="ex3" type="text">
                       </div>
-              
+
                   </div>
-              
-              
-              
+
+
+
               </div>
           </form>
         </div>
-  
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
-  
+
       </div>
     </div>
   </div>
@@ -295,25 +295,25 @@
   <div class="modal" id="pickupPointModal">
     <div class="modal-dialog">
       <div class="modal-content">
-  
+
         <!-- Modal Header -->
         <div class="modal-header">
             <h4 class="modal-title">TODO</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-  
+
         <!-- Modal body -->
         <div class="modal-body">
-          
-          
+
+
         </div>
-  
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
-  
+
       </div>
     </div>
 </div>
