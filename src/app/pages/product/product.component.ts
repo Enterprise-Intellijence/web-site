@@ -25,14 +25,14 @@ export class ProductComponent implements OnInit{
     this.productService.productById(this.id).subscribe(p => {
       this.product = p;
 
-      this.filterSeller = new FilterOptions()
-      this.filterSimilar = new FilterOptions()
-      
-      this.filterSeller.userId = this.product?.seller?.id
+      this.filterSeller = new FilterOptions();
+      this.filterSimilar = new FilterOptions();
 
-      this.filterSimilar.primaryCat = this.product?.productCategory?.primaryCat
-      this.filterSimilar.secondaryCat = this.product?.productCategory?.secondaryCat
-      this.filterSimilar.tertiaryCat = this.product?.productCategory?.tertiaryCat
+      this.filterSeller.userId = this.product?.seller?.id;
+
+      this.filterSimilar.primaryCat = this.product?.productCategory?.primaryCat;
+      this.filterSimilar.secondaryCat = this.product?.productCategory?.secondaryCat;
+      this.filterSimilar.tertiaryCat = this.product?.productCategory?.tertiaryCat;
 
       if(this.product?.seller?.reviewsTotalSum === 0 || this.product?.seller?.reviewsTotalSum == undefined)
         this.rating = 0;
@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit{
         this.rating = this.product?.seller?.reviewsTotalSum!/this.product?.seller?.reviewsNumber!;
 
       this.product.productImages?.forEach(element => {
-        this.images.push(Config.basePath + element.urlPhoto!)
+        this.images.push(Config.basePath + element.urlPhoto!);
       });
       this.isWaitingForResponse = false;
     });
@@ -50,11 +50,12 @@ export class ProductComponent implements OnInit{
       this.route.params.subscribe(params=>{
           this.id = params['id'];
           if(this.id) {
+            console.log(this.id);
             this.loadProduct();
           }
         });
 
- 
+
         if(this.product?.seller?.reviewsTotalSum == 0 || this.product?.seller?.reviewsTotalSum == undefined)
           this.rating = 0;
         else
