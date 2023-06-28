@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit {
   userIcon = faUser;
 
   isCollapsed = true;
-  isLoggedIn = false;
+  isLoggedIn$ = this.apiAuth.isLoggedIn$;
 
   unreadMessages: number = 2;
   likedProductsCount: number = 4;
@@ -35,16 +35,13 @@ export class NavBarComponent implements OnInit {
   otherCategory?: ProductCategory;
 
   constructor(private UserLikesService: UserLikesService,
-    private apiAuth: ApiAuthService,
+    public apiAuth: ApiAuthService,
     private categoriesService: ProductCategoriesService,
     private currentUserService: CurrentUserService,
     private route: Router
     ) { }
 
   ngOnInit(): void {
-    this.apiAuth.isLoggedIn$.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-    });
 
     this.UserLikesService.LikedProductsCount$.subscribe((count) => {
       this.likedProductsCount = count;

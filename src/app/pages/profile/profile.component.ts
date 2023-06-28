@@ -22,8 +22,6 @@ export class ProfileComponent implements OnInit {
   userImage?: string = '';
   emptyBio: string = 'Wow, such empty.';
 
-  basePath: string = "https://localhost:8443/api/v1/";
-
   constructor(
     private route: ActivatedRoute,
     private currentUserService: CurrentUserService,
@@ -38,13 +36,13 @@ export class ProfileComponent implements OnInit {
         this.currentUserService.user$.subscribe(user => {
           this.user = user;
           this.visitedUser = user as UserBasicDTO;
-          this.userImage = this.basePath + this.visitedUser?.photoProfile?.urlPhoto;
+          this.userImage = this.visitedUser?.photoProfile?.urlPhoto;
           this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
         })
       } else {
         this.userProfileService.loadVisitedUserProfile(this.userId ?? '');
         this.userProfileService.visitedUserProfile$.subscribe(user => {
-          this.userImage = this.basePath + this.visitedUser?.photoProfile?.urlPhoto;
+          this.userImage = this.visitedUser?.photoProfile?.urlPhoto;
           this.visitedUser = user;
           this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
 

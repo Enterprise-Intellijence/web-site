@@ -22,7 +22,7 @@ export class ProductImagesComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
    this.image = this.thumbnails[0]
   }
-  
+
   openImage(){
     this.imgSrc = this.thumbnails[this.curr_index]
   }
