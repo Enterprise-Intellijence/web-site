@@ -119,6 +119,7 @@ export class ProfileDetailsComponent {
 
   ngOnInit() {
     this.currentUserService.user$.subscribe(user => {
+      console.log("user: ", user);
       this.user = user;
       this.textAreaText = user?.bio;
       this.bioText = user?.bio;
