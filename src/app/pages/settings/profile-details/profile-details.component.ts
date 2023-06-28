@@ -20,7 +20,7 @@ export class ProfileDetailsComponent {
   bioText?: string;
   maxBioLength: number = 500;
   // TODO: Get profile pic from user service
-  profilePic: string = "";
+  profilePic?: string;
   newProfilePic?: File;
 
   public type: string = 'component';
@@ -35,7 +35,7 @@ export class ProfileDetailsComponent {
     cancelReset: null
   };
 
-  
+
   @ViewChild(DropzoneComponent, { static: false }) componentRef?: DropzoneComponent;
   @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
 
@@ -84,7 +84,7 @@ export class ProfileDetailsComponent {
   }
 
   processFile(imageInput: any) {
-    
+
     const file: File = imageInput[0];
     const reader = new FileReader();
     console.log("args: ", file);
@@ -122,7 +122,7 @@ export class ProfileDetailsComponent {
       this.user = user;
       this.textAreaText = user?.bio;
       this.bioText = user?.bio;
-      this.profilePic = Config.basePath + user?.photoProfile?.urlPhoto;
+      this.profilePic = user?.photoProfile?.urlPhoto;
       console.log("photo: ", this.profilePic);
     });
   }

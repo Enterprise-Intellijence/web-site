@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UserControllerService, UserDTO } from './api-service';
+import { UserBasicDTO, UserControllerService, UserDTO } from './api-service';
 import { ApiAuthService } from './api-auth.service';
 
 @Injectable({
@@ -10,6 +10,8 @@ export class CurrentUserService {
 
   user: UserDTO | null = null;
   user$ = new BehaviorSubject<UserDTO | null>(null);
+
+  userBasic$ = new BehaviorSubject<UserBasicDTO | null>(null);
 
   constructor(private userService: UserControllerService,
               private apiAuth: ApiAuthService) {
@@ -24,6 +26,11 @@ export class CurrentUserService {
       next: (user) => {
         this.user = user;
         this.user$.next(user);
+        this.userService.userById(user.id!).subscribe({
+          next: (userBasic) => {
+            this.userBasic$.next(userBasic);
+          }
+        });
       }
     });
   }
