@@ -14,6 +14,7 @@ export class PaymentsComponent {
   expirationDay?: string = "MM/AA";
   secureCode?: string = "example: 123";
   error: boolean = false;
+
   constructor(private router: Router){
     
   }
