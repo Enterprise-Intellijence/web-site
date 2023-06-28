@@ -1,3 +1,14 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.text-truncate-container {
+
+}
+
+.text-truncate-container p {
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
