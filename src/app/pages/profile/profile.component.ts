@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation, faEnvelope, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
 import { FollowingControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
@@ -21,8 +21,8 @@ export class ProfileComponent implements OnInit {
   visitedUser?: UserBasicDTO;
   userImage?: string = '';
   emptyBio: string = 'Wow, such empty.';
-
-  basePath: string = "https://localhost:8443/api/v1/";
+  faEnvelope = faEnvelope;
+  faUserPlus = faUserPlus;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,13 +38,13 @@ export class ProfileComponent implements OnInit {
         this.currentUserService.user$.subscribe(user => {
           this.user = user;
           this.visitedUser = user as UserBasicDTO;
-          this.userImage = this.basePath + this.visitedUser?.photoProfile?.urlPhoto;
+          this.userImage = this.visitedUser?.photoProfile?.urlPhoto;
           this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
         })
       } else {
         this.userProfileService.loadVisitedUserProfile(this.userId ?? '');
         this.userProfileService.visitedUserProfile$.subscribe(user => {
-          this.userImage = this.basePath + this.visitedUser?.photoProfile?.urlPhoto;
+          this.userImage = this.visitedUser?.photoProfile?.urlPhoto;
           this.visitedUser = user;
           this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
 

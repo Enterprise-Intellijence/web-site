@@ -18,11 +18,10 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product!: ProductBasicDTO;
 
-  basePath: string = "https://localhost:8443/api/v1/";
+  get cardImage() { return this.product?.productImages?.urlPhoto; }
 
-  cardImage?: string;
+  get userImage() { return this.product?.seller?.photoProfile?.urlPhoto; }
 
-  usernameImage?: string;
 
   userLikesProduct: boolean = false;
 
@@ -33,13 +32,6 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usernameImage = this.basePath + this.product.seller?.photoProfile?.urlPhoto;
-
-    if(this.product && this.product.productImages)
-      this.cardImage = this.basePath + this.product.productImages.urlPhoto;
-
-    else this.cardImage = "assets/images/default-product-pic.png";
-
     this.userLikesService.LikedProducts$.subscribe(() => {
       this.userLikesProduct = this.userLikesService.isProductLiked(this.product);
     });
