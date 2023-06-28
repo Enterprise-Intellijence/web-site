@@ -1,5 +1,5 @@
 <div class="basic-container">
-    <div class = "row fw-lighter">
+    <div class = "row">
         <span>Payment options</span>
     </div>
     <div class = "row">
@@ -11,22 +11,6 @@
             <fa-icon [icon]="arrowRight">
 
             </fa-icon>
-          </button>
-        </div>
-    </div>
-</div>
-
-<div class="basic-container">
-    <div class = "row fw-lighter">
-        <span>Transfer options</span>
-    </div>
-    <div class = "row">
-        <div class="col-6 fw-semibold mt-3">
-            <span>Add bank-account</span>
-        </div>
-        <div class="col-6 fw-semibold mt-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary float-end" [routerLink]="['/wallet/bank-account']">
-            <fa-icon [icon]="arrowRight"></fa-icon>
           </button>
         </div>
     </div>
@@ -83,7 +67,7 @@
             
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control border-0" placeholder="{{expirationDay}}" (input)="formatDateInput($event)" [ngClass]="{ 'error': error }">
-                        <div class="error-message mt-2" *ngIf="error">Invalid month, try again.</div>
+                        <div class="error-message mt-2" style="color:red" *ngIf="error">Invalid month, try again.</div>
                     </div>
                 </div>
             </div>
