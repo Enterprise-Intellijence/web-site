@@ -1,5 +1,5 @@
 <div class="basic-container">
-    <div class = "row fw-lighter">
+    <div class = "row">
         <span>Payment options</span>
     </div>
     <div class = "row">
@@ -17,7 +17,7 @@
 </div>
 
 <div class="basic-container">
-    <div class = "row fw-lighter">
+    <div class = "row">
         <span>Transfer options</span>
     </div>
     <div class = "row">
@@ -83,7 +83,7 @@
             
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control border-0" placeholder="{{expirationDay}}" (input)="formatDateInput($event)" [ngClass]="{ 'error': error }">
-                        <div class="error-message mt-2" *ngIf="error">Invalid month, try again.</div>
+                        <div class="error-message mt-2" style="color:red" *ngIf="error">Invalid month, try again.</div>
                     </div>
                 </div>
             </div>
