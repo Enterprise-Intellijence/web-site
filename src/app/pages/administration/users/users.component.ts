@@ -115,4 +115,8 @@ export class UsersComponent implements OnInit{
   onEnter(value: string) {
     this.handleInput(value);
   }
+
+  viewProfile(user: UserDTO) {
+    
+  }
 }

@@ -30,6 +30,9 @@
       <td *ngIf="currentUser.user?.role === 'SUPER_ADMIN'">
         <button class="btn btn " type="button" (click)="promoteDemoteUser(user)">DEMOTE</button>
       </td>
+      <td >
+        <button class="btn btn " type="button" (click)="viewProfile(user)">VIEW</button>
+      </td>
     </tr>
     </tbody>
   </table>
