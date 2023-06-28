@@ -54,8 +54,8 @@ export interface User {
     adminFollowedMyReport?: Array<Report>;
     notifications?: Array<Notification>;
     enabled?: boolean;
-    authorities?: Array<GrantedAuthority>;
     administrator?: boolean;
+    authorities?: Array<GrantedAuthority>;
     accountNonExpired?: boolean;
     credentialsNonExpired?: boolean;
     accountNonLocked?: boolean;

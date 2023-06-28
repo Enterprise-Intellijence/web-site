@@ -10,12 +10,16 @@
  * Do not edit the class manually.
  */
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    pseudoCurrency?: boolean;
-    numeric3Code?: string;
-    countryCodes?: Array<string>;
+export interface ContentDisposition { 
+    type?: string;
+    name?: string;
+    filename?: string;
+    charset?: string;
+    size?: number;
+    creationDate?: Date;
+    modificationDate?: Date;
+    readDate?: Date;
+    formData?: boolean;
+    attachment?: boolean;
+    inline?: boolean;
 }

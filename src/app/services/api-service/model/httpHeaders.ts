@@ -10,12 +10,8 @@
  * Do not edit the class manually.
  */
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    pseudoCurrency?: boolean;
-    numeric3Code?: string;
-    countryCodes?: Array<string>;
+export interface HttpHeaders extends null<String, Array> { 
+  [key: string]: Array<string>;
+
+
 }
