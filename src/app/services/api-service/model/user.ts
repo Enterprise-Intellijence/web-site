@@ -57,8 +57,8 @@ export interface User {
     authorities?: Array<GrantedAuthority>;
     administrator?: boolean;
     accountNonExpired?: boolean;
-    accountNonLocked?: boolean;
     credentialsNonExpired?: boolean;
+    accountNonLocked?: boolean;
 }
 export namespace User {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';

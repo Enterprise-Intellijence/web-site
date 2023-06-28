@@ -187,13 +187,15 @@ export class AdminControllerService {
      * 
      * @param page 
      * @param size 
+     * @param userRole 
+     * @param username 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUsers(page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PageUserDTO>;
-    public getUsers(page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageUserDTO>>;
-    public getUsers(page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageUserDTO>>;
-    public getUsers(page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUsers(page: number, size: number, userRole: string, username?: string, observe?: 'body', reportProgress?: boolean): Observable<PageUserDTO>;
+    public getUsers(page: number, size: number, userRole: string, username?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageUserDTO>>;
+    public getUsers(page: number, size: number, userRole: string, username?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageUserDTO>>;
+    public getUsers(page: number, size: number, userRole: string, username?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (page === null || page === undefined) {
             throw new Error('Required parameter page was null or undefined when calling getUsers.');
@@ -203,12 +205,23 @@ export class AdminControllerService {
             throw new Error('Required parameter size was null or undefined when calling getUsers.');
         }
 
+        if (userRole === null || userRole === undefined) {
+            throw new Error('Required parameter userRole was null or undefined when calling getUsers.');
+        }
+
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (page !== undefined && page !== null) {
             queryParameters = queryParameters.set('page', <any>page);
         }
         if (size !== undefined && size !== null) {
             queryParameters = queryParameters.set('size', <any>size);
+        }
+        if (userRole !== undefined && userRole !== null) {
+            queryParameters = queryParameters.set('userRole', <any>userRole);
+        }
+        if (username !== undefined && username !== null) {
+            queryParameters = queryParameters.set('username', <any>username);
         }
 
         let headers = this.defaultHeaders;

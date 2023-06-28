@@ -1,51 +1,96 @@
-<p>ADMIN</p>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col" >Username</th>
-    <th scope="col" >Email</th>
-    <th scope="col" >Status</th>
-    <th scope="col" >Role</th>
-    <th scope="col" ></th>
-    <th *ngIf="loggedUser?.role === 'SUPER_ADMIN'" scope="col" ></th>
-    <th scope="col" ></th>
+<div class="basic-container">
+  <p>ADMIN</p>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" >Username</th>
+      <th scope="col" >Email</th>
+      <th scope="col" >Status</th>
+      <th scope="col" >Role</th>
+      <th scope="col" ></th>
+      <th *ngIf="currentUser.user?.role === 'SUPER_ADMIN'" scope="col" ></th>
+      <th *ngIf="currentUser.user?.role === 'SUPER_ADMIN'" scope="col" ></th>
 
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let user of admins.content">
-    <th scope="row" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ user.id }}</th>
-    <td>{{ user.username }}</td>
-    <td>{{ user.email}}</td>
-    <td>{{user.status}}</td>
-    <td>{{ user.role}}</td>
-    <button class="btn btn-outline-primary position-relative" [routerLink]="['']" (click)="sendMessageTo()">
-      <fa-icon [icon]="messagesIcon"></fa-icon>
-    </button>
-    <td><button *ngIf="loggedUser?.role === 'SUPER_ADMIN'" class="btn btn-outline-light text-black border-0 mb-2 text-start col-12"
-                type="button">
-<!--                [ngClass]="{'red-text': reports.status === 'PENDING', 'green-text': reports.status !== 'PENDING'}"
-                (click)="closeReport(reports)">-->
-      BAN</button> </td>
-
-    <td><button class="btn btn " *ngIf="loggedUser?.role === 'SUPER_ADMIN'"
-                type="button">
-      <!--                [ngClass]="{'red-text': reports.status === 'PENDING', 'green-text': reports.status !== 'PENDING'}"
-                      (click)="closeReport(reports)">-->
-      DEMOTE</button> </td>
-
-  </tr>
-  </tbody>
-</table>
-<div class="d-flex justify-content-between p-2">
-  <ngb-pagination
-    [collectionSize]="admins.totalElements!"
-    [(page)]="admins.number!"
-    [maxSize]="5"
-    [pageSize]="admins.size!"
-    (pageChange)="refreshAdmins()"
-  >
-  </ngb-pagination>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of admins?.content">
+      <th scope="row" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ user.id }}</th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email}}</td>
+      <td>{{user.status}}</td>
+      <td > {{ user.role === 'SUPER_ADMIN' ? 'SUPER' : user.role }}</td>
+      <button class="btn btn-outline-primary position-relative" (click)="sendMessageTo()">
+        <fa-icon [icon]="messagesIcon"></fa-icon>
+      </button>
+      <td *ngIf="currentUser.user?.role === 'SUPER_ADMIN'" >
+        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button">BAN</button>
+      </td>
+      <td *ngIf="currentUser.user?.role === 'SUPER_ADMIN'">
+        <button class="btn btn " type="button" (click)="promoteDemoteUser(user)">DEMOTE</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="totalAdmins"
+      [(page)]="pageAdmin"
+      [maxSize]="5"
+      [pageSize]="sizeAdmin"
+      (pageChange)="refreshAdmins()"
+    >
+    </ngb-pagination>
+  </div>
 </div>
+<hr />
+<div class="basic-container">
 
+  <label for="typeahead-basic">Search user:</label>
+  <input id="typeahead-basic" type="text" class="form-control" [formControl]="inputControl" />
+  <hr />
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" >Username</th>
+      <th scope="col" >Email</th>
+      <th scope="col" >Status</th>
+      <th scope="col" >Role</th>
+      <th scope="col" ></th>
+      <th *ngIf="currentUser.user?.role == 'SUPER_ADMIN'" scope="col" ></th>
+      <th scope="col" ></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users?.content">
+      <th scope="row" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ user.id }}</th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email}}</td>
+      <td>{{user.status}}</td>
+      <td>{{ user.role}}</td>
+      <button class="btn btn-outline-primary position-relative" [routerLink]="['']" (click)="sendMessageTo()">
+        <fa-icon [icon]="messagesIcon"></fa-icon>
+      </button>
+      <td>
+        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button">BAN</button>
+      </td>
+      <td *ngIf="currentUser.user?.role == 'SUPER_ADMIN'">
+        <button class="btn btn " type="button" (click)="promoteDemoteUser(user)">PROMOTE</button> </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="totalUsers"
+      [(page)]="pageUsers"
+      [maxSize]="5"
+      [pageSize]="sizeUsers!"
+      (pageChange)="refreshUsers()"
+    >
+    </ngb-pagination>
+  </div>
+</div>
