@@ -10,12 +10,14 @@
  * Do not edit the class manually.
  */
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    pseudoCurrency?: boolean;
-    numeric3Code?: string;
-    countryCodes?: Array<string>;
+export interface MediaType { 
+    type?: string;
+    subtype?: string;
+    parameters?: { [key: string]: string; };
+    qualityValue?: number;
+    charset?: string;
+    concrete?: boolean;
+    wildcardSubtype?: boolean;
+    wildcardType?: boolean;
+    subtypeSuffix?: string;
 }

@@ -10,12 +10,11 @@
  * Do not edit the class manually.
  */
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    pseudoCurrency?: boolean;
-    numeric3Code?: string;
-    countryCodes?: Array<string>;
+export interface HttpStatusCode { 
+    error?: boolean;
+    is4xxClientError?: boolean;
+    is5xxServerError?: boolean;
+    is1xxInformational?: boolean;
+    is3xxRedirection?: boolean;
+    is2xxSuccessful?: boolean;
 }

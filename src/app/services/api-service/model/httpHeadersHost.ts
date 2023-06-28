@@ -9,13 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { HttpHeadersHostAddress } from './httpHeadersHostAddress';
 
-export interface CurrencyUnit { 
-    code?: string;
-    numericCode?: number;
-    decimalPlaces?: number;
-    symbol?: string;
-    pseudoCurrency?: boolean;
-    numeric3Code?: string;
-    countryCodes?: Array<string>;
+export interface HttpHeadersHost { 
+    address?: HttpHeadersHostAddress;
+    port?: number;
+    unresolved?: boolean;
+    hostName?: string;
+    hostString?: string;
 }

@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { NotificationDTO } from '../model/notificationDTO';
 import { PageNotificationDTO } from '../model/pageNotificationDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
