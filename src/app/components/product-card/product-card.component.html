@@ -1,7 +1,7 @@
 <div class="card shadow cursor-pointer" style="max-width: 20rem;" [routerLink]="['/products', product.id]">
 
   <div class="card-header text-truncate cursor-pointer" [routerLink]="['/users', product.seller?.id]">
-    <img [src]="usernameImage" alt="" class="rounded-circle" width="26px" height="26px">
+    <img [src]="product.seller?.photoProfile?.urlPhoto | defaultProfilePic " alt="" class="rounded-circle" width="26px" height="26px">
     <span class="ms-2">{{product.seller?.username}}</span>
   </div>
 

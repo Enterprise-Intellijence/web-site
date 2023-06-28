@@ -14,15 +14,11 @@ import { ImageControllerService, UserBasicDTO } from 'src/app/services/api-servi
   providers: [NgbRatingConfig]
 })
 export class UserCardComponent implements OnInit {
-  
+
   @Input() rating?: number
   @Input() seller?: UserBasicDTO
 
-  sellerPic: any
-
   ngOnInit(): void {
-    this.sellerPic = Config.basePath + this.seller?.photoProfile?.urlPhoto
-    console.log(this.sellerPic)
   }
 
 
