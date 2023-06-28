@@ -7,7 +7,6 @@ import { PaymentsComponent } from './pages/settings/payments/payments.component'
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
@@ -64,7 +63,6 @@ const routes: Routes = [
       { path: 'manage-sizes', component: ManageSizesComponent },
     ]},
 
-  { path: 'wallet/bank-account', component: BankAccountComponent },
   { path: 'checkout/:id', component: PurchasingPageComponent },
   { path: '**', redirectTo: 'home' }
 ];

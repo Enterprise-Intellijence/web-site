@@ -24,7 +24,6 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { FilteredProductListComponent } from './components/filtered-product-list/filtered-product-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
-import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { BadgeTextPipe } from './pipes/badge-text.pipe';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
@@ -95,9 +94,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ProfileComponent,
     DefaultProfilePicPipe,
     DefaultProductPicPipe,
-    BankAccountComponent,
     PurchasingPageComponent,
-    BankAccountComponent,
     MessagesPageComponent,
     LoginPageComponent,
     ReviewCardComponent,
