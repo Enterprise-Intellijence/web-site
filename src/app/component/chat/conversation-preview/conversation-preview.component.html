@@ -1,8 +1,39 @@
-<a href="#" class="list-group-item list-group-item-action border-bottom">
-  <div class="d-flex align-items-start">
-    <img [src]="otherUser.photoProfile?.urlPhoto | defaultProfilePic" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-    <div class="flex-grow-1 ml-3">
-      {{otherUser.username}}
+<a [routerLink]="['/messages', conversation.conversationId]" class="list-group-item list-group-item-action border-bottom">
+  <div class="p-2">
+    <div class="row">
+      <div class="col-2">
+        <div class="ratio ratio-1x1" *ngIf="conversation.productBasicDTO != undefined">
+          <img [src]="conversation.productBasicDTO.productImages?.urlPhoto| defaultProductPic" [alt]="conversation.productBasicDTO.productImages?.description" class="w-100 rounded shadow">
+        </div>
+      </div>
+
+      <div class="col-10">
+        <div class="row align-items-center g-2">
+          <div class="col-auto">
+
+            <img [src]="otherUser.photoProfile?.urlPhoto | defaultProfilePic" class="rounded-circle mr-1 shadow" alt="Vanessa Tucker" width="26" height="26">
+          </div>
+          <div class="col text-truncate">
+            {{otherUser.username}}
+          </div>
+          <div class="col-auto" *ngIf="conversation.unreadMessages">
+            <span class="badge bg-primary">New</span>
+          </div>
+
+          <div class="col-auto text-nowrap text-muted small">
+
+            {{conversation.lastMessage.messageDate | date: 'shortTime'}}
+          </div>
+        </div>
+        <div class="row-col">
+          <div class="text-truncate">
+            {{conversation.lastMessage.text}}
+          </div>
+        </div>
+      </div>
+
+
     </div>
+
   </div>
 </a>

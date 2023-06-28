@@ -10,7 +10,7 @@ export class DefaultProductPicPipe implements PipeTransform {
     if (url) {
       return url;
     } else {
-      return Config.basePath + "/assets/images/default-product-pic.png";
+      return "/assets/images/default-product-pic.png";
     }
   }
 
