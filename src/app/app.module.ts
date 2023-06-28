@@ -30,7 +30,7 @@ import { BadgeTextPipe } from './pipes/badge-text.pipe';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
 import { AlertModule } from './components/alerts/alert.module';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DropzoneModule, DropzoneConfigInterface, DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
@@ -161,6 +161,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     FormsModule,
     NgbdModalFocus,
     UserCardComponent,
+    ReactiveFormsModule,
   ]
 })
 export class AppModule { }

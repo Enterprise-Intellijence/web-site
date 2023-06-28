@@ -27,6 +27,7 @@ import { ProductBasicDTO } from '../model/productBasicDTO';
 import { ProductCategory } from '../model/productCategory';
 import { ProductsIdBody } from '../model/productsIdBody';
 import { ProductsIdBody1 } from '../model/productsIdBody1';
+import { ResponseStatusException } from '../model/responseStatusException';
 import { V1ProductsBody } from '../model/v1ProductsBody';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';

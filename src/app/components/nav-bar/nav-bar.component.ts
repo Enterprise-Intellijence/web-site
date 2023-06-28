@@ -71,29 +71,12 @@ export class NavBarComponent implements OnInit {
 
   searchFor($event: ProductCategory, gender?: ClothingDTO.ProductGenderEnum) {
     //console.log("searching for:", $event.name, "for gender: ", gender);
-    let child : String | undefined;
-    let secondary : String | undefined;
-    let primary : String | undefined;
-    const categoryPath = $event.getCategoryPath()
 
-    if(categoryPath.length>2) {
-      child = categoryPath[categoryPath.length - 1].rawName;
-      secondary = categoryPath[categoryPath.length - 2].rawName;
-      primary = categoryPath[categoryPath.length - 3].rawName;
-    }
-    else if(categoryPath.length>1){
-      secondary = categoryPath[categoryPath.length - 1].rawName;
-      primary = categoryPath[categoryPath.length - 2].rawName;
-    }
-    else
-      primary = categoryPath[categoryPath.length - 1].rawName;
 
 
     this.route.navigate(['/search-page'], {
       queryParams: {
-        primary: primary,
-        secondary: secondary,
-        child: child,
+        category: $event.rawName,
         gender:gender
       }
     });
