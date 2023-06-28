@@ -105,6 +105,10 @@ export class ShippingComponent implements OnInit {
     this.getCities();
   }
 
+  setDefaultAddress(address: AddressDTO) {
+    throw new Error('Method not implemented.');
+  }
+
   constructor(
     private currentUserService: CurrentUserService,
     private deliveryService: DeliveryControllerService,
