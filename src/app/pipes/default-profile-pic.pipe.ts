@@ -12,7 +12,7 @@ export class DefaultProfilePicPipe implements PipeTransform {
     if (url) {
         return url;
     } else {
-      return Config.basePath + "/assets/images/default-profile-pic.png";
+      return "/assets/images/default-profile-pic.png";
     }
   }
 }

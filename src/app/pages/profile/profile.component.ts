@@ -4,7 +4,6 @@ import { OnInit } from '@angular/core';
 import { FollowingControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
   selector: 'profile',
@@ -17,9 +16,11 @@ export class ProfileComponent implements OnInit {
 
   userId: string | null = null;
   isFollowing: boolean = false;
-  user?: UserDTO | null = null;
+
+  isCurrentUser: boolean = false;
+
   visitedUser?: UserBasicDTO;
-  userImage?: string = '';
+  get userImage() { return this.visitedUser?.photoProfile?.urlPhoto; }
   emptyBio: string = 'Wow, such empty.';
   faEnvelope = faEnvelope;
   faUserPlus = faUserPlus;
@@ -27,54 +28,56 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private currentUserService: CurrentUserService,
-    private userProfileService: UserProfileService,
+    private userService: UserControllerService,
     private followingService: FollowingControllerService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('id') ?? null;
 
-      if (this.userId == 'me') {
-        this.currentUserService.user$.subscribe(user => {
-          this.user = user;
-          this.visitedUser = user as UserBasicDTO;
-          this.userImage = this.visitedUser?.photoProfile?.urlPhoto;
-          this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
-        })
-      } else {
-        this.userProfileService.loadVisitedUserProfile(this.userId ?? '');
-        this.userProfileService.visitedUserProfile$.subscribe(user => {
-          this.userImage = this.visitedUser?.photoProfile?.urlPhoto;
-          this.visitedUser = user;
-          this.visitedUser!.bio = this.visitedUser?.bio ?? this.emptyBio;
+      this.isCurrentUser = this.userId == 'me';
 
-          this.followingService.imFollowingThisUser(this.visitedUser?.id ?? '').subscribe(isFollowing => {
-            this.isFollowing = isFollowing;
-          });
+      if (this.userId == 'me') {
+
+        this.currentUserService.userBasic$.subscribe(user => {
+
+          if(this.isCurrentUser && user != null) {
+            this.visitedUser = user;
+          }
+        })
+      } else if (this.userId != undefined) {
+        this.userService.userById(this.userId).subscribe(user => {
+          console.log("profile page user: ", user);
+
+          if(user != null) {
+            this.visitedUser = user;
+
+            this.followingService.imFollowingThisUser(this.visitedUser?.id!).subscribe(isFollowing => {
+              this.isFollowing = isFollowing;
+            });
+          }
         });
       }
     });
   }
 
   follow() {
-    if (this.visitedUser) {
-      this.followingService.follow(this.visitedUser.id ?? '').subscribe(() => {
+    if (this.visitedUser?.id) {
+      this.followingService.follow(this.visitedUser.id).subscribe(() => {
         this.isFollowing = true;
       });
 
       this.visitedUser.followersNumber = (this.visitedUser.followersNumber ?? 0) + 1;
-      this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }
 
   unfollow() {
-    if (this.visitedUser) {
-      this.followingService.unfollow(this.visitedUser.id ?? '').subscribe(() => {
+    if (this.visitedUser?.id) {
+      this.followingService.unfollow(this.visitedUser.id).subscribe(() => {
         this.isFollowing = false;
       });
 
       this.visitedUser.followersNumber = (this.visitedUser.followersNumber ?? 0) - 1;
-      this.userProfileService.visitedUserProfile$.next(this.visitedUser);
     }
   }
 }
