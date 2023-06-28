@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation, faEnvelope, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
 import { FollowingControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   visitedUser?: UserBasicDTO;
   userImage?: string = '';
   emptyBio: string = 'Wow, such empty.';
+  faEnvelope = faEnvelope;
+  faUserPlus = faUserPlus;
 
   constructor(
     private route: ActivatedRoute,

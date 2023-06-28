@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faEnvelope, faHeart, faRightFromBracket, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
+import { faAddressCard, faEnvelope, faGear, faHeart, faRightFromBracket, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ProductCategory } from 'src/app/models/product-category';
 import { ApiAuthService } from 'src/app/services/api-auth.service';
 import { ClothingDTO, UserDTO } from 'src/app/services/api-service';
@@ -20,6 +21,10 @@ export class NavBarComponent implements OnInit {
   messagesIcon = faEnvelope;
   likesIcon = faHeart;
   userIcon = faUser;
+  faSquarePlus = faSquarePlus;
+  faGear = faGear;
+  faAddressCard = faAddressCard;
+  faRightFromBracket = faRightFromBracket;
 
   isCollapsed = true;
   isLoggedIn$ = this.apiAuth.isLoggedIn$;
