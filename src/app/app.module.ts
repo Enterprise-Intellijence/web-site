@@ -58,8 +58,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ApiModule as CountryCityModule, Configuration as CountryCiyConfig } from './services/country-city-api';
-import { ConversationPreviewComponent } from './component/chat/conversation-preview/conversation-preview.component';
-import { MessageComponent } from './component/chat/message/message.component';
+import { ConversationPreviewComponent } from './components/chat/conversation-preview/conversation-preview.component';
+import { MessageComponent } from './components/chat/message/message.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
