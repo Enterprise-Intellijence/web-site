@@ -6,13 +6,26 @@
         </h5>
         <hr class="product-page"/>
         <div class="d-grid gap-2 col-10 mx-auto">
-            <button type="button" (click)="clickBuyButton()" class="btn btn-primary btn-block">Acquista</button>
-            <button type="button" (click)="clickOfferButton()" class="btn btn-outline-primary btn-block">Fai un offerta</button>
-            <button type="button" (click)="clickInfoButton()" class="btn btn-outline-primary btn-block">Chiedi informazioni</button>
-            <button type="button" (click)="clickFavButton()"class="btn btn-outline-secondary btn-block">
+            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickBuyButton()" class="btn btn-primary btn-block">
+                <fa-icon [icon]="faCartShopping" class="me-1"></fa-icon>
+                Buy</button>
+            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickOfferButton()" class="btn btn-outline-primary btn-block">
+                <fa-icon [icon]="faCommentDollar" class="me-1"></fa-icon>
+                Make an Offer</button>
+            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickInfoButton()" class="btn btn-outline-primary btn-block">
+                <fa-icon [icon]="faCircleInfo" class="me-1"></fa-icon>
+                More info</button>
+            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickFavButton()" class="btn btn-outline-secondary btn-block">
                 <fa-icon [icon]="isFav ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
                 {{isFav ? isFavButtonText : notFavButtonText}}
             </button>
+            <button *ngIf="currentUser?.id == productDTO?.seller?.id" type="button" (click)="clickEdit()" class="btn btn-outline-secondary btn-block">
+                <fa-icon [icon]="faEdit" class="me-1"></fa-icon>
+                Edit Product
+            </button>
+            <button type="button" (click)="clickShareProduct()" class="btn btn-outline-secondary btn-block">
+                <fa-icon [icon]="faShareNodes" class="me-1"></fa-icon>
+                Share</button>
         </div>
     </div>
 </div>
