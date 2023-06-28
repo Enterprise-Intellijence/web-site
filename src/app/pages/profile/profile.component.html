@@ -67,15 +67,15 @@
       <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
         <li ngbNavItem>
           <button class="btn-primary" ngbNavLink>Closet</button>
-          <ng-template ngbNavContent *ngIf="visitedUser">
-            <closet [visitedUser]="visitedUser"></closet>
+          <ng-template ngbNavContent>
+            <closet [visitedUser]="visitedUser ?? null"></closet>
           </ng-template>
         </li>
 
         <li ngbNavItem>
           <button class="btn-primary" ngbNavLink>Reviews</button>
-          <ng-template ngbNavContent *ngIf="visitedUser">
-            <review [visitedUser]="visitedUser"></review>
+          <ng-template ngbNavContent>
+            <review [visitedUser]="visitedUser ?? null"></review>
           </ng-template>
         </li>
       </ul>
