@@ -12,7 +12,6 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { AccountSettingsComponent } from './pages/settings/account-settings/account-settings.component';
 import { ShippingComponent } from './pages/settings/shipping/shipping.component';
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
-import { NotificationsComponent } from './pages/settings/notifications/notifications.component';
 import { ProductPriceComponent } from './components/product-price/product-price.component';
 import { ProductImagesComponent } from './components/product-images/product-images.component';
 import { ProductComponent } from './pages/product/product.component';
@@ -85,9 +84,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     AccountSettingsComponent,
     ShippingComponent,
     PaymentsComponent,
-    NotificationsComponent,
     ProductPriceComponent,
-    NotificationsComponent,
     ProductImagesComponent,
     ProductComponent,
     ProductInfoComponent,

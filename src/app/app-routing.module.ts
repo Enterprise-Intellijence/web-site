@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShippingComponent } from './pages/settings/shipping/shipping.component';
 import { ProfileDetailsComponent } from './pages/settings/profile-details/profile-details.component';
 import { AccountSettingsComponent } from './pages/settings/account-settings/account-settings.component';
-import { NotificationsComponent } from './pages/settings/notifications/notifications.component';
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsComponent } from './pages/settings/settings.component';
@@ -17,14 +16,12 @@ import { LikedProductsPageComponent } from './pages/liked-products-page/liked-pr
 import { ProductComponent } from './pages/product/product.component';
 import { ConfirmRegistrationEmailComponent } from './pages/confirm-registration-email/confirm-registration-email.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
-import {CategoryComponent} from "./pages/administration/category/category.component";
-import {ReportsComponent} from "./pages/administration/reports/reports.component";
-import {UsersComponent} from "./pages/administration/users/users.component";
-import {ProductsComponent} from "./pages/administration/products/products.component";
-import {ManageSizesComponent} from "./pages/administration/manage-sizes/manage-sizes.component";
-import {
-  ReportSingleViewComponent
-} from "./pages/administration/report-single-view/report-single-view.component";
+import { CategoryComponent } from "./pages/administration/category/category.component";
+import { ReportsComponent } from "./pages/administration/reports/reports.component";
+import { UsersComponent } from "./pages/administration/users/users.component";
+import { ProductsComponent } from "./pages/administration/products/products.component";
+import { ManageSizesComponent } from "./pages/administration/manage-sizes/manage-sizes.component";
+import { ReportSingleViewComponent } from "./pages/administration/report-single-view/report-single-view.component";
 import {SearchPageComponent} from "./pages/search-page/search-page.component";
 
 
@@ -53,7 +50,6 @@ const routes: Routes = [
       { path: '', redirectTo: 'profile-details', pathMatch: 'full' },
       { path: 'profile-details', component: ProfileDetailsComponent },
       { path: 'account', component: AccountSettingsComponent },
-      { path: 'notifications', component: NotificationsComponent },
       { path: 'shipping', component: ShippingComponent },
       { path: 'payments', component: PaymentsComponent },
     ]
