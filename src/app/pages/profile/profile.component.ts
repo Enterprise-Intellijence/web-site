@@ -4,7 +4,6 @@ import { OnInit } from '@angular/core';
 import { FollowingControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
   selector: 'profile',
