@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiAuthService } from './api-auth.service';
 import { ConversationDTO, CustomMoneyDTO, MessageControllerService, MessageCreateDTO, MessageDTO, OfferControllerService, OfferCreateDTO, OfferDTO, ProductBasicDTO, UserBasicDTO } from './api-service';
 import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
+import { CurrentUserService } from './current-user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ export class ChatService {
 
   constructor(private apiAuth: ApiAuthService,
     private offerService: OfferControllerService,
-    private messageService: MessageControllerService) {
+    private messageService: MessageControllerService,
+    private currentUserService: CurrentUserService) {
     apiAuth.isLoggedIn$.subscribe(isLoggedIn => {
       if (isLoggedIn)
         this.getAllConversations();
@@ -47,6 +49,12 @@ export class ChatService {
         let messages = this.messagesMap.get(conversation.conversationId!) || [];
         this.messagesMap.set(conversation.conversationId!, messages);
         this.conversationsMap.set(conversation.conversationId!, conversation);
+      });
+
+      this.conversations = this.conversations.sort((a, b) => {
+        let aDate = new Date(a.lastMessage.messageDate!).getTime();
+        let bDate = new Date(b.lastMessage.messageDate!).getTime();
+        return bDate > aDate ? 1 : -1;
       });
 
       this.conversations$.next(this.conversations);
@@ -136,7 +144,8 @@ export class ChatService {
 
 
   public readMessagesOfConversation(conversationId: string) {
-    let messagesIds = this.messagesMap.get(conversationId)?.filter(message => message.messageStatus == 'UNREAD').map(message => message.id!) || [];
+    let myId = this.currentUserService.user?.id;
+    let messagesIds = this.messagesMap.get(conversationId)?.filter(message => message.messageStatus == 'UNREAD' && message.receivedUser.id == myId).map(message => message.id!) || [];
     this.messageService.setReadMessages(messagesIds).subscribe();
   }
 

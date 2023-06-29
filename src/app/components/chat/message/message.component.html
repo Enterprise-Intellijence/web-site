@@ -6,7 +6,7 @@
       </div>
       <div>
 
-  <fa-icon [icon]="faCheck" *ngIf="isOwnMessage" [ngClass]="isRead ? 'text-primary' : 'text-secondary'" class="me-3">
+  <fa-icon [icon]="faCheck" *ngIf="isOwnMessage" [ngClass]="isRead ? 'text-primary' : 'text-muted'" class="me-3">
   </fa-icon>
 
         <span class="text-muted text-nowrap">{{message.messageDate | date: 'short'}}</span>
