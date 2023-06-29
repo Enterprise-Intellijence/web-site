@@ -58,7 +58,7 @@
         <button *ngIf="isFollowing == true" class="btn btn-outline-success margin-button" type="button" (click)="unfollow()">
           Unfollow
         </button>
-        <button class="btn btn-outline-warning margin-button" type="button">
+        <button class="btn btn-outline-warning margin-button" data-bs-toggle="modal" data-bs-target="#myModal" (click)="report()" type="button">
           <fa-icon [icon]="faCircleExclamation"></fa-icon>
         </button>
       </div>
@@ -83,6 +83,31 @@
         </li>
       </ul>
       <div [ngbNavOutlet]="nav"></div>
+    </div>
+  </div>
+</div>
+
+<!--Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header justify-content-center">
+        <fa-icon [icon]="faCircleExclamation"></fa-icon>
+         <h5 class="text-center">Report user</h5>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body ">
+        Are you sure you want to report <b>{{visitedUser?.username}}</b>?
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="" (click)="report()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+      </div>
+
     </div>
   </div>
 </div>
