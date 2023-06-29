@@ -1,9 +1,8 @@
 <div class="container-sm">
-    <div class="basic-container">
-        <div class="row">
-            <filtered-product-list [filter]="filter"></filtered-product-list>
-        </div>
+  <div class="">
+    <div class="row" style="min-height: 200px;">
+      <filtered-product-list (isProductEmpty)="setIsProductEmpty($event)" [filter]="filter"></filtered-product-list>
+      <empty-closet [show]="isProductEmpty"></empty-closet>
     </div>
+  </div>
 </div>
-    
-  

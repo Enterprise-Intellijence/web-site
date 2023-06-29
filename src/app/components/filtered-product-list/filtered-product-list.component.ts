@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import { PageProductBasicDTO, ProductBasicDTO, ProductControllerService } from "../../services/api-service";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import { PageProductBasicDTO } from "../../services/api-service";
 import {FilterOptions} from "../../models/filter-options";
 import {ProductService} from "../../services/product.service";
 
@@ -11,10 +11,13 @@ import {ProductService} from "../../services/product.service";
 })
 export class FilteredProductListComponent implements OnInit,OnChanges {
   @Input() filter!: FilterOptions
+  @Output() isProductEmpty = new EventEmitter<boolean>();
+
   products?: PageProductBasicDTO = { content: [] };
   numberElements: any;
   page: number = 1;
   pageSize: any;
+  hideProduct: boolean = false;
 
   constructor(private productService: ProductService) {
     this.numberElements=0
@@ -38,6 +41,15 @@ export class FilteredProductListComponent implements OnInit,OnChanges {
     this.filter.sizePage = this.pageSize
     this.productService.getFilteredProducts(this.filter).subscribe({
       next: (page: PageProductBasicDTO) => {
+
+        if (page.totalElements == 0) {
+          this.isProductEmpty.emit(true);
+          this.hideProduct = true;
+        } else {
+          this.isProductEmpty.emit(false);
+          this.hideProduct = false;
+        }
+
         this.products = page
         this.numberElements = page.totalElements
       }
