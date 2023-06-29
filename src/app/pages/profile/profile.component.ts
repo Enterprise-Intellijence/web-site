@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
         this.currentUserService.userBasic$.subscribe(user => {
 
-          if(this.isCurrentUser && user != null) {
+          if ((this.userId! in ['me', user?.id]) && user != null) {
             this.visitedUser = user;
           }
         })
@@ -49,12 +49,15 @@ export class ProfileComponent implements OnInit {
         this.userService.userById(this.userId).subscribe(user => {
           console.log("profile page user: ", user);
 
-          if(user != null) {
+          if (user != null) {
             this.visitedUser = user;
+            this.isCurrentUser = (this.currentUserService.user?.id == this.visitedUser?.id)
 
-            this.followingService.imFollowingThisUser(this.visitedUser?.id!).subscribe(isFollowing => {
-              this.isFollowing = isFollowing;
-            });
+            if (!this.isCurrentUser) {
+              this.followingService.imFollowingThisUser(this.visitedUser?.id!).subscribe(isFollowing => {
+                this.isFollowing = isFollowing;
+              });
+            }
           }
         });
       }

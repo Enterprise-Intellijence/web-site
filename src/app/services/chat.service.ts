@@ -34,10 +34,10 @@ export class ChatService {
         this.getAllConversations();
     });
 
-    //repeat every 5 seconds
-    setInterval(() => {
-      this.getAllConversations();
-    }, 5000);
+    //repeat every 10 seconds
+    // setInterval(() => {
+    //   this.getAllConversations();
+    // }, 10000);
   }
 
 
@@ -139,7 +139,14 @@ export class ChatService {
       conversationId: conversation.conversationId
     };
 
-    return this.messageService.createMessage(messageCreateDTO);
+    return this.messageService.createMessage(messageCreateDTO).pipe(
+      tap(message => {
+        let messages = this.messagesMap.get(conversation.conversationId!) || [];
+        this.messagesMap.set(conversation.conversationId!, [message, ...messages]);
+        this.conversationsMap.get(conversation.conversationId!)!.lastMessage = message;
+        this.OnUpdate$.next(true);
+      })
+    )
   }
 
 
