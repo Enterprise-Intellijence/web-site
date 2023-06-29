@@ -106,7 +106,12 @@ export class ShippingComponent implements OnInit {
   }
 
   setDefaultAddress(address: AddressDTO) {
-    throw new Error('Method not implemented.');
+    address._default = true;
+
+    this.deliveryService.replaceAddress(address, this.currentUserService.user?.id!).subscribe(res => {
+      console.log("res: ", res);
+      alert("Default address set");
+    });
   }
 
   constructor(

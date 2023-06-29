@@ -60,6 +60,7 @@ import { ConversationPreviewComponent } from './components/chat/conversation-pre
 import { MessageComponent } from './components/chat/message/message.component';
 import { EmptyClosetComponent } from './components/empty-closet/empty-closet.component';
 import { AddNewSizeComponent } from './pages/administration/add-new-size/add-new-size.component';
+import { ClickStopPropagationDirective } from "./directives/click-stop-propagation.directive";
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -122,7 +123,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ConversationPreviewComponent,
     MessageComponent,
     EmptyClosetComponent,
-    AddNewSizeComponent
+    AddNewSizeComponent,
+    ClickStopPropagationDirective,
     ],
   providers: [
     HttpClient,
