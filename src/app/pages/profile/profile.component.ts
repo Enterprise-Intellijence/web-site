@@ -41,7 +41,8 @@ export class ProfileComponent implements OnInit {
 
         this.currentUserService.userBasic$.subscribe(user => {
 
-          if ((this.userId! in ['me', user?.id]) && user != null) {
+          if ((this.userId! == 'me' || this.userId! == user?.id) && user != null) {
+            this.isCurrentUser = true;
             this.visitedUser = user;
           }
         })
