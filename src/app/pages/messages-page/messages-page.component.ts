@@ -32,8 +32,10 @@ export class MessagesPageComponent implements OnInit {
       this.conversationId = params.get('conversation-id') ?? undefined;
       console.log("conversation-id: " + this.conversationId);
 
-      if (this.conversationId)
+      if (this.conversationId){
         this.chatService.loadFullConversationMessages(this.conversationId);
+        this.chatService.readMessagesOfConversation(this.conversationId);
+      }
     });
 
 
@@ -60,13 +62,14 @@ export class MessagesPageComponent implements OnInit {
     this.selectedConversation = this.chatService.conversationsMap.get(this.conversationId);
     this.messages = this.chatService.messagesMap.get(this.conversationId) || [];
     this.chatService.refreshConversation(this.conversationId);
+    this.chatService.readMessagesOfConversation(this.conversationId);
   }
 
   public sendMessage() {
     if (!this.selectedConversation || !this.newMessageText)
       return;
     this.chatService.sendMessageForConversation(this.newMessageText, this.selectedConversation).subscribe((message) => {
-      this.messages.push(message);
+      this.messages.unshift(message);
     });
 
     this.newMessageText = '';
