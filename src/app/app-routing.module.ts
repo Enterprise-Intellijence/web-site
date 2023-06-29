@@ -22,6 +22,7 @@ import { ProductsComponent } from "./pages/administration/products/products.comp
 import { ManageSizesComponent } from "./pages/administration/manage-sizes/manage-sizes.component";
 import { ReportSingleViewComponent } from "./pages/administration/report-single-view/report-single-view.component";
 import {SearchPageComponent} from "./pages/search-page/search-page.component";
+import {AddNewSizeComponent} from "./pages/administration/add-new-size/add-new-size.component";
 
 
 const routes: Routes = [
@@ -61,6 +62,7 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'category', component: CategoryComponent },
       { path: 'manage-sizes', component: ManageSizesComponent },
+      {path:'add-new-size',component: AddNewSizeComponent}
     ]},
 
   { path: 'checkout/:id', component: PurchasingPageComponent },

@@ -15,7 +15,7 @@ export class ProductSizesService {
   get areSizesLoaded() {
     return this.allSizes.length > 0;
   }
-  
+
   onSizesLoaded = new BehaviorSubject<SizeDTO[]>([]);
 
 
