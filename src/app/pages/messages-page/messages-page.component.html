@@ -29,9 +29,7 @@
       <hr class="d-block d-lg-none">
       <div class="col-12 col-lg-7 col-xl-8">
         <div class="border-bottom border-2" style="height: 4rem;">
-
           <a [routerLink]="['/users', selectedConversation.otherUser.id]" class="text-reset text-decoration-none" *ngIf="selectedConversation">
-
             <div class="row align-items-center h-100" >
               <div class="col-auto">
                 <img [src]="selectedConversation.otherUser.photoProfile?.urlPhoto | defaultProfilePic" class="rounded-circle shadow ms-4" [alt]="selectedConversation.otherUser.photoProfile?.description" width="40" height="40">
@@ -41,11 +39,11 @@
               </div>
               <div class="col-auto">
                 <div class="hstack gap-2 me-4">
-                  <button class="btn btn-outline-warning" (click)="reportConversation()">
+                  <button class="btn btn-outline-warning" (click)="reportConversation()" clickStopPropagation>
                     <fa-icon [icon]="faExclamationTriangle"></fa-icon>
                     Report
                   </button>
-                  <button class="btn btn-outline-primary" (click)="refreshConversation()">
+                  <button class="btn btn-outline-primary" (click)="refreshConversation()" clickStopPropagation>
                     <fa-icon [icon]="faRefresh" *ngIf="!isRefreshingConversation"></fa-icon>
                     <span *ngIf="isRefreshingConversation" class="spinner-border spinner-border-sm"></span>
                   </button>

@@ -170,7 +170,6 @@ export class ChatService {
       tap(() => {
         this.undreadConversationsCount$.next(this.undreadConversationsCount$.value - 1);
         this.conversationsMap.get(conversationId)!.unreadMessages = false;
-        this.OnUpdate$.next(true);
       })
     );
   }

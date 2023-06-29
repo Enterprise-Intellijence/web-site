@@ -76,7 +76,8 @@ export class MessagesPageComponent implements OnInit {
     this.selectedConversation = this.chatService.conversationsMap.get(this.conversationId);
     this.messages = this.chatService.messagesMap.get(this.conversationId) || [];
     this.chatService.refreshConversation(this.conversationId).subscribe();
-    this.chatService.readMessagesOfConversation(this.conversationId).subscribe();
+    this.chatService.readMessagesOfConversation(this.conversationId).subscribe(() =>
+      this.conversations = this.chatService.conversations$.getValue());
   }
 
   public sendMessage() {

@@ -18,8 +18,8 @@
         <div class="col-auto" *ngIf="conversation.unreadMessages && conversation.lastMessage.sendUser.id == conversation.otherUser.id">
           <span class="badge bg-primary">New</span>
         </div>
-        <div class="col-auto" *ngIf="conversation.lastMessage.receivedUser.id == conversation.otherUser.id">
-          <fa-icon [icon]="faCheck" [ngClass]="conversation.unreadMessages ? 'text-muted' : 'text-primary'"></fa-icon>
+        <div class="col-auto" *ngIf="lastMessage.receivedUser.id == conversation.otherUser.id">
+          <fa-icon [icon]="faCheck" [ngClass]="isLastMessageRead ? 'text-primary': 'text-muted'"></fa-icon>
         </div>
 
         <div class="col-auto text-nowrap text-muted pe-2">
