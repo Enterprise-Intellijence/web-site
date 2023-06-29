@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { faCircleExclamation, faEnvelope, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
-import { FollowingControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
+import { FollowingControllerService, ReportControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ActivatedRoute } from '@angular/router';
+import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'profile',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private currentUserService: CurrentUserService,
     private userService: UserControllerService,
-    private followingService: FollowingControllerService) { }
+    private followingService: FollowingControllerService,
+    private reportService: ReportControllerService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -83,5 +85,15 @@ export class ProfileComponent implements OnInit {
 
       this.visitedUser.followersNumber = (this.visitedUser.followersNumber ?? 0) - 1;
     }
+  }
+
+  report() {
+    this.reportService.createReport({
+      reportedUser: this.visitedUser!,
+      reporterUser: this.currentUserService.user!,
+      description: "Reported by " + this.currentUserService.user?.username
+    }).subscribe(report => {
+      console.log("report: ", report);
+    });
   }
 }
