@@ -22,7 +22,7 @@
       <div class="col-auto">
         <div *ngIf="this.isLoggedIn$ | async" class="hstack gap-3">
 
-          <button class="btn btn-outline-primary position-relative" [routerLink]="['/messages']" (click)="unreadMessages = 2*unreadMessages + 1">
+          <button class="btn btn-outline-primary position-relative" [routerLink]="['/messages']">
             <fa-icon [icon]="messagesIcon"></fa-icon>
 
             <span *ngIf="unreadMessages > 0" class="position-absolute top-0 start-100 badge rounded-pill bg-danger" style="transform: translate(-60%, -40%);">

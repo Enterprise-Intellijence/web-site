@@ -5,6 +5,7 @@ import { faAddressCard, faEnvelope, faGear, faHeart, faRightFromBracket, faSearc
 import { ProductCategory } from 'src/app/models/product-category';
 import { ApiAuthService } from 'src/app/services/api-auth.service';
 import { ClothingDTO, UserDTO } from 'src/app/services/api-service';
+import { ChatService } from 'src/app/services/chat.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ProductCategoriesService } from 'src/app/services/product-categories.service';
 import { UserLikesService } from 'src/app/services/user-likes.service';
@@ -43,6 +44,7 @@ export class NavBarComponent implements OnInit {
     public apiAuth: ApiAuthService,
     private categoriesService: ProductCategoriesService,
     private currentUserService: CurrentUserService,
+    private chatService: ChatService,
     private route: Router
     ) { }
 
@@ -61,6 +63,10 @@ export class NavBarComponent implements OnInit {
       this.homeCategory = this.categoriesService.getCategoryByRawName('Home') ?? undefined;
       this.entertainmentCategory = this.categoriesService.getCategoryByRawName('Entertainment') ?? undefined;
       this.otherCategory = this.categoriesService.getCategoryByRawName('Other') ?? undefined;
+    });
+
+    this.chatService.undreadConversationsCount$.subscribe((count) => {
+      this.unreadMessages = count;
     });
   }
 

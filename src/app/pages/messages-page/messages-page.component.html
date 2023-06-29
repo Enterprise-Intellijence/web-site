@@ -9,9 +9,14 @@
               <input type="text" class="form-control " placeholder="Search..." ngModel [ngModel]="conversationSearch" (ngModelChange)="conversationSearchChanged($event)">
             </div>
             <div class="col-auto">
-              <button class="btn btn-outline-primary btn-sm">
+              <button class="btn btn-outline-primary">
                 <fa-icon [icon]="writeIcon"></fa-icon>
-                New Message</button>
+                New Message
+              </button>
+              <button class="ms-3 btn btn-outline-primary" (click)="refreshConversations()">
+                <fa-icon [icon]="faRefresh" *ngIf="!isRefreshingConversations"></fa-icon>
+                <span *ngIf="isRefreshingConversations" class="spinner-border spinner-border-sm"></span>
+              </button>
             </div>
           </div>
         </div>
@@ -26,18 +31,25 @@
         <div class="border-bottom border-2" style="height: 4rem;">
 
           <a [routerLink]="['/users', selectedConversation.otherUser.id]" class="text-reset text-decoration-none" *ngIf="selectedConversation">
-            <div class="row align-items-center w-100 h-100 px-4">
+
+            <div class="row align-items-center h-100" >
               <div class="col-auto">
-                <img [src]="selectedConversation.otherUser.photoProfile?.urlPhoto | defaultProfilePic" class="rounded-circle shadow" [alt]="selectedConversation.otherUser.photoProfile?.description" width="40" height="40">
+                <img [src]="selectedConversation.otherUser.photoProfile?.urlPhoto | defaultProfilePic" class="rounded-circle shadow ms-4" [alt]="selectedConversation.otherUser.photoProfile?.description" width="40" height="40">
               </div>
               <div class="col">
                 <strong>{{selectedConversation.otherUser.username}}</strong>
               </div>
               <div class="col-auto">
-                <button class="btn btn-outline-warning">
-                  <fa-icon [icon]="faExclamationTriangle"></fa-icon>
-                  Report
-                </button>
+                <div class="hstack gap-2 me-4">
+                  <button class="btn btn-outline-warning" (click)="reportConversation()">
+                    <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+                    Report
+                  </button>
+                  <button class="btn btn-outline-primary" (click)="refreshConversation()">
+                    <fa-icon [icon]="faRefresh" *ngIf="!isRefreshingConversation"></fa-icon>
+                    <span *ngIf="isRefreshingConversation" class="spinner-border spinner-border-sm"></span>
+                  </button>
+                </div>
               </div>
             </div>
           </a>
@@ -75,11 +87,20 @@
 
 
           <div class="px-4 py-2 border-2 border-top align-self-end w-100">
+            <div class="row">
 
-            <div class="input-group ">
-              <textarea type="textarea" class="form-control" placeholder="Type your message" ngModel [(ngModel)]="newMessageText" (keydown.enter)="sendMessage()" autocomplete="off">
-              </textarea>
-              <button class="btn btn-primary" (click)="sendMessage()">Send</button>
+              <div class="col">
+
+                <textarea type="textarea" class="form-control" placeholder="Type your message" ngModel [(ngModel)]="newMessageText" (keydown.enter)="sendMessage()" autocomplete="off">
+                </textarea>
+              </div>
+
+              <div class="col-auto align-self-end">
+                <button class="btn btn-primary" (click)="sendMessage()">
+                  <fa-icon [icon]="faPaperPlane"></fa-icon>
+                  Send</button>
+              </div>
+
             </div>
           </div>
         </div>
