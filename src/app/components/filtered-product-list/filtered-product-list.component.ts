@@ -22,7 +22,7 @@ export class FilteredProductListComponent implements OnInit,OnChanges {
   constructor(private productService: ProductService) {
     this.numberElements=0
     this.page = 1
-    this.pageSize = 10
+    this.pageSize = 12
   }
 
   ngOnInit(): void {

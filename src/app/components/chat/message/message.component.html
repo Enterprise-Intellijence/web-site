@@ -1,1 +1,16 @@
-<p>message works!</p>
+<div class="pb-3 row" [ngClass]="isOwnMessage ? 'own-message' : 'other-message'">
+  <div class="col-8">
+    <div class="card shadow p-2">
+      <div class="card-title">
+        {{message.text }}
+      </div>
+      <div>
+
+  <fa-icon [icon]="faCheck" *ngIf="isOwnMessage" [ngClass]="isRead ? 'text-primary' : 'text-muted'" class="me-3">
+  </fa-icon>
+
+        <span class="text-muted text-nowrap">{{message.messageDate | date: 'short'}}</span>
+      </div>
+    </div>
+  </div>
+</div>
