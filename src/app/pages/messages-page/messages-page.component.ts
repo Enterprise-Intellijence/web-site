@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faCircleInfo, faInfo, faInfoCircle, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faExclamationTriangle, faInfo, faInfoCircle, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { ConversationDTO, MessageDTO } from 'src/app/services/api-service';
 import { ChatService } from 'src/app/services/chat.service';
 
@@ -9,18 +9,23 @@ import { ChatService } from 'src/app/services/chat.service';
   styleUrls: ['./messages-page.component.scss']
 })
 export class MessagesPageComponent implements OnInit {
+
   writeIcon = faPenToSquare;
   infoIcon = faCircleInfo;
+  faExclamationTriangle = faExclamationTriangle;
+
 
   conversationId?: string;
 
   conversations: ConversationDTO[] = [];
+  filteredConversations: ConversationDTO[] = [];
 
   selectedConversation?: ConversationDTO;
 
   messages: MessageDTO[] = [];
 
   newMessageText: string = '';
+  conversationSearch: string = '';
 
 
   constructor(private chatService: ChatService, private activatedRoute: ActivatedRoute) {
@@ -30,11 +35,12 @@ export class MessagesPageComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
 
       this.conversationId = params.get('conversation-id') ?? undefined;
-      console.log("conversation-id: " + this.conversationId);
 
-      if (this.conversationId){
+      if (this.conversationId) {
         this.chatService.loadFullConversationMessages(this.conversationId);
         this.chatService.readMessagesOfConversation(this.conversationId);
+
+        this.updateConversation();
       }
     });
 
@@ -70,8 +76,19 @@ export class MessagesPageComponent implements OnInit {
       return;
     this.chatService.sendMessageForConversation(this.newMessageText, this.selectedConversation).subscribe((message) => {
       this.messages.unshift(message);
+      this.chatService.getAllConversations();
     });
 
     this.newMessageText = '';
   }
+
+  conversationSearchChanged($event: string) {
+    this.conversationSearch = $event;
+    this.filteredConversations = this.conversations.filter(c => {
+      return c.otherUser.username.toLowerCase().includes(this.conversationSearch.toLowerCase()) ||
+        c.lastMessage.text.toLowerCase().includes(this.conversationSearch.toLowerCase());
+    }
+    );
+  }
+
 }
