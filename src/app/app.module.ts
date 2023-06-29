@@ -59,6 +59,7 @@ import { ApiModule as CountryCityModule, Configuration as CountryCiyConfig } fro
 import { ConversationPreviewComponent } from './components/chat/conversation-preview/conversation-preview.component';
 import { MessageComponent } from './components/chat/message/message.component';
 import { EmptyClosetComponent } from './components/empty-closet/empty-closet.component';
+import { ClickStopPropagationDirective } from "./directives/click-stop-propagation.directive"
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -120,7 +121,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     SearchPageComponent,
     ConversationPreviewComponent,
     MessageComponent,
-    EmptyClosetComponent
+    EmptyClosetComponent,
+    ClickStopPropagationDirective,
     ],
   providers: [
     HttpClient,

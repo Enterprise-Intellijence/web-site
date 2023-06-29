@@ -9,7 +9,7 @@
     <img [src]="cardImage" class="card-img-top rounded-0" style="object-fit: cover;" [alt]="product.description">
   </div>
   <div class="card-body" >
-    <div class="text-truncate-container">
+    <div class="text-truncate">
       <span class="card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{product.title}}</span>
     </div>
     <div class="row g-0">
@@ -20,7 +20,7 @@
       </div>
       <div class="col-auto align-self-end">
         <!-- like button with like counter on the right -->
-        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()">
+        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()" clickStopPropagation>
           <fa-icon [icon]="userLikesProduct ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
           <span class="fw-semibold d-inline-block" style="min-width: 1.1rem;">{{totalLikes}}</span>
         </button>
