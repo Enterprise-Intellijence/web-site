@@ -11,10 +11,11 @@ export class ConversationPreviewComponent {
   faCheck = faCheck;
 
   @Input() selected: boolean = false;
+
   @Input() conversation!: ConversationDTO;
-
   get otherUser() { return this.conversation.otherUser;}
-
+  get lastMessage() { return this.conversation.lastMessage;}
+  get isLastMessageRead() { return this.conversation.lastMessage.messageStatus == 'READ';}
 
   constructor() {
 
