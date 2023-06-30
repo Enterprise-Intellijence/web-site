@@ -19,7 +19,6 @@ import { Observable }                                        from 'rxjs';
 
 import { PageReportDTO } from '../model/pageReportDTO';
 import { ReportDTO } from '../model/reportDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';

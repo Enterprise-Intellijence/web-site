@@ -68,7 +68,7 @@
             <a [routerLink]="['/products', selectedConversationProductID]" class="text-reset text-decoration-none">
               <div class="row">
                 <div class="col-auto">
-                  <img [src]="selectedConversationProduct.productImages | defaultProductPic" [alt]="selectedConversationProduct.productImages?.description" width="60" height="60" class="rounded shadow">
+                  <img [src]="selectedConversationProduct.productImages | defaultProductPic" [alt]="selectedConversationProduct.productImages?.at(0)?.description" width="60" height="60" class="rounded shadow">
                 </div>
                 <div class="col h-stack text-truncate" style="text-overflow: ellipsis;">
                   <h5>
