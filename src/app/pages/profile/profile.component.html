@@ -46,11 +46,11 @@
       </div>
 
       <div *ngIf="!isCurrentUser">
-        <button class="btn btn-outline-success" type="button" [routerLink]="['/messages']">
+        <button class="btn btn-outline-success" type="button" [routerLink]="['/messages/new', visitedUser?.id]">
         <fa-icon [icon]="faEnvelope" class="me-1"></fa-icon>
           Message
         </button>
-        
+
         <button *ngIf="isFollowing == false" class="btn btn-success margin-button" type="button" (click)="follow()">
         <fa-icon [icon]="faUserPlus" class="me-1"></fa-icon>
           Follow

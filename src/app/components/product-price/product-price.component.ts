@@ -41,11 +41,14 @@ export class ProductPriceComponent implements OnChanges {
   }
 
   clickOfferButton() {
-    alert("Offerta effettuata");
   }
 
   clickInfoButton() {
-    alert("Informazioni prodotto");
+    this.router.navigate(["/messages/new/", this.productDTO?.seller?.id], {
+      queryParams: {
+        "product-id": this.productDTO?.id
+      }
+    });
   }
 
   clickShareProduct() {
@@ -70,5 +73,5 @@ export class ProductPriceComponent implements OnChanges {
       this.currentUser = user;
     })
   }
-  
+
 }

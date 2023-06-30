@@ -36,6 +36,7 @@ const routes: Routes = [
   { path: 'liked-products', component: LikedProductsPageComponent },
   { path: 'messages', component: MessagesPageComponent },
   { path: 'messages/:conversation-id', component: MessagesPageComponent },
+  { path: 'messages/new/:user-id', component: MessagesPageComponent },
   { path: 'products/new', component: NewProductPageComponent },
   {path: 'search-page',component: SearchPageComponent},
   { path: 'products/:id', component: ProductComponent },

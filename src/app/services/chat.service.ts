@@ -136,15 +136,10 @@ export class ChatService {
 
   public sendMessageForConversation(message: string, conversation: ConversationDTO): Observable<MessageDTO> {
 
-    let prod: any = conversation.productBasicDTO;
-    if (conversation.productBasicDTO != null) {
-      prod.productImages = [conversation.productBasicDTO.productImages]
-    }
-
     let messageCreateDTO: MessageCreateDTO = {
       text: message,
       receivedUser: conversation.otherUser,
-      product: prod,
+      product: conversation.productBasicDTO,
       conversationId: conversation.conversationId
     };
 
@@ -163,7 +158,7 @@ export class ChatService {
     let myId = this.currentUserService.user?.id;
     let messagesIds = this.messagesMap.get(conversationId)?.filter(message => message.messageStatus == 'UNREAD' && message.receivedUser.id == myId).map(message => message.id!) || [];
 
-    if(messagesIds.length == 0)
+    if (messagesIds.length == 0)
       return of();
 
     return this.messageService.setReadMessages(messagesIds).pipe(
@@ -175,13 +170,32 @@ export class ChatService {
   }
 
   public sendFirstMessage(message: string, to: UserBasicDTO, product?: ProductBasicDTO): Observable<MessageDTO> {
+
+    // todo: check if conversation already exists
+
+
     let messageCreateDTO: MessageCreateDTO = {
       text: message,
       receivedUser: to,
-      product: product
+      product: product,
+      conversationId: undefined
     };
 
-    return this.messageService.createMessage(messageCreateDTO);
+    return this.messageService.createMessage(messageCreateDTO).pipe(
+      tap(message => {
+        let conversation: ConversationDTO = {
+          conversationId: message.conversationId!,
+          otherUser: to,
+          productBasicDTO: product,
+          lastMessage: message,
+          unreadMessages: false
+        }
+        this.conversationsMap.set(conversation.conversationId!, conversation);
+        this.conversations = [conversation, ...this.conversations];
+        this.conversations$.next(this.conversations);
+        this.OnUpdate$.next(true);
+      })
+    );
   }
 
 
