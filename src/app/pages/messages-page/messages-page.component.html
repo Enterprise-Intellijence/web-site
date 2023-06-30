@@ -49,12 +49,12 @@
                 <strong>{{selectedConversationUser.username}}</strong>
               </div>
               <div class="col-auto">
-                <div class="hstack gap-2 me-4">
-                  <button class="btn btn-outline-warning" (click)="reportConversation()" clickStopPropagation>
+                <div class="hstack gap-2 me-4" *ngIf="selectedConversation">
+                  <button class="btn btn-outline-warning" clickStopPropagation (click)="reportConversation()">
                     <fa-icon [icon]="faExclamationTriangle"></fa-icon>
                     Report
                   </button>
-                  <button class="btn btn-outline-primary" (click)="refreshConversation()" clickStopPropagation>
+                  <button class="btn btn-outline-primary" clickStopPropagation (click)="refreshConversation()" >
                     <fa-icon [icon]="faRefresh" *ngIf="!isRefreshingConversation"></fa-icon>
                     <span *ngIf="isRefreshingConversation" class="spinner-border spinner-border-sm"></span>
                   </button>

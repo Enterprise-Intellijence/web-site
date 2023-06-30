@@ -9,6 +9,7 @@ export class ClickStopPropagationDirective {
   public onClick(event: any): void {
     console.log("clickStopPropagation", event);
     event.stopPropagation();
+    event.preventDefault();
   }
 
 }
