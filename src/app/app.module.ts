@@ -60,6 +60,8 @@ import { ConversationPreviewComponent } from './components/chat/conversation-pre
 import { MessageComponent } from './components/chat/message/message.component';
 import { EmptyClosetComponent } from './components/empty-closet/empty-closet.component';
 import { ClickStopPropagationDirective } from "./directives/click-stop-propagation.directive"
+import { AuthGuard } from "./guards/auth.guard"
+import { AdminGuard } from "./guards/admin.guard"
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -129,6 +131,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ApiInterceptor,
     API_INTERCEPTOR_PROVIDER,
     UserControllerService,
+    AuthGuard,
+    AdminGuard,
     {
       provide: DROPZONE_CONFIG,
       useValue: DEFAULT_DROPZONE_CONFIG
