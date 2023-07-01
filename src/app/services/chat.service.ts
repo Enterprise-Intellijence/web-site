@@ -71,7 +71,7 @@ export class ChatService {
 
 
   loadConversationPageMessages(conversationId: string, page: number = 0, size: number = 40) {
-    this.messageService.getConversation(conversationId, page, size).subscribe(messages => {
+    this.messageService.getConversationMessages(conversationId, page, size, "body").subscribe(messages => {
       if (page == 0) {
         this.messagesMap.set(conversationId, messages.content!);
 
@@ -95,7 +95,7 @@ export class ChatService {
 
 
   public refreshConversation(conversationId: string): Observable<MessageDTO[]> {
-    return this.messageService.getConversation(conversationId, 0, 40).pipe(
+    return this.messageService.getConversationMessages(conversationId, 0, 40, "body").pipe(
       map(messages => {
         let chatMessages = this.messagesMap.get(conversationId) || [];
         if (chatMessages.length == 0) {
@@ -104,7 +104,7 @@ export class ChatService {
         }
         else {
           // check which messages are new
-          let newMessages = messages.content!.filter(message => !chatMessages.some(chatMessage => chatMessage.id == message.id));
+          let newMessages = messages.content!.filter(message => chatMessages.some(chatMessage => chatMessage.id == message.id));
 
           if (newMessages.length > 0) {
 
