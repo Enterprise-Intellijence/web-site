@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { AdminProductsBody } from '../model/adminProductsBody';
 import { PageUserDTO } from '../model/pageUserDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 import { UserDTO } from '../model/userDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -28,7 +29,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class AdminControllerService {
 
-    protected basePath = 'https://localhost:8443';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

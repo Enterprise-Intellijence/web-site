@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { FollowingFollowersDTO } from '../model/followingFollowersDTO';
 import { PageFollowingFollowersDTO } from '../model/pageFollowingFollowersDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -27,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class FollowingControllerService {
 
-    protected basePath = 'https://localhost:8443';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

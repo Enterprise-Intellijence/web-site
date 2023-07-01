@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { PageReviewDTO } from '../model/pageReviewDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 import { ReviewCreateDTO } from '../model/reviewCreateDTO';
 import { ReviewDTO } from '../model/reviewDTO';
 
@@ -28,7 +29,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class ReviewControllerService {
 
-    protected basePath = 'https://localhost:8443';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

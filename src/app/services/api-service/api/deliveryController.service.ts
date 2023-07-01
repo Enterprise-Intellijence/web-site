@@ -21,6 +21,7 @@ import { AddressCreateDTO } from '../model/addressCreateDTO';
 import { AddressDTO } from '../model/addressDTO';
 import { DeliveryCreateDTO } from '../model/deliveryCreateDTO';
 import { DeliveryDTO } from '../model/deliveryDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -29,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class DeliveryControllerService {
 
-    protected basePath = 'https://localhost:8443';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

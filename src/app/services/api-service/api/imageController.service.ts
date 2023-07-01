@@ -21,6 +21,7 @@ import { ImagesProductBody } from '../model/imagesProductBody';
 import { PhotoprofileIdBody } from '../model/photoprofileIdBody';
 import { ProductIdBody } from '../model/productIdBody';
 import { ProductImageDTO } from '../model/productImageDTO';
+import { ResponseStatusException } from '../model/responseStatusException';
 import { UserImageDTO } from '../model/userImageDTO';
 import { UsersPhotoprofileBody } from '../model/usersPhotoprofileBody';
 
@@ -31,7 +32,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class ImageControllerService {
 
-    protected basePath = 'https://localhost:8443';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
