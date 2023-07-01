@@ -21,7 +21,6 @@ import { ConversationDTO } from '../model/conversationDTO';
 import { MessageCreateDTO } from '../model/messageCreateDTO';
 import { MessageDTO } from '../model/messageDTO';
 import { PageMessageDTO } from '../model/pageMessageDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -189,18 +188,60 @@ export class MessageControllerService {
      * 
      * 
      * @param conversationId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getConversationById(conversationId: string, observe?: 'body', reportProgress?: boolean): Observable<ConversationDTO>;
+    public getConversationById(conversationId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ConversationDTO>>;
+    public getConversationById(conversationId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ConversationDTO>>;
+    public getConversationById(conversationId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (conversationId === null || conversationId === undefined) {
+            throw new Error('Required parameter conversationId was null or undefined when calling getConversationById.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<ConversationDTO>('get',`${this.basePath}/api/v1/messages/conversations/${encodeURIComponent(String(conversationId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param conversationId 
      * @param page 
      * @param sizePage 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getConversation(conversationId: string, page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageMessageDTO>;
-    public getConversation(conversationId: string, page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageMessageDTO>>;
-    public getConversation(conversationId: string, page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageMessageDTO>>;
-    public getConversation(conversationId: string, page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getConversationMessages(conversationId: string, page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageMessageDTO>;
+    public getConversationMessages(conversationId: string, page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageMessageDTO>>;
+    public getConversationMessages(conversationId: string, page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageMessageDTO>>;
+    public getConversationMessages(conversationId: string, page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (conversationId === null || conversationId === undefined) {
-            throw new Error('Required parameter conversationId was null or undefined when calling getConversation.');
+            throw new Error('Required parameter conversationId was null or undefined when calling getConversationMessages.');
         }
 
 
@@ -229,7 +270,57 @@ export class MessageControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageMessageDTO>('get',`${this.basePath}/api/v1/messages/conversations/${encodeURIComponent(String(conversationId))}`,
+        return this.httpClient.request<PageMessageDTO>('get',`${this.basePath}/api/v1/messages/conversations/${encodeURIComponent(String(conversationId))}/messages`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param userId 
+     * @param productId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getConversationWithUser(userId: string, productId?: string, observe?: 'body', reportProgress?: boolean): Observable<ConversationDTO>;
+    public getConversationWithUser(userId: string, productId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ConversationDTO>>;
+    public getConversationWithUser(userId: string, productId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ConversationDTO>>;
+    public getConversationWithUser(userId: string, productId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getConversationWithUser.');
+        }
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (productId !== undefined && productId !== null) {
+            queryParameters = queryParameters.set('productId', <any>productId);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<ConversationDTO>('get',`${this.basePath}/api/v1/messages/conversations/with/${encodeURIComponent(String(userId))}`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

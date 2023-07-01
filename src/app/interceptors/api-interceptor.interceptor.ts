@@ -29,7 +29,7 @@ export class ApiInterceptor implements HttpInterceptor {
       tap({
         error: error => {
           // Handle this err
-          console.error(`Error performing request, status code: ${error.status}\nError message: ${error.message}`);
+          console.error(`Error performing request, status code: ${error.status}\nError message: ${error.message}`, error);
         }
       })
     );

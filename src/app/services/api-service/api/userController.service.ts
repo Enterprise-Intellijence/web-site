@@ -22,7 +22,6 @@ import { LoginWithGoogleBody } from '../model/loginWithGoogleBody';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageOrderBasicDTO } from '../model/pageOrderBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 import { UserBasicDTO } from '../model/userBasicDTO';
 import { UserDTO } from '../model/userDTO';
 
