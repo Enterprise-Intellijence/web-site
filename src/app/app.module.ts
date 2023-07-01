@@ -62,6 +62,7 @@ import { EmptyClosetComponent } from './components/empty-closet/empty-closet.com
 import { ClickStopPropagationDirective } from "./directives/click-stop-propagation.directive"
 import { AuthGuard } from "./guards/auth.guard"
 import { AdminGuard } from "./guards/admin.guard"
+import { Config } from './models/config';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -155,7 +156,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     DropzoneModule,
     BackendApiModule.forRoot(() => new BackendApiConfig({
       withCredentials: false,
-      basePath: 'https://localhost:8443'
+      basePath: Config.basePath,
     })),
     CountryCityModule.forRoot(() => new CountryCiyConfig({
       apiKeys: {"X-CSCAPI-KEY": "ZXJ6emFVYUxmWnhxN2YzZnpQWFY3TENnRmF2SUd6cHZxTWdvRGdKWQ=="}
