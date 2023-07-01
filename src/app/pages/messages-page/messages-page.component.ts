@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faCircleInfo, faExclamationTriangle, faInfo, faInfoCircle, faPaperPlane, faPenToSquare, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { Observable, map, of } from 'rxjs';
 import { ConversationDTO, MessageDTO, ProductBasicDTO, ProductControllerService, UserBasicDTO, UserControllerService } from 'src/app/services/api-service';
 import { ChatService } from 'src/app/services/chat.service';
 
@@ -45,6 +46,7 @@ export class MessagesPageComponent implements OnInit {
 
   constructor(private chatService: ChatService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private userService: UserControllerService,
     private productService: ProductControllerService
   ) {
@@ -54,6 +56,7 @@ export class MessagesPageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.url.subscribe(url => {
       this.makingNewConversation = url[1].path == 'new';
+      this.UpdateConversationIfExists();
     });
 
 
@@ -65,6 +68,7 @@ export class MessagesPageComponent implements OnInit {
       if (this.selectedConversationUserID) {
         this.userService.userById(this.selectedConversationUserID).subscribe(user => {
           this.selectedConversationUser = user;
+          this.UpdateConversationIfExists();
         });
       }
 
@@ -94,7 +98,6 @@ export class MessagesPageComponent implements OnInit {
     this.chatService.conversations$.subscribe(conversations => {
       this.isRefreshingConversations = false;
       this.conversations = conversations;
-      this.updateConversation();
     });
 
 
@@ -117,7 +120,6 @@ export class MessagesPageComponent implements OnInit {
         this.selectedConversationProductID = undefined;
         this.selectedConversationProduct = undefined;
       }
-
       return;
     }
 
@@ -130,7 +132,8 @@ export class MessagesPageComponent implements OnInit {
     this.selectedConversationProduct = this.selectedConversation?.productBasicDTO;
 
     this.messages = this.chatService.messagesMap.get(this.conversationId) || [];
-    this.chatService.refreshConversation(this.conversationId).subscribe();
+
+    this.refreshConversation();
     this.chatService.readMessagesOfConversation(this.conversationId).subscribe(() => {
       this.conversations = this.chatService.conversations$.getValue();
     });
@@ -147,6 +150,7 @@ export class MessagesPageComponent implements OnInit {
 
       this.chatService.sendFirstMessage(this.newMessageText, this.selectedConversationUser!, this.selectedConversationProduct).subscribe((message) => {
         this.chatService.getAllConversations();
+        this.UpdateConversationIfExists();
       });
     } else {
       if (!this.selectedConversation) {
@@ -181,9 +185,34 @@ export class MessagesPageComponent implements OnInit {
   }
 
   refreshConversation() {
-    this.chatService.refreshConversation(this.conversationId!).subscribe(() =>
-      this.isRefreshingConversation = false);
     this.isRefreshingConversation = true;
+    this.chatService.refreshConversation(this.conversationId!).subscribe(() => {
+      this.isRefreshingConversation = false;
+    });
+  }
+
+  UpdateConversationIfExists(): void {
+    if (!this.makingNewConversation)
+      return;
+
+    if (!this.selectedConversationUser)
+      return;
+
+    console.log("UpdateConversationIfExists for user: " + this.selectedConversationUser.username + " and product: " + this.selectedConversationProductID ?? "undefined");
+
+
+    this.chatService.getConversationWithUser(this.selectedConversationUser.id!, this.selectedConversationProductID).subscribe(
+      conversation => {
+        if (conversation) {
+          console.log("Conversation exists, redirecting to it");
+          this.selectedConversation = conversation;
+          this.router.navigate(['/messages', conversation.conversationId]);
+        }
+        else{
+          console.log("Conversation does not exist");
+        }
+      }
+    );
   }
 
 }

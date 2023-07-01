@@ -29,7 +29,18 @@ export class ApiInterceptor implements HttpInterceptor {
       tap({
         error: error => {
           // Handle this err
-          console.error(`Error performing request, status code: ${error.status}\nError message: ${error.message}`, error);
+          if(error.status == 401) {
+            this.apiAuth.logout();
+          }
+          else if(error.status == 404) {
+            console.warn(`404 error, url: ${error.url}`);
+          }
+          else if(error.status == 500) {
+            console.error(`500 Server error, url: ${error.url}`);
+          }
+          else {
+            console.error(`error ${error.status} status code, url: ${error.url}\n`, error.message, error);
+          }
         }
       })
     );
