@@ -43,7 +43,7 @@ export class ProductService {
   getProductCapabilityURL(productID: string): Observable<string> {
     return this.productControllerService.createCapability(productID).pipe(
       map((capabilityDTO) => {
-        return `${Config.webBasePath}/product/token/${capabilityDTO.capabilityToken}`;
+        return `${Config.webBasePath}/products/token/${capabilityDTO.capabilityToken}`;
       })
     )
   }
