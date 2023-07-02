@@ -55,6 +55,12 @@
         <fa-icon [icon]="faShareNodes" class="me-1"></fa-icon>
         Share
       </button>
+
+      <div *ngIf="wasLinkCopied">
+        <div class="alert alert-success" role="alert">
+          Link copied to clipboard!
+        </div>
+      </div>
     </div>
   </div>
 </div>

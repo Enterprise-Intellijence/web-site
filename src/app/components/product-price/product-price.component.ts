@@ -6,7 +6,6 @@ import { UserLikesService } from 'src/app/services/user-likes.service';
 import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { NgForm } from '@angular/forms';
-import { max } from 'rxjs';
 
 @Component({
   selector: 'product-price',
@@ -39,6 +38,7 @@ export class ProductPriceComponent implements OnChanges {
   faCommentDollar = faCommentDollar;
   faEdit = faEdit;
 
+  wasLinkCopied: boolean = false;
 
   isMakingOffer: boolean = false;
   offerAmount: number = this.productDTO?.productCost?.price || 0;
@@ -113,8 +113,19 @@ export class ProductPriceComponent implements OnChanges {
   }
 
   clickShareProduct() {
-    alert("coming soon!");
-    throw new Error('Method not implemented.');
+
+    if(this.isSeller && this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE) {
+
+    }
+    else {
+      var url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        this.wasLinkCopied = true;
+        setTimeout(() => {
+          this.wasLinkCopied = false;
+        }, 3000);
+      });
+    }
   }
 
   clickEdit() {
