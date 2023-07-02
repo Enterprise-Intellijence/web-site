@@ -19,6 +19,8 @@ import {ProductSizesService} from "../../../services/product-sizes.service";
 })
 export class ManageSizesComponent implements OnInit{
 
+  
+
   sizeList?: Array<SizeDTO>
   originalSizeList?: Array<SizeDTO>
   inputSizeType = new FormControl

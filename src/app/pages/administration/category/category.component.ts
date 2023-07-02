@@ -19,7 +19,7 @@ export class CategoryComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.allCategories = this.categoryService.allCategories
+/*    this.allCategories = this.categoryService.allCategories
     this.primaryCategory = this.categoryService.primaryCategories
     this.secondaryCategory = this.categoryService.allCategories
     this.leafCategory = this.categoryService.leafCategories
@@ -32,7 +32,7 @@ export class CategoryComponent implements OnInit{
         this.leafCategory.push(category)
       else
         this.secondaryCategory.push(category)
-    }
+    }*/
 
 
   }
