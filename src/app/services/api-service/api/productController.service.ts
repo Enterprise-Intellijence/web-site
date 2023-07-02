@@ -535,67 +535,6 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProductLikedByUser(id: string, page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public getProductLikedByUser(id: string, page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public getProductLikedByUser(id: string, page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public getProductLikedByUser(id: string, page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getProductLikedByUser.');
-        }
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getProductLikedByUser.');
-        }
-
-        if (size === null || size === undefined) {
-            throw new Error('Required parameter size was null or undefined when calling getProductLikedByUser.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined && size !== null) {
-            queryParameters = queryParameters.set('size', <any>size);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/likes/users/${encodeURIComponent(String(id))}`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param page 
-     * @param size 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
     public getProductMessages(id: string, page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<PageMessageDTO>;
     public getProductMessages(id: string, page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageMessageDTO>>;
     public getProductMessages(id: string, page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageMessageDTO>>;
@@ -780,6 +719,67 @@ export class ProductControllerService {
 
         return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/sizes`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param productId 
+     * @param page 
+     * @param size 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUsersThatLikedProduct(productId: string, page: number, size: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getUsersThatLikedProduct(productId: string, page: number, size: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getUsersThatLikedProduct(productId: string, page: number, size: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getUsersThatLikedProduct(productId: string, page: number, size: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (productId === null || productId === undefined) {
+            throw new Error('Required parameter productId was null or undefined when calling getUsersThatLikedProduct.');
+        }
+
+        if (page === null || page === undefined) {
+            throw new Error('Required parameter page was null or undefined when calling getUsersThatLikedProduct.');
+        }
+
+        if (size === null || size === undefined) {
+            throw new Error('Required parameter size was null or undefined when calling getUsersThatLikedProduct.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (page !== undefined && page !== null) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (size !== undefined && size !== null) {
+            queryParameters = queryParameters.set('size', <any>size);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/likes/users/${encodeURIComponent(String(productId))}`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

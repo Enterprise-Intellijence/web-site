@@ -12,8 +12,8 @@
 import { CurrencyUnit } from './currencyUnit';
 
 export interface Money { 
-    zero?: boolean;
     negative?: boolean;
+    zero?: boolean;
     positive?: boolean;
     amount?: number;
     scale?: number;
