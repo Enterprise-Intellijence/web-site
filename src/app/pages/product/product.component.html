@@ -17,13 +17,13 @@
                 <user-card style="cursor: pointer;" [routerLink]="['/users', product?.seller?.id]" *ngIf="!isWaitingForResponse" [seller]="product?.seller" [rating]="rating"></user-card>
             </div>
         </div>
-        
+
     </div>
     <div class="row">
         <h4>More articles by the seller</h4>
         <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1"></span>
         <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSeller!"></filtered-product-list>
-        <hr />
+        <hr/>
         <h4>Similar items</h4>
         <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSimilar!"></filtered-product-list>
     </div>

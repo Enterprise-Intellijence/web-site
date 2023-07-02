@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit{
   private id!: string;
   product?: ProductDTO;
   rating?: number;
-  images: String[] = []
+  images: string[] = []
   isWaitingForResponse: Boolean = true;
 
   filterSeller: FilterOptions | undefined

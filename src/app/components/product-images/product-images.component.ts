@@ -7,12 +7,12 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class ProductImagesComponent implements OnChanges{
 
-  @Input() thumbnails: String[] = [];
+  @Input() thumbnails: string[] = [];
 
-  image: String = this.thumbnails[0];
+  curr_index: number = 0;
 
-  curr_index: any | undefined
-  imgSrc: String | undefined
+  image: string = this.thumbnails[0];
+
 
   changeImage(index: number) {
     this.curr_index = index
@@ -21,10 +21,6 @@ export class ProductImagesComponent implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
    this.image = this.thumbnails[0]
-  }
-
-  openImage(){
-    this.imgSrc = this.thumbnails[this.curr_index]
   }
 
 }

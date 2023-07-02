@@ -18,10 +18,6 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product!: ProductBasicDTO;
 
-  get cardImage() { return this.product?.productImages?.urlPhoto; }
-
-  get userImage() { return this.product?.seller?.photoProfile?.urlPhoto; }
-
 
   userLikesProduct: boolean = false;
 

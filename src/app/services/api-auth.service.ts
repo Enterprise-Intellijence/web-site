@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 import { UserControllerService } from './api-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,20 @@ export class ApiAuthService {
 
   public isLoggedIn$: BehaviorSubject<boolean>;
 
+  public get role(): string | null {
+    if (this.accessJWT) {
+      return this.accessJWT.role;
+    }
+    return null;
+  }
+
+  public get isAdmin(): boolean {
+    return this.role == 'ADMIN' || this.isSuperAdmin;
+  }
+
+  public get isSuperAdmin(): boolean {
+    return this.role == 'SUPER_ADMIN';
+  }
 
   private _encodedAccessJWT: string | null = null;
   public get encodedAccessJWT() { return this._encodedAccessJWT; }
@@ -25,7 +40,8 @@ export class ApiAuthService {
   private refreshJWT: RefreshJWT | null = null;
 
 
-  constructor(private http: HttpClient,
+
+  constructor(private router: Router,
     private userService: UserControllerService) {
     this.loadTokens();
     this.isLoggedIn$ = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -84,8 +100,8 @@ export class ApiAuthService {
     this.refreshJWT = null;
     this.saveTokens();
     this.isLoggedIn$.next(false);
-    console.log('logged out', this.isLoggedIn());
-
+    this.router.navigate(['login']);
+    console.log('LOGGED OUT, isLoggedIn: ', this.isLoggedIn());
   }
 
   public isLoggedIn(): boolean {

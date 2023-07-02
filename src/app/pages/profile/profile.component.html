@@ -46,11 +46,11 @@
       </div>
 
       <div *ngIf="!isCurrentUser">
-        <button class="btn btn-outline-success" type="button" [routerLink]="['/messages']">
+        <button class="btn btn-outline-success" type="button" [routerLink]="['/messages/new', visitedUser?.id]">
         <fa-icon [icon]="faEnvelope" class="me-1"></fa-icon>
           Message
         </button>
-        
+
         <button *ngIf="isFollowing == false" class="btn btn-success margin-button" type="button" (click)="follow()">
         <fa-icon [icon]="faUserPlus" class="me-1"></fa-icon>
           Follow
@@ -65,26 +65,24 @@
     </div>
   </div>
 
-  <div class="row row-eq-height row-bottom">
-    <div class="col-12">
+  <div class="row-col row-bottom" *ngIf="visitedUser">
       <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
         <li ngbNavItem>
-          <button class="btn-primary" ngbNavLink>Closet</button>
+          <button ngbNavLink>Closet</button>
           <ng-template ngbNavContent>
-            <closet [visitedUser]="visitedUser ?? null"></closet>
+            <closet [visitedUser]="visitedUser"></closet>
           </ng-template>
         </li>
 
         <li ngbNavItem>
-          <button class="btn-primary" ngbNavLink>Reviews</button>
+          <button ngbNavLink>Reviews</button>
           <ng-template ngbNavContent>
-            <review [visitedUser]="visitedUser ?? null"></review>
+            <review [visitedUser]="visitedUser"></review>
           </ng-template>
         </li>
       </ul>
       <div [ngbNavOutlet]="nav"></div>
     </div>
-  </div>
 </div>
 
 <!--Modal -->

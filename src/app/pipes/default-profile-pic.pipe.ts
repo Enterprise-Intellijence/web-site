@@ -8,11 +8,15 @@ import { Config } from '../models/config';
 })
 export class DefaultProfilePicPipe implements PipeTransform {
 
-  transform(url: String | undefined): String {
-    if (url) {
-        return url;
-    } else {
-      return "/assets/images/default-profile-pic.png";
+  defaultImage: string = "/assets/images/default-profile-pic.png"
+
+  transform(value: UserImageDTO | string | undefined): string {
+    if (!value)
+      return this.defaultImage;
+
+    if (typeof value === 'string') {
+      return value;
     }
+    return value.urlPhoto!;
   }
 }

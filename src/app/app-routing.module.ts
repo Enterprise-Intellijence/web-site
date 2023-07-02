@@ -21,24 +21,23 @@ import { UsersComponent } from "./pages/administration/users/users.component";
 import { ProductsComponent } from "./pages/administration/products/products.component";
 import { ManageSizesComponent } from "./pages/administration/manage-sizes/manage-sizes.component";
 import { ReportSingleViewComponent } from "./pages/administration/report-single-view/report-single-view.component";
-import {SearchPageComponent} from "./pages/search-page/search-page.component";
 import {AddNewSizeComponent} from "./pages/administration/add-new-size/add-new-size.component";
+import { SearchPageComponent } from "./pages/search-page/search-page.component";
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
-  // TODO: Just for test purposes the profile page is accessible from users/me but, when the user id
-  //  is provided use the users/:id path
-  // TODO: Add the :id to all the routerLink that are using the users/:id path
   { path: 'users/:id', component: ProfileComponent },
-  { path: 'users/me', component: ProfileComponent },
-  { path: 'users/:id', component: ProfileComponent },
-  { path: 'liked-products', component: LikedProductsPageComponent },
-  { path: 'messages', component: MessagesPageComponent },
-  { path: 'messages/:conversation-id', component: MessagesPageComponent },
-  { path: 'products/new', component: NewProductPageComponent },
-  {path: 'search-page',component: SearchPageComponent},
+  { path: 'users/me', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'liked-products', component: LikedProductsPageComponent, canActivate: [AuthGuard] },
+  { path: 'messages', component: MessagesPageComponent, canActivate: [AuthGuard] },
+  { path: 'messages/:conversation-id', component: MessagesPageComponent, canActivate: [AuthGuard] },
+  { path: 'messages/new/:user-id', component: MessagesPageComponent, canActivate: [AuthGuard] },
+  { path: 'products/new', component: NewProductPageComponent, canActivate: [AuthGuard] },
+  { path: 'search-page', component: SearchPageComponent },
   { path: 'products/:id', component: ProductComponent },
   // { path: 'search', component: SearchPageComponent },
   { path: 'login', component: LoginPageComponent },
@@ -46,7 +45,7 @@ const routes: Routes = [
   { path: 'login-with-google-redirect', component: ProfileComponent },
   // { path: 'register', component: RegisterPageComponent },
   {
-    path: 'settings', component: SettingsComponent, children: [
+    path: 'settings', component: SettingsComponent, canActivate: [AuthGuard], children: [
       { path: '', redirectTo: 'profile-details', pathMatch: 'full' },
       { path: 'profile-details', component: ProfileDetailsComponent },
       { path: 'account', component: AccountSettingsComponent },
@@ -54,17 +53,17 @@ const routes: Routes = [
       { path: 'payments', component: PaymentsComponent },
     ]
   },
-  {path: 'administration', component: AdministrationComponent , children:[
-     { path: '', redirectTo: 'reports', pathMatch: 'full' },
-      { path: 'reports', component: ReportsComponent},
-      {path:  'report/id:',component:ReportSingleViewComponent},
+  {
+    path: 'administration', component: AdministrationComponent, canActivate: [AuthGuard, AdminGuard], children: [
+      { path: '', redirectTo: 'reports', pathMatch: 'full' },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'report/id:', component: ReportSingleViewComponent },
       { path: 'users', component: UsersComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'category', component: CategoryComponent },
       { path: 'manage-sizes', component: ManageSizesComponent },
       {path:'add-new-size',component: AddNewSizeComponent}
     ]},
-
   { path: 'checkout/:id', component: PurchasingPageComponent },
   { path: '**', redirectTo: 'home' }
 ];

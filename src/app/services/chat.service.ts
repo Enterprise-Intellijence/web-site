@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiAuthService } from './api-auth.service';
 import { ConversationDTO, CustomMoneyDTO, MessageControllerService, MessageCreateDTO, MessageDTO, OfferControllerService, OfferCreateDTO, OfferDTO, ProductBasicDTO, UserBasicDTO } from './api-service';
-import { BehaviorSubject, Observable, map, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, switchMap, tap, throwError } from 'rxjs';
 import { CurrentUserService } from './current-user.service';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 
@@ -71,7 +71,7 @@ export class ChatService {
 
 
   loadConversationPageMessages(conversationId: string, page: number = 0, size: number = 40) {
-    this.messageService.getConversation(conversationId, page, size).subscribe(messages => {
+    this.messageService.getConversationMessages(conversationId, page, size, "body").subscribe(messages => {
       if (page == 0) {
         this.messagesMap.set(conversationId, messages.content!);
 
@@ -95,7 +95,7 @@ export class ChatService {
 
 
   public refreshConversation(conversationId: string): Observable<MessageDTO[]> {
-    return this.messageService.getConversation(conversationId, 0, 40).pipe(
+    return this.messageService.getConversationMessages(conversationId, 0, 40, "body").pipe(
       map(messages => {
         let chatMessages = this.messagesMap.get(conversationId) || [];
         if (chatMessages.length == 0) {
@@ -104,7 +104,12 @@ export class ChatService {
         }
         else {
           // check which messages are new
-          let newMessages = messages.content!.filter(message => !chatMessages.some(chatMessage => chatMessage.id == message.id));
+          let newMessages: Array<MessageDTO> = [];
+          messages.content!.forEach(message => {
+            if (!chatMessages.some(chatMessage => chatMessage.id == message.id))
+              newMessages.push(message);
+          });
+
 
           if (newMessages.length > 0) {
 
@@ -125,7 +130,7 @@ export class ChatService {
   }
 
   public sendMessageForConversationId(message: string, conversationId: string): Observable<MessageDTO> {
-    let conversation = this.getConversation(conversationId);
+    let conversation = this.getConversationById(conversationId);
 
     if (conversation == null)
       return throwError(() => new Error("Conversation not found"));
@@ -136,15 +141,10 @@ export class ChatService {
 
   public sendMessageForConversation(message: string, conversation: ConversationDTO): Observable<MessageDTO> {
 
-    let prod: any = conversation.productBasicDTO;
-    if (conversation.productBasicDTO != null) {
-      prod.productImages = [conversation.productBasicDTO.productImages]
-    }
-
     let messageCreateDTO: MessageCreateDTO = {
       text: message,
       receivedUser: conversation.otherUser,
-      product: prod,
+      product: conversation.productBasicDTO,
       conversationId: conversation.conversationId
     };
 
@@ -160,28 +160,56 @@ export class ChatService {
 
 
   public readMessagesOfConversation(conversationId: string) {
+    if (!this.conversationsMap.has(conversationId) || !this.conversationsMap.get(conversationId)!.unreadMessages)
+      return of();
+
     let myId = this.currentUserService.user?.id;
     let messagesIds = this.messagesMap.get(conversationId)?.filter(message => message.messageStatus == 'UNREAD' && message.receivedUser.id == myId).map(message => message.id!) || [];
 
-    if(messagesIds.length == 0)
+    if (messagesIds.length == 0)
       return of();
 
     return this.messageService.setReadMessages(messagesIds).pipe(
       tap(() => {
-        this.undreadConversationsCount$.next(this.undreadConversationsCount$.value - 1);
         this.conversationsMap.get(conversationId)!.unreadMessages = false;
+        this.undreadConversationsCount$.next(this.undreadConversationsCount$.value - 1);
       })
     );
   }
 
   public sendFirstMessage(message: string, to: UserBasicDTO, product?: ProductBasicDTO): Observable<MessageDTO> {
-    let messageCreateDTO: MessageCreateDTO = {
-      text: message,
-      receivedUser: to,
-      product: product
-    };
 
-    return this.messageService.createMessage(messageCreateDTO);
+    return this.getConversationWithUser(to.id!, product?.id).pipe(
+      switchMap(conversation => {
+        if (conversation != null) {
+          return this.sendMessageForConversation(message, conversation);
+        }
+
+        let messageCreateDTO: MessageCreateDTO = {
+          text: message,
+          receivedUser: to,
+          product: product,
+          conversationId: undefined
+        };
+
+        return this.messageService.createMessage(messageCreateDTO).pipe(
+          tap(message => {
+            let conversation: ConversationDTO = {
+              conversationId: message.conversationId!,
+              otherUser: to,
+              productBasicDTO: product,
+              lastMessage: message,
+              unreadMessages: false
+            }
+            this.conversationsMap.set(conversation.conversationId!, conversation);
+            this.conversations = [conversation, ...this.conversations];
+            this.conversations$.next(this.conversations);
+            this.OnUpdate$.next(true);
+          })
+        );
+      }
+
+      ));
   }
 
 
@@ -194,15 +222,32 @@ export class ChatService {
   }
 
 
-  public getConversation(conversationId: string): ConversationDTO | null {
+  public getConversationById(conversationId: string): ConversationDTO | null {
     return this.conversationsMap.get(conversationId) || null;
   }
 
-  public getConversationWithUser(otherUser: UserBasicDTO, product?: ProductBasicDTO): ConversationDTO | null {
+
+  public getConversationWithUser(otherUserId: string, productId?: string): Observable<ConversationDTO | null> {
+    console.log("getConversationWithUser", otherUserId, productId);
+
+    return this.messageService.getConversationWithUser(otherUserId, productId, "body").pipe(
+      map(conversation => {
+        console.log("getConversationWithUser, found conversation: ", conversation);
+
+        return conversation;
+      }),
+      catchError(err => {
+        if (err.status == 404)
+          return of(null);
+        throw err;
+      })
+    );
+
+
     // we can use new endpoint for this if we want
-    return this.conversations.find(conversation =>
-      conversation.otherUser.id == otherUser.id &&
-      (conversation.productBasicDTO == product)) || null;
+    // return this.conversations.find(conversation =>
+    //   conversation.otherUser.id == otherUser.id &&
+    //   (conversation.productBasicDTO == product)) || null;
   }
 
 
