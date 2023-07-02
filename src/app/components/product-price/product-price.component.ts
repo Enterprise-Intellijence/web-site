@@ -6,6 +6,7 @@ import { UserLikesService } from 'src/app/services/user-likes.service';
 import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { NgForm } from '@angular/forms';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'product-price',
@@ -13,22 +14,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./product-price.component.scss']
 })
 export class ProductPriceComponent implements OnChanges {
-
-
-  isFav: boolean = false;
-
-  notFavButtonText: string = "Add to favourites";
-  isFavButtonText: string = "Remove from favourites";
-
-  get isSeller(): boolean {
-    return this.currentUser?.id === this.productDTO?.seller?.id;
-  }
-
-  @Input() productDTO?: ProductDTO;
-  priceWithProtection?: string;
-
-  currentUser: UserDTO | null = null;
-
 
   fullHeartIcon = faHeartFull;
   emptyHeartIcon = faHeart;
@@ -38,20 +23,38 @@ export class ProductPriceComponent implements OnChanges {
   faCommentDollar = faCommentDollar;
   faEdit = faEdit;
 
-  wasLinkCopied: boolean = false;
+
+
+  @Input() productDTO?: ProductDTO;
+
+  get isPrivate() {
+    return this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE;
+  }
+
+
+  currentUser: UserDTO | null = null;
+  get isSeller(): boolean {
+    return this.currentUser?.id === this.productDTO?.seller?.id;
+  }
+
+  isLiked: boolean = false;
+
 
   isMakingOffer: boolean = false;
   offerAmount: number = this.productDTO?.productCost?.price || 0;
   offerCurrency: CustomMoneyDTO.CurrencyEnum = this.productDTO?.productCost?.currency || "EUR";
+
+  wasLinkCopied: boolean = false;
 
 
   constructor(
     private currentUserService: CurrentUserService,
     private offerService: OfferControllerService,
     private userLikesService: UserLikesService,
-     private router: Router) {
+    private productService: ProductService,
+    private router: Router) {
     this.userLikesService.LikedProducts$.subscribe((products) => {
-      this.isFav = userLikesService.isProductLikedById(this.productDTO?.id!);
+      this.isLiked = userLikesService.isProductLikedById(this.productDTO?.id!);
     });
 
     this.currentUserService.user$.subscribe((user) => {
@@ -113,19 +116,26 @@ export class ProductPriceComponent implements OnChanges {
   }
 
   clickShareProduct() {
-
-    if(this.isSeller && this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE) {
-
+    if (this.isSeller && this.isPrivate) {
+      this.productService.getProductCapabilityURL(this.productDTO?.id!).subscribe((url) => {
+        this.copyToClipboard(url);
+      });
     }
     else {
       var url = window.location.href;
-      navigator.clipboard.writeText(url).then(() => {
-        this.wasLinkCopied = true;
-        setTimeout(() => {
-          this.wasLinkCopied = false;
-        }, 3000);
-      });
+      this.copyToClipboard(url);
     }
+  }
+
+
+
+  private copyToClipboard(url: string) {
+    navigator.clipboard.writeText(url).then(() => {
+      this.wasLinkCopied = true;
+      setTimeout(() => {
+        this.wasLinkCopied = false;
+      }, 3000);
+    });
   }
 
   clickEdit() {
@@ -134,7 +144,7 @@ export class ProductPriceComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    this.isFav = this.userLikesService.isProductLikedById(this.productDTO?.id!);
+    this.isLiked = this.userLikesService.isProductLikedById(this.productDTO?.id!);
     this.offerAmount = this.productDTO?.productCost?.price || 0;
     this.offerCurrency = this.productDTO?.productCost?.currency || "EUR";
   }

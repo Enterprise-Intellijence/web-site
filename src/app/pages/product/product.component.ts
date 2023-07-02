@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductControllerService } from 'src/app/services/api-service';
 import { FilterOptions } from 'src/app/models/filter-options';
 import { Config } from 'src/app/models/config';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'product',
@@ -12,8 +13,16 @@ import { Config } from 'src/app/models/config';
 })
 export class ProductComponent implements OnInit{
 
+  faLock = faLock;
+
   private id!: string;
   product?: ProductDTO;
+
+
+  get isPrivate() {
+    return this.product?.visibility == ProductDTO.VisibilityEnum.PRIVATE;
+  }
+
   rating?: number;
   images: string[] = []
   isWaitingForResponse: Boolean = true;

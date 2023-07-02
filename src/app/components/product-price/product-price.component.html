@@ -42,8 +42,8 @@
       </button>
 
       <button *ngIf="!isSeller" type="button" (click)="clickFavButton()" class="btn btn-outline-secondary btn-block">
-        <fa-icon [icon]="isFav ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
-        {{isFav ? isFavButtonText : notFavButtonText}}
+        <fa-icon [icon]="isLiked ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
+        {{isLiked ? "Remove from favourites" : "Add to favourites"}}
       </button>
 
       <button *ngIf="isSeller" type="button" (click)="clickEdit()" class="btn btn-outline-secondary btn-block">
