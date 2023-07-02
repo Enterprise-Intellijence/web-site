@@ -96,6 +96,7 @@ export class ProductPriceComponent implements OnChanges {
 
       this.offerService.createOffer(offer, "body").subscribe((offer) => {
         console.log("offer created: ", offer);
+        this.router.navigate(["/messages"]);
         this.isMakingOffer = false;
       })
 

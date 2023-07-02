@@ -12,6 +12,7 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 export class MessageComponent implements OnInit {
 
 
+
   faCheck = faCheck;
   faXMark = faXmark;
   faHourglassHalf = faHourglassHalf;
@@ -46,31 +47,39 @@ export class MessageComponent implements OnInit {
 
 
   private UpdateOfferVisual() {
-    if (this.containsOffer) {
-      if (this.message.offer?.state == 'ACCEPTED') {
-        this.offerStatusIcon = this.faCheck;
-        this.offerStatusText = 'Offer accepted';
-        this.offerStatusClass = 'bg-success';
-      }
-      else if (this.message.offer?.state == 'PENDING') {
-        this.offerStatusIcon = this.faHourglassHalf;
-        this.offerStatusText = 'Offer pending';
-        this.offerStatusClass = 'bg-warning';
-      }
-      else if (this.message.offer?.state == 'REJECTED') {
-        this.offerStatusIcon = this.faXMark;
-        this.offerStatusText = 'Offer rejected';
-        this.offerStatusClass = 'bg-danger';
-      }
+    if (!this.containsOffer)
+      return;
+
+    if (this.message.offer?.state == 'ACCEPTED') {
+      this.offerStatusIcon = this.faCheck;
+      this.offerStatusText = 'Offer accepted';
+      this.offerStatusClass = 'bg-success';
+    }
+    else if (this.message.offer?.state == 'PENDING') {
+      this.offerStatusIcon = this.faHourglassHalf;
+      this.offerStatusText = 'Offer pending';
+      this.offerStatusClass = 'bg-warning';
+    }
+    else if (this.message.offer?.state == 'REJECTED') {
+      this.offerStatusIcon = this.faXMark;
+      this.offerStatusText = 'Offer rejected';
+      this.offerStatusClass = 'bg-danger';
+    }
+    else if (this.message.offer?.state == 'CANCELLED') {
+      this.offerStatusIcon = this.faXMark;
+      this.offerStatusText = 'Offer canceled';
+      this.offerStatusClass = 'bg-danger';
+    }
+    else {
+      throw new Error("Unknown offer state");
     }
   }
 
   declineOffer() {
     if (!this.offer)
       return;
-    var offer: OfferDTO = { ...this.offer, state: 'REJECTED' };
 
-    this.offerService.updateOffer(offer, offer.id!).subscribe((offer) => {
+    this.offerService.rejectOffer(this.offer.id!).subscribe((offer) => {
       this.message.offer = offer;
       this.UpdateOfferVisual();
     });
@@ -80,15 +89,22 @@ export class MessageComponent implements OnInit {
   acceptOffer() {
     if (!this.offer)
       return;
-    var offer: OfferDTO = { ...this.offer, state: 'ACCEPTED' };
 
-    this.offerService.updateOffer(offer, offer.id!).subscribe((offer) => {
+
+    this.offerService.acceptOffer(this.offer.id!).subscribe((offer) => {
       this.message.offer = offer;
       this.UpdateOfferVisual();
     });
   }
 
 
+  cancelOffer() {
+    if (!this.offer)
+      return;
 
-
+    this.offerService.cancelOffer(this.offer.id!).subscribe((offer) => {
+      this.message.offer = offer;
+      this.UpdateOfferVisual();
+    });
+  }
 }
