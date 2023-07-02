@@ -157,17 +157,17 @@ export class ProductControllerService {
     /**
      * 
      * 
-     * @param token 
+     * @param productId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCapability(token: string, observe?: 'body', reportProgress?: boolean): Observable<AdminProductsBody>;
-    public getCapability(token: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AdminProductsBody>>;
-    public getCapability(token: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AdminProductsBody>>;
-    public getCapability(token: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getCapabilityToken(productId: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public getCapabilityToken(productId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public getCapabilityToken(productId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public getCapabilityToken(productId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (token === null || token === undefined) {
-            throw new Error('Required parameter token was null or undefined when calling getCapability.');
+        if (productId === null || productId === undefined) {
+            throw new Error('Required parameter productId was null or undefined when calling getCapabilityToken.');
         }
 
         let headers = this.defaultHeaders;
@@ -186,7 +186,7 @@ export class ProductControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<AdminProductsBody>('get',`${this.basePath}/api/v1/products/capability/${encodeURIComponent(String(token))}`,
+        return this.httpClient.request<string>('post',`${this.basePath}/api/v1/products/capability/token/${encodeURIComponent(String(productId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -199,17 +199,17 @@ export class ProductControllerService {
     /**
      * 
      * 
-     * @param id 
+     * @param productId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCapabilityUrl(id: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public getCapabilityUrl(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public getCapabilityUrl(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public getCapabilityUrl(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getCapabilityUrl(productId: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public getCapabilityUrl(productId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public getCapabilityUrl(productId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public getCapabilityUrl(productId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getCapabilityUrl.');
+        if (productId === null || productId === undefined) {
+            throw new Error('Required parameter productId was null or undefined when calling getCapabilityUrl.');
         }
 
         let headers = this.defaultHeaders;
@@ -228,7 +228,7 @@ export class ProductControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<string>('get',`${this.basePath}/api/v1/products/capability/url/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<string>('post',`${this.basePath}/api/v1/products/capability/url/${encodeURIComponent(String(productId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -481,6 +481,48 @@ export class ProductControllerService {
         return this.httpClient.request<PageProductBasicDTO>('get',`${this.basePath}/api/v1/products/me`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param token 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getProductFromCapability(token: string, observe?: 'body', reportProgress?: boolean): Observable<AdminProductsBody>;
+    public getProductFromCapability(token: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AdminProductsBody>>;
+    public getProductFromCapability(token: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AdminProductsBody>>;
+    public getProductFromCapability(token: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (token === null || token === undefined) {
+            throw new Error('Required parameter token was null or undefined when calling getProductFromCapability.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<AdminProductsBody>('get',`${this.basePath}/api/v1/products/capability/${encodeURIComponent(String(token))}`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
