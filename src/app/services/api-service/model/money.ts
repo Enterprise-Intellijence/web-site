@@ -15,17 +15,16 @@ export interface Money {
     zero?: boolean;
     negative?: boolean;
     positive?: boolean;
+    amount?: number;
     scale?: number;
     currencyUnit?: CurrencyUnit;
+    amountMajor?: number;
     amountMajorLong?: number;
     amountMajorInt?: number;
     amountMinor?: number;
     amountMinorLong?: number;
     amountMinorInt?: number;
     minorPart?: number;
-    amountMajor?: number;
     positiveOrZero?: boolean;
     negativeOrZero?: boolean;
-    amount?: number;
-
 }

@@ -1,9 +1,12 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ProductDTO, ProductBasicDTO, CustomMoneyDTO } from 'src/app/services/api-service';
+import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserBasicDTO, UserDTO, OfferControllerService, OfferCreateDTO } from 'src/app/services/api-service';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as faHeartFull } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCircleInfo, faCommentDollar, faEdit, faHeart as faHeartFull, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { UserLikesService } from 'src/app/services/user-likes.service';
 import { Router } from '@angular/router';
+import { CurrentUserService } from 'src/app/services/current-user.service';
+import { NgForm } from '@angular/forms';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'product-price',
@@ -12,15 +15,61 @@ import { Router } from '@angular/router';
 })
 export class ProductPriceComponent implements OnChanges {
 
-  isFav: boolean = false;
+  fullHeartIcon = faHeartFull;
+  emptyHeartIcon = faHeart;
+  faCartShopping = faCartShopping;
+  faShareNodes = faShareNodes;
+  faCircleInfo = faCircleInfo;
+  faCommentDollar = faCommentDollar;
+  faEdit = faEdit;
 
-  notFavButtonText: string = "Aggiungi ai preferiti";
-  isFavButtonText: string = "Rimuovi dai preferiti";
+
 
   @Input() productDTO?: ProductDTO;
-  priceWithProtection?: string;
-  fullHeartIcon= faHeartFull;
-  emptyHeartIcon= faHeart;
+
+  get isPrivate() {
+    return this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE;
+  }
+
+
+  currentUser: UserDTO | null = null;
+  get isSeller(): boolean {
+    return this.currentUser?.id === this.productDTO?.seller?.id;
+  }
+
+  isLiked: boolean = false;
+
+
+  isMakingOffer: boolean = false;
+  offerAmount: number = this.productDTO?.productCost?.price || 0;
+  offerCurrency: CustomMoneyDTO.CurrencyEnum = this.productDTO?.productCost?.currency || "EUR";
+
+  wasLinkCopied: boolean = false;
+
+
+  constructor(
+    private currentUserService: CurrentUserService,
+    private offerService: OfferControllerService,
+    private userLikesService: UserLikesService,
+    private productService: ProductService,
+    private router: Router) {
+    this.userLikesService.LikedProducts$.subscribe((products) => {
+      this.isLiked = userLikesService.isProductLikedById(this.productDTO?.id!);
+    });
+
+    this.currentUserService.user$.subscribe((user) => {
+      this.currentUser = user;
+    })
+  }
+
+  offerChanged($event: number) {
+    this.offerAmount = $event;
+    if (this.offerAmount < 0) {
+      this.offerAmount = 0;
+    }
+    console.log("offer changed: ", this.offerAmount);
+  }
+
 
   clickFavButton() {
     this.userLikesService.toggleLikeProductById(this.productDTO?.id!).subscribe();
@@ -33,21 +82,73 @@ export class ProductPriceComponent implements OnChanges {
   }
 
   clickOfferButton() {
-    alert("Offerta effettuata");
+    this.isMakingOffer = !this.isMakingOffer;
   }
 
+  submitOffer(form: NgForm) {
+    if (form.valid) {
+      console.log("form valid");
+
+      var offer: OfferCreateDTO = {
+        amount: {
+          price: this.offerAmount,
+          currency: this.offerCurrency
+        },
+        product: this.productDTO,
+      }
+
+      this.offerService.createOffer(offer, "body").subscribe((offer) => {
+        console.log("offer created: ", offer);
+        this.router.navigate(["/messages"]);
+        this.isMakingOffer = false;
+      })
+
+    }
+  }
+
+
   clickInfoButton() {
-    alert("Informazioni prodotto");
+    this.router.navigate(["/messages/new/", this.productDTO?.seller?.id], {
+      queryParams: {
+        "product-id": this.productDTO?.id
+      }
+    });
+  }
+
+  clickShareProduct() {
+    if (this.isSeller && this.isPrivate) {
+      this.productService.getProductCapabilityURL(this.productDTO?.id!).subscribe((url) => {
+        this.copyToClipboard(url);
+      });
+    }
+    else {
+      var url = window.location.href;
+      this.copyToClipboard(url);
+    }
+  }
+
+
+
+  private copyToClipboard(url: string) {
+    navigator.clipboard.writeText(url).then(() => {
+      this.wasLinkCopied = true;
+      setTimeout(() => {
+        this.wasLinkCopied = false;
+      }, 3000);
+    });
+  }
+
+  clickEdit() {
+    alert("coming soon!");
+    throw new Error('Method not implemented.');
   }
 
   ngOnChanges() {
-    this.isFav = this.userLikesService.isProductLikedById(this.productDTO?.id!);
+    this.isLiked = this.userLikesService.isProductLikedById(this.productDTO?.id!);
+    this.offerAmount = this.productDTO?.productCost?.price || 0;
+    this.offerCurrency = this.productDTO?.productCost?.currency || "EUR";
   }
 
-  constructor(private userLikesService: UserLikesService, private router: Router) {
-    userLikesService.LikedProducts$.subscribe((products) => {
-      this.isFav = userLikesService.isProductLikedById(this.productDTO?.id!);
-      console.log(this.isFav)
-    });
-  }
+
+
 }

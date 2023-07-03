@@ -25,7 +25,7 @@ export interface ProductBasicDTO {
     condition?: ProductBasicDTO.ConditionEnum;
     likesNumber?: number;
     seller?: UserBasicDTO;
-    productImages?: ProductImageDTO;
+    productImages?: Array<ProductImageDTO>;
     productCategory?: ProductCategoryDTO;
 }
 export namespace ProductBasicDTO {

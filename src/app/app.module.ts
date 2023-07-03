@@ -12,7 +12,6 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { AccountSettingsComponent } from './pages/settings/account-settings/account-settings.component';
 import { ShippingComponent } from './pages/settings/shipping/shipping.component';
 import { PaymentsComponent } from './pages/settings/payments/payments.component';
-import { NotificationsComponent } from './pages/settings/notifications/notifications.component';
 import { ProductPriceComponent } from './components/product-price/product-price.component';
 import { ProductImagesComponent } from './components/product-images/product-images.component';
 import { ProductComponent } from './pages/product/product.component';
@@ -24,12 +23,11 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { FilteredProductListComponent } from './components/filtered-product-list/filtered-product-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DefaultProfilePicPipe } from './pipes/default-profile-pic.pipe';
-import { BankAccountComponent } from './pages/settings/payments/bank-account/bank-account.component';
 import { BadgeTextPipe } from './pipes/badge-text.pipe';
 import { PurchasingPageComponent } from './pages/purchasing-page/purchasing-page.component';
 import { DefaultProductPicPipe } from './pipes/default-product-pic.pipe';
 import { AlertModule } from './components/alerts/alert.module';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DropzoneModule, DropzoneConfigInterface, DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { ApiInterceptor } from './interceptors/api-interceptor.interceptor';
@@ -57,6 +55,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ApiModule as CountryCityModule, Configuration as CountryCiyConfig } from './services/country-city-api';
+import { ConversationPreviewComponent } from './components/chat/conversation-preview/conversation-preview.component';
+import { MessageComponent } from './components/chat/message/message.component';
+import { EmptyClosetComponent } from './components/empty-closet/empty-closet.component';
+import { ClickStopPropagationDirective } from "./directives/click-stop-propagation.directive"
+import { AuthGuard } from "./guards/auth.guard"
+import { AdminGuard } from "./guards/admin.guard"
+import { Config } from './models/config';
+import { EmptyReviewsComponent } from './components/empty-reviews/empty-reviews.component';
+
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -71,6 +78,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
   multi: true
 };
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,9 +88,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     AccountSettingsComponent,
     ShippingComponent,
     PaymentsComponent,
-    NotificationsComponent,
     ProductPriceComponent,
-    NotificationsComponent,
     ProductImagesComponent,
     ProductComponent,
     ProductInfoComponent,
@@ -93,9 +99,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ProfileComponent,
     DefaultProfilePicPipe,
     DefaultProductPicPipe,
-    BankAccountComponent,
     PurchasingPageComponent,
-    BankAccountComponent,
     MessagesPageComponent,
     LoginPageComponent,
     ReviewCardComponent,
@@ -117,14 +121,20 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ReportsComponent,
     ReportSingleViewComponent,
     FooterComponent,
-    SearchPageComponent
-
+    SearchPageComponent,
+    ConversationPreviewComponent,
+    MessageComponent,
+    EmptyClosetComponent,
+    ClickStopPropagationDirective,
+    EmptyReviewsComponent,
     ],
   providers: [
     HttpClient,
     ApiInterceptor,
     API_INTERCEPTOR_PROVIDER,
     UserControllerService,
+    AuthGuard,
+    AdminGuard,
     {
       provide: DROPZONE_CONFIG,
       useValue: DEFAULT_DROPZONE_CONFIG
@@ -147,13 +157,14 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     DropzoneModule,
     BackendApiModule.forRoot(() => new BackendApiConfig({
       withCredentials: false,
-      basePath: 'https://localhost:8443'
+      basePath: Config.basePath,
     })),
     CountryCityModule.forRoot(() => new CountryCiyConfig({
       apiKeys: {"X-CSCAPI-KEY": "ZXJ6emFVYUxmWnhxN2YzZnpQWFY3TENnRmF2SUd6cHZxTWdvRGdKWQ=="}
     })),
     FormsModule,
     UserCardComponent,
+    ReactiveFormsModule,
   ]
 })
 export class AppModule { }

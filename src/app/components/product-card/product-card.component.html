@@ -1,16 +1,18 @@
-<div class="card shadow cursor-pointer" style="max-width: 20rem;" [routerLink]="['/products', product.id]">
+<div class="card shadow cursor-pointer" [routerLink]="['/products', product.id]">
 
   <div class="card-header text-truncate cursor-pointer" [routerLink]="['/users', product.seller?.id]">
-    <img [src]="usernameImage" alt="" class="rounded-circle" width="26px" height="26px">
+    <img [src]="product.seller?.photoProfile | defaultProfilePic" alt="" class="rounded-circle" width="26px" height="26px">
     <span class="ms-2">{{product.seller?.username}}</span>
   </div>
 
-  <div class="ratio ratio-1x1" style="min-block-size: 200px;">
-    <img [src]="cardImage" class="card-img-top rounded-0" style="object-fit: cover;" [alt]="product.description">
+  <div class="ratio ratio-1x1">
+    <img [src]="product.productImages | defaultProductPic" class="card-img-top rounded-0" style="object-fit: cover;" [alt]="product.description">
   </div>
-  <div class="card-body">
-    <h5 class="card-title" style="max-width: 90%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{product.title}}</h5>
-    <div class="row">
+  <div class="card-body" >
+    <div class="text-truncate">
+      <span class="card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{product.title}}</span>
+    </div>
+    <div class="row g-0">
       <div class="col card-text">
         <span class="fw-medium">{{product.productCost.price | currency:product.productCost.currency}}</span>
         <br>
@@ -18,7 +20,7 @@
       </div>
       <div class="col-auto align-self-end">
         <!-- like button with like counter on the right -->
-        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()">
+        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()" clickStopPropagation>
           <fa-icon [icon]="userLikesProduct ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
           <span class="fw-semibold d-inline-block" style="min-width: 1.1rem;">{{totalLikes}}</span>
         </button>

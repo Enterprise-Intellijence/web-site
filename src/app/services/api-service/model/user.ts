@@ -51,13 +51,14 @@ export interface User {
     status?: User.StatusEnum;
     reports?: Array<Report>;
     reported?: Array<Report>;
+    adminFollowedMyReport?: Array<Report>;
     notifications?: Array<Notification>;
     enabled?: boolean;
     administrator?: boolean;
     authorities?: Array<GrantedAuthority>;
-    credentialsNonExpired?: boolean;
     accountNonExpired?: boolean;
     accountNonLocked?: boolean;
+    credentialsNonExpired?: boolean;
 }
 export namespace User {
     export type ProviderEnum = 'LOCAL' | 'GOOGLE';
@@ -71,11 +72,12 @@ export namespace User {
         USER: 'USER' as RoleEnum,
         SUPERADMIN: 'SUPER_ADMIN' as RoleEnum
     };
-    export type StatusEnum = 'ACTIVE' | 'BANNED' | 'HIDDEN' | 'HOLIDAY';
+    export type StatusEnum = 'ACTIVE' | 'BANNED' | 'HIDDEN' | 'HOLIDAY' | 'CANCELLED';
     export const StatusEnum = {
         ACTIVE: 'ACTIVE' as StatusEnum,
         BANNED: 'BANNED' as StatusEnum,
         HIDDEN: 'HIDDEN' as StatusEnum,
-        HOLIDAY: 'HOLIDAY' as StatusEnum
+        HOLIDAY: 'HOLIDAY' as StatusEnum,
+        CANCELLED: 'CANCELLED' as StatusEnum
     };
 }

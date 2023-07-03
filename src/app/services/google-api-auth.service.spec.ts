@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserProfileService } from './user-profile.service';
+import { GoogleApiAuthService } from './google-api-auth.service';
 
-describe('UserProfileService', () => {
-  let service: UserProfileService;
+describe('GoogleApiAuthService', () => {
+  let service: GoogleApiAuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserProfileService);
+    service = TestBed.inject(GoogleApiAuthService);
   });
 
   it('should be created', () => {

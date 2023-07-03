@@ -1,17 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { UserImageDTO } from '../services/api-service';
 import { SafeUrl } from '@angular/platform-browser';
+import { Config } from '../models/config';
 
 @Pipe({
   name: 'defaultProfilePic'
 })
 export class DefaultProfilePicPipe implements PipeTransform {
 
-  transform(s: String | undefined): String {
-    if (s) {
-      return s.toString();
-    } else {
-      return "/assets/images/default-profile-pic.png";
+  defaultImage: string = "/assets/images/default-profile-pic.png"
+
+  transform(value: UserImageDTO | string | undefined): string {
+    if (!value)
+      return this.defaultImage;
+
+    if (typeof value === 'string') {
+      return value;
     }
+    return value.urlPhoto!;
   }
 }

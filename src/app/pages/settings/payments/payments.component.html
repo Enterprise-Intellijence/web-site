@@ -1,5 +1,5 @@
 <div class="basic-container">
-    <div class = "row fw-lighter">
+    <div class = "row">
         <span>Payment options</span>
     </div>
     <div class = "row">
@@ -11,22 +11,6 @@
             <fa-icon [icon]="arrowRight">
 
             </fa-icon>
-          </button>
-        </div>
-    </div>
-</div>
-
-<div class="basic-container">
-    <div class = "row fw-lighter">
-        <span>Transfer options</span>
-    </div>
-    <div class = "row">
-        <div class="col-6 fw-semibold mt-3">
-            <span>Add bank-account</span>
-        </div>
-        <div class="col-6 fw-semibold mt-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary float-end" [routerLink]="['/wallet/bank-account']">
-            <fa-icon [icon]="arrowRight"></fa-icon>
           </button>
         </div>
     </div>
@@ -59,7 +43,7 @@
                     </div>
             
                     <div class="col-8 mt-2">
-                        <input type="text" class="form-control border-0" placeholder="{{profileName}}">
+                        <input ngModel type="text" class="form-control" placeholder="{{cardOwnerPlaceholder}}" (input)="setCardOwnerName($event)">
                     </div>
                 </div>
             </div>
@@ -70,7 +54,7 @@
                     </div>
             
                     <div class="col-8 mt-2">
-                        <input type="text" class="form-control border-0" placeholder="{{cardNumber}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input type="text" class="form-control" placeholder="{{cardNumberPlaceholder}}" (input)="formatCardNumber($event)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                 </div>
             </div>
@@ -82,8 +66,7 @@
                     </div>
             
                     <div class="col-8 mt-2">
-                        <input type="text" class="form-control border-0" placeholder="{{expirationDay}}" (input)="formatDateInput($event)" [ngClass]="{ 'error': error }">
-                        <div class="error-message mt-2" *ngIf="error">Invalid month, try again.</div>
+                        <input type="text" class="form-control" placeholder="{{expirationDayPlaceholder}}" (input)="formatDateInput($event)">
                     </div>
                 </div>
             </div>
@@ -95,16 +78,20 @@
                     </div>
             
                     <div class="col-8 mt-2">
-                        <input type="text" class="form-control border-0" placeholder="{{secureCode}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input type="text" class="form-control" placeholder="{{secureCodePlaceholder}}" (input)="formatSecureCode($event)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                 </div>
             </div>
           </form>
         </div>
+
+        <div *ngIf="error == true" class="alert alert-danger mt-1 m-2">
+            <div>{{alertErrorMessage}}</div>
+        </div>
   
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="" (click)="save()">Save</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
   

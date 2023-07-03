@@ -1,20 +1,16 @@
-<div class="col mt-3 offset-2">
-    <div class="row align-items-center">
-        <table id="grid-table">
-            <tr *ngFor="let r of reviewPageMap.get(pageNumber)">
-                <review-card [review]="r"></review-card>
-            </tr>
-        </table>
-    
-    </div>
-    
-    <ngb-pagination class="d-flex justify-content-center"
-        [(page)]="pageNumber"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        [collectionSize]="totalElements"
-        (pageChange)="changePage()">
-    </ngb-pagination>
+<div *ngIf="totalElements != 0" class="mt-4 px-3">
+  <ngb-pagination class="d-flex justify-content-center mt-4" [(page)]="pageNumber" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [collectionSize]="totalElements" (pageChange)="changePage()">
+  </ngb-pagination>
+
+  <div class="row align-items-center g-4 justify-content-center ">
+    <ng-container *ngFor="let review of reviewPageMap.get(pageNumber)">
+      <review-card [review]="review" class="mt-4 col-12 col-md-6"></review-card>
+    </ng-container>
+  </div>
+
+  <ngb-pagination class="d-flex justify-content-center mt-3" [(page)]="pageNumber" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [collectionSize]="totalElements" (pageChange)="changePage()">
+  </ngb-pagination>
+
 </div>
-    
+
+<empty-reviews [show]="totalElements == 0" [isCurrentUser]="isCurrentUser"></empty-reviews>

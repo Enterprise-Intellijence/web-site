@@ -1,0 +1,20 @@
+<div *ngIf="show">
+    <div *ngIf="isCurrentUser" class="row d-flex justify-content-center align-items-center basic-container text-center">
+      <fa-icon
+        [icon]="faPencilSquare"
+        class="mb-1"
+        style="font-size: 3rem; color: gray"
+      ></fa-icon>
+      <h5 class="card-title">You have no reviews!</h5>
+      <p class="card-text">A user can review your profile after they buy one of your products</p>
+    </div>
+  
+    <div *ngIf="!isCurrentUser" class="row d-flex justify-content-center align-items-center basic-container text-center">
+      <fa-icon
+        [icon]="faPencilSquare"
+        class="mb-1"
+        style="font-size: 3rem; color: gray"
+      ></fa-icon>
+      <h5 class="card-title">This user has no review yet!</h5>
+    </div>  
+  </div>

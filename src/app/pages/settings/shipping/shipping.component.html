@@ -1,6 +1,6 @@
 <div *ngFor="let a of addresses; let i=index;">
     <div class="basic-container">
-        <div class="row fw-lighter" *ngIf="a.id === defaultAddress?.id; else notDefault">
+        <div class="row" *ngIf="a.id === defaultAddress?.id; else notDefault">
             <span>Default Address</span>
         </div>
         <ng-template #notDefault class="row fw-lighter">
@@ -48,23 +48,19 @@
         </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-        <div *ngIf="a.id !== defaultAddress?.id">
-            <button type="button" class="btn btn-danger" (click)="deleteAddress(a,i)">Delete</button>
-        </div>
-        <button type="button" class="btn btn-primary ml-2" (click)="updateAddress(a)">Save</button>
+        <button *ngIf="a.id !== defaultAddress?.id" type="button" class="btn btn-outline-secondary" (click)="setDefaultAddress(a)">Set as default</button>
+        <button *ngIf="a.id !== defaultAddress?.id" type="button" class="btn btn-danger" (click)="deleteAddress(a,i)">Delete</button>
+        <button type="button" class="btn btn-primary" (click)="updateAddress(a)">Save</button>
     </div>        
 </div>
 
 <div class="basic-container mb-5">
-    <div class="row fw-lighter">
-        <span>Your address</span>
-    </div>
     <div class="row">
         <div class="col-6 fw-semibold mt-3">
             <span>Add address</span>
         </div>
         <div class="col-6 fw-semibold mt-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#myModal">
+          <button type="button" class="btn btn-sm btn-secondary float-end" data-bs-toggle="modal" data-bs-target="#myModal">
             <fa-icon [icon]="arrowRight">
 
             </fa-icon>

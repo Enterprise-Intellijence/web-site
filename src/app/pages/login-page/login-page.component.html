@@ -1,8 +1,54 @@
+<!-- <script>
+  function decodeJwtResponse(token) {
+    let base64Url = token.split('.')[1]
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload)
+  }
+
+  let responsePayload;
+  globalThis.handleCredentialResponse = (response) => {
+    // decodeJwtResponse() is a custom function defined by you
+    // to decode the credential response.
+    console.log("response: ",  response);
+    responsePayload = decodeJwtResponse(response.credential);
+    console.log("responsePayload: ", responsePayload);
+
+    console.log("ID: " + responsePayload.sub);
+    console.log('Full Name: ' + responsePayload.name);
+    console.log('Given Name: ' + responsePayload.given_name);
+    console.log('Family Name: ' + responsePayload.family_name);
+    console.log("Image URL: " + responsePayload.picture);
+    console.log("Email: " + responsePayload.email);
+
+    // use the apiAuth service to send the token to the server
+
+
+  }
+
+</script> -->
+
 <div class="container">
 
   <div class="row">
     <div class="col-12 col-md-6 col-lg-5 mt-4">
-      <login-form></login-form>
+      <div class="row-col">
+
+        <div class="card mb-4">
+          <div class="card-body">
+
+            <!-- <div id="g_id_onload" data-client_id="1049827257011-ete5d6u7kjq601i6ra2ukaus5nsd3het.apps.googleusercontent.com" data-context="signin" data-login_uri="https://localhost:8443/api/v1/users/login-with-google" data-itp_support="true">
+            </div> -->
+            <div #googleBtnDiv>
+
+            </div>
+          </div>
+
+        </div>
+        <login-form></login-form>
+      </div>
     </div>
 
     <div class="col-lg-2 d-none d-lg-flex">

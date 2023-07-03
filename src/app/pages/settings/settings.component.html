@@ -4,11 +4,22 @@
                 <div class="row">
                     <div class="col">
                         <h4 class="d-sm-flex" style="margin: 0px 0px 5px 12px;">Settings</h4>
-                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/profile-details']">Profile details</button>
-                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/account']">Account settings</button>
-                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/shipping']">Shipping</button>
-                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/payments']">Payments</button>
-                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/notifications']">Notifications</button>
+                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/profile-details']">
+                            <fa-icon [icon]="faUser"></fa-icon>
+                            Profile details
+                        </button>
+                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/account']">
+                            <fa-icon [icon]="faBars"></fa-icon>
+                            Account settings
+                        </button>
+                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/shipping']">
+                            <fa-icon [icon]="faLocationDot"></fa-icon>
+                            Shipping
+                        </button>
+                        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" [routerLink]="['/settings/payments']">
+                            <fa-icon [icon]="faCreditCard"></fa-icon>
+                            Payments
+                        </button>
                     </div>
                 </div>
             </div>

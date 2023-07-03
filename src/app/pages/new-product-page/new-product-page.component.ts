@@ -8,6 +8,7 @@ import { CustomMoneyDTO } from 'src/app/services/api-service';
 import { ProductSizesService } from 'src/app/services/product-sizes.service';
 import { ClothingCreateDTO } from 'src/app/services/api-service';
 import { UploadImagesService } from 'src/app/services/upload-images.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'new-product-page',
@@ -124,7 +125,7 @@ export class NewProductPageComponent implements OnInit {
     }
 
     let newProduct: ProductCreateDTO = this.createProductDTO();
-    
+
     console.log("id: ", this.idTertiaryCategory);
     console.log("type: ", newProduct.type);
 
@@ -191,6 +192,7 @@ export class NewProductPageComponent implements OnInit {
           console.log("res", res);
         });
       });
+      this.router.navigate(['/product', p.id]);
     });
   }
 
@@ -254,7 +256,8 @@ export class NewProductPageComponent implements OnInit {
     private categoriesService: ProductCategoriesService,
     private productService: ProductControllerService,
     private productSizesService: ProductSizesService,
-    private imageService: UploadImagesService) {
+    private imageService: UploadImagesService,
+    private router: Router) {
   }
 
 }

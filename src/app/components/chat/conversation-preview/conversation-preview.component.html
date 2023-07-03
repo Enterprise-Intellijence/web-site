@@ -1,0 +1,39 @@
+<a [routerLink]="['/messages', conversation.conversationId]" class="list-group-item list-group-item-action border-bottom">
+  <div class="row p-2" [class.bg-body-secondary]="selected">
+    <div class="col-2">
+      <div class="ratio ratio-1x1" *ngIf="conversation.productBasicDTO != undefined">
+        <img [src]="conversation.productBasicDTO.productImages | defaultProductPic" [alt]="conversation.productBasicDTO.productImages?.at(0)?.description" class="w-100 rounded shadow">
+      </div>
+    </div>
+
+    <div class="col-10">
+      <div class="row align-items-center g-2">
+        <div class="col-auto">
+
+          <img [src]="otherUser.photoProfile?.urlPhoto | defaultProfilePic" class="rounded-circle mr-1 shadow" alt="Vanessa Tucker" width="26" height="26">
+        </div>
+        <div class="col text-truncate">
+          {{otherUser.username}}
+        </div>
+        <div class="col-auto" *ngIf="conversation.unreadMessages && conversation.lastMessage.sendUser.id == conversation.otherUser.id">
+          <span class="badge bg-primary">New</span>
+        </div>
+        <div class="col-auto" *ngIf="lastMessage.receivedUser.id == conversation.otherUser.id">
+          <fa-icon [icon]="faCheck" [ngClass]="isLastMessageRead ? 'text-primary': 'text-muted'"></fa-icon>
+        </div>
+
+        <div class="col-auto text-nowrap text-muted pe-2">
+          {{conversation.lastMessage.messageDate | date: 'shortTime'}}
+        </div>
+
+      </div>
+      <div class="row-col">
+        <div class="text-truncate">
+          {{conversation.lastMessage.text}}
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</a>

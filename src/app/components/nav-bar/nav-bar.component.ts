@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faEnvelope, faHeart, faRightFromBracket, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
+import { faAddressCard, faEnvelope, faGear, faHeart, faRightFromBracket, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ProductCategory } from 'src/app/models/product-category';
 import { ApiAuthService } from 'src/app/services/api-auth.service';
 import { ClothingDTO, UserDTO } from 'src/app/services/api-service';
+import { ChatService } from 'src/app/services/chat.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ProductCategoriesService } from 'src/app/services/product-categories.service';
 import { UserLikesService } from 'src/app/services/user-likes.service';
@@ -20,9 +22,13 @@ export class NavBarComponent implements OnInit {
   messagesIcon = faEnvelope;
   likesIcon = faHeart;
   userIcon = faUser;
+  faSquarePlus = faSquarePlus;
+  faGear = faGear;
+  faAddressCard = faAddressCard;
+  faRightFromBracket = faRightFromBracket;
 
   isCollapsed = true;
-  isLoggedIn = false;
+  isLoggedIn$ = this.apiAuth.isLoggedIn$;
 
   unreadMessages: number = 2;
   likedProductsCount: number = 4;
@@ -35,16 +41,14 @@ export class NavBarComponent implements OnInit {
   otherCategory?: ProductCategory;
 
   constructor(private UserLikesService: UserLikesService,
-    private apiAuth: ApiAuthService,
+    public apiAuth: ApiAuthService,
     private categoriesService: ProductCategoriesService,
     private currentUserService: CurrentUserService,
+    private chatService: ChatService,
     private route: Router
     ) { }
 
   ngOnInit(): void {
-    this.apiAuth.isLoggedIn$.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-    });
 
     this.UserLikesService.LikedProductsCount$.subscribe((count) => {
       this.likedProductsCount = count;
@@ -60,6 +64,10 @@ export class NavBarComponent implements OnInit {
       this.entertainmentCategory = this.categoriesService.getCategoryByRawName('Entertainment') ?? undefined;
       this.otherCategory = this.categoriesService.getCategoryByRawName('Other') ?? undefined;
     });
+
+    this.chatService.undreadConversationsCount$.subscribe((count) => {
+      this.unreadMessages = count;
+    });
   }
 
   public logout() {
@@ -69,29 +77,12 @@ export class NavBarComponent implements OnInit {
 
   searchFor($event: ProductCategory, gender?: ClothingDTO.ProductGenderEnum) {
     //console.log("searching for:", $event.name, "for gender: ", gender);
-    let child : String | undefined;
-    let secondary : String | undefined;
-    let primary : String | undefined;
-    const categoryPath = $event.getCategoryPath()
 
-    if(categoryPath.length>2) {
-      child = categoryPath[categoryPath.length - 1].rawName;
-      secondary = categoryPath[categoryPath.length - 2].rawName;
-      primary = categoryPath[categoryPath.length - 3].rawName;
-    }
-    else if(categoryPath.length>1){
-      secondary = categoryPath[categoryPath.length - 1].rawName;
-      primary = categoryPath[categoryPath.length - 2].rawName;
-    }
-    else
-      primary = categoryPath[categoryPath.length - 1].rawName;
 
 
     this.route.navigate(['/search-page'], {
       queryParams: {
-        primary: primary,
-        secondary: secondary,
-        child: child,
+        category: $event.rawName,
         gender:gender
       }
     });

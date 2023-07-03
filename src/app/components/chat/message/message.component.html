@@ -1,0 +1,58 @@
+<div class="pb-3 row" [ngClass]="isOwnMessage ? 'own-message' : 'other-message'">
+  <div class="col-10 col-lg-9 col-xl-8">
+    <div class="card shadow p-2">
+      <div class="card-title">
+        {{message.text }}
+      </div>
+
+      <div *ngIf="containsOffer" class="bg-body p-2 rounded border">
+        <div class="row align-items-center">
+          <div class="col">
+            <span class="fw-bold">
+              {{offer?.amount?.price | currency:offer?.amount?.currency}}
+            </span>insted of
+            <span class="fw-bold">
+              {{product?.productCost?.price | currency:product?.productCost?.currency}}
+            </span>
+          </div>
+          <div class="col-auto">
+            <span>status: </span>
+            <div class="p-2 rounded shadow d-inline-block" [ngClass]="offerStatusClass">
+              <fa-icon [icon]="offerStatusIcon"></fa-icon>
+              {{offerStatusText}}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="offer?.state == 'PENDING'">
+          <hr>
+          <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-outline-success" (click)="acceptOffer()" *ngIf="!isOwnMessage">
+              <fa-icon [icon]="faCheck"></fa-icon>
+              Accept
+            </button>
+            <button type="button" class="btn btn-outline-danger" (click)="declineOffer()" *ngIf="!isOwnMessage">
+              <fa-icon [icon]="faXMark"></fa-icon>
+              Decline
+            </button>
+
+            <!-- cancel offer -->
+            <button type="button" class="btn btn-outline-secondary" (click)="cancelOffer()" *ngIf="isOwnMessage">
+              <fa-icon [icon]="faXMark"></fa-icon>
+              Cancel
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <div>
+        <fa-icon [icon]="faCheck" *ngIf="isOwnMessage" [ngClass]="isRead ? 'text-primary' : 'text-muted'" class="me-3">
+        </fa-icon>
+
+        <span class="text-muted text-nowrap">{{message.messageDate | date: 'short'}}</span>
+      </div>
+    </div>
+  </div>
+</div>
