@@ -12,12 +12,9 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 export class ClosetComponent implements OnChanges {
 
   @Input() visitedUser: UserBasicDTO | null = null;
-
+  @Input() isCurrentUser: boolean = false;
+  
   customLoadMethod?: (page: number, pageSize: number) => Observable<PageProductBasicDTO>;
-
-  get isCurrentUser() {
-    return this.visitedUser?.id == this.currentUser.user?.id;
-  }
 
   filter!: FilterOptions;
   isProductEmpty!: boolean;

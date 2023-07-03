@@ -70,14 +70,14 @@
         <li ngbNavItem>
           <button ngbNavLink>Closet</button>
           <ng-template ngbNavContent>
-            <closet [visitedUser]="visitedUser"></closet>
+            <closet [visitedUser]="visitedUser" [isCurrentUser]="isCurrentUser"></closet>
           </ng-template>
         </li>
 
         <li ngbNavItem>
           <button ngbNavLink>Reviews</button>
           <ng-template ngbNavContent>
-            <review [visitedUser]="visitedUser"></review>
+            <review [visitedUser]="visitedUser" [isCurrentUser]="isCurrentUser"></review>
           </ng-template>
         </li>
       </ul>

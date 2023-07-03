@@ -1,15 +1,24 @@
 <div *ngIf="show">
-  <div class="row d-flex justify-content-center align-items-center basic-container text-center">
-      <fa-icon
-        [icon]="faCubes"
-        class="mb-3"
-        style="font-size: 3rem; color: gray"
-      ></fa-icon>
-      <h5 class="card-title">Your closet is empty!</h5>
-      <p class="card-text">Start selling something to fill your closet.</p>
-      <button class="btn btn-primary" style="max-width: 7rem;" [routerLink]="['/products/new']">
-        <fa-icon [icon]="faSquarePlus" class="me-1"></fa-icon>
-        Sell now
-      </button>
-    </div>
+  <div *ngIf="isCurrentUser" class="row d-flex justify-content-center align-items-center basic-container text-center">
+    <fa-icon
+      [icon]="faCubes"
+      class="mb-3"
+      style="font-size: 3rem; color: gray"
+    ></fa-icon>
+    <h5 class="card-title">Your closet is empty!</h5>
+    <p class="card-text">Start selling something to fill your closet.</p>
+    <button class="btn btn-primary" style="max-width: 7rem;" [routerLink]="['/products/new']">
+      <fa-icon [icon]="faSquarePlus" class="me-1"></fa-icon>
+      Sell now
+    </button>
+  </div>
+
+  <div *ngIf="isCurrentUser == false" class="row d-flex justify-content-center align-items-center basic-container text-center">
+    <fa-icon
+      [icon]="faCubes"
+      class="mb-3"
+      style="font-size: 3rem; color: gray"
+    ></fa-icon>
+    <h5 class="card-title">This closet is empty!</h5>
+  </div>  
 </div>
