@@ -1,34 +1,29 @@
 <div class="row mt-2">
-    <div class="col-2">
-        <ul style="list-style-type:none; overflow: scroll; max-height: 25rem;">
-            <div *ngFor="let t of thumbnails; let index=index" style="min-width: 50px; max-width: 70px; margin-bottom: 1rem;">
-                <li><img (mouseover)="changeImage(index)" src="{{t}}" class="img-thumbnail card-image-top rounded-0 ratio ratio-1x1" style="object-fit: cover; max-block-size: 70px;"></li>
-            </div>
-        </ul>
-    </div>
-    <div class="col-10">
-        <div class="image-container rounded" style="max-height: 25rem; overflow: hidden;">
-        <img [src]="image"  style="object-fit: cover; cursor: pointer;" class="w-100 shadow-1-strong modal-hover-opacity"
-            (click)="openImage()" data-bs-toggle="modal" data-bs-target="#imageModal"/>
+  <div class="col-2">
+    <ul style="list-style-type:none; overflow: scroll; max-height: 25rem;">
+      <div *ngFor="let t of thumbnails; let index=index" style="min-width: 50px; max-width: 70px; margin-bottom: 1rem;">
+        <li><img (mouseover)="changeImage(index)" src="{{t}}" class="img-thumbnail card-image-top rounded-0 ratio ratio-1x1" style="object-fit: cover; max-block-size: 70px;"></li>
+      </div>
+    </ul>
+  </div>
+  <div class="col-10">
+    <div class="image-container rounded shadow" style="max-height: 25rem; overflow: hidden;">
+      <img [src]="image" style="object-fit: cover; cursor: pointer;" class="w-100 shadow-1-strong modal-hover-opacity" data-bs-toggle="modal" data-bs-target="#imageModal" />
 
     </div>
 
-</div>
+  </div>
 
-<div class="modal fade" id="imageModal">
+  <div class="modal fade" id="imageModal">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header justify-content-end">
-                <button type="button" #closebutton class="close btn btn-outline-primary"  data-bs-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <img
-                [src]="image"
-                style="max-width:100%;cursor:pointer"
-                class="modal-hover-opacity"
-                /> 
-            </div>
-            
+      <div class="modal-content">
+        <div class="modal-header justify-content-end">
+          <button type="button" #closebutton class="close btn btn-outline-primary" data-bs-dismiss="modal">&times;</button>
         </div>
+        <div class="modal-body">
+          <img [src]="image" style="max-width:100%;cursor:pointer" class="modal-hover-opacity" />
+        </div>
+
+      </div>
     </div>
-</div>
+  </div>

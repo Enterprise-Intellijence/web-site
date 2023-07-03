@@ -11,12 +11,12 @@ export class UploadImagesService {
 
   updateUserImage(file: File, userId: string): Observable<ProductImageDTO> {
     const fd = this.createFormData(file);
-    return this.http.post<ProductImageDTO>(Config.basePath + '/images/users/photo-profile/' + userId, fd);
+    return this.http.post<ProductImageDTO>(Config.apiBasePath + '/images/users/photo-profile/' + userId, fd);
   }
 
   saveProductImage(file: File, productId: string, productDescription: string): Observable<ProductImageDTO> {
     const fd = this.createFormData(file);
-    return this.http.post<ProductImageDTO>(Config.basePath + '/images/product?product_id=' + productId + '&description=' + productDescription, fd);
+    return this.http.post<ProductImageDTO>(Config.apiBasePath + '/images/product?product_id=' + productId + '&description=' + productDescription, fd);
   }
 
   createFormData(file: File): FormData {

@@ -1,30 +1,38 @@
 <div class="container">
-    <div class="row mt-4 justify-content-center">
-        <div class="col-8">
-            <div *ngIf="!isWaitingForResponse" class="row-col">
-                <product-images [thumbnails]="images"></product-images>
-                <hr style="margin-top: 2rem; margin-bottom: 2rem;"/>
-                <h5>Description</h5>
-                <p style="word-wrap: break-word;">{{product?.description}}</p>
-            </div>
-        </div>
-        <div class="col-1 d-none"></div>
-        <div class="col-6 col-lg-3 col-md-8">
-            <div class="row-col">
-                <product-info *ngIf="!isWaitingForResponse" [productInfo]="product"></product-info>
-                <product-price *ngIf="!isWaitingForResponse" [productDTO]="product"></product-price>
-                <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1"></span>
-                <user-card style="cursor: pointer;" [routerLink]="['/users', product?.seller?.id]" *ngIf="!isWaitingForResponse" [seller]="product?.seller" [rating]="rating"></user-card>
-            </div>
-        </div>
-        
+  <div class="row mt-4 justify-content-center">
+    <div class="col-8">
+      <div *ngIf="!isWaitingForResponse" class="row-col">
+        <product-images [thumbnails]="images"></product-images>
+        <hr style="margin-top: 2rem; margin-bottom: 2rem;" />
+        <h5>Description</h5>
+        <p style="word-wrap: break-word;">{{product?.description}}</p>
+      </div>
     </div>
-    <div class="row">
-        <h4>More articles by the seller</h4>
+    <div class="col-1 d-none"></div>
+    <div class="col-6 col-lg-3 col-md-8">
+      <div class="row-col">
+
+        <div *ngIf="isPrivate" class="card product-page bg-warning mt-2 p-3 text-center">
+          <span>
+            <fa-icon [icon]="faLock"></fa-icon>
+            this product is private
+          </span>
+        </div>
+
+        <product-info *ngIf="!isWaitingForResponse" [productInfo]="product"></product-info>
+        <product-price *ngIf="!isWaitingForResponse" [productDTO]="product"></product-price>
         <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1"></span>
-        <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSeller!"></filtered-product-list>
-        <hr />
-        <h4>Similar items</h4>
-        <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSimilar!"></filtered-product-list>
+        <user-card style="cursor: pointer;" [routerLink]="['/users', product?.seller?.id]" *ngIf="!isWaitingForResponse" [seller]="product?.seller" [rating]="rating"></user-card>
+      </div>
     </div>
+
+  </div>
+  <div class="row">
+    <h4>More articles by the seller</h4>
+    <span *ngIf="isWaitingForResponse" class="spinner-border spinner-border-sm mr-1"></span>
+    <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSeller!"></filtered-product-list>
+    <hr />
+    <h4>Similar items</h4>
+    <filtered-product-list *ngIf="!isWaitingForResponse" [filter]="filterSimilar!"></filtered-product-list>
+  </div>
 </div>

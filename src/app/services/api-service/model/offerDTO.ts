@@ -24,10 +24,11 @@ export interface OfferDTO {
     order?: OrderBasicDTO;
 }
 export namespace OfferDTO {
-    export type StateEnum = 'PENDING' | 'ACCEPTED' | 'REJECTED';
+    export type StateEnum = 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELLED';
     export const StateEnum = {
         PENDING: 'PENDING' as StateEnum,
         ACCEPTED: 'ACCEPTED' as StateEnum,
-        REJECTED: 'REJECTED' as StateEnum
+        REJECTED: 'REJECTED' as StateEnum,
+        CANCELLED: 'CANCELLED' as StateEnum
     };
 }

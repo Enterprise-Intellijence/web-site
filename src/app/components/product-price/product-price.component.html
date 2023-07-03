@@ -1,31 +1,66 @@
 <div class="card mt-2 product-page">
-    <div class="card-body">
-        <h2 class="card-title">{{productDTO?.productCost?.price | currency:productDTO?.productCost?.currency}}</h2>
-        <h5 class="card-subtitle mb-2 text-muted">
-            {{(productDTO?.productCost?.price! + (productDTO?.productCost?.price!/100*7) ) | currency:productDTO?.productCost?.currency}} includes product insurance
-        </h5>
-        <hr class="product-page"/>
-        <div class="d-grid gap-2 col-10 mx-auto">
-            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickBuyButton()" class="btn btn-primary btn-block">
-                <fa-icon [icon]="faCartShopping" class="me-1"></fa-icon>
-                Buy</button>
-            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickOfferButton()" class="btn btn-outline-primary btn-block">
-                <fa-icon [icon]="faCommentDollar" class="me-1"></fa-icon>
-                Make an Offer</button>
-            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickInfoButton()" class="btn btn-outline-primary btn-block">
-                <fa-icon [icon]="faCircleInfo" class="me-1"></fa-icon>
-                More info</button>
-            <button *ngIf="currentUser?.id != productDTO?.seller?.id" type="button" (click)="clickFavButton()" class="btn btn-outline-secondary btn-block">
-                <fa-icon [icon]="isFav ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
-                {{isFav ? isFavButtonText : notFavButtonText}}
-            </button>
-            <button *ngIf="currentUser?.id == productDTO?.seller?.id" type="button" (click)="clickEdit()" class="btn btn-outline-secondary btn-block">
-                <fa-icon [icon]="faEdit" class="me-1"></fa-icon>
-                Edit Product
-            </button>
-            <button type="button" (click)="clickShareProduct()" class="btn btn-outline-secondary btn-block">
-                <fa-icon [icon]="faShareNodes" class="me-1"></fa-icon>
-                Share</button>
+  <div class="card-body">
+    <h2 class="card-title">{{productDTO?.productCost?.price | currency:productDTO?.productCost?.currency}}</h2>
+    <h5 class="card-subtitle mb-2 text-muted">
+      {{(productDTO?.productCost?.price! + (productDTO?.productCost?.price!/100*7) ) | currency:productDTO?.productCost?.currency}} includes product insurance
+    </h5>
+    <hr class="product-page" />
+    <div class="d-grid gap-2 col-10 mx-auto">
+      <button *ngIf="!isSeller" type="button" (click)="clickBuyButton()" class="btn btn-primary btn-block">
+        <fa-icon [icon]="faCartShopping" class="me-1"></fa-icon>
+        Buy
+      </button>
+
+      <button *ngIf="!isSeller" type="button" (click)="clickOfferButton()" class="btn btn-block" [ngClass]="isMakingOffer ? 'btn-primary' : 'btn-outline-primary'">
+        <fa-icon [icon]="faCommentDollar" class="me-1"></fa-icon>
+        Make an Offer
+      </button>
+
+      <div *ngIf="isMakingOffer" class="mt-1 mb-3 border rounded p-2">
+        <form #offerForm="ngForm" (ngSubmit)="submitOffer(offerForm)">
+          <div class="input-group">
+            <span class="input-group-text">{{productDTO?.productCost?.currency}}</span>
+            <input type="number" class="form-control" [placeholder]="productDTO?.productCost?.price" name="offer" [ngModel]="offerAmount" (ngModelChange)="offerChanged($event)" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100 my-2">
+            <fa-icon [icon]="faCommentDollar" class="me-1"></fa-icon>
+            send offer
+          </button>
+
+          <button type="button" class="btn btn-outline-secondary w-100" (click)="isMakingOffer = false">
+            cancel
+          </button>
+        </form>
+      </div>
+
+
+
+
+      <button *ngIf="!isSeller" type="button" (click)="clickInfoButton()" class="btn btn-outline-primary btn-block">
+        <fa-icon [icon]="faCircleInfo" class="me-1"></fa-icon>
+        More info
+      </button>
+
+      <button *ngIf="!isSeller" type="button" (click)="clickFavButton()" class="btn btn-outline-secondary btn-block">
+        <fa-icon [icon]="isLiked ? fullHeartIcon : emptyHeartIcon" class="me-1"></fa-icon>
+        {{isLiked ? "Remove from favourites" : "Add to favourites"}}
+      </button>
+
+      <button *ngIf="isSeller" type="button" (click)="clickEdit()" class="btn btn-outline-secondary btn-block">
+        <fa-icon [icon]="faEdit" class="me-1"></fa-icon>
+        Edit Product
+      </button>
+
+      <button type="button" (click)="clickShareProduct()" class="btn btn-outline-secondary btn-block">
+        <fa-icon [icon]="faShareNodes" class="me-1"></fa-icon>
+        Share
+      </button>
+
+      <div *ngIf="wasLinkCopied">
+        <div class="alert alert-success" role="alert">
+          Link copied to clipboard!
         </div>
+      </div>
     </div>
+  </div>
 </div>

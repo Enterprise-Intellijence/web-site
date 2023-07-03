@@ -22,7 +22,6 @@ import { LoginWithGoogleBody } from '../model/loginWithGoogleBody';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageOrderBasicDTO } from '../model/pageOrderBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
-import { ResponseStatusException } from '../model/responseStatusException';
 import { UserBasicDTO } from '../model/userBasicDTO';
 import { UserDTO } from '../model/userDTO';
 
@@ -33,7 +32,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class UserControllerService {
 
-    protected basePath = 'https://localhost:8443';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

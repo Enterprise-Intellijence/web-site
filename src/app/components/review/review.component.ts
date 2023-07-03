@@ -10,7 +10,7 @@ export class ReviewComponent implements OnChanges {
 
   @Input() visitedUser: UserBasicDTO | null = null;
   reviewPageMap: Map<number, Array<ReviewDTO>> = new Map<number, Array<ReviewDTO>>();
-  pageNumber: number = 0;
+  pageNumber: number = 1;
   pageSize: number = 10;
   totalElements: number = 0;
   totalPages: number = 0;

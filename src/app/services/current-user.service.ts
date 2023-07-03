@@ -8,6 +8,7 @@ import { ApiAuthService } from './api-auth.service';
 })
 export class CurrentUserService {
 
+
   user: UserDTO | null = null;
   user$ = new BehaviorSubject<UserDTO | null>(null);
 

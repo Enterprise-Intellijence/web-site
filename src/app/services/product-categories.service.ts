@@ -35,7 +35,6 @@ export class ProductCategoriesService {
   loadCategories() {
     return this.apiProductService.getCategoriesList().subscribe(
       (apiCategories: ProductCategoryDTO[]) => {
-        console.log("categories: ", apiCategories);
 
         // get all distinct primary categories
         apiCategories.forEach((apiCategory) => {

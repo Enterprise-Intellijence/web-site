@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ProductControllerService } from './api-service';
 import { FilterOptions } from '../models/filter-options';
+import { Observable, map } from 'rxjs';
+import { Config } from '../models/config';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +37,14 @@ export class ProductService {
       filterOptions.sizePage,
       filterOptions.sortBy,
       filterOptions.sortDirection);
+  }
+
+
+  getProductCapabilityURL(productID: string): Observable<string> {
+    return this.productControllerService.createCapability(productID).pipe(
+      map((capabilityDTO) => {
+        return `${Config.webBasePath}/products/token/${capabilityDTO.capabilityToken}`;
+      })
+    )
   }
 }
