@@ -63,6 +63,7 @@ import { ClickStopPropagationDirective } from "./directives/click-stop-propagati
 import { AuthGuard } from "./guards/auth.guard"
 import { AdminGuard } from "./guards/admin.guard"
 import { Config } from './models/config';
+import { EmptyReviewsComponent } from './components/empty-reviews/empty-reviews.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -126,6 +127,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     MessageComponent,
     EmptyClosetComponent,
     ClickStopPropagationDirective,
+    EmptyReviewsComponent,
     ],
   providers: [
     HttpClient,
