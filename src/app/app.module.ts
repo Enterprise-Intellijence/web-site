@@ -17,7 +17,6 @@ import { ProductImagesComponent } from './components/product-images/product-imag
 import { ProductComponent } from './pages/product/product.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { NgbdModalFocus } from "./components/modal-focus/modal-focus.component";
 
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -166,7 +165,6 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
       apiKeys: {"X-CSCAPI-KEY": "ZXJ6emFVYUxmWnhxN2YzZnpQWFY3TENnRmF2SUd6cHZxTWdvRGdKWQ=="}
     })),
     FormsModule,
-    NgbdModalFocus,
     UserCardComponent,
     ReactiveFormsModule,
   ]
