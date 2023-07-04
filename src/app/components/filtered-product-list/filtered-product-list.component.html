@@ -2,18 +2,18 @@
   <div class="row-col gx-3 gy-4">
 
     <div class="mt-3 d-flex justify-content-center ">
-      <ngb-pagination class="" [collectionSize]="numberElements" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="refreshProducts()">
+      <ngb-pagination class="" [collectionSize]="numberElements" [(page)]="userPage" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="refreshProducts()">
       </ngb-pagination>
     </div>
 
     <div class="row p-2 g-3">
-      <ng-container *ngFor="let item of products?.content">
+      <ng-container *ngFor="let item of products">
         <product-card [product]="item" class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12 justify-content-center"></product-card>
       </ng-container>
     </div>
 
     <div class="m-2 d-flex justify-content-center ">
-      <ngb-pagination [collectionSize]="numberElements" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="refreshProducts()">
+      <ngb-pagination [collectionSize]="numberElements" [(page)]="userPage" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="refreshProducts()">
       </ngb-pagination>
     </div>
   </div>

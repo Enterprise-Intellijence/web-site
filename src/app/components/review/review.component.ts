@@ -9,8 +9,9 @@ import { ReviewControllerService, ReviewDTO, UserBasicDTO, UserDTO } from 'src/a
 export class ReviewComponent implements OnChanges {
 
   @Input() visitedUser: UserBasicDTO | null = null;
+  @Input() isCurrentUser: boolean = false;
   reviewPageMap: Map<number, Array<ReviewDTO>> = new Map<number, Array<ReviewDTO>>();
-  pageNumber: number = 0;
+  pageNumber: number = 1;
   pageSize: number = 10;
   totalElements: number = 0;
   totalPages: number = 0;
@@ -26,7 +27,6 @@ export class ReviewComponent implements OnChanges {
       this.reviewPageMap.set(this.pageNumber, page.content!);
       this.totalPages = page.totalPages!;
       this.totalElements = page.totalElements!;
-      console.log(page);
     });
   }
 

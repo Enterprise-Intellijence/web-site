@@ -24,11 +24,12 @@ export interface Notification {
     type?: Notification.TypeEnum;
 }
 export namespace Notification {
-    export type TypeEnum = 'NEW_OFFER' | 'OFFER_REJECTED' | 'OFFER_ACCEPTED' | 'REVIEW' | 'MESSAGE' | 'SALE' | 'PURCHASE' | 'PRODUCT_SOLD' | 'NEW_PRODUCT' | 'FOLLOW' | 'USER' | 'NEW_FAVORITE';
+    export type TypeEnum = 'NEW_OFFER' | 'OFFER_REJECTED' | 'OFFER_ACCEPTED' | 'OFFER_CANCELED' | 'REVIEW' | 'MESSAGE' | 'SALE' | 'PURCHASE' | 'PRODUCT_SOLD' | 'NEW_PRODUCT' | 'FOLLOW' | 'USER' | 'NEW_FAVORITE';
     export const TypeEnum = {
         NEWOFFER: 'NEW_OFFER' as TypeEnum,
         OFFERREJECTED: 'OFFER_REJECTED' as TypeEnum,
         OFFERACCEPTED: 'OFFER_ACCEPTED' as TypeEnum,
+        OFFERCANCELED: 'OFFER_CANCELED' as TypeEnum,
         REVIEW: 'REVIEW' as TypeEnum,
         MESSAGE: 'MESSAGE' as TypeEnum,
         SALE: 'SALE' as TypeEnum,

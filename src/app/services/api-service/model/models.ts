@@ -2,6 +2,7 @@ export * from './address';
 export * from './addressCreateDTO';
 export * from './addressDTO';
 export * from './adminProductsBody';
+export * from './capabilityDTO';
 export * from './clothingCreateDTO';
 export * from './clothingDTO';
 export * from './conversationDTO';
