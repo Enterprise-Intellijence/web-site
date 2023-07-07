@@ -84,6 +84,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -126,6 +133,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -174,6 +188,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             '*/*'
@@ -210,6 +231,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -225,6 +253,55 @@ export class ProductControllerService {
         ];
 
         return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/categories`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param category 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCategoryId(category: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public getCategoryId(category: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public getCategoryId(category: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public getCategoryId(category: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (category === null || category === undefined) {
+            throw new Error('Required parameter category was null or undefined when calling getCategoryId.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<string>('get',`${this.basePath}/api/v1/products/category/${encodeURIComponent(String(category))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -373,6 +450,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -423,6 +507,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -451,6 +542,50 @@ export class ProductControllerService {
     /**
      * 
      * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getPrimaryCategoriesList(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getPrimaryCategoriesList(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getPrimaryCategoriesList(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getPrimaryCategoriesList(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/primaryCategories`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param token 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -466,6 +601,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -503,6 +645,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -563,6 +712,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -624,6 +780,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -667,6 +830,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -694,6 +864,55 @@ export class ProductControllerService {
     /**
      * 
      * 
+     * @param primary 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSecondaryCategoriesList(primary: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getSecondaryCategoriesList(primary: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getSecondaryCategoriesList(primary: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getSecondaryCategoriesList(primary: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (primary === null || primary === undefined) {
+            throw new Error('Required parameter primary was null or undefined when calling getSecondaryCategoriesList.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/secondaryCategories/${encodeURIComponent(String(primary))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -704,6 +923,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -719,6 +945,104 @@ export class ProductControllerService {
         ];
 
         return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/sizes`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param category 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSizesListByCategory(category: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getSizesListByCategory(category: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getSizesListByCategory(category: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getSizesListByCategory(category: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (category === null || category === undefined) {
+            throw new Error('Required parameter category was null or undefined when calling getSizesListByCategory.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/sizes/${encodeURIComponent(String(category))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param secondary 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getTertiaryCategoriesList(secondary: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getTertiaryCategoriesList(secondary: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getTertiaryCategoriesList(secondary: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getTertiaryCategoriesList(secondary: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (secondary === null || secondary === undefined) {
+            throw new Error('Required parameter secondary was null or undefined when calling getTertiaryCategoriesList.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/v1/products/tertiaryCategories/${encodeURIComponent(String(secondary))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -764,6 +1088,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -807,6 +1138,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -849,6 +1187,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -896,6 +1241,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -949,6 +1301,13 @@ export class ProductControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',

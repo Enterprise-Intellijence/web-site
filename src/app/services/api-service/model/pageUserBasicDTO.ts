@@ -9,13 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { PageableObject } from './pageableObject';
 import { SortObject } from './sortObject';
+import { UserBasicDTO } from './userBasicDTO';
 
-export interface PageableObject { 
-    offset?: number;
+export interface PageUserBasicDTO { 
+    totalElements?: number;
+    totalPages?: number;
+    size?: number;
+    content?: Array<UserBasicDTO>;
+    number?: number;
     sort?: SortObject;
-    paged?: boolean;
-    unpaged?: boolean;
-    pageNumber?: number;
-    pageSize?: number;
+    pageable?: PageableObject;
+    first?: boolean;
+    last?: boolean;
+    numberOfElements?: number;
+    empty?: boolean;
 }
