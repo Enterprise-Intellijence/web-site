@@ -11,8 +11,10 @@ import {ProductCategoriesService} from "../../services/product-categories.servic
   styleUrls: ['./search-page.component.scss']
 })
 export class SearchPageComponent implements OnInit{
-  category? : string | undefined
-  gender?: string
+  category? : string;
+  gender?: string;
+  query?: string;
+
   filterOptions!: FilterOptions;
 
   constructor(private activeRoute: ActivatedRoute, private productCategory: ProductCategoriesService ) {
@@ -20,12 +22,18 @@ export class SearchPageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.setRouteSubscribe();
+    this.subscribeToRouteChanges();
   }
 
   updateFilter(){
     this.filterOptions = new FilterOptions();
-    if(this.category !== undefined){
+
+    if(this.query != undefined){
+      this.filterOptions.title = this.query;
+    }
+
+
+    if(this.category != undefined){
 
       let categoryDTO =  this.productCategory.getCategoryByRawName(this.category)
       let categoryPath = categoryDTO?.getCategoryPath()
@@ -35,14 +43,15 @@ export class SearchPageComponent implements OnInit{
       this.filterOptions.tertiaryCat = categoryPath?.at(2)?.rawName
     }
 
-    if(this.gender !== undefined)
+    if(this.gender != undefined)
       this.filterOptions.productGender = this.gender
   }
 
-  setRouteSubscribe(){
+  subscribeToRouteChanges(){
     this.activeRoute.queryParams.subscribe(params=>{
       this.category = params['category'];
       this.gender = params['gender'];
+      this.query = params['query'];
       this.updateFilter();
     })
   }

@@ -8,11 +8,11 @@
         </a>
       </div>
 
-
-      <form class="col" role="search">
+      <form class="col" role="search" onsubmit="searchForQuery(searchQuery)">
         <div class="row input-group">
-          <input class="form-control col" type="search" placeholder="Search for items" aria-label="Search">
-          <button class="btn btn-outline-success col-auto" type="submit">
+
+          <input class="form-control col" type="search" placeholder="Search for items" aria-label="Search" [(ngModel)]="searchQuery" name="searchInput">
+          <button class="btn btn-outline-success col-auto" type="submit" (click)="searchForQuery(searchQuery)">
             <fa-icon [icon]="searchIcon"></fa-icon>
             Search
           </button>
@@ -96,10 +96,10 @@
 <nav class="navbar navbar-expand-sm border-bottom py-0 bg-tertiary">
   <div class="container-sm">
     <ul class="navbar-nav">
-      <nav-bar-menu-item title="woman" [primaryCategory]="clothingCategory" (onCategorySelected)="searchFor($event, 'FEMALE')"></nav-bar-menu-item>
-      <nav-bar-menu-item title="man" [primaryCategory]="clothingCategory" (onCategorySelected)="searchFor($event, 'MALE')"></nav-bar-menu-item>
-      <nav-bar-menu-item title="entertainment" [primaryCategory]="entertainmentCategory" (onCategorySelected)="searchFor($event)"></nav-bar-menu-item>
-      <nav-bar-menu-item title="home" [primaryCategory]="homeCategory" (onCategorySelected)="searchFor($event)"></nav-bar-menu-item>
+      <nav-bar-menu-item title="woman" [primaryCategory]="clothingCategory" (onCategorySelected)="searchForProductCategory($event, 'FEMALE')"></nav-bar-menu-item>
+      <nav-bar-menu-item title="man" [primaryCategory]="clothingCategory" (onCategorySelected)="searchForProductCategory($event, 'MALE')"></nav-bar-menu-item>
+      <nav-bar-menu-item title="entertainment" [primaryCategory]="entertainmentCategory" (onCategorySelected)="searchForProductCategory($event)"></nav-bar-menu-item>
+      <nav-bar-menu-item title="home" [primaryCategory]="homeCategory" (onCategorySelected)="searchForProductCategory($event)"></nav-bar-menu-item>
       <li class="nav-item">
         <a class="nav-link" tabindex="0" role="button">Other</a>
       </li>

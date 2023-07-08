@@ -39,7 +39,7 @@ export class ApiInterceptor implements HttpInterceptor {
             console.error(`500 Server error, url: ${error.url}`);
           }
           else {
-            console.error(`error ${error.status} status code, url: ${error.url}\n`, error.message, error);
+            console.error(`error ${error.status} status code, url: ${error.url}\n${error.message}\n${error.error.error}`, error);
           }
         }
       })
