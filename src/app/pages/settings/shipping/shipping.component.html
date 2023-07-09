@@ -3,7 +3,7 @@
         <div class="row" *ngIf="a.id === defaultAddress?.id; else notDefault">
             <span>Default Address</span>
         </div>
-        <ng-template #notDefault class="row fw-lighter">
+        <ng-template #notDefault class="row">
             <span>Your address</span>
         </ng-template>
         <div class = "row">
@@ -51,7 +51,7 @@
         <button *ngIf="a.id !== defaultAddress?.id" type="button" class="btn btn-outline-secondary" (click)="setDefaultAddress(a)">Set as default</button>
         <button *ngIf="a.id !== defaultAddress?.id" type="button" class="btn btn-danger" (click)="deleteAddress(a,i)">Delete</button>
         <button type="button" class="btn btn-primary" (click)="updateAddress(a)">Save</button>
-    </div>        
+    </div>
 </div>
 
 <div class="basic-container mb-5">
@@ -84,48 +84,48 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form>
-            <div class="container border-bottom p-2 shadow-sm">
-                <div class = "row fw-lighter">
+            <div class="container border-bottom p-2">
+                <div class = "row">
                     <div class="col-6">
                         <span>Country</span>
                     </div>
                     <div class="col-6" *ngIf="country">
                         <span>City</span>
-                    </div>                
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6 fw-bold mt-2">
                         <select class="form-select" placeholder="Seleziona un paese">
                             <option *ngFor="let c of countries; let i=index;" (click)="onCountrySelected(c)" [ngValue]="c.name">{{c.name}}</option>
-                        </select>   
+                        </select>
                     </div>
                     <div class="col-6 fw-bold mt-2" *ngIf="country">
                         <select class="form-select" placeholder="Seleziona una città">
                             <option *ngFor="let c of cities; let i=index;" (click)="city=c" [ngValue]="c.name">{{c.name}}</option>
-                        </select>   
+                        </select>
                     </div>
                     <span class="border-bottom mt-2"></span>
-                    <div class = "row fw-lighter mt-2">
+                    <div class = "row mt-2">
                         <span>Street</span>
                     </div>
                     <div class="col-xs-4 mt-2">
                         <input class="form-control" name="street" [(ngModel)]="street">
                     </div>
                     <span class="border-bottom mt-2"></span>
-                    <div class = "row fw-lighter mt-2">
+                    <div class = "row mt-2">
                         <span>Postal Code</span>
                     </div>
                     <div class="col-xs-4 mt-2">
                         <input class="form-control" name="zip" [(ngModel)]="zipCode">
                     </div>
                     <span class="border-bottom mt-2"></span>
-                    <div class = "row fw-lighter mt-2">
+                    <div class = "row mt-2">
                         <span>Phone number</span>
                     </div>
                     <div class="col-xs-4 mt-2">
                         <input class="form-control" name="phone" [(ngModel)]="phoneNumber">
                     </div>
-                </div>  
+                </div>
             </div>
         </form>
       </div>

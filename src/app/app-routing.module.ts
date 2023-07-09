@@ -65,7 +65,7 @@ const routes: Routes = [
     ]
   },
 
-  { path: 'checkout/:id', component: PurchasingPageComponent },
+  { path: 'checkout/:id', component: PurchasingPageComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' }
 ];
 

@@ -73,12 +73,10 @@ export class ProductPriceComponent implements OnChanges {
 
   clickFavButton() {
     this.userLikesService.toggleLikeProductById(this.productDTO?.id!).subscribe();
-    alert("liked");
   }
 
   clickBuyButton() {
     this.router.navigate(["/checkout", this.productDTO?.id]);
-    alert("Acquisto effettuato");
   }
 
   clickOfferButton() {
