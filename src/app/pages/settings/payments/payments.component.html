@@ -14,6 +14,25 @@
           </button>
         </div>
     </div>
+    <div class="row-col">
+      <div>
+        <span>Cards</span>
+      </div>
+      <div *ngFor="let paymentMethod of paymentMethods">
+
+        <div class="row mt-3">
+          <div class="col">
+            <span>{{paymentMethod.creditCard}}</span>
+          </div>
+          <div class="col-auto">
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="setDefault(paymentMethod)" *ngIf="!paymentMethod._default">
+              Set as default
+            </button>
+            <span class="badge bg-success" *ngIf="paymentMethod._default">Default</span>
+          </div>
+
+      </div>
+    </div>
 </div>
 
 
@@ -21,17 +40,17 @@
 <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
-  
+
         <!-- Modal Header -->
         <div class="modal-header d-flex justify-content-center align-items-center">
            <h6 class="text-center">Card Details</h6>
         </div>
-  
+
         <!-- Modal body -->
         <div class="modal-body">
           <form>
             <div class="container">
-                <div class="row fw-lighter">
+                <div class="row">
                     <span>The information about your card are protected</span>
                 </div>
             </div>
@@ -41,7 +60,7 @@
                     <div class="col-12 ml-2">
                         <span>Card's holder name</span>
                     </div>
-            
+
                     <div class="col-8 mt-2">
                         <input ngModel type="text" class="form-control" placeholder="{{cardOwnerPlaceholder}}" (input)="setCardOwnerName($event)">
                     </div>
@@ -52,7 +71,7 @@
                     <div class="col-12 ml-2">
                         <span>Number of the card</span>
                     </div>
-            
+
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control" placeholder="{{cardNumberPlaceholder}}" (input)="formatCardNumber($event)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
@@ -64,21 +83,9 @@
                     <div class="col-12 ml-2">
                         <span>Expiration Day</span>
                     </div>
-            
+
                     <div class="col-8 mt-2">
                         <input type="text" class="form-control" placeholder="{{expirationDayPlaceholder}}" (input)="formatDateInput($event)">
-                    </div>
-                </div>
-            </div>
-
-            <div class="basic-container mb-4">
-                <div class="row align-items-center">
-                    <div class="col-12 ml-2">
-                        <span>Secure code</span>
-                    </div>
-            
-                    <div class="col-8 mt-2">
-                        <input type="text" class="form-control" placeholder="{{secureCodePlaceholder}}" (input)="formatSecureCode($event)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                 </div>
             </div>
@@ -88,13 +95,13 @@
         <div *ngIf="error == true" class="alert alert-danger mt-1 m-2">
             <div>{{alertErrorMessage}}</div>
         </div>
-  
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="" (click)="save()">Save</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
-  
+
       </div>
     </div>
   </div>
@@ -102,4 +109,4 @@
 
 
 
-  
+

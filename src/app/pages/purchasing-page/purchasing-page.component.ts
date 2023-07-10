@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, TemplateRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductControllerService, ProductDTO } from 'src/app/services/api-service';
 
 @Component({
   selector: 'purchasing-page',
@@ -10,59 +12,87 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class PurchasingPageComponent {
 
-  constructor(private router: Router) {}
-
-  // TODO: Get product pic from product service
-  productPic: string = "";
-  productName?: string = "Product name here";
-  productDescription?: string = "Product description here";
-  productPrice?: Number = 15;
-
   faPlusIcon = faPlus;
 
+  productId!: string;
+  product!: ProductDTO;
 
 
-  profileName?: string = "Owner of the card's name";
-  cardNumber?: string = "example: 1234 1234 1234 1234";
-  expirationDay?: string = "MM/AA";
-  secureCode?: string = "example: 123";
-  error: boolean = false;
+  cardOwnerName: string = "";
+  cardNumber: string = "";
+  cardExpirationDay: string = "";
+  cardSecurityCode: string = "";
 
-
-
-
-  ngOnInit(){}
-
+  cardExpirationDayError: boolean = false;
 
 
 
-  formatDateInput(event: any) {
-    const input = event.target as HTMLInputElement;
-    const cleanedValue = input.value.replace(/[^0-9]/g, '');
-    let formattedValue = '';
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductControllerService,
+    private modalService: NgbModal
+  ) { }
 
-    if (cleanedValue.length > 2) {
-      const month = cleanedValue.substring(0, 2);
-      const year = cleanedValue.substring(2, 4);
-      formattedValue = `${month}/${year}`;
 
-      const monthNumber = parseInt(month, 10);
-      if (monthNumber < 1 || monthNumber > 12) {
-        this.error = true;
-      } else {
-        this.error = false;
+
+  ngOnInit() {
+    // get the product Id from the url example: /checkout/27959de9-88bf-417f-a263-b8a919d965c0
+    this.activatedRoute.paramMap.subscribe(params => {
+      if (!params.has('id')) {
+        this.router.navigate(['']);
       }
-    } else {
-      formattedValue = cleanedValue;
-      this.error = false;
-    }
 
-    input.value = formattedValue;
+      this.productId = params.get('id')!;
+      this.loadProduct(this.productId);
+    });
+
+
+  }
+
+
+  loadProduct(productId: string) {
+    this.productService.productById(productId).subscribe({
+      next: (value: any) => {
+        this.product = value;
+      }
+    })
   }
 
 
 
 
+
+  formatCardExpirationDay(event: string) {
+    const cleanedValue = event.replace(/[^0-9]/g, '');
+
+
+    if (cleanedValue.length > 2) {
+      const month = cleanedValue.substring(0, 2);
+      const year = cleanedValue.substring(2, 4);
+      this.cardExpirationDay = `${month}/${year}`;
+
+      const monthNumber = parseInt(month, 10);
+      if (monthNumber < 1 || monthNumber > 12) {
+        this.cardExpirationDayError = true;
+      } else {
+        this.cardExpirationDayError = false;
+      }
+    } else {
+      this.cardExpirationDay = cleanedValue;
+      this.cardExpirationDayError = false;
+    }
+  }
+
+
+  openModal(modal: TemplateRef<any>) {
+    this.modalService.open(modal, {  });
+  }
+
+
+
   //TODO: fare in modo che se il toggle switch sia selezionato, non è possibile scegliere una posizione dalla mappa
 
+
 }
+
