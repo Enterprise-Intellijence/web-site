@@ -32,19 +32,27 @@
           <a [routerLink]="['/settings/shipping']">add other addresses</a>
         </div>
       </div>
-      <div class="row mt-3 g-3">
+      <div class="vstack gap-3">
         <ng-container *ngFor="let address of addresses">
+          <div class="card p-2">
+            <div class="row">
 
-          <div class="col-auto">
-            <div class="vstack">
-              <div class="fw-semibold">
-                Country
+              <div class="col-auto hstack gap-2">
+                <span class="fw-semibold">Country:</span>
+                <span>{{address.country}}</span>
               </div>
-              <div>
-                {{address.country}}
+
+              <div class="col-auto hstack gap-2">
+                <span class="fw-semibold">City:</span>
+                <span>{{address.city}}</span>
               </div>
+
+
+
+
             </div>
           </div>
+
         </ng-container>
       </div>
     </div>
@@ -55,7 +63,7 @@
         <span>Payment options</span>
       </div>
       <div class="row">
-        <div class="col-6 fw-semibold mt-3">
+        <div class="col-6 fw-semibold">
           <span>Add credit card</span>
         </div>
         <div class="col-6 fw-semibold mt-2">
@@ -67,36 +75,6 @@
         </div>
       </div>
     </div>
-
-
-    <div class="basic-container">
-      <div class="row">
-        <span>Delivery details</span>
-      </div>
-      <div class="row align-items-end">
-        <div class="col-6 text-start">
-          <div class="row align-items-center">
-            <span class="fw-semibold">Use default address</span>
-          </div>
-        </div>
-        <div class="col-6 text-end mr-2">
-          <div class="form-check form-switch form-control-lg d-flex justify-content-end">
-            <input class="form-check-input" type="checkbox" id="newMessageNotificationSwitch">
-          </div>
-        </div>
-      </div>
-      <div class="row mt-2">
-        <div class="col-6 fw-semibold mt-3">
-          <span>Choose a pickup point</span>
-        </div>
-        <div class="col-6 fw-semibold mt-2 text-end mr-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#pickupPointModal">
-            <fa-icon [icon]="faPlusIcon"></fa-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <div class="custom-right-container d-flex flex-column justify-content-center align-items-center">

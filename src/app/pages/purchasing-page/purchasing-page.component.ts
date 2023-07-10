@@ -25,6 +25,9 @@ export class PurchasingPageComponent {
   addresses: AddressDTO[] = [];
   paymentMethods: PaymentMethodDTO[] = [];
 
+  selectedAddress?: AddressDTO;
+  selectedPaymentMethod?: PaymentMethodDTO;
+
   cardOwnerName: string = "";
   cardNumber: string = "";
   cardExpirationDay: string = "";
