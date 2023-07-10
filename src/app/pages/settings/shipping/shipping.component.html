@@ -48,8 +48,9 @@
         </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-        <button *ngIf="a.id !== defaultAddress?.id" type="button" class="btn btn-outline-secondary" (click)="setDefaultAddress(a)">Set as default</button>
-        <button *ngIf="a.id !== defaultAddress?.id" type="button" class="btn btn-danger" (click)="deleteAddress(a,i)">Delete</button>
+        <button *ngIf="a.id != defaultAddress?.id" type="button" class="btn btn-outline-secondary" (click)="setDefaultAddress(a, true)">Set as default</button>
+        <button *ngIf="a.id == defaultAddress?.id" type="button" class="btn btn-outline-secondary" (click)="setDefaultAddress(a, false)">Remove default</button>
+        <button type="button" class="btn btn-danger" (click)="deleteAddress(a,i)">Delete</button>
         <button type="button" class="btn btn-primary" (click)="updateAddress(a)">Save</button>
     </div>
 </div>
@@ -109,21 +110,21 @@
                         <span>Street</span>
                     </div>
                     <div class="col-xs-4 mt-2">
-                        <input class="form-control" name="street" [(ngModel)]="street">
+                        <input class="form-control" name="street" [(ngModel)]="street" required>
                     </div>
                     <span class="border-bottom mt-2"></span>
                     <div class = "row mt-2">
                         <span>Postal Code</span>
                     </div>
                     <div class="col-xs-4 mt-2">
-                        <input class="form-control" name="zip" [(ngModel)]="zipCode">
+                        <input class="form-control" name="zip" [(ngModel)]="zipCode" maxlength="5" required>
                     </div>
                     <span class="border-bottom mt-2"></span>
                     <div class = "row mt-2">
                         <span>Phone number</span>
                     </div>
                     <div class="col-xs-4 mt-2">
-                        <input class="form-control" name="phone" [(ngModel)]="phoneNumber">
+                        <input type="text" class="form-control " name="phone" [(ngModel)]="phoneNumber" required>
                     </div>
                 </div>
             </div>

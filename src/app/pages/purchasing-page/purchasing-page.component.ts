@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProductControllerService, ProductDTO } from 'src/app/services/api-service';
+import { AddressDTO, CustomMoneyDTO, PaymentMethodDTO, ProductControllerService, ProductDTO } from 'src/app/services/api-service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'purchasing-page',
@@ -18,6 +19,12 @@ export class PurchasingPageComponent {
   product!: ProductDTO;
 
 
+  agreedProductCost?: CustomMoneyDTO;
+  totalCost?: CustomMoneyDTO;
+
+  addresses: AddressDTO[] = [];
+  paymentMethods: PaymentMethodDTO[] = [];
+
   cardOwnerName: string = "";
   cardNumber: string = "";
   cardExpirationDay: string = "";
@@ -27,11 +34,13 @@ export class PurchasingPageComponent {
 
 
 
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private productService: ProductControllerService,
-    private modalService: NgbModal
+    private currentUserService: CurrentUserService,
+    private modalService: NgbModal,
   ) { }
 
 
@@ -48,19 +57,34 @@ export class PurchasingPageComponent {
     });
 
 
-  }
+    this.currentUserService.user$.subscribe({
+      next: (user) => {
+        this.paymentMethods = user?.paymentMethods ?? [];
+        this.addresses = user?.addresses ?? [];
+      }
+    })
 
+
+
+  }
 
   loadProduct(productId: string) {
     this.productService.productById(productId).subscribe({
       next: (value: any) => {
         this.product = value;
+        this.agreedProductCost = this.product.productCost;
+
+        if(this.agreedProductCost?.currency != this.product.deliveryCost?.currency) {
+          throw new Error("The currency of the product cost and the delivery cost must be the same");
+        }
+
+        this.totalCost = {
+          price: this.agreedProductCost?.price!! + this.product.deliveryCost?.price!!,
+          currency: this.agreedProductCost?.currency!!
+        }
       }
     })
   }
-
-
-
 
 
   formatCardExpirationDay(event: string) {

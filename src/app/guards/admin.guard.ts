@@ -14,10 +14,9 @@ export class AdminGuard implements CanActivate {
     private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log(`AdminGuard.canActivate(): this.authService.isLoggedIn():`, this.authService.isLoggedIn());
-    console.log(`AdminGuard.canActivate(): this.authService.isAdmin:`, this.authService.isAdmin);
+    console.log(`AdminGuard: role: ${this.authService.role}, this.authService.isLoggedIn(): ${this.authService.isLoggedIn()},  this.authService.isAdmin: ${this.authService.isAdmin}`);
 
-    if(this.authService.isLoggedIn() && this.authService.isAdmin) {
+    if (this.authService.isLoggedIn() && this.authService.isAdmin) {
       return true;
     }
     this.router.navigate(['']);

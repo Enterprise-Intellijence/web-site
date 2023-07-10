@@ -25,18 +25,27 @@
 
     <div class="basic-container">
       <div class="row">
-        <span>Your address</span>
+        <div class="col">
+          <h5>Your addresses</h5>
+        </div>
+        <div class="col-auto">
+          <a [routerLink]="['/settings/shipping']">add other addresses</a>
+        </div>
       </div>
-      <div class="row mt-3">
-        <div class="col-auto fw-semibold">
-          <span>Add address</span>
-        </div>
-        <div class="col fw-semibold text-end">
-          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(addressModal)">
-            <fa-icon [icon]="faPlusIcon">
-            </fa-icon>
-          </button>
-        </div>
+      <div class="row mt-3 g-3">
+        <ng-container *ngFor="let address of addresses">
+
+          <div class="col-auto">
+            <div class="vstack">
+              <div class="fw-semibold">
+                Country
+              </div>
+              <div>
+                {{address.country}}
+              </div>
+            </div>
+          </div>
+        </ng-container>
       </div>
     </div>
 
@@ -99,7 +108,7 @@
         <span>Ordine:</span>
       </div>
       <div class="col text-end">
-        <span>costo</span>
+        <span>{{agreedProductCost?.price | currency:agreedProductCost?.currency}}</span>
       </div>
     </div>
     <div class="row mt-2">
@@ -107,7 +116,7 @@
         <span>Spedizione:</span>
       </div>
       <div class="col text-end">
-        <span>costo</span>
+        <span>{{product.deliveryCost.price | currency:product.deliveryCost.currency}}</span>
       </div>
     </div>
     <div class="row mt-2">
@@ -115,7 +124,7 @@
         <span>Totale:</span>
       </div>
       <div class="col-6 text-end">
-        <span>costoTotale</span>
+        <span>{{totalCost?.price | currency:totalCost?.currency}}</span>
       </div>
     </div>
     <div class="row">
@@ -127,194 +136,5 @@
 
   <div class="custom-scrollbar">
     <div class="custom-scrollbar-thumb"></div>
-  </div>
-</div>
-
-
-
-<!-- Modal -->
-<div class="modal" id="paymentMethodModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Add credit card</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <form>
-          <div class="container">
-            <div class="row">
-              <span>The information about your card are protected</span>
-            </div>
-          </div>
-          <div class="basic-container mb-4">
-
-            <div class="row align-items-center">
-              <div class="col-12 ml-2">
-                <span>Card's holder name</span>
-              </div>
-
-              <div class="col-8 mt-2">
-                <input type="text" class="form-control border-0" placeholder="Owner of the card's name">
-              </div>
-            </div>
-          </div>
-          <div class="basic-container mb-4">
-            <div class="row align-items-center">
-              <div class="col-12 ml-2">
-                <span>Number of the card</span>
-              </div>
-
-              <div class="col-8 mt-2">
-                <input type="text" class="form-control border-0" placeholder="example: 1234 1234 1234 1234" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-              </div>
-            </div>
-          </div>
-
-          <div class="basic-container mb-4">
-            <div class="row align-items-center">
-              <div class="col-12 ml-2">
-                <span>Expiration Day</span>
-              </div>
-
-              <div class="col-8 mt-2">
-                <input type="text" class="form-control border-0" placeholder="MM/AA" [ngModel]="cardExpirationDay" (ngModelChange)="formatCardExpirationDay($event)" [ngClass]="{ 'error': cardExpirationDayError }" id="cardExpirationDay">
-
-                <div class="error-message mt-2" *ngIf="cardExpirationDayError">Invalid month, try again.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="basic-container mb-4">
-            <div class="row align-items-center">
-              <div class="col-12 ml-2">
-                <span>Secure code</span>
-              </div>
-
-              <div class="col-8 mt-2">
-                <input type="text" class="form-control border-0" placeholder="example: 123" oninput="this.value = this.value.replace(/[^0-9]/g, '')" [ngModel]="cardSecurityCode" id="cardSecurityCode">
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-
-
-<ng-template #addressModal let-modal>
-  <div class="modal-content">
-
-    <!-- Modal Header -->
-    <div class="modal-header">
-      <h4 class="modal-title">Add address</h4>
-      <button type="button" class="btn btn-close" (click)="modal.close(addressModal)"></button>
-    </div>
-
-    <!-- Modal body -->
-    <div class="modal-body">
-      <form>
-        <div class="container border-bottom p-2">
-          <div class="row">
-            <span>Country</span>
-          </div>
-          <div class="row">
-            <div class="col-6 fw-bold mt-2">
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Select country</option>
-                <option value="1">Italy</option>
-                <option value="2">France</option>
-                <option value="3">Russia</option>
-              </select>
-            </div>
-            <span class="border-bottom mt-2"></span>
-            <div class="row mt-2">
-              <span>Name and Lastname</span>
-            </div>
-            <div class="col-xs-4 mt-2">
-              <input class="form-control" id="ex3" type="text">
-            </div>
-            <span class="border-bottom mt-2"></span>
-            <div class="row mt-2">
-              <span>Address 1</span>
-            </div>
-            <div class="col-xs-4 mt-2">
-              <input class="form-control" id="ex3" type="text">
-            </div>
-            <span class="border-bottom mt-2"></span>
-            <div class="row mt-2">
-              <span>Address 2 (optional)</span>
-            </div>
-            <div class="col-xs-4 mt-2">
-              <input class="form-control" id="ex3" type="text">
-            </div>
-            <span class="border-bottom mt-2"></span>
-            <div class="row mt-2">
-              <span>Postal Code</span>
-            </div>
-            <div class="col-xs-4 mt-2">
-              <input class="form-control" id="ex3" type="text">
-            </div>
-
-          </div>
-
-
-
-        </div>
-      </form>
-    </div>
-
-    <!-- Modal footer -->
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="modal.close(addressModal)">Save</button>
-      <button type="button" class="btn btn-danger" (click)="modal.close(addressModal)">Close</button>
-    </div>
-
-  </div>
-</ng-template>
-
-
-
-
-
-
-
-<div class="modal" id="pickupPointModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">TODO</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-
-
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
   </div>
 </div>

@@ -41,7 +41,6 @@ export class PaymentsComponent {
 
   setDefault(paymentMethod: PaymentMethodBasicDTO) {
     paymentMethod._default = true;
-
     //TODO: implement
     alert("Not implemented yet");
 
