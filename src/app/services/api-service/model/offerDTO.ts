@@ -10,18 +10,16 @@
  * Do not edit the class manually.
  */
 import { CustomMoneyDTO } from './customMoneyDTO';
-import { OrderBasicDTO } from './orderBasicDTO';
 import { ProductBasicDTO } from './productBasicDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface OfferDTO { 
-    id?: string;
-    amount?: CustomMoneyDTO;
+    id: string;
+    amount: CustomMoneyDTO;
     creationTime?: Date;
-    state?: OfferDTO.StateEnum;
-    offerer?: UserBasicDTO;
-    product?: ProductBasicDTO;
-    order?: OrderBasicDTO;
+    state: OfferDTO.StateEnum;
+    offerer: UserBasicDTO;
+    product: ProductBasicDTO;
 }
 export namespace OfferDTO {
     export type StateEnum = 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELLED';

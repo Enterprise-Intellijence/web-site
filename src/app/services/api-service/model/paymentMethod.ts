@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Transaction } from './transaction';
 import { User } from './user';
 
 export interface PaymentMethod { 
@@ -18,6 +17,5 @@ export interface PaymentMethod {
     expiryDate?: string;
     owner?: string;
     ownerUser?: User;
-    transaction?: Array<Transaction>;
     _default?: boolean;
 }

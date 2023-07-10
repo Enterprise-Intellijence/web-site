@@ -21,8 +21,8 @@ export interface OrderDTO {
     state: OrderDTO.StateEnum;
     orderDate?: Date;
     orderUpdateDate?: Date;
-    product?: ProductBasicDTO;
-    user?: UserBasicDTO;
+    product: ProductBasicDTO;
+    user: UserBasicDTO;
     delivery?: DeliveryDTO;
     deliveryAddress?: AddressDTO;
     offer?: OfferBasicDTO;

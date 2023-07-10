@@ -13,16 +13,15 @@ import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductCategoryDTO } from './productCategoryDTO';
 
 export interface ProductCreateDTO { 
-    title?: string;
+    title: string;
     description?: string;
     productCost: CustomMoneyDTO;
     deliveryCost: CustomMoneyDTO;
     brand?: string;
-    condition?: ProductCreateDTO.ConditionEnum;
-    productSize?: ProductCreateDTO.ProductSizeEnum;
-    visibility?: ProductCreateDTO.VisibilityEnum;
-    productCategory?: ProductCategoryDTO;
-    productImages?: Array<Blob>;
+    condition: ProductCreateDTO.ConditionEnum;
+    productSize: ProductCreateDTO.ProductSizeEnum;
+    visibility: ProductCreateDTO.VisibilityEnum;
+    productCategory: ProductCategoryDTO;
     type: string;
 }
 export namespace ProductCreateDTO {

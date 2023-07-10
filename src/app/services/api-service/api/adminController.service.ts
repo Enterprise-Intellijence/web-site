@@ -335,13 +335,13 @@ export class AdminControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateProduct(body: AdminProductsBody, observe?: 'body', reportProgress?: boolean): Observable<AdminProductsBody>;
-    public updateProduct(body: AdminProductsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AdminProductsBody>>;
-    public updateProduct(body: AdminProductsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AdminProductsBody>>;
-    public updateProduct(body: AdminProductsBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateProduct1(body: AdminProductsBody, observe?: 'body', reportProgress?: boolean): Observable<AdminProductsBody>;
+    public updateProduct1(body: AdminProductsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AdminProductsBody>>;
+    public updateProduct1(body: AdminProductsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AdminProductsBody>>;
+    public updateProduct1(body: AdminProductsBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling updateProduct.');
+            throw new Error('Required parameter body was null or undefined when calling updateProduct1.');
         }
 
         let headers = this.defaultHeaders;
@@ -372,7 +372,7 @@ export class AdminControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<AdminProductsBody>('post',`${this.basePath}/api/v1/admin/products/`,
+        return this.httpClient.request<AdminProductsBody>('put',`${this.basePath}/api/v1/admin/products/`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

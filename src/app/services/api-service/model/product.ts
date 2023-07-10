@@ -38,7 +38,7 @@ export interface Product {
     usersThatLiked?: Array<User>;
     offers?: Array<Offer>;
     messages?: Array<Message>;
-    order?: Order;
+    order?: Array<Order>;
     productImages?: Array<ProductImage>;
     reports?: Array<Report>;
 }

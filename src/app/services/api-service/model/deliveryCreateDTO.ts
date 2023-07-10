@@ -12,6 +12,6 @@
 import { OrderBasicDTO } from './orderBasicDTO';
 
 export interface DeliveryCreateDTO { 
-    order?: OrderBasicDTO;
+    order: OrderBasicDTO;
     shipper?: string;
 }

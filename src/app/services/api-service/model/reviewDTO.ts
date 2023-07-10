@@ -12,11 +12,11 @@
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface ReviewDTO { 
-    id?: string;
+    id: string;
     date?: Date;
-    title?: string;
+    title: string;
     description?: string;
-    vote?: number;
-    reviewer?: UserBasicDTO;
-    reviewed?: UserBasicDTO;
+    vote: number;
+    reviewer: UserBasicDTO;
+    reviewed: UserBasicDTO;
 }

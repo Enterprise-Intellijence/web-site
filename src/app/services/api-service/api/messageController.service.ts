@@ -426,66 +426,6 @@ export class MessageControllerService {
      * 
      * 
      * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public replaceMessage(body: MessageDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<MessageDTO>;
-    public replaceMessage(body: MessageDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MessageDTO>>;
-    public replaceMessage(body: MessageDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MessageDTO>>;
-    public replaceMessage(body: MessageDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling replaceMessage.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling replaceMessage.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (App_Bearer_token) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<MessageDTO>('put',`${this.basePath}/api/v1/messages/${encodeURIComponent(String(id))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -526,66 +466,6 @@ export class MessageControllerService {
         }
 
         return this.httpClient.request<any>('post',`${this.basePath}/api/v1/messages/read`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updateMessage(body: MessageDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<MessageDTO>;
-    public updateMessage(body: MessageDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MessageDTO>>;
-    public updateMessage(body: MessageDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MessageDTO>>;
-    public updateMessage(body: MessageDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling updateMessage.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateMessage.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (App_Bearer_token) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<MessageDTO>('patch',`${this.basePath}/api/v1/messages/${encodeURIComponent(String(id))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

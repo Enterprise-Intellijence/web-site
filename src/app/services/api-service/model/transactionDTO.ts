@@ -11,15 +11,15 @@
  */
 import { CustomMoneyDTO } from './customMoneyDTO';
 import { OrderBasicDTO } from './orderBasicDTO';
-import { PaymentMethodBasicDTO } from './paymentMethodBasicDTO';
 
 export interface TransactionDTO { 
-    id?: string;
+    id: string;
     creationTime?: Date;
     amount: CustomMoneyDTO;
-    transactionState?: TransactionDTO.TransactionStateEnum;
-    paymentMethod: PaymentMethodBasicDTO;
-    order?: OrderBasicDTO;
+    transactionState: TransactionDTO.TransactionStateEnum;
+    paymentMethod: string;
+    paymentMethodOwner: string;
+    order: OrderBasicDTO;
 }
 export namespace TransactionDTO {
     export type TransactionStateEnum = 'REJECTED' | 'COMPLETED';

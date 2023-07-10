@@ -12,9 +12,9 @@
 import { CustomMoneyDTO } from './customMoneyDTO';
 
 export interface OfferBasicDTO { 
-    id?: string;
-    amount?: CustomMoneyDTO;
-    state?: OfferBasicDTO.StateEnum;
+    id: string;
+    amount: CustomMoneyDTO;
+    state: OfferBasicDTO.StateEnum;
     creationTime?: Date;
 }
 export namespace OfferBasicDTO {

@@ -15,7 +15,7 @@ import { ProductImageDTO } from './productImageDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface ProductBasicDTO { 
-    id?: string;
+    id: string;
     title?: string;
     description?: string;
     uploadDate?: Date;

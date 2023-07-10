@@ -14,14 +14,14 @@ import { CustomMoneyDTO } from './customMoneyDTO';
 import { OrderBasicDTO } from './orderBasicDTO';
 
 export interface DeliveryDTO { 
-    order?: OrderBasicDTO;
-    sendTime?: Date;
+    order: OrderBasicDTO;
+    sendTime: Date;
     deliveredTime?: Date;
     deliveryCost?: CustomMoneyDTO;
     shipper?: string;
-    deliveryStatus?: DeliveryDTO.DeliveryStatusEnum;
-    senderAddress?: AddressDTO;
-    receiverAddress?: AddressDTO;
+    deliveryStatus: DeliveryDTO.DeliveryStatusEnum;
+    senderAddress: AddressDTO;
+    receiverAddress: AddressDTO;
     id?: string;
 }
 export namespace DeliveryDTO {

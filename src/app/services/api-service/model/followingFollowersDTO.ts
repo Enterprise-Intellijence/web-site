@@ -14,6 +14,6 @@ import { UserBasicDTO } from './userBasicDTO';
 export interface FollowingFollowersDTO { 
     id?: string;
     followingFrom?: Date;
-    follower?: UserBasicDTO;
-    following?: UserBasicDTO;
+    follower: UserBasicDTO;
+    following: UserBasicDTO;
 }

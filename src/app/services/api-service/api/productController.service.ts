@@ -20,14 +20,12 @@ import { Observable }                                        from 'rxjs';
 import { AdminProductsBody } from '../model/adminProductsBody';
 import { CapabilityDTO } from '../model/capabilityDTO';
 import { InlineResponse200 } from '../model/inlineResponse200';
-import { OrderBasicDTO } from '../model/orderBasicDTO';
 import { PageMessageDTO } from '../model/pageMessageDTO';
 import { PageOfferBasicDTO } from '../model/pageOfferBasicDTO';
 import { PageProductBasicDTO } from '../model/pageProductBasicDTO';
 import { ProductBasicDTO } from '../model/productBasicDTO';
 import { ProductCategory } from '../model/productCategory';
 import { ProductsIdBody } from '../model/productsIdBody';
-import { ProductsIdBody1 } from '../model/productsIdBody1';
 import { V1ProductsBody } from '../model/v1ProductsBody';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -122,9 +120,9 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProduct(body: V1ProductsBody, observe?: 'body', reportProgress?: boolean): Observable<ProductsIdBody1>;
-    public createProduct(body: V1ProductsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductsIdBody1>>;
-    public createProduct(body: V1ProductsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductsIdBody1>>;
+    public createProduct(body: V1ProductsBody, observe?: 'body', reportProgress?: boolean): Observable<AdminProductsBody>;
+    public createProduct(body: V1ProductsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AdminProductsBody>>;
+    public createProduct(body: V1ProductsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AdminProductsBody>>;
     public createProduct(body: V1ProductsBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
@@ -159,7 +157,7 @@ export class ProductControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<ProductsIdBody1>('post',`${this.basePath}/api/v1/products`,
+        return this.httpClient.request<AdminProductsBody>('post',`${this.basePath}/api/v1/products`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -341,10 +339,10 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'body', reportProgress?: boolean): Observable<PageProductBasicDTO>;
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageProductBasicDTO>>;
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageProductBasicDTO>>;
-    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: string, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: Array<string>, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'body', reportProgress?: boolean): Observable<PageProductBasicDTO>;
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: Array<string>, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageProductBasicDTO>>;
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: Array<string>, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageProductBasicDTO>>;
+    public getFilteredProducts(title?: string, description?: string, minProductCost?: number, maxProductCost?: number, brands?: Array<string>, condition?: Array<string>, views?: number, userId?: string, uploadDate?: Date, availability?: string, productCategory?: ProductCategory, primaryCat?: string, secondaryCat?: string, tertiaryCat?: string, likesNumber?: number, productGender?: string, sizes?: Array<string>, colour?: string, entertainmentLanguage?: string, homeMaterial?: string, page?: number, sizePage?: number, sortBy?: string, sortDirection?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
 
@@ -388,8 +386,10 @@ export class ProductControllerService {
                 queryParameters = queryParameters.append('brands', <any>element);
             })
         }
-        if (condition !== undefined && condition !== null) {
-            queryParameters = queryParameters.set('condition', <any>condition);
+        if (condition) {
+            condition.forEach((element) => {
+                queryParameters = queryParameters.append('condition', <any>element);
+            })
         }
         if (views !== undefined && views !== null) {
             queryParameters = queryParameters.set('views', <any>views);
@@ -815,55 +815,6 @@ export class ProductControllerService {
     /**
      * 
      * 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getProductOrder(id: string, observe?: 'body', reportProgress?: boolean): Observable<OrderBasicDTO>;
-    public getProductOrder(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderBasicDTO>>;
-    public getProductOrder(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderBasicDTO>>;
-    public getProductOrder(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getProductOrder.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (App_Bearer_token) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<OrderBasicDTO>('get',`${this.basePath}/api/v1/products/${encodeURIComponent(String(id))}/order`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
      * @param primary 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -1226,17 +1177,17 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public replaceProduct(body: ProductsIdBody, id: string, observe?: 'body', reportProgress?: boolean): Observable<ProductsIdBody>;
-    public replaceProduct(body: ProductsIdBody, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductsIdBody>>;
-    public replaceProduct(body: ProductsIdBody, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductsIdBody>>;
-    public replaceProduct(body: ProductsIdBody, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateProduct(body: ProductsIdBody, id: string, observe?: 'body', reportProgress?: boolean): Observable<ProductsIdBody>;
+    public updateProduct(body: ProductsIdBody, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductsIdBody>>;
+    public updateProduct(body: ProductsIdBody, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductsIdBody>>;
+    public updateProduct(body: ProductsIdBody, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling replaceProduct.');
+            throw new Error('Required parameter body was null or undefined when calling updateProduct.');
         }
 
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling replaceProduct.');
+            throw new Error('Required parameter id was null or undefined when calling updateProduct.');
         }
 
         let headers = this.defaultHeaders;
@@ -1268,66 +1219,6 @@ export class ProductControllerService {
         }
 
         return this.httpClient.request<ProductsIdBody>('put',`${this.basePath}/api/v1/products/${encodeURIComponent(String(id))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updateProduct1(body: ProductsIdBody1, id: string, observe?: 'body', reportProgress?: boolean): Observable<ProductsIdBody1>;
-    public updateProduct1(body: ProductsIdBody1, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductsIdBody1>>;
-    public updateProduct1(body: ProductsIdBody1, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductsIdBody1>>;
-    public updateProduct1(body: ProductsIdBody1, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling updateProduct1.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateProduct1.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (App_Bearer_token) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<ProductsIdBody1>('patch',`${this.basePath}/api/v1/products/${encodeURIComponent(String(id))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

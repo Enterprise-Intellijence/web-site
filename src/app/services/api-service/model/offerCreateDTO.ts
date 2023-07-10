@@ -13,6 +13,6 @@ import { CustomMoneyDTO } from './customMoneyDTO';
 import { ProductBasicDTO } from './productBasicDTO';
 
 export interface OfferCreateDTO { 
-    amount?: CustomMoneyDTO;
-    product?: ProductBasicDTO;
+    amount: CustomMoneyDTO;
+    product: ProductBasicDTO;
 }

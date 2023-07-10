@@ -64,7 +64,6 @@ export * from './productIdBody';
 export * from './productImage';
 export * from './productImageDTO';
 export * from './productsIdBody';
-export * from './productsIdBody1';
 export * from './report';
 export * from './reportDTO';
 export * from './review';

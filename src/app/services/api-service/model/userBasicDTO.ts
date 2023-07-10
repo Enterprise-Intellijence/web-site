@@ -12,7 +12,7 @@
 import { UserImageDTO } from './userImageDTO';
 
 export interface UserBasicDTO { 
-    id?: string;
+    id: string;
     username: string;
     bio?: string;
     photoProfile?: UserImageDTO;

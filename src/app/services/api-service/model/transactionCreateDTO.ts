@@ -13,6 +13,6 @@ import { OrderBasicDTO } from './orderBasicDTO';
 import { PaymentMethodBasicDTO } from './paymentMethodBasicDTO';
 
 export interface TransactionCreateDTO { 
-    paymentMethod?: PaymentMethodBasicDTO;
-    order?: OrderBasicDTO;
+    paymentMethod: PaymentMethodBasicDTO;
+    order: OrderBasicDTO;
 }
