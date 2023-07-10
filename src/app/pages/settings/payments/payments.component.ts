@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { PaymentMethodBasicDTO, PaymentMethodControllerService } from 'src/app/services/api-service';
+import { PaymentMethodBasicDTO, PaymentMethodControllerService, PaymentMethodDTO } from 'src/app/services/api-service';
 import { PaymentMethodCreateDTO } from 'src/app/services/api-service/model/paymentMethodCreateDTO';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'payments',
@@ -12,7 +13,7 @@ export class PaymentsComponent {
 
   arrowRight = faAngleRight
 
-  paymentMethods: PaymentMethodBasicDTO[] = [];
+  paymentMethods: PaymentMethodDTO[] = [];
 
   cardOwnerPlaceholder: string = "Owner of the card's name";
   cardOwnerName: string = "";
@@ -26,7 +27,7 @@ export class PaymentsComponent {
   error: boolean = false;
   alertErrorMessage!: string;
 
-  constructor(private paymentsService: PaymentMethodControllerService) {
+  constructor(private paymentsService: PaymentMethodControllerService, private currentUserService: CurrentUserService) {
   }
 
   ngOnInit() {
@@ -34,16 +35,20 @@ export class PaymentsComponent {
   }
 
   private loadPaymentMethods() {
-    this.paymentsService.getMyPaymentMethods(0, 100, "body").subscribe((response) => {
-      this.paymentMethods = response.content ?? [];
+    this.currentUserService.user$.subscribe((user) => {
+      this.paymentMethods = user?.paymentMethods ?? [];
     });
   }
 
-  setDefault(paymentMethod: PaymentMethodBasicDTO) {
-    paymentMethod._default = true;
+  setDefault(paymentMethod: PaymentMethodDTO) {
+    paymentMethod.isDefault = true;
+
     //TODO: implement
     alert("Not implemented yet");
 
+    this.paymentsService.updatePaymentMethod(paymentMethod, paymentMethod.id).subscribe(() => {
+      this.currentUserService.getUser();
+    });
   }
 
   formatDateInput(event: any) {
@@ -141,7 +146,7 @@ export class PaymentsComponent {
       creditCard: this.cardNumber,
       expiryDate: this.expirationDay,
       owner: this.cardOwnerName,
-      _default: false
+      isDefault: false
     }
 
     this.error = false;

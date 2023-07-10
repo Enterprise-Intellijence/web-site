@@ -81,7 +81,7 @@ export class ShippingComponent implements OnInit {
       console.log("user: ", this.user);
       console.log("indirizzi: ", this.addresses);
       this.addresses?.forEach(a => {
-        console.log("is default: ", a._default);
+        console.log("is default: ", a.isDefault);
       })
     });
 
@@ -116,7 +116,7 @@ export class ShippingComponent implements OnInit {
     // @ts-ignore
     address.isDefault = value;
 
-    this.deliveryService.replaceAddress(address, address.id).subscribe(res => {
+    this.deliveryService.updateAddress(address, address.id).subscribe((res: AddressDTO) => {
       console.log("res: ", res);
       alert("Default address set");
       this.currentUserService.getUser();

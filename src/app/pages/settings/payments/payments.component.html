@@ -25,10 +25,10 @@
             <span>{{paymentMethod.creditCard}}</span>
           </div>
           <div class="col-auto">
-            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="setDefault(paymentMethod)" *ngIf="!paymentMethod._default">
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="setDefault(paymentMethod)" *ngIf="!paymentMethod.isDefault">
               Set as default
             </button>
-            <span class="badge bg-success" *ngIf="paymentMethod._default">Default</span>
+            <span class="badge bg-success" *ngIf="paymentMethod.isDefault">Default</span>
           </div>
 
       </div>
