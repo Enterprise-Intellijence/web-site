@@ -55,7 +55,7 @@ export class MessagesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.url.subscribe(url => {
-      this.makingNewConversation = url[1].path == 'new';
+      this.makingNewConversation = url.at(1)?.path == 'new' ?? false;
       this.UpdateConversationIfExists();
     });
 
@@ -206,7 +206,7 @@ export class MessagesPageComponent implements OnInit {
         if (conversation) {
           console.log("Conversation exists, redirecting to it");
           this.selectedConversation = conversation;
-          this.router.navigate(['/messages', conversation.conversationId]);
+          this.router.navigate(['/messages', conversation.conversationId], { replaceUrl: true });
         }
         else{
           console.log("Conversation does not exist");

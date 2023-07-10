@@ -9,11 +9,7 @@
               <input type="text" class="form-control " placeholder="Search..." ngModel [ngModel]="conversationSearch" (ngModelChange)="conversationSearchChanged($event)">
             </div>
             <div class="col-auto">
-              <button class="btn btn-outline-primary">
-                <fa-icon [icon]="writeIcon"></fa-icon>
-                New Message
-              </button>
-              <button class="ms-3 btn btn-outline-primary" (click)="refreshConversations()">
+              <button class="btn btn-outline-primary" (click)="refreshConversations()">
                 <fa-icon [icon]="faRefresh" *ngIf="!isRefreshingConversations"></fa-icon>
                 <span *ngIf="isRefreshingConversations" class="spinner-border spinner-border-sm"></span>
               </button>
