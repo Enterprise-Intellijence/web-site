@@ -22,7 +22,7 @@
       <div class="col-auto">
         <div *ngIf="this.isLoggedIn$ | async" class="hstack gap-3">
 
-          <button class="btn btn-outline-primary position-relative" [routerLink]="['/messages']">
+          <button class="btn btn-outline-primary position-relative" [routerLink]="['/messages']" aria-label="messages" title="messages">
             <fa-icon [icon]="messagesIcon"></fa-icon>
 
             <span *ngIf="unreadMessages > 0" class="position-absolute top-0 start-100 badge rounded-pill bg-danger" style="transform: translate(-60%, -40%);">
@@ -30,8 +30,16 @@
               <span class="visually-hidden">unread messages</span>
             </span>
 
+
+
           </button>
-          <button class="btn btn-outline-primary position-relative" [routerLink]="['/liked-products']">
+
+          <button class="btn btn-outline-primary" [routerLink]="['/orders']" aria-label="orders" title="orders">
+            <fa-icon [icon]="faTruck"></fa-icon>
+          </button>
+
+
+          <button class="btn btn-outline-primary position-relative" [routerLink]="['/liked-products']" aria-label="liked products" title="liked products">
             <fa-icon [icon]="likesIcon"></fa-icon>
             <span *ngIf="likedProductsCount > 0" class="position-absolute top-0 start-100 badge rounded-pill bg-danger" style="transform: translate(-60%, -40%);">
               {{likedProductsCount | badgeText}}
@@ -44,7 +52,6 @@
               <fa-icon [icon]="userIcon"></fa-icon>
             </button>
 
-
             <ul ngbDropdownMenu class="p-2 rounded-3">
               <h6 class="dropdown-header">Account</h6>
               <li>
@@ -53,12 +60,12 @@
                   Profile
                 </a>
               </li>
-              <li>
+              <!-- <li>
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/orders']">
                   <fa-icon [icon]="faTruck" class="me-1"></fa-icon>
                   Orders
                 </a>
-              </li>
+              </li> -->
               <li>
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/settings']">
                   <fa-icon [icon]="faGear" class="me-1"></fa-icon>
