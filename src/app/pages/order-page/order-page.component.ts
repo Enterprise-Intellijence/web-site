@@ -26,16 +26,32 @@ export class OrderPageComponent implements OnInit {
   orderId!: string;
   order?: OrderDTO;
 
-  otherUser?: UserBasicDTO;
-
-  get product() {
-    return this.order!.product;
-  }
-
 
   get state() { return this.order!.state; }
 
+  get wasReviewed()  { return this.state == State.REVIEWED; }
+  get wasCompleted() { return this.state == State.COMPLETED || this.wasReviewed;  }
+  get wasDelivered() { return this.state == State.DELIVERED || this.wasCompleted; }
+  get wasShipped()   { return this.state == State.SHIPPED   || this.wasDelivered; }
+  get wasPurchased() { return this.state == State.PURCHASED || this.wasShipped;   }
+  get isPending()    { return this.state == State.PENDING;  }
+  get isCanceled()   { return this.state == State.CANCELED; }
 
+
+  get product() { return this.order!.product; }
+  get buyer(): UserBasicDTO { return this.order!.user; }
+  get seller(): UserBasicDTO { return this.order!.product!.seller!; }
+
+  get hasOffer() { return this.order!.offer != undefined; }
+  get offer() { return this.order!.offer; }
+
+  get hasTransaction() { return this.order!.transaction != undefined; }
+  get transaction() { return this.order!.transaction; }
+
+  currentUserId?: string;
+
+  get isBuyer() { return this.currentUserId == this.buyer.id; }
+  get isSeller() { return this.currentUserId == this.seller.id; }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,7 +64,12 @@ export class OrderPageComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.orderId = params['orderId'];
       this.loadOrder();
+    });
 
+    this.currentUserService.user$.subscribe({
+      next: (user) => {
+        this.currentUserId = user?.id;
+      }
     });
 
   }
@@ -77,6 +98,8 @@ export class OrderPageComponent implements OnInit {
       case State.PURCHASED:
       case State.SHIPPED:
       case State.DELIVERED:
+        val = 'secondary'
+        break;
       case State.COMPLETED:
       case State.REVIEWED:
         val = 'success'

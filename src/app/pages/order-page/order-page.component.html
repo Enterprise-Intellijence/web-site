@@ -19,22 +19,88 @@
       <product-card [product]="product" class="col-12 col-sm-6 col-md-4 col-lg-3"></product-card>
 
       <div class="col">
+        <div class="vstack gap-3">
 
-        <div class="card p-2 ps-4">
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="card p-2 shadow-sm">
 
-            <span class="text-muted">
-              created: <span class="fw-semibold">{{order.orderDate | date }}</span>
-            </span>
-            <span class="ms-4 text-muted d-none d-lg-inline">
-              last modified: <span class="fw-semibold">{{order.orderUpdateDate| date }}</span>
-            </span>
-            <div class="ms-auto alert py-1 px-2 m-0" [ngClass]="getStateColor('alert-')">
-              <span>Order state: </span>
-              <span class="fw-semibold me-2">{{order.state | titlecase}}</span>
-              <fa-icon [icon]="getStateIcon()"></fa-icon>
+
+            <div class="d-flex align-items-center">
+              <span class="fw-semibold me-3">
+                Order
+              </span>
+
+              <span class="text-muted">
+                created: <span class="fw-semibold">{{order.orderDate | date }}</span>
+              </span>
+              <span class="ms-4 text-muted">
+                last modified: <span class="fw-semibold">{{order.orderUpdateDate | date }}</span>
+              </span>
+              <div class="ms-auto alert py-1 px-2 m-0" [ngClass]="getStateColor('alert-')">
+                <span>Order state: </span>
+                <span class="fw-semibold me-2">
+                  {{order.state | titlecase}}
+                <fa-icon [icon]="getStateIcon()"></fa-icon>
+              </span>
+              </div>
             </div>
           </div>
+
+          <div class="card p-2 shadow-sm" *ngIf="hasOffer">
+
+            <div class="d-flex align-items-center">
+              <span class="fw-semibold me-3">
+                Offer
+              </span>
+
+              <div class="text-muted">
+                created: <span class="fw-semibold">{{offer?.creationTime | date}}</span>
+              </div>
+              <div>
+                agreed product price: <span class="fw-semibold">{{offer?.amount?.price | currency:offer?.amount?.currency }}</span>
+              </div>
+              <div>
+                agreed product price: <span class="fw-semibold">{{offer?.amount?.price | currency:offer?.amount?.currency }}</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card p-2 shadow-sm" *ngIf="hasTransaction">
+            <div class="d-flex align-items-center">
+
+              <span class="fw-semibold me-3">
+                Transaction
+              </span>
+
+              <div class="text-muted">
+                created: <span class="fw-semibold">{{transaction!.creationTime | date}}</span>
+              </div>
+
+              <div class="ms-auto alert py-1 px-2 m-0" [ngClass]="transaction!.transactionState == 'COMPLETED' ? 'alert-success' : 'alert-danger'">
+                <span>Transaction state: </span>
+                <span class="fw-semibold">{{transaction!.transactionState | titlecase}} <fa-icon [icon]="transaction!.transactionState == 'COMPLETED' ? faCheck : faXmark"></fa-icon></span>
+
+              </div>
+            </div>
+
+            <div class="card p-2 shadow-sm mt-2">
+              <div class="d-flex justify-content-between">
+                <div class="hstack gap-2">
+                  <span class="fw-semibold">Owner:</span>
+                  <span>{{transaction!.paymentMethodOwner}}</span>
+                </div>
+
+                <div class="hstack gap-2">
+                  <span class="fw-semibold">Card number:</span>
+                  <span>{{transaction!.paymentMethod}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
     </div>

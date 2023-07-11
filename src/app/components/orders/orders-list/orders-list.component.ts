@@ -23,6 +23,8 @@ export class OrdersListComponent implements OnInit, OnChanges {
   @Input() HideIfEmpty: boolean = true;
   @Input() messageIfEmpty: string = 'No orders found';
 
+  @Input() LoadOrdersForCurrentUserProducts: boolean = false;
+
   @Input() titleIconFromState: boolean = true;
   @Input() titleIcon?: IconDefinition;
   @Input() pageSize: number = 6;
@@ -50,11 +52,20 @@ export class OrdersListComponent implements OnInit, OnChanges {
   }
 
   loadProductsPage(state?: OrderBasicDTO.StateEnum) {
-    this.orderService.getAllOrdersOfUser(state, this.visualPage - 1, this.pageSize).subscribe((orders) => {
-      this.totalPages = orders.totalPages || 0;
-      this.totalOrdersCount = orders.totalElements || 0;
-      this.orders = orders.content || [];
-    });
+    if (this.LoadOrdersForCurrentUserProducts) {
+      this.orderService.getAllOrdersOfSeller(state, this.visualPage - 1, this.pageSize).subscribe((orders) => {
+        this.totalPages = orders.totalPages || 0;
+        this.totalOrdersCount = orders.totalElements || 0;
+        this.orders = orders.content || [];
+      });
+    }
+    else {
+      this.orderService.getAllOrdersOfUser(state, this.visualPage - 1, this.pageSize).subscribe((orders) => {
+        this.totalPages = orders.totalPages || 0;
+        this.totalOrdersCount = orders.totalElements || 0;
+        this.orders = orders.content || [];
+      });
+    }
   }
 
   isEmpty(): boolean {

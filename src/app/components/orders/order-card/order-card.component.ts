@@ -39,6 +39,8 @@ export class OrderCardComponent {
       case State.PURCHASED:
       case State.SHIPPED:
       case State.DELIVERED:
+        val = 'secondary'
+        break;
       case State.COMPLETED:
       case State.REVIEWED:
         val = 'success'
