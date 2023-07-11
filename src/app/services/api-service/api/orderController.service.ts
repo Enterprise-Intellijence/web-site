@@ -19,7 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { OrderCreateDTO } from '../model/orderCreateDTO';
 import { OrderDTO } from '../model/orderDTO';
-import { PageOrderDTO } from '../model/pageOrderDTO';
+import { PageOrderBasicDTO } from '../model/pageOrderBasicDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -163,19 +163,24 @@ export class OrderControllerService {
     /**
      * 
      * 
+     * @param state 
      * @param page 
      * @param sizePage 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllOrdersOfUser(page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageOrderDTO>;
-    public getAllOrdersOfUser(page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageOrderDTO>>;
-    public getAllOrdersOfUser(page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageOrderDTO>>;
-    public getAllOrdersOfUser(page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllOrdersOfUser(state?: string, page?: number, sizePage?: number, observe?: 'body', reportProgress?: boolean): Observable<PageOrderBasicDTO>;
+    public getAllOrdersOfUser(state?: string, page?: number, sizePage?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageOrderBasicDTO>>;
+    public getAllOrdersOfUser(state?: string, page?: number, sizePage?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageOrderBasicDTO>>;
+    public getAllOrdersOfUser(state?: string, page?: number, sizePage?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
 
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (state !== undefined && state !== null) {
+            queryParameters = queryParameters.set('state', <any>state);
+        }
         if (page !== undefined && page !== null) {
             queryParameters = queryParameters.set('page', <any>page);
         }
@@ -206,7 +211,7 @@ export class OrderControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageOrderDTO>('get',`${this.basePath}/api/v1/orders/me`,
+        return this.httpClient.request<PageOrderBasicDTO>('get',`${this.basePath}/api/v1/orders/me`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

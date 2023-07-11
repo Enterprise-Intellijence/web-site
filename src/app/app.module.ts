@@ -64,6 +64,8 @@ import { AuthGuard } from "./guards/auth.guard"
 import { AdminGuard } from "./guards/admin.guard"
 import { Config } from './models/config';
 import { EmptyReviewsComponent } from './components/empty-reviews/empty-reviews.component';
+import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
+import { OrderPageComponent } from './pages/order-page/order-page.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -129,6 +131,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     AddNewSizeComponent,
     ClickStopPropagationDirective,
     EmptyReviewsComponent,
+    OrdersPageComponent,
+    OrderPageComponent,
     ],
   providers: [
     HttpClient,

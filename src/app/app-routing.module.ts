@@ -25,6 +25,8 @@ import {AddNewSizeComponent} from "./pages/administration/add-new-size/add-new-s
 import { SearchPageComponent } from "./pages/search-page/search-page.component";
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
+import { OrderPageComponent } from './pages/order-page/order-page.component';
 
 
 const routes: Routes = [
@@ -52,6 +54,14 @@ const routes: Routes = [
       { path: 'account', component: AccountSettingsComponent },
       { path: 'shipping', component: ShippingComponent },
       { path: 'payments', component: PaymentsComponent },
+    ]
+  },
+  {
+    path: 'orders', canActivate: [AuthGuard], children: [
+      { path: '', redirectTo: 'all', pathMatch: 'full' },
+      { path: 'all', component: OrdersPageComponent },
+      { path: ':orderId', component: OrderPageComponent },
+
     ]
   },
   {

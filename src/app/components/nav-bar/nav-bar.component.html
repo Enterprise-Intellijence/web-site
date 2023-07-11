@@ -48,25 +48,37 @@
             <ul ngbDropdownMenu class="p-2 rounded-3">
               <h6 class="dropdown-header">Account</h6>
               <li>
-                <!-- TODO: Add argument to routerLink when account id is available-->
-                <!-- <button ngbDropdownToggle class="btn btn-outline-primary " [routerLink]="['/users', {{user.id}}]"></button> -->
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/users/me']">
                   <fa-icon [icon]="faAddressCard" class="me-1"></fa-icon>
-                  Profile</a>
+                  Profile
+                </a>
               </li>
-              <li *ngIf="(currentUser?.role == 'ADMIN' || currentUser?.role == 'SUPER_ADMIN')">
-                <a ngbDropdownItem class="rounded-2" [routerLink]="['/administration']">Admin Dashboard</a>
+              <li>
+                <a ngbDropdownItem class="rounded-2" [routerLink]="['/orders']">
+                  <fa-icon [icon]="faTruck" class="me-1"></fa-icon>
+                  Orders
+                </a>
               </li>
               <li>
                 <a ngbDropdownItem class="rounded-2" [routerLink]="['/settings']">
                   <fa-icon [icon]="faGear" class="me-1"></fa-icon>
-                  Settings</a>
+                  Settings
+                </a>
               </li>
-              <li><hr class="dropdown-divider"></li>
+              <li *ngIf="(currentUser?.role == 'ADMIN' || currentUser?.role == 'SUPER_ADMIN')">
+                <a ngbDropdownItem class="rounded-2" [routerLink]="['/administration']">
+                  <fa-icon [icon]="faGavel" class="me-1"></fa-icon>
+                  Admin
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li>
                 <a ngbDropdownItem class="rounded-2" (click)="logout()">
                   <fa-icon [icon]="faRightFromBracket" class="me-1"></fa-icon>
-                  Log out</a>
+                  Log out
+                </a>
               </li>
             </ul>
           </div>
