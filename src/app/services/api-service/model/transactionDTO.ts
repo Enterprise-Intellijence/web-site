@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 import { CustomMoneyDTO } from './customMoneyDTO';
-import { OrderBasicDTO } from './orderBasicDTO';
 
 export interface TransactionDTO { 
     id: string;
@@ -19,7 +18,6 @@ export interface TransactionDTO {
     transactionState: TransactionDTO.TransactionStateEnum;
     paymentMethod: string;
     paymentMethodOwner: string;
-    order: OrderBasicDTO;
 }
 export namespace TransactionDTO {
     export type TransactionStateEnum = 'REJECTED' | 'COMPLETED';
