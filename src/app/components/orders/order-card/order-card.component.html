@@ -1,12 +1,12 @@
 <div class="card p-3 shadow-sm" style="max-height: 200px;">
   <div class="row">
-    <div class="col-auto">
+    <div class="col-auto cursor-pointer" [routerLink]="['/products', order.product.id]">
       <img [src]="order.product.productImages | defaultProductPic" [alt]="order.product.description" class="img-fluid rounded" width="80">
     </div>
 
     <div class="col d-flex flex-column">
       <div class="d-flex align-items-center">
-        <div class="fw-semibold">
+        <div class="fw-semibold cursor-pointer" [routerLink]="['/products', order.product.id]">
           {{order.product.title}}
         </div>
 
@@ -16,18 +16,18 @@
           </span>
         </div>
 
+
         <div class="alert p-1 m-0 ms-auto" [ngClass]="getStateColor('alert-')">
-          state: {{state | titlecase}}
+          state: {{state | titlecase}} <fa-icon [icon]="getStateIcon()"></fa-icon>
         </div>
 
       </div>
 
 
       <div class="flex-fill">
-        <div>
-          to address
+        <div class="">
+          {{order.product.description}}
         </div>
-
       </div>
 
 
@@ -35,23 +35,14 @@
         <span class="text-muted">
           created: <span class="fw-semibold">{{order.orderDate | date }}</span>
         </span>
-        <span class="ms-3 text-muted">
+        <span class="ms-3 text-muted d-none d-lg-inline">
           last modified: <span class="fw-semibold">{{order.orderUpdateDate| date }}</span>
         </span>
 
         <div class="ms-auto">
-
-          <ng-container *ngIf="state == 'COMPLETED'">
-            <button class="btn btn-primary" [routerLink]="['/orders', order.id]">
-              <fa-icon [icon]="faStar"></fa-icon>
-              <span class="ms-2">Review</span>
-            </button>
-          </ng-container>
-
-
           <button class="btn btn-primary" [routerLink]="['/orders', order.id]">
             <fa-icon [icon]="faOpen"></fa-icon>
-            <span class="ms-2">Go to order</span>
+            <!-- <span class="ms-2">Go to order</span> -->
           </button>
         </div>
       </div>

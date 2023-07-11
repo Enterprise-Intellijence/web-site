@@ -1,0 +1,21 @@
+<div class="basic-container rounded shadow-sm" *ngIf="!(isEmpty() && HideIfEmpty)">
+  <h4 class="my-2" *ngIf="title.length > 0">
+    {{title}}
+    <fa-icon [icon]="titleIcon" *ngIf="titleIcon"> </fa-icon>
+  </h4>
+
+  <div class="p-2 row g-3 justify-content-center">
+    <ng-container *ngFor="let order of orders">
+      <order-card [orderBasic]="order" class="col-12 col-xxl-6"></order-card>
+    </ng-container>
+  </div>
+
+  <div class="m-2 d-flex justify-content-center " *ngIf="!isEmpty() && totalPages > 1">
+    <ngb-pagination [collectionSize]="totalOrdersCount" [page]="visualPage" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChanged($event)">
+    </ngb-pagination>
+  </div>
+
+  <div class="m-2 d-flex justify-content-center " *ngIf="isEmpty()">
+    <span class="fw-semibold">{{messageIfEmpty}}</span>
+  </div>
+</div>

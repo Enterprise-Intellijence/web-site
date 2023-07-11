@@ -1,18 +1,18 @@
 <div class="container">
 
-  <div class="basic-container">
-    <h4 class="my-2">Your orders</h4>
+  <h1 class="my-3 text-center">Orders on your products</h1>
+  <orders-list [HideIfEmpty]="false" messageIfEmpty="no orders for your products yet"></orders-list>
 
-    <div>
-      <ng-container *ngFor="let order of orders">
-        <order-card [orderBasic]="order"></order-card>
-      </ng-container>
-    </div>
+  <hr class="my-5">
 
-    <div class="m-2 d-flex justify-content-center ">
-      <ngb-pagination [collectionSize]="totalOrdersCount" [(page)]="visualPage" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadProductsPage()">
-      </ngb-pagination>
-    </div>
-  </div>
+  <h1 class="my-3 text-center">Your orders</h1>
+
+  <orders-list title="Pending orders"   orderState="PENDING"></orders-list>
+  <orders-list title="Purchased orders" orderState="PURCHASED"></orders-list>
+  <orders-list title="Shipped orders"   orderState="SHIPPED"></orders-list>
+  <orders-list title="Delivered orders" orderState="DELIVERED"></orders-list>
+  <orders-list title="Completed orders" orderState="COMPLETED"></orders-list>
+  <orders-list title="Reviewed orders"  orderState="REVIEWED"></orders-list>
+  <orders-list title="Orders cancelled" orderState="CANCELED"></orders-list>
 
 </div>
