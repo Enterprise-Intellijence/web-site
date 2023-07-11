@@ -199,21 +199,21 @@ export class NewProductPageComponent implements OnInit {
 
   createProductDTO(): ProductCreateDTO {
     return {
-      title: this.title,
-      description: this.description,
+      title: this.title || "",
+      description: this.description || "",
       productCost: { price: +this.price!, currency: this.currency == "USD" ? 'USD' : 'EUR' },
       deliveryCost: { price: +this.deliveryPrice!, currency: this.currency == "USD" ? 'USD' : 'EUR' },
       brand: this.brand,
-      condition: this.conditionsMapping.get(this.condition!),
-      visibility: this.visibilitiesMapping.get(this.visibility!),
+      condition: this.conditionsMapping.get(this.condition!)!,
+      visibility: this.visibilitiesMapping.get(this.visibility!)!,
       productCategory: {
         id: this.idTertiaryCategory!,
         primaryCat: this.selectedCategory!.rawName,
         secondaryCat: this.selectedSecondaryCategory!.rawName,
         tertiaryCat: this.selectedTertiaryCategory!.rawName
       },
+      productSize: ProductCreateDTO.ProductSizeEnum.MEDIUM,
       // productImages: this.filesLoaded,
-      productImages: [],
       type: this.selectedCategory!.rawName
     };
   }

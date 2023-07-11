@@ -17,5 +17,5 @@ export interface AddressCreateDTO {
     street: string;
     zipCode: string;
     phoneNumber: string;
-    _default?: boolean;
+    isDefault: boolean;
 }

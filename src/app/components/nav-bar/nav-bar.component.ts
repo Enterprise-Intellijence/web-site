@@ -17,6 +17,7 @@ import { UserLikesService } from 'src/app/services/user-likes.service';
 })
 export class NavBarComponent implements OnInit {
 
+
   searchIcon = faSearch;
   loginIcon = faRightFromBracket;
   messagesIcon = faEnvelope;
@@ -39,6 +40,8 @@ export class NavBarComponent implements OnInit {
   homeCategory?: ProductCategory;
   entertainmentCategory?: ProductCategory;
   otherCategory?: ProductCategory;
+
+  public searchQuery = '';
 
   constructor(private UserLikesService: UserLikesService,
     public apiAuth: ApiAuthService,
@@ -75,16 +78,23 @@ export class NavBarComponent implements OnInit {
   }
 
 
-  searchFor($event: ProductCategory, gender?: ClothingDTO.ProductGenderEnum) {
+  searchForProductCategory($event: ProductCategory, gender?: ClothingDTO.ProductGenderEnum) {
     //console.log("searching for:", $event.name, "for gender: ", gender);
-
-
 
     this.route.navigate(['/search-page'], {
       queryParams: {
         category: $event.rawName,
         gender:gender
       }
+    });
+  }
+
+  searchForQuery(query: string) {
+    this.route.navigate(['/search-page'], {
+      queryParams: {
+        query: query
+      },
+      queryParamsHandling: 'merge'
     });
   }
 

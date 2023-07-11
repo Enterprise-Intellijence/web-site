@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserBasicDTO, UserDTO, OfferControllerService, OfferCreateDTO } from 'src/app/services/api-service';
+import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserBasicDTO, UserDTO, OfferControllerService, OfferCreateDTO, ProductControllerService } from 'src/app/services/api-service';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faCartShopping, faCircleInfo, faCommentDollar, faEdit, faHeart as faHeartFull, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { UserLikesService } from 'src/app/services/user-likes.service';
@@ -26,6 +26,7 @@ export class ProductPriceComponent implements OnChanges {
 
 
   @Input() productDTO?: ProductDTO;
+  private _productBasicDTO?: ProductBasicDTO;
 
   get isPrivate() {
     return this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE;
@@ -52,7 +53,9 @@ export class ProductPriceComponent implements OnChanges {
     private offerService: OfferControllerService,
     private userLikesService: UserLikesService,
     private productService: ProductService,
+    private productControllerService: ProductControllerService,
     private router: Router) {
+
     this.userLikesService.LikedProducts$.subscribe((products) => {
       this.isLiked = userLikesService.isProductLikedById(this.productDTO?.id!);
     });
@@ -73,12 +76,10 @@ export class ProductPriceComponent implements OnChanges {
 
   clickFavButton() {
     this.userLikesService.toggleLikeProductById(this.productDTO?.id!).subscribe();
-    alert("liked");
   }
 
   clickBuyButton() {
     this.router.navigate(["/checkout", this.productDTO?.id]);
-    alert("Acquisto effettuato");
   }
 
   clickOfferButton() {
@@ -89,12 +90,16 @@ export class ProductPriceComponent implements OnChanges {
     if (form.valid) {
       console.log("form valid");
 
+      if (this._productBasicDTO == null) {
+        throw new Error("productBasicDTO is null");
+      }
+
       var offer: OfferCreateDTO = {
         amount: {
           price: this.offerAmount,
           currency: this.offerCurrency
         },
-        product: this.productDTO,
+        product: this._productBasicDTO,
       }
 
       this.offerService.createOffer(offer, "body").subscribe((offer) => {
@@ -147,6 +152,12 @@ export class ProductPriceComponent implements OnChanges {
     this.isLiked = this.userLikesService.isProductLikedById(this.productDTO?.id!);
     this.offerAmount = this.productDTO?.productCost?.price || 0;
     this.offerCurrency = this.productDTO?.productCost?.currency || "EUR";
+
+    if (this.productDTO?.id) {
+      this.productControllerService.productBasicById(this.productDTO.id).subscribe((product) => {
+        this._productBasicDTO = product;
+      });
+    }
   }
 
 

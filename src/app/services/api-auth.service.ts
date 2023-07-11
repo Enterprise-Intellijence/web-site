@@ -14,14 +14,15 @@ export class ApiAuthService {
   public isLoggedIn$: BehaviorSubject<boolean>;
 
   public get role(): string | null {
-    if (this.accessJWT) {
-      return this.accessJWT.role;
+    if (this.accessJWT && this.accessJWT.role.length > 7) {
+      // removes '[ROLE_' prefix and ']' suffix
+      return this.accessJWT.role.slice(6, -1);
     }
     return null;
   }
 
   public get isAdmin(): boolean {
-    return this.role == 'ADMIN' || this.isSuperAdmin;
+    return this.role == "ADMIN" || this.isSuperAdmin;
   }
 
   public get isSuperAdmin(): boolean {
@@ -59,6 +60,7 @@ export class ApiAuthService {
 
     this.accessJWT = jwtDecode(this.encodedAccessJWT!);
     this.refreshJWT = jwtDecode(this.encodedRefreshJWT!);
+    console.log(`this.accessJWT:`, this.accessJWT);
 
     this.saveTokens();
 

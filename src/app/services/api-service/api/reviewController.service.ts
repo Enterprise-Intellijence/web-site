@@ -87,6 +87,13 @@ export class ReviewControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -142,6 +149,13 @@ export class ReviewControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -185,6 +199,13 @@ export class ReviewControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -233,6 +254,13 @@ export class ReviewControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             '*/*'
@@ -259,59 +287,6 @@ export class ReviewControllerService {
     /**
      * 
      * 
-     * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public replaceReview(body: ReviewDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<ReviewDTO>;
-    public replaceReview(body: ReviewDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReviewDTO>>;
-    public replaceReview(body: ReviewDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReviewDTO>>;
-    public replaceReview(body: ReviewDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling replaceReview.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling replaceReview.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<ReviewDTO>('put',`${this.basePath}/api/v1/reviews/${encodeURIComponent(String(id))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -327,6 +302,13 @@ export class ReviewControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -374,6 +356,13 @@ export class ReviewControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -393,7 +382,7 @@ export class ReviewControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<ReviewDTO>('patch',`${this.basePath}/api/v1/reviews/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<ReviewDTO>('put',`${this.basePath}/api/v1/reviews/${encodeURIComponent(String(id))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

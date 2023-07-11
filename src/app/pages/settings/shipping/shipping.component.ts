@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { Address, AddressDTO, DeliveryControllerService, UserControllerService, UserDTO } from 'src/app/services/api-service';
+import { Address, AddressCreateDTO, AddressDTO, DeliveryControllerService, UserControllerService, UserDTO } from 'src/app/services/api-service';
 import { CSCService, City, Country } from 'src/app/services/country-city-api';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
@@ -10,12 +10,12 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
   styleUrls: ['./shipping.component.scss']
 })
 export class ShippingComponent implements OnInit {
-  
+
   arrowRight = faAngleRight
   user: UserDTO | null = null;
-  addresses? = new Array<AddressDTO>();
-  countries? = new Array<Country>();
-  cities? = new Array<City>();
+  addresses?= new Array<AddressDTO>();
+  countries?= new Array<Country>();
+  cities?= new Array<City>();
 
   defaultAddress?: AddressDTO;
   country?: Country;
@@ -42,27 +42,28 @@ export class ShippingComponent implements OnInit {
   }
 
   saveNewAddress() {
-    if(!this.country || !this.city || !this.street || !this.phoneNumber || !this.zipCode)
+    if (!this.country || !this.city || !this.street || !this.phoneNumber || !this.zipCode)
       alert("Fill all the fields");
 
-    else if(!/^\d+$/.test(this.phoneNumber!) || !/^\d+$/.test(this.zipCode!))
+    else if (!/^\d+$/.test(this.phoneNumber!) || !/^\d+$/.test(this.zipCode!))
       alert("Invalid fields: phone number and postal code must contain only digits");
-    
+
     else {
-      let address: AddressDTO = {
-        id: "",
-        header: "",
+      let address: AddressCreateDTO = {
+        header: "default",
         country: this.country.name!,
         city: this.city.name!,
         street: this.street,
         phoneNumber: this.phoneNumber,
-        zipCode: this.zipCode
+        zipCode: this.zipCode,
+        // @ts-ignore
+        isDefault: false
       };
 
       this.deliveryService.createAddress(address).subscribe(res => {
         console.log("address res: ", res);
-        alert("New address added");
-        this.addresses?.push(address);
+        this.addresses?.push(res);
+        this.currentUserService.getUser();
       });
     }
   }
@@ -71,16 +72,18 @@ export class ShippingComponent implements OnInit {
     this.currentUserService.user$.subscribe(user => {
       this.user = user;
       this.addresses = this.user?.addresses;
-      this.userService.getDefaultAddress(this.user?.id!).subscribe(addr => {
-        this.defaultAddress = addr;
+      console.log("user: ", user);
+
+      this.userService.getDefaultAddress(user?.id!).subscribe(addr => {
+        this.defaultAddress = addr || undefined;
         console.log("default addr: ", addr);
       });
       console.log("user: ", this.user);
       console.log("indirizzi: ", this.addresses);
       this.addresses?.forEach(a => {
-        console.log("bool: ", a._default);
+        console.log("is default: ", a.isDefault);
       })
-    });  
+    });
 
     this.getCountries();
   }
@@ -88,14 +91,18 @@ export class ShippingComponent implements OnInit {
 
   getCountries() {
     this.cscService.countriesGet().subscribe(res => {
-      console.log("counties: ", res);
+      console.log("countries: ", res);
       this.countries = res;
     });
   }
 
   getCities() {
-    this.cscService.countriesCisoCitiesGet(this.country!.iso2!).subscribe(res => {
-      console.log("counties: ", res);
+
+    if (!this.country)
+      throw new Error("country is null");
+
+    this.cscService.countriesCisoCitiesGet(this.country.iso2!).subscribe(res => {
+      console.log("cities: ", res);
       this.cities = res;
     });
   }
@@ -105,12 +112,14 @@ export class ShippingComponent implements OnInit {
     this.getCities();
   }
 
-  setDefaultAddress(address: AddressDTO) {
-    address._default = true;
+  setDefaultAddress(address: AddressDTO, value: boolean = true) {
+    // @ts-ignore
+    address.isDefault = value;
 
-    this.deliveryService.replaceAddress(address, this.currentUserService.user?.id!).subscribe(res => {
+    this.deliveryService.updateAddress(address, address.id).subscribe((res: AddressDTO) => {
       console.log("res: ", res);
       alert("Default address set");
+      this.currentUserService.getUser();
     });
   }
 
@@ -118,7 +127,7 @@ export class ShippingComponent implements OnInit {
     private currentUserService: CurrentUserService,
     private deliveryService: DeliveryControllerService,
     private cscService: CSCService,
-    private userService: UserControllerService) {}
+    private userService: UserControllerService) { }
 }
 
 

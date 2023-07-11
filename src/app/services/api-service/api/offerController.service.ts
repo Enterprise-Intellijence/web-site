@@ -74,6 +74,13 @@ export class OfferControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -116,6 +123,13 @@ export class OfferControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -158,6 +172,13 @@ export class OfferControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -195,47 +216,6 @@ export class OfferControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteOffer(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public deleteOffer(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public deleteOffer(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public deleteOffer(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling deleteOffer.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<any>('delete',`${this.basePath}/api/v1/offers/${encodeURIComponent(String(id))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
     public getOffer(id: string, observe?: 'body', reportProgress?: boolean): Observable<OfferDTO>;
     public getOffer(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OfferDTO>>;
     public getOffer(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OfferDTO>>;
@@ -247,6 +227,13 @@ export class OfferControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -289,6 +276,13 @@ export class OfferControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -321,59 +315,6 @@ export class OfferControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public replaceOffer(body: OfferDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<OfferDTO>;
-    public replaceOffer(body: OfferDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OfferDTO>>;
-    public replaceOffer(body: OfferDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OfferDTO>>;
-    public replaceOffer(body: OfferDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling replaceOffer.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling replaceOffer.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<OfferDTO>('put',`${this.basePath}/api/v1/offers/${encodeURIComponent(String(id))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
     public setOfferState(body: string, id: string, observe?: 'body', reportProgress?: boolean): Observable<OfferDTO>;
     public setOfferState(body: string, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OfferDTO>>;
     public setOfferState(body: string, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OfferDTO>>;
@@ -389,6 +330,13 @@ export class OfferControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -409,59 +357,6 @@ export class OfferControllerService {
         }
 
         return this.httpClient.request<OfferDTO>('patch',`${this.basePath}/api/v1/offers/${encodeURIComponent(String(id))}/state`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updateOffer(body: OfferDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<OfferDTO>;
-    public updateOffer(body: OfferDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OfferDTO>>;
-    public updateOffer(body: OfferDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OfferDTO>>;
-    public updateOffer(body: OfferDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling updateOffer.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateOffer.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<OfferDTO>('patch',`${this.basePath}/api/v1/offers/${encodeURIComponent(String(id))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

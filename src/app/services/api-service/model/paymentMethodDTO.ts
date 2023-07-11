@@ -11,9 +11,9 @@
  */
 
 export interface PaymentMethodDTO { 
-    id?: string;
+    id: string;
     creditCard: string;
     expiryDate: string;
+    isDefault: boolean;
     owner: string;
-    _default?: boolean;
 }

@@ -37,7 +37,7 @@ export class CurrentUserService {
   }
 
   updateUser(user: UserDTO) {
-    this.userService.replaceUser(user, user.id ?? '').subscribe({
+    this.userService.updateUser(user, user.id!).subscribe({
       next: () => {
         this.user = user;
         this.user$.next(user);

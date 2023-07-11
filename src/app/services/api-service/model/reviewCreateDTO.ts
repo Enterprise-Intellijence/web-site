@@ -13,9 +13,9 @@ import { OrderBasicDTO } from './orderBasicDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface ReviewCreateDTO { 
-    orderBasicDTO?: OrderBasicDTO;
-    title?: string;
+    orderBasicDTO: OrderBasicDTO;
+    title: string;
     description?: string;
-    vote?: number;
-    reviewed?: UserBasicDTO;
+    vote: number;
+    reviewed: UserBasicDTO;
 }

@@ -11,8 +11,8 @@
  */
 
 export interface CustomMoneyDTO { 
-    price?: number;
-    currency?: CustomMoneyDTO.CurrencyEnum;
+    price: number;
+    currency: CustomMoneyDTO.CurrencyEnum;
 }
 export namespace CustomMoneyDTO {
     export type CurrencyEnum = 'EUR' | 'USD';

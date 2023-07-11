@@ -17,7 +17,7 @@ export interface OrderBasicDTO {
     state: OrderBasicDTO.StateEnum;
     orderDate?: Date;
     orderUpdateDate?: Date;
-    product?: ProductBasicDTO;
+    product: ProductBasicDTO;
     offer?: OfferBasicDTO;
 }
 export namespace OrderBasicDTO {

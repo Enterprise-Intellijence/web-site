@@ -14,13 +14,13 @@ import { PaymentMethodDTO } from './paymentMethodDTO';
 import { UserImageDTO } from './userImageDTO';
 
 export interface UserDTO { 
-    id?: string;
+    id: string;
     username: string;
-    email?: string;
+    email: string;
     bio?: string;
     photoProfile?: UserImageDTO;
     provider: UserDTO.ProviderEnum;
-    status?: UserDTO.StatusEnum;
+    status: UserDTO.StatusEnum;
     addresses?: Array<AddressDTO>;
     paymentMethods?: Array<PaymentMethodDTO>;
     role: UserDTO.RoleEnum;

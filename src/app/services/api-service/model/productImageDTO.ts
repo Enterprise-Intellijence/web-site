@@ -13,5 +13,5 @@
 export interface ProductImageDTO { 
     id?: string;
     description?: string;
-    urlPhoto?: string;
+    urlPhoto: string;
 }

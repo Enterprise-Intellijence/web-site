@@ -65,8 +65,8 @@ const routes: Routes = [
       { path: 'manage-sizes', component: ManageSizesComponent },
       {path:'add-new-size',component: AddNewSizeComponent}
     ]},
-  { path: 'checkout/:id', component: PurchasingPageComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: 'checkout/:id', component: PurchasingPageComponent, canActivate: [AuthGuard] },
+{ path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

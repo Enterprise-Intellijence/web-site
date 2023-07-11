@@ -11,14 +11,14 @@
  */
 import { CustomMoney } from './customMoney';
 import { Order } from './order';
-import { PaymentMethod } from './paymentMethod';
 
 export interface Transaction { 
     id?: string;
     creationTime?: Date;
     amount?: CustomMoney;
     transactionState?: Transaction.TransactionStateEnum;
-    paymentMethod?: PaymentMethod;
+    paymentMethod?: string;
+    paymentMethodOwner?: string;
     order?: Order;
 }
 export namespace Transaction {

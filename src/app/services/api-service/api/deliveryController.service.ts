@@ -76,6 +76,13 @@ export class DeliveryControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -124,6 +131,13 @@ export class DeliveryControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -172,6 +186,13 @@ export class DeliveryControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             '*/*'
@@ -202,47 +223,6 @@ export class DeliveryControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteDelivery(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public deleteDelivery(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public deleteDelivery(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public deleteDelivery(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling deleteDelivery.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<any>('delete',`${this.basePath}/api/v1/deliveries/${encodeURIComponent(String(id))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
     public getAddress(id: string, observe?: 'body', reportProgress?: boolean): Observable<AddressDTO>;
     public getAddress(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AddressDTO>>;
     public getAddress(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AddressDTO>>;
@@ -254,6 +234,13 @@ export class DeliveryControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -296,6 +283,13 @@ export class DeliveryControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -333,6 +327,13 @@ export class DeliveryControllerService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -365,21 +366,28 @@ export class DeliveryControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public replaceAddress(body: AddressDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<AddressDTO>;
-    public replaceAddress(body: AddressDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AddressDTO>>;
-    public replaceAddress(body: AddressDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AddressDTO>>;
-    public replaceAddress(body: AddressDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateAddress(body: AddressDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<AddressDTO>;
+    public updateAddress(body: AddressDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AddressDTO>>;
+    public updateAddress(body: AddressDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AddressDTO>>;
+    public updateAddress(body: AddressDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling replaceAddress.');
+            throw new Error('Required parameter body was null or undefined when calling updateAddress.');
         }
 
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling replaceAddress.');
+            throw new Error('Required parameter id was null or undefined when calling updateAddress.');
         }
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -418,21 +426,28 @@ export class DeliveryControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public replaceDelivery(body: DeliveryDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<DeliveryDTO>;
-    public replaceDelivery(body: DeliveryDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DeliveryDTO>>;
-    public replaceDelivery(body: DeliveryDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DeliveryDTO>>;
-    public replaceDelivery(body: DeliveryDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateDelivery(body: DeliveryDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<DeliveryDTO>;
+    public updateDelivery(body: DeliveryDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DeliveryDTO>>;
+    public updateDelivery(body: DeliveryDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DeliveryDTO>>;
+    public updateDelivery(body: DeliveryDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling replaceDelivery.');
+            throw new Error('Required parameter body was null or undefined when calling updateDelivery.');
         }
 
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling replaceDelivery.');
+            throw new Error('Required parameter id was null or undefined when calling updateDelivery.');
         }
 
         let headers = this.defaultHeaders;
 
+        // authentication (App_Bearer_token) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json',
@@ -453,112 +468,6 @@ export class DeliveryControllerService {
         }
 
         return this.httpClient.request<DeliveryDTO>('put',`${this.basePath}/api/v1/deliveries/${encodeURIComponent(String(id))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updateAddress(body: AddressDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<AddressDTO>;
-    public updateAddress(body: AddressDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AddressDTO>>;
-    public updateAddress(body: AddressDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AddressDTO>>;
-    public updateAddress(body: AddressDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling updateAddress.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateAddress.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<AddressDTO>('patch',`${this.basePath}/api/v1/deliveries/address/${encodeURIComponent(String(id))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param body 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updateDelivery(body: DeliveryDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<DeliveryDTO>;
-    public updateDelivery(body: DeliveryDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DeliveryDTO>>;
-    public updateDelivery(body: DeliveryDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DeliveryDTO>>;
-    public updateDelivery(body: DeliveryDTO, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling updateDelivery.');
-        }
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateDelivery.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<DeliveryDTO>('patch',`${this.basePath}/api/v1/deliveries/${encodeURIComponent(String(id))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

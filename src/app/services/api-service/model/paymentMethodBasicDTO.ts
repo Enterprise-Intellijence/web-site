@@ -11,7 +11,7 @@
  */
 
 export interface PaymentMethodBasicDTO { 
-    id?: string;
+    id: string;
     creditCard: string;
     _default?: boolean;
 }

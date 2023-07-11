@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { PaymentMethodControllerService } from 'src/app/services/api-service';
+import { PaymentMethodBasicDTO, PaymentMethodControllerService, PaymentMethodDTO } from 'src/app/services/api-service';
 import { PaymentMethodCreateDTO } from 'src/app/services/api-service/model/paymentMethodCreateDTO';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'payments',
@@ -9,7 +10,11 @@ import { PaymentMethodCreateDTO } from 'src/app/services/api-service/model/payme
   styleUrls: ['./payments.component.scss']
 })
 export class PaymentsComponent {
+
   arrowRight = faAngleRight
+
+  paymentMethods: PaymentMethodDTO[] = [];
+
   cardOwnerPlaceholder: string = "Owner of the card's name";
   cardOwnerName: string = "";
 
@@ -19,17 +24,32 @@ export class PaymentsComponent {
   expirationDayPlaceholder: string = "MM/AA";
   expirationDay: string = "";
 
-  secureCodePlaceholder: string = "example: 123";
-  secureCode: string = "";
-
   error: boolean = false;
   alertErrorMessage!: string;
 
-  constructor(private paymentsService: PaymentMethodControllerService) {
-
+  constructor(private paymentsService: PaymentMethodControllerService, private currentUserService: CurrentUserService) {
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.loadPaymentMethods();
+  }
+
+  private loadPaymentMethods() {
+    this.currentUserService.user$.subscribe((user) => {
+      this.paymentMethods = user?.paymentMethods ?? [];
+    });
+  }
+
+  setDefault(paymentMethod: PaymentMethodDTO) {
+    paymentMethod.isDefault = true;
+
+    //TODO: implement
+    alert("Not implemented yet");
+
+    this.paymentsService.updatePaymentMethod(paymentMethod, paymentMethod.id).subscribe(() => {
+      this.currentUserService.getUser();
+    });
+  }
 
   formatDateInput(event: any) {
     const input = event.target as HTMLInputElement;
@@ -61,7 +81,7 @@ export class PaymentsComponent {
       this.error = false;
 
     input.value = formattedValue;
-    this.expirationDay = "20" + formattedValue.substring(3, 5) + "-" + formattedValue.substring(0, 2) + "-30";
+    this.expirationDay = "01-" + formattedValue.substring(0, 2) + "-20" + formattedValue.substring(3, 5);
   }
 
   formatCardNumber(event: any) {
@@ -98,21 +118,6 @@ export class PaymentsComponent {
     this.cardNumber = formattedValue;
   }
 
-  formatSecureCode(event: any) {
-    const input = event.target as HTMLInputElement;
-    const cleanedValue = input.value.replace(/[^0-9]/g, '');
-    let formattedValue = '';
-
-    if (cleanedValue.length > 4) {
-      formattedValue = `${cleanedValue.substring(0, 4)}`;
-    } else {
-      formattedValue = cleanedValue;
-    }
-
-    input.value = formattedValue;
-    this.secureCode = formattedValue;
-  }
-
   setCardOwnerName(event: any) {
     const input = event.target as HTMLInputElement;
     this.cardOwnerName = input.value;
@@ -137,17 +142,11 @@ export class PaymentsComponent {
       return;
     }
 
-    if (this.secureCode === "") {
-      this.error = true;
-      this.alertErrorMessage = "Please, enter a secure code";
-      return;
-    }
-
     let p: PaymentMethodCreateDTO = {
       creditCard: this.cardNumber,
       expiryDate: this.expirationDay,
       owner: this.cardOwnerName,
-      _default: false
+      isDefault: false
     }
 
     this.error = false;
