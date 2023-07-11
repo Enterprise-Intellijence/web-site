@@ -17,6 +17,7 @@ import RoleEnum = UserDTO.RoleEnum;
 })
 export class ReportSingleViewComponent {
   @Input()report?:ReportDTO
+  isBanned: Boolean = false
 
   constructor(private reportService: ReportControllerService,private currentUser: CurrentUserService,private adminService: AdminControllerService) {
   }
@@ -47,11 +48,24 @@ export class ReportSingleViewComponent {
     if(this.currentUser.user?.role==RoleEnum.ADMIN || this.currentUser.user?.role==RoleEnum.SUPERADMIN) {
       this.adminService.banUser(this.report!.reportedUser!.id!).subscribe({
         next:(value:any)=>{
-          this.report!.reportedUser = value
+          //todo gestire meglio
+          this.isBanned = true
         }
       })
     }
 
 
+  }
+
+  unBanUser() {
+    if(this.currentUser.user?.role==RoleEnum.ADMIN || this.currentUser.user?.role==RoleEnum.SUPERADMIN) {
+      this.adminService .unbanUser(this.report!.reportedUser!.id!).subscribe({
+        next:(value:any)=>{
+          //todo gestire meglio
+          this.isBanned = false
+        }
+      })
     }
+
+  }
 }

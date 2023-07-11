@@ -20,7 +20,7 @@
           <td>{{report.status}}</td>
           <td style="text-align: center">{{(report.adminFollowedReport!==null)?(report.adminFollowedReport!.username):"-"}}</td>
           <td><button [disabled]="report.adminFollowedReport !== null" class="btn btn-outline-light text-black border-0 mb-2 text-start col-12"
-                      type="button" (click)="followReport(report)"><span [ngClass]="{'red-text': report.adminFollowedReport !== null, 'green-text': report.adminFollowedReport === null}">FOLLOW</span> </button> </td>
+                      type="button" (click)="followReport(report)"><span [ngClass]="{'red-text': report.adminFollowedReport !== null, 'green-text': report.adminFollowedReport === null}">HANDLE</span> </button> </td>
         </tr>
         </tbody>
       </table>
