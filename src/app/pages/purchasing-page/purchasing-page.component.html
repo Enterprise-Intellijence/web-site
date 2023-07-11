@@ -1,118 +1,187 @@
-<div class="container" style="display: flex;">
-  <div class="scrollable-container-left" style="flex-grow: 1; margin-right: 100px;">
-    <div class="basic-container" style="margin-bottom: 30px;">
-      <div class="row">
-        <h3>Order</h3>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="d-flex align-items-center">
-            <img [src]="product.productImages | defaultProductPic" class="rounded mt-2" style="width: 60px; height: 60px;">
-            <div class="ms-2">
-              <span class="fw-semibold">{{product.title}}</span>
-              <br>
-              <span class="d-block">{{product.description}}</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="d-flex me-3">
-            <span class="fw-semibold">{{product.productCost.price | currency:product.productCost.currency}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="container">
+  <div class="row">
 
-    <div class="basic-container">
-      <div class="row">
-        <div class="col">
-          <h5>Your addresses</h5>
-        </div>
-        <div class="col-auto">
-          <a [routerLink]="['/settings/shipping']">add other addresses</a>
-        </div>
-      </div>
+    <div class="col">
       <div class="vstack gap-3">
-        <ng-container *ngFor="let address of addresses">
-          <div class="card p-2">
-            <div class="row">
+        <div class="basic-container">
 
-              <div class="col-auto hstack gap-2">
-                <span class="fw-semibold">Country:</span>
-                <span>{{address.country}}</span>
+          <h3>Order for</h3>
+
+          <div class="row">
+            <div class="col">
+              <div class="d-flex">
+                <img [src]="product.productImages | defaultProductPic" class="rounded mt-2" style="width: 80px; height: 80px;">
+                <div class="ms-2">
+                  <span class="fw-semibold">{{product.title}}</span>
+                  <br>
+                  <span class="d-block">{{product.description}}</span>
+                </div>
               </div>
-
-              <div class="col-auto hstack gap-2">
-                <span class="fw-semibold">City:</span>
-                <span>{{address.city}}</span>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex me-3">
+                <span class="fw-semibold">{{product.productCost.price | currency:product.productCost.currency}}</span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="basic-container">
+          <div class="row">
+            <div class="col">
+              <h5>Your addresses</h5>
+            </div>
+            <div class="col-auto">
+              <a [routerLink]="['/settings/shipping']">add other addresses</a>
+            </div>
+          </div>
+          <div class="vstack gap-3">
+            <ng-container *ngFor="let address of addresses">
+              <div class="card p-2 border border-2 cursor-pointer" [ngClass]="(selectedAddress === address) ? 'border-primary' : ''" (click)="toggleSelectAddress(address)">
+                <div class="row">
+
+                  <div class="col row justify-content-between">
+
+                    <div class="col-auto hstack gap-2">
+                      <span class="fw-semibold">Country:</span>
+                      <span>{{address.country}}</span>
+                    </div>
+
+                    <div class="col-auto hstack gap-2">
+                      <span class="fw-semibold">City:</span>
+                      <span>{{address.city}}</span>
+                    </div>
+
+                    <div class="col-auto hstack gap-2">
+                      <span class="fw-semibold">Street:</span>
+                      <span>{{address.street}}</span>
+                    </div>
+
+                    <div class="col-auto hstack gap-2">
+                      <span class="fw-semibold">Phone:</span>
+                      <span>{{address.phoneNumber}}</span>
+                    </div>
+                  </div>
 
 
 
+
+                  <div class="col-auto">
+
+                    <button type="button" class="btn" [ngClass]="address === selectedAddress ? 'btn-primary' : 'btn-outline-primary' " (click)="toggleSelectAddress(address)" style="min-width: 120px" clickStopPropagation>
+                      <fa-icon [icon]="address === selectedAddress ? faXmark : faCheck"></fa-icon>
+                      <span class="ms-2">
+                        {{address === selectedAddress ? 'unselect' : 'select'}}
+                      </span>
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </ng-container>
+            <div *ngIf="addresses.length === 0" class="alert alert-danger p-2">
+              <h5>No addresses found</h5>
+              <span>add an address in the <a [routerLink]="['/settings/shipping']" class="alert-link">settings</a></span>
 
             </div>
           </div>
-
-        </ng-container>
-      </div>
-    </div>
-
-
-    <div class="basic-container">
-      <div class="row">
-        <span>Payment options</span>
-      </div>
-      <div class="row">
-        <div class="col-6 fw-semibold">
-          <span>Add credit card</span>
         </div>
-        <div class="col-6 fw-semibold mt-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#paymentMethodModal">
-            <fa-icon [icon]="faPlusIcon">
 
-            </fa-icon>
-          </button>
+
+        <div class="basic-container">
+          <div class="row">
+            <div class="col">
+              <h5>Your Payment Methods</h5>
+            </div>
+            <div class="col-auto">
+              <a [routerLink]="['/settings/payments']">add other Payment Methods</a>
+            </div>
+          </div>
+          <div class="vstack gap-3">
+            <ng-container *ngFor="let paymentMethod of paymentMethods">
+              <div class="card p-2 border border-2 cursor-pointer" [ngClass]="(selectedPaymentMethod === paymentMethod) ? 'border-primary' : ''" (click)="toggleSelectPaymentMethod(paymentMethod)">
+                <div class="row">
+                  <div class="col row justify-content-between">
+
+                    <div class="col-auto hstack gap-2">
+                      <span class="fw-semibold">Owner:</span>
+                      <span>{{paymentMethod.owner}}</span>
+                    </div>
+
+                    <div class="col-auto hstack gap-2">
+                      <span class="fw-semibold">Card number:</span>
+                      <span>{{paymentMethod.creditCard}}</span>
+                    </div>
+
+                    <div class="col-auto hstack gap-2">
+                      <span class="fw-semibold">Expiration date:</span>
+                      <span>{{paymentMethod.expiryDate}}</span>
+                    </div>
+                  </div>
+
+                  <div class="col-auto">
+                    <button type="button" class="btn" [ngClass]="paymentMethod === selectedPaymentMethod ? 'btn-primary' : 'btn-outline-primary' " (click)="toggleSelectPaymentMethod(paymentMethod)" style="min-width: 120px" clickStopPropagation>
+                      <fa-icon [icon]="paymentMethod === selectedPaymentMethod ? faXmark : faCheck"></fa-icon>
+                      <span class="ms-2">
+                        {{paymentMethod === selectedPaymentMethod ? 'unselect' : 'select'}}
+                      </span>
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </ng-container>
+            <div *ngIf="paymentMethods.length === 0" class="alert alert-danger p-2">
+              <h5>No paymentMethods found</h5>
+              <span>add a payment method in the <a [routerLink]="['/settings/payments']" class="alert-link">settings</a></span>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+
+    <div class="col-12 col-md-5 col-lg-4">
+      <div class="d-flex flex-column justify-content-center align-items-center basic-container py-2">
+        <h5>Order summary</h5>
+
+        <div class="vstack gap-2 p-3">
+
+          <div class="row">
+            <div class="col-auto text-start fw-semibold">
+              <span>Product price:</span>
+            </div>
+            <div class="col text-end">
+              <span>{{agreedProductCost?.price | currency:agreedProductCost?.currency}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto text-start fw-semibold">
+              <span>Delivery price:</span>
+            </div>
+            <div class="col text-end">
+              <span>{{product.deliveryCost.price | currency:product.deliveryCost.currency}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto text-start fw-semibold">
+              <span>Total to pay:</span>
+            </div>
+            <div class="col text-end">
+              <span>{{totalCost?.price | currency:totalCost?.currency}}</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="!canCreateOrder()" (click)="createOrder()">Proceed to payment</button>
+
+        <div *ngIf="!canCreateOrder()" class="alert alert-danger my-3">
+          <h6>Cannot proceed to payment</h6>
+          <span>please select a payment method and an address</span>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <div class="custom-right-container d-flex flex-column justify-content-center align-items-center">
-    <div class="row">
-      <span>Order summary</span>
-    </div>
-    <div class="row mt-2">
-      <div class="col-auto text-start fw-semibold">
-        <span>Ordine:</span>
-      </div>
-      <div class="col text-end">
-        <span>{{agreedProductCost?.price | currency:agreedProductCost?.currency}}</span>
-      </div>
-    </div>
-    <div class="row mt-2">
-      <div class="col-auto text-start fw-semibold">
-        <span>Spedizione:</span>
-      </div>
-      <div class="col text-end">
-        <span>{{product.deliveryCost.price | currency:product.deliveryCost.currency}}</span>
-      </div>
-    </div>
-    <div class="row mt-2">
-      <div class="col-6 text-start fw-semibold">
-        <span>Totale:</span>
-      </div>
-      <div class="col-6 text-end">
-        <span>{{totalCost?.price | currency:totalCost?.currency}}</span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 text-center mt-4">
-        <button class="btn btn-primary">Paga Ora</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="custom-scrollbar">
-    <div class="custom-scrollbar-thumb"></div>
-  </div>
 </div>

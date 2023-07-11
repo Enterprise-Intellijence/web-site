@@ -1,9 +1,9 @@
 import { Component, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddressDTO, CustomMoneyDTO, PaymentMethodDTO, ProductControllerService, ProductDTO } from 'src/app/services/api-service';
+import { AddressDTO, CustomMoneyDTO, OrderControllerService, OrderCreateDTO, PaymentMethodDTO, ProductControllerService, ProductDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
@@ -13,7 +13,10 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 })
 export class PurchasingPageComponent {
 
+
   faPlusIcon = faPlus;
+  faCheck = faCheck;
+  faXmark = faXmark;
 
   productId!: string;
   product!: ProductDTO;
@@ -44,6 +47,7 @@ export class PurchasingPageComponent {
     private productService: ProductControllerService,
     private currentUserService: CurrentUserService,
     private modalService: NgbModal,
+    private orderService: OrderControllerService,
   ) { }
 
 
@@ -77,7 +81,7 @@ export class PurchasingPageComponent {
         this.product = value;
         this.agreedProductCost = this.product.productCost;
 
-        if(this.agreedProductCost?.currency != this.product.deliveryCost?.currency) {
+        if (this.agreedProductCost?.currency != this.product.deliveryCost?.currency) {
           throw new Error("The currency of the product cost and the delivery cost must be the same");
         }
 
@@ -113,10 +117,50 @@ export class PurchasingPageComponent {
 
 
   openModal(modal: TemplateRef<any>) {
-    this.modalService.open(modal, {  });
+    this.modalService.open(modal, {});
   }
 
 
+  toggleSelectAddress(address: AddressDTO) {
+    if (this.selectedAddress?.id == address.id) {
+      this.selectedAddress = undefined;
+    }
+    else {
+      this.selectedAddress = address;
+    }
+  }
+
+  toggleSelectPaymentMethod(paymentMethod: PaymentMethodDTO) {
+    if (this.selectedPaymentMethod?.id == paymentMethod.id) {
+      this.selectedPaymentMethod = undefined;
+    }
+    else {
+      this.selectedPaymentMethod = paymentMethod;
+    }
+  }
+
+
+  canCreateOrder() {
+    return (this.selectedAddress != undefined && this.selectedPaymentMethod != undefined);
+  }
+
+
+  createOrder() {
+    if(!this.canCreateOrder()) {
+      throw new Error("Cannot create order");
+    }
+
+    let order: OrderCreateDTO = {
+      deliveryAddress: this.selectedAddress!!,
+      product: this.product
+    }
+
+    this.orderService.createOrder(order).subscribe({
+      next: (order) => {
+        this.router.navigate(['/orders', order.id]);
+      }
+    });
+  }
 
   //TODO: fare in modo che se il toggle switch sia selezionato, non è possibile scegliere una posizione dalla mappa
 
