@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { OrderControllerService, OrderDTO } from 'src/app/services/api-service';
+import { OrderBasicDTO, OrderControllerService, OrderDTO, ProductBasicDTO } from 'src/app/services/api-service';
 
 @Component({
   selector: 'orders-page',
@@ -15,7 +15,7 @@ export class OrdersPageComponent implements OnInit {
   visualPage: number = 1;
   totalOrdersCount: number = 0;
 
-  orders: OrderDTO[] = [];
+  orders: OrderBasicDTO[] = [];
 
   constructor(private orderService: OrderControllerService) { }
 
@@ -24,8 +24,8 @@ export class OrdersPageComponent implements OnInit {
     this.loadProductsPage();
   }
 
-  loadProductsPage() {
-    this.orderService.getAllOrdersOfUser(this.visualPage-1, this.pageSize).subscribe((orders) => {
+  loadProductsPage(state?: OrderBasicDTO.StateEnum) {
+    this.orderService.getAllOrdersOfUser(state, this.visualPage-1, this.pageSize).subscribe((orders) => {
       this.totalOrdersCount = orders.totalElements || 0;
       this.orders = orders.content || [];
     });
