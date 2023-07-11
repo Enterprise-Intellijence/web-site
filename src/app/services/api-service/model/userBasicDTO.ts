@@ -20,4 +20,15 @@ export interface UserBasicDTO {
     reviewsNumber?: number;
     followersNumber?: number;
     followingNumber?: number;
+    status?: UserBasicDTO.StatusEnum;
+}
+export namespace UserBasicDTO {
+    export type StatusEnum = 'ACTIVE' | 'BANNED' | 'HIDDEN' | 'HOLIDAY' | 'CANCELLED';
+    export const StatusEnum = {
+        ACTIVE: 'ACTIVE' as StatusEnum,
+        BANNED: 'BANNED' as StatusEnum,
+        HIDDEN: 'HIDDEN' as StatusEnum,
+        HOLIDAY: 'HOLIDAY' as StatusEnum,
+        CANCELLED: 'CANCELLED' as StatusEnum
+    };
 }

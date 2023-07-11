@@ -41,7 +41,6 @@ export * from './pageMessageDTO';
 export * from './pageNotificationDTO';
 export * from './pageOfferBasicDTO';
 export * from './pageOrderBasicDTO';
-export * from './pageOrderDTO';
 export * from './pagePaymentMethodBasicDTO';
 export * from './pageProductBasicDTO';
 export * from './pageReportDTO';
