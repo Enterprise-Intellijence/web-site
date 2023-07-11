@@ -58,6 +58,7 @@ import { ApiModule as CountryCityModule, Configuration as CountryCiyConfig } fro
 import { ConversationPreviewComponent } from './components/chat/conversation-preview/conversation-preview.component';
 import { MessageComponent } from './components/chat/message/message.component';
 import { EmptyClosetComponent } from './components/empty-closet/empty-closet.component';
+import { AddNewSizeComponent } from './pages/administration/add-new-size/add-new-size.component';
 import { ClickStopPropagationDirective } from "./directives/click-stop-propagation.directive"
 import { AuthGuard } from "./guards/auth.guard"
 import { AdminGuard } from "./guards/admin.guard"
@@ -125,6 +126,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     ConversationPreviewComponent,
     MessageComponent,
     EmptyClosetComponent,
+    AddNewSizeComponent,
     ClickStopPropagationDirective,
     EmptyReviewsComponent,
     ],

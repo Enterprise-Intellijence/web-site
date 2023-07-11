@@ -21,6 +21,7 @@ import { UsersComponent } from "./pages/administration/users/users.component";
 import { ProductsComponent } from "./pages/administration/products/products.component";
 import { ManageSizesComponent } from "./pages/administration/manage-sizes/manage-sizes.component";
 import { ReportSingleViewComponent } from "./pages/administration/report-single-view/report-single-view.component";
+import {AddNewSizeComponent} from "./pages/administration/add-new-size/add-new-size.component";
 import { SearchPageComponent } from "./pages/search-page/search-page.component";
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
@@ -62,11 +63,10 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'category', component: CategoryComponent },
       { path: 'manage-sizes', component: ManageSizesComponent },
-    ]
-  },
-
+      {path:'add-new-size',component: AddNewSizeComponent}
+    ]},
   { path: 'checkout/:id', component: PurchasingPageComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'home' }
+{ path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

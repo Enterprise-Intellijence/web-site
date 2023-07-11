@@ -1,1 +1,39 @@
-<p>manage-sizes works!</p>
+<div class="basic-container">
+  <div class="row">
+    <div class="col-8">
+      <label for="typeahead-basic">Search for type:</label>
+      <input id="typeahead-basic" type="text" class="form-control" [formControl]="inputSizeType" />
+    </div>
+    <div class="col-4">
+      <button class="btn btn" type="button" [routerLink]="['/administration/add-new-size']" >ADD NEW SIZE</button>
+    </div>
+  </div>
+
+
+  <hr />
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" >Size Type</th>
+      <th scope="col" >Size Name</th>
+      <th scope="col" ></th>
+      <th scope="col" ></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let size of sizeList">
+      <th scope="row" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ size.id }}</th>
+      <td>{{ size.type }}</td>
+      <td>{{ size.sizeName}}</td>
+      <td>
+        <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button" (click)="editSize(size)">EDIT</button>
+      </td>
+      <td>
+        <button class="btn btn " type="button" (click)="removeSize(size)">REMOVE</button> </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

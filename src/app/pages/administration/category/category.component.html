@@ -1,1 +1,42 @@
-<p>category works!</p>
+<p>category works</p>
+<!--
+<div class="basic-container">
+
+  <ul>
+    <ng-container *ngFor="let category of primaryCategory">
+      <li>
+        {{ category.name }}
+        <ul >
+          <ng-container *ngFor="let secondary of secondaryCategory">
+            <li *ngIf="secondary.parentCategory?.rawName == category.rawName">
+              {{ secondary.name }}
+              <ul>
+                <ng-container *ngFor="let tertiary of leafCategory">
+                  <li *ngIf="tertiary.parentCategory?.rawName == secondary.rawName" >{{ tertiary.name }}</li>
+                </ng-container>
+              </ul>
+            </li>
+          </ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ul>
+
+</div>
+-->
+
+<!--<table class="table table-striped">
+  &lt;!&ndash;                <thead>
+                  <tr>
+                    <th scope="col" >tertiary</th>
+                  </tr>
+                  </thead>&ndash;&gt;
+  <tbody>
+  <tr *ngFor="let tertiary of leafCategory">
+    <td *ngIf="tertiary?.parentCategory?.rawName == secondary?.rawName">{{ tertiary.name }}</td>
+    <td>
+
+    </td>
+  </tr>
+  </tbody>
+</table>-->
