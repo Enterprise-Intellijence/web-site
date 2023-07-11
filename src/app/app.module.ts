@@ -66,6 +66,7 @@ import { Config } from './models/config';
 import { EmptyReviewsComponent } from './components/empty-reviews/empty-reviews.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { OrderPageComponent } from './pages/order-page/order-page.component';
+import { OrderCardComponent } from './components/orders/order-card/order-card.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -133,6 +134,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     EmptyReviewsComponent,
     OrdersPageComponent,
     OrderPageComponent,
+    OrderCardComponent,
     ],
   providers: [
     HttpClient,

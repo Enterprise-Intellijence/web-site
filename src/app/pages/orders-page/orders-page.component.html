@@ -5,21 +5,7 @@
 
     <div>
       <ng-container *ngFor="let order of orders">
-        <div class="card p-3 shadow-sm">
-
-          <div class="row">
-            <div class="col">
-              created on: {{order.orderDate | date }}
-            </div>
-            <div class="col-auto">
-              <button class="btn btn-primary" [routerLink]="['/orders', order.id]">
-                <fa-icon [icon]="faOpen"></fa-icon>
-                <span class="ms-2">Go to order</span>
-              </button>
-            </div>
-          </div>
-
-        </div>
+        <order-card [orderBasic]="order"></order-card>
       </ng-container>
     </div>
 
