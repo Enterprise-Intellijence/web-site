@@ -41,8 +41,8 @@
 
       <div class="col-5">
         <div class="float-end">
-          <button *ngIf="!isBanned" class="btn btn-outline-light text-black mx-2 my-2 text-start btn-sm border-dark" type="button" (click)="banUser()">BAN</button>
-          <button *ngIf="isBanned" class="btn btn-outline-light text-black mx-2 my-2 text-start btn-sm border-dark" type="button" (click)="unBanUser()">UNBAN</button>
+          <button *ngIf="report?.reportedUser?.status != 'BANNED'" class="btn btn-outline-light text-black mx-2 my-2 text-start btn-sm border-dark" type="button" (click)="banUser()">BAN</button>
+          <button *ngIf="report?.reportedUser?.status == 'BANNED'" class="btn btn-outline-light text-black mx-2 my-2 text-start btn-sm border-dark" type="button" (click)="unBanUser()">UNBAN</button>
           <button class="btn btn-outline-light text-black mx-2 my-2 text-start btn-sm border-dark" type="button" [routerLink]="['/users',report!.reportedUser!.id]" >VIEW PROFILE</button>
         </div>
       </div>

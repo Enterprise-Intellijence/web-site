@@ -27,7 +27,7 @@
       <td *ngIf="currentUser.user?.role === 'SUPER_ADMIN'" >
         <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button">BAN</button>
       </td>
-      <td *ngIf="currentUser.user?.role === 'SUPER_ADMIN'">
+      <td *ngIf="currentUser.user?.role === 'SUPER_ADMIN' && user.role != 'SUPER_ADMIN'">
         <button class="btn btn " type="button" (click)="promoteDemoteUser(user)">DEMOTE</button>
       </td>
       <td >
@@ -81,7 +81,7 @@
       <td>
         <button class="btn btn-outline-light text-black border-0 mb-2 text-start col-12" type="button">BAN</button>
       </td>
-      <td *ngIf="currentUser.user?.role == 'SUPER_ADMIN'">
+      <td *ngIf="currentUser.user?.role == 'SUPER_ADMIN' " >
         <button class="btn btn " type="button" (click)="promoteDemoteUser(user)">PROMOTE</button> </td>
     </tr>
     </tbody>

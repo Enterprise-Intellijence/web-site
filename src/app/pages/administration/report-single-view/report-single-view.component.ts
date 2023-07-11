@@ -9,6 +9,7 @@ import {
 } from "../../../services/api-service";
 import {CurrentUserService} from "../../../services/current-user.service";
 import RoleEnum = UserDTO.RoleEnum;
+import StatusEnum = UserDTO.StatusEnum;
 
 @Component({
   selector: 'report-single-view',
@@ -17,7 +18,6 @@ import RoleEnum = UserDTO.RoleEnum;
 })
 export class ReportSingleViewComponent {
   @Input()report?:ReportDTO
-  isBanned: Boolean = false
 
   constructor(private reportService: ReportControllerService,private currentUser: CurrentUserService,private adminService: AdminControllerService) {
   }
@@ -27,6 +27,7 @@ export class ReportSingleViewComponent {
       this.reportService.closeReport(this.report!.id!).subscribe({
         next:(value:any)=>{
           this.report = value
+
         }
       })
     }
@@ -48,8 +49,8 @@ export class ReportSingleViewComponent {
     if(this.currentUser.user?.role==RoleEnum.ADMIN || this.currentUser.user?.role==RoleEnum.SUPERADMIN) {
       this.adminService.banUser(this.report!.reportedUser!.id!).subscribe({
         next:(value:any)=>{
-          //todo gestire meglio
-          this.isBanned = true
+          var ban = this.report!.reportedUser!
+          this.report!.reportedUser! = {...ban, status: "BANNED"}
         }
       })
     }
@@ -61,8 +62,9 @@ export class ReportSingleViewComponent {
     if(this.currentUser.user?.role==RoleEnum.ADMIN || this.currentUser.user?.role==RoleEnum.SUPERADMIN) {
       this.adminService .unbanUser(this.report!.reportedUser!.id!).subscribe({
         next:(value:any)=>{
-          //todo gestire meglio
-          this.isBanned = false
+          var ban = this.report!.reportedUser!
+          this.report!.reportedUser! = {...ban, status: "ACTIVE"}
+
         }
       })
     }
