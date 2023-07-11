@@ -6,7 +6,7 @@ import {
   UserControllerService,
   UserDTO
 } from "../../../services/api-service";
-import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faUser, faUsers, faUsersViewfinder} from "@fortawesome/free-solid-svg-icons";
 import {CurrentUserService} from "../../../services/current-user.service";
 import RoleEnum = UserDTO.RoleEnum;
 import {FormControl} from "@angular/forms";
@@ -36,6 +36,7 @@ export class UsersComponent implements OnInit{
   totalUsers: number = 0
 
   messagesIcon = faEnvelope;
+  viewProfileIcon = faUser
   inputControl = new FormControl();
 
   constructor(private adminService:AdminControllerService, public currentUser: CurrentUserService, private  superAdminService: SuperAdminControllerService) {
@@ -117,6 +118,6 @@ export class UsersComponent implements OnInit{
   }
 
   viewProfile(user: UserDTO) {
-    
+
   }
 }

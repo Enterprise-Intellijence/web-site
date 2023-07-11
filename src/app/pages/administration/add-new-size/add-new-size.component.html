@@ -1,1 +1,21 @@
-<p>add-new-size works!</p>
+<div class="row">
+  <div class="column">
+    <div style="padding-bottom: 20px">Select category: </div>
+    <div>
+      <select [(ngModel)]="selectedCategory" class="form-select-sm" >
+        <option *ngFor="let category of categoryChoice" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="column">
+    <label>Size:</label>
+    <input type="text" [(ngModel)]="sizeName">
+  </div>
+
+  <div>
+    <button class="btn btn-outline-primary position-relative" (click)="addSize()">Add Size</button>
+  </div>
+</div>
+
+
+

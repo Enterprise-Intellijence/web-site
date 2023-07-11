@@ -19,7 +19,7 @@ import {ProductSizesService} from "../../../services/product-sizes.service";
 })
 export class ManageSizesComponent implements OnInit{
 
-  
+
 
   sizeList?: Array<SizeDTO>
   originalSizeList?: Array<SizeDTO>
@@ -29,10 +29,19 @@ export class ManageSizesComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if(this.sizeService.areSizesLoaded){
-      this.originalSizeList = this.sizeService.getAllSizes()
-      this.sizeList = this.sizeService.getAllSizes()
-    }
+    this.sizeService.onSizesLoaded.subscribe((sizes) => {
+      if (this.sizeService.areSizesLoaded) {
+        this.originalSizeList = sizes;
+        this.sizeList = sizes;
+      }
+    });
+
+
+/*
+    this.originalSizeList = this.sizeService.getAllSizes()
+    this.sizeList = this.sizeService.getAllSizes()
+*/
+
 /*    this.productController.getSizesList().subscribe({
       next: (value: Array<SizeDTO>) => {
         this.originalSizeList = value;

@@ -1,1 +1,9 @@
-<p>products works!</p>
+<div>
+  <div style="padding-right: 20px">
+    <input  type="text" [(ngModel)]="productId" placeholder="Find product by ID">
+    <button (click)="handleClick()">Search</button>
+  </div>
+  <p>In attesa dell'edit del product da poter utilizzare qui</p>
+  <p>{{product?.title}}</p>
+
+</div>
