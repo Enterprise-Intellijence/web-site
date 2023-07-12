@@ -68,7 +68,7 @@ export class OrderPageComponent implements OnInit {
 
   currentUserId?: string;
 
-  get isBuyer() { return this.currentUserId == this.buyer.id; }
+  get isBuyer() { return !this.isSeller; }
   get isSeller() { return this.currentUserId == this.seller.id; }
 
   constructor(
@@ -223,7 +223,7 @@ export class OrderPageComponent implements OnInit {
   }
 
   canWriteReview(): boolean {
-    if (this.isBuyer && this.wasCompleted && !this.wasReviewed)
+    if (this.isBuyer && this.state == State.COMPLETED)
       return true;
     return false;
   }

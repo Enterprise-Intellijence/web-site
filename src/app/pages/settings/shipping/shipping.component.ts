@@ -97,7 +97,6 @@ export class ShippingComponent implements OnInit {
   }
 
   getCities() {
-
     if (!this.country)
       throw new Error("country is null");
 
@@ -109,6 +108,7 @@ export class ShippingComponent implements OnInit {
 
   onCountrySelected(c: Country) {
     this.country = c;
+    this.city = undefined;
     this.getCities();
   }
 

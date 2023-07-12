@@ -247,12 +247,12 @@
               </div>
 
 
-            <button class="btn btn-primary" (click)="CreateDelivery()" [disabled]="!hasSelectedAddress">Create Delivery</button>
+              <button class="btn btn-primary" (click)="CreateDelivery()" [disabled]="!hasSelectedAddress">Create Delivery</button>
+            </div>
           </div>
 
 
           <div class="card p-2 shadow-sm" *ngIf="canWriteReview()">
-
 
             <form (submit)="ReviewOrder()">
 
