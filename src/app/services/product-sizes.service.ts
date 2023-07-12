@@ -23,7 +23,7 @@ export class ProductSizesService {
     this.loadSizes();
   }
 
-  private loadSizes() {
+  public loadSizes() {
     this.apiProductService.getSizesList().subscribe(
       (apiSizes: SizeDTO[]) => {
         this.allSizes = apiSizes;
