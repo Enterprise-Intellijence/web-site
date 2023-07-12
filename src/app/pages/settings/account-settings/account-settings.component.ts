@@ -33,7 +33,11 @@ export class AccountSettingsComponent {
     if (this.oldPassword && this.newPassword) {
       if (this.oldPassword === this.newPassword) {
         alert("New password must be different from old password");
-        return;
+        return
+      }
+      if(this.newPassword.length < 8) {
+        alert("New password must be at least 8 characters long")
+        return
       }
 
       let observe;

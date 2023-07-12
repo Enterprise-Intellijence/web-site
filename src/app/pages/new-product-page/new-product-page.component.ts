@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCategoriesService } from 'src/app/services/product-categories.service';
 import { ProductCategory } from 'src/app/models/product-category';
-import { EntertainmentCreateDTO, HomeCreateDTO, ProductControllerService } from 'src/app/services/api-service';
+import { EntertainmentCreateDTO, HomeCreateDTO, ProductControllerService, ProductDTO } from 'src/app/services/api-service';
 import { ProductCreateDTO } from 'src/app/services/api-service';
 import { SizeDTO } from 'src/app/services/api-service';
 import { CustomMoneyDTO } from 'src/app/services/api-service';
@@ -23,10 +23,12 @@ export class NewProductPageComponent implements OnInit {
   primaryCategories = new Array<ProductCategory>();
   secondaryCategories = new Array<ProductCategory>();
   tertiaryCategories = new Array<ProductCategory>();
+  deliverySizesMapping = new Map<string, ProductCreateDTO.ProductSizeEnum>();
   conditionsMapping = new Map<string, ProductCreateDTO.ConditionEnum>();
   visibilitiesMapping = new Map<string, ProductCreateDTO.VisibilityEnum>();
   conditions = ["Nuovo con etichetta", "Nuovo senza etichetta", "Come nuovo", "Buone condizioni", "Acettabile"];
   visibilities = ["Pubblico", "Privato"];
+  deliverySizes = ["Big", "Medium", "Small"];
   prodSizes: Array<SizeDTO> = new Array<SizeDTO>();
   categorySizes: SizeDTO[] = [];
   currencies: string[] = [];
@@ -44,6 +46,7 @@ export class NewProductPageComponent implements OnInit {
   price?: string;
   currency?: string;
   deliveryPrice?: string;
+  deliverySize?: string;
   condition?: string;
   visibility?: string;
   brand?: string;
@@ -54,24 +57,21 @@ export class NewProductPageComponent implements OnInit {
   material?: HomeCreateDTO.HomeMaterialEnum;
   homeColour?: HomeCreateDTO.ColourEnum;
   idTertiaryCategory: string | null = null;
-  product!: any; //ClothingCreateDTO | EntertainmentCreateDTO | HomeCreateDTO | ProductCreateDTO;
+  product!: any;
 
 
   processFile(imageInput: any) {
     if (this.imagesLoaded.length === 5) {
-      alert("Impossibile caricare altre immagini: numero massimo di file da caricare raggiunto.");
+      alert("Error on photos uploading: you can upload up to 5 photos");
       return;
     }
     const file: File = imageInput.files[0];
     const reader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
-      /*const fd: FormData = new FormData();
-      fd.append('file', file);*/
-      //const blob = new Blob([event.target.result], { type: file.type });
+      
       this.filesLoaded.push(file);
       this.imagesLoaded.push(event.target.result);
-      //console.log("blob: ", blob);
       console.log("event.target: ", event.target.result);
 
     });
@@ -120,8 +120,14 @@ export class NewProductPageComponent implements OnInit {
     if (!this.title || !this.description || !this.price || !this.currency || !this.deliveryPrice || this.imagesLoaded.length == 0
       || !this.brand || !this.selectedCategory || !this.selectedSecondaryCategory || !this.selectedTertiaryCategory
       || !this.condition || !this.visibility) {
-      alert("Compilare tutti i campi.");
+      alert("Please fill all the fields");
       return;
+    }
+
+    let regex: RegExp = /^\d+$/;
+    if(!regex.test(this.price) || !regex.test(this.deliveryPrice)) {
+      alert("Error: price and delivery price must be numbers")
+      return; 
     }
 
     let newProduct: ProductCreateDTO = this.createProductDTO();
@@ -131,7 +137,7 @@ export class NewProductPageComponent implements OnInit {
 
     if (this.selectedCategory.rawName === "Clothing") {
       if (!this.gender || !this.size || !this.clothingColour) {
-        alert("Compilare tutti i campi.");
+        alert("Please fill all the fields.");
         console.log("gender: ", this.gender, " size: ", this.size, " color: ", this.clothingColour);
         return;
       }
@@ -148,7 +154,7 @@ export class NewProductPageComponent implements OnInit {
 
     else if (this.selectedCategory.rawName === "Entertainment") {
       if (!this.language) {
-        alert("Compilare tutti i campi.");
+        alert("Please fill all the fields");
         return;
       }
 
@@ -212,7 +218,7 @@ export class NewProductPageComponent implements OnInit {
         secondaryCat: this.selectedSecondaryCategory!.rawName,
         tertiaryCat: this.selectedTertiaryCategory!.rawName
       },
-      productSize: ProductCreateDTO.ProductSizeEnum.MEDIUM,
+      productSize: this.deliverySizesMapping.get(this.deliverySize!)!,
       // productImages: this.filesLoaded,
       type: this.selectedCategory!.rawName
     };
@@ -238,6 +244,11 @@ export class NewProductPageComponent implements OnInit {
       this.visibilitiesMapping.set(this.visibilities[i], vis[i]);
     }
 
+    var deliveryS = Object.values(ProductCreateDTO.ProductSizeEnum);
+    for (let i = 0; i < this.visibilities.length; i++) {
+      this.deliverySizesMapping.set(this.deliverySizes[i], deliveryS[i]);
+    }  
+    
     this.currencies = Object.keys(CustomMoneyDTO.CurrencyEnum);
     this.genders = Object.keys(ClothingCreateDTO.ProductGenderEnum);
     this.colours = Object.keys(ClothingCreateDTO.ColourEnum);
