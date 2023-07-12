@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddressDTO, CustomMoneyDTO, OrderControllerService, OrderCreateDTO, PaymentMethodDTO, ProductControllerService, ProductDTO } from 'src/app/services/api-service';
+import { AddressDTO, CustomMoneyDTO, OrderControllerService, OrderCreateDTO, OrderDTO, PaymentMethodDTO, ProductControllerService, ProductDTO, TransactionControllerService, TransactionCreateDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
@@ -39,6 +39,7 @@ export class PurchasingPageComponent {
   cardExpirationDayError: boolean = false;
 
 
+  order?: OrderDTO;
 
 
   constructor(
@@ -48,6 +49,7 @@ export class PurchasingPageComponent {
     private currentUserService: CurrentUserService,
     private modalService: NgbModal,
     private orderService: OrderControllerService,
+    private transactionService: TransactionControllerService,
   ) { }
 
 
@@ -157,7 +159,32 @@ export class PurchasingPageComponent {
 
     this.orderService.createOrder(order).subscribe({
       next: (order) => {
-        this.router.navigate(['/orders', order.id]);
+        console.log("order created: ", order);
+
+        this.order = order;
+        this.payForOrder();
+      }
+    });
+  }
+
+  payForOrder() {
+    if(this.order == undefined) {
+      throw new Error("Cannot pay for undefined order");
+    }
+
+    if(this.selectedPaymentMethod == undefined) {
+      throw new Error("Cannot pay with undefined payment method");
+    }
+
+    let transaction: TransactionCreateDTO = {
+      order: this.order,
+      paymentMethod: this.selectedPaymentMethod
+    }
+
+    this.transactionService.createTransaction(transaction).subscribe({
+      next: (transaction) => {
+        console.log("transaction created: ", transaction);
+        this.router.navigate(['/orders', this.order?.id]);
       }
     });
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IconDefinition, faCheck, faCreditCard, faHome, faHourglassHalf, faStar, faTruck, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { OrderControllerService, OrderDTO, UserBasicDTO } from 'src/app/services/api-service';
+import { DeliveryControllerService, OfferBasicDTO, OrderControllerService, OrderDTO, UserBasicDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
 
@@ -48,6 +48,10 @@ export class OrderPageComponent implements OnInit {
   get hasTransaction() { return this.order!.transaction != undefined; }
   get transaction() { return this.order!.transaction; }
 
+  get hasDelivery() { return this.order!.delivery != undefined; }
+  get delivery() { return this.order!.delivery; }
+
+
   currentUserId?: string;
 
   get isBuyer() { return this.currentUserId == this.buyer.id; }
@@ -56,6 +60,7 @@ export class OrderPageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private orderService: OrderControllerService,
+    private deliveryService: DeliveryControllerService,
     private currentUserService: CurrentUserService,
   ) { }
 
@@ -78,12 +83,14 @@ export class OrderPageComponent implements OnInit {
     this.orderService.getOrder(this.orderId).subscribe({
       next: (order) => {
         this.order = order;
-        console.log("order loaded", order);
-      },
-      error: (err) => {
-        console.error("error loading order", err);
+        console.log(order);
+        this.LoadDelivery();
       }
     });
+  }
+
+  LoadDelivery() {
+
   }
 
   getStateColor(prefix: string = 'bg-', suffix: string = '') {
@@ -131,4 +138,32 @@ export class OrderPageComponent implements OnInit {
     }
   }
 
+
+  getOfferStateColor() {
+    switch (this.offer!.state) {
+      case OfferBasicDTO.StateEnum.PENDING:
+        return 'warning';
+      case OfferBasicDTO.StateEnum.ACCEPTED:
+        return 'success';
+      case OfferBasicDTO.StateEnum.REJECTED:
+      case OfferBasicDTO.StateEnum.CANCELLED:
+        return 'danger';
+      default:
+        throw new Error(`Unknown offer state: ${this.offer!.state}`);
+    }
+  }
+
+  getOfferStateIcon() {
+    switch (this.offer!.state) {
+      case OfferBasicDTO.StateEnum.PENDING:
+        return this.faHourglass;
+      case OfferBasicDTO.StateEnum.ACCEPTED:
+        return this.faCheck;
+      case OfferBasicDTO.StateEnum.REJECTED:
+      case OfferBasicDTO.StateEnum.CANCELLED:
+        return this.faXmark;
+      default:
+        throw new Error(`Unknown offer state: ${this.offer!.state}`);
+    }
+  }
 }
