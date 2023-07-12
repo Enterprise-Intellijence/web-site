@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IconDefinition, faCheck, faCreditCard, faHome, faHourglassHalf, faStar, faTruck, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { DeliveryControllerService, OfferBasicDTO, OrderControllerService, OrderDTO, UserBasicDTO } from 'src/app/services/api-service';
+import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
+import { DeliveryControllerService, DeliveryCreateDTO, DeliveryDTO, OfferBasicDTO, OrderBasicDTO, OrderControllerService, OrderDTO, ReviewControllerService, ReviewCreateDTO, UserBasicDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
 
@@ -15,7 +16,9 @@ import State = OrderDTO.StateEnum
 })
 export class OrderPageComponent implements OnInit {
 
+
   faStar = faStar;
+  faStarEmpty = faStarEmpty;
   faCheck = faCheck;
   faXmark = faXmark;
   faCreditCard = faCreditCard;
@@ -26,16 +29,20 @@ export class OrderPageComponent implements OnInit {
   orderId!: string;
   order?: OrderDTO;
 
+  reviewDescription: string = '';
+  reviewRating: number = 5;
+  reviewTitle: string = '';
+
 
   get state() { return this.order!.state; }
 
-  get wasReviewed()  { return this.state == State.REVIEWED; }
-  get wasCompleted() { return this.state == State.COMPLETED || this.wasReviewed;  }
+  get wasReviewed() { return this.state == State.REVIEWED; }
+  get wasCompleted() { return this.state == State.COMPLETED || this.wasReviewed; }
   get wasDelivered() { return this.state == State.DELIVERED || this.wasCompleted; }
-  get wasShipped()   { return this.state == State.SHIPPED   || this.wasDelivered; }
-  get wasPurchased() { return this.state == State.PURCHASED || this.wasShipped;   }
-  get isPending()    { return this.state == State.PENDING;  }
-  get isCanceled()   { return this.state == State.CANCELED; }
+  get wasShipped() { return this.state == State.SHIPPED || this.wasDelivered; }
+  get wasPurchased() { return this.state == State.PURCHASED || this.wasShipped; }
+  get isPending() { return this.state == State.PENDING; }
+  get isCanceled() { return this.state == State.CANCELED; }
 
 
   get product() { return this.order!.product; }
@@ -62,6 +69,7 @@ export class OrderPageComponent implements OnInit {
     private orderService: OrderControllerService,
     private deliveryService: DeliveryControllerService,
     private currentUserService: CurrentUserService,
+    private reviewService: ReviewControllerService
   ) { }
 
 
@@ -83,15 +91,160 @@ export class OrderPageComponent implements OnInit {
     this.orderService.getOrder(this.orderId).subscribe({
       next: (order) => {
         this.order = order;
-        console.log(order);
-        this.LoadDelivery();
+      }
+    });
+
+  }
+
+  canDoSomething(): boolean {
+    return (this.canCancelOrder() || this.canCreateDelivery() || this.canMarkAsCompleted() || this.canWriteReview());
+  }
+
+  canCancelOrder(): boolean {
+    if (this.isBuyer && this.isPending)
+      return true;
+    return false;
+  }
+
+  cancelOrder() {
+    if (!this.canCancelOrder())
+      return;
+
+    // @ts-ignore
+    let body: OrderDTO = {
+      ...this.order!,
+      state: OrderDTO.StateEnum.CANCELED
+    }
+
+    this.orderService.updateOrder(body, body?.id!).subscribe({
+      next: (order) => {
+        this.order = order;
+        this.loadOrder();
       }
     });
   }
 
-  LoadDelivery() {
 
+
+  canCreateDelivery(): boolean {
+    if (this.isSeller && !this.hasDelivery && this.wasPurchased)
+      return true;
+    return false;
   }
+
+
+  CreateDelivery() {
+    if (!this.canCreateDelivery())
+      return;
+
+    let shippers = ['DHL', 'UPS', 'FedEx', 'USPS', 'Bartolini spa']
+    let shipper = shippers[Math.floor(Math.random() * shippers.length)];
+
+    // @ts-ignore
+    let body: DeliveryCreateDTO = {
+      order: this.order!,
+      shipper: shipper,
+    }
+
+    this.deliveryService.createDelivery(body).subscribe({
+      next: (delivery) => {
+        this.order!.delivery = delivery;
+        this.loadOrder();
+      }
+    })
+  }
+
+
+  canMarkAsDelivered(): boolean {
+    if (this.isSeller && this.hasDelivery && this.wasShipped && !this.wasDelivered)
+      return true;
+    return false;
+  }
+
+  MarkAsDelivered() {
+    if (!this.canMarkAsDelivered())
+      return;
+
+    // @ts-ignore
+    let body: DeliveryDTO = {
+      ...this.delivery,
+      deliveryStatus: DeliveryDTO.DeliveryStatusEnum.DELIVERED
+    }
+
+    this.deliveryService.updateDelivery(body, body?.id!).subscribe({
+      next: (delivery) => {
+        this.order!.delivery = delivery;
+        this.loadOrder();
+      }
+    })
+  }
+
+
+  canMarkAsCompleted(): boolean {
+    if (this.isBuyer && this.hasDelivery && this.wasDelivered && !this.wasCompleted)
+      return true;
+    return false;
+  }
+
+  MarkAsCompleted() {
+    if (!this.canMarkAsCompleted())
+      return;
+
+    // @ts-ignore
+    let body: OrderDTO = {
+      ...this.order!,
+      state: OrderDTO.StateEnum.COMPLETED
+    }
+
+    this.orderService.updateOrder(body, body?.id!).subscribe({
+      next: (order) => {
+        this.order = order;
+        this.loadOrder();
+      }
+    })
+  }
+
+  canWriteReview(): boolean {
+    if (this.isBuyer && this.wasCompleted && !this.wasReviewed)
+      return true;
+    return false;
+  }
+
+  canCreateReview(): boolean {
+    if (!this.canWriteReview())
+      return false;
+
+    if (this.reviewDescription.trim().length == 0 ||
+      (this.reviewRating < 1 || this.reviewRating > 5) ||
+      (this.reviewTitle.trim().length == 0))
+      return false;
+
+    return true;
+  }
+
+
+
+  ReviewOrder() {
+    if (!this.canCreateReview())
+      return;
+
+    // @ts-ignore
+    let body: ReviewCreateDTO = {
+      // @ts-ignore
+      orderId: this.order?.id,
+      title: this.reviewTitle,
+      description: this.reviewDescription,
+      vote: this.reviewRating,
+      reviewed: this.buyer,
+    }
+
+    this.reviewService.createReview(body).subscribe({
+      next: (review) => {
+        this.loadOrder();
+      }
+    });
+  }
+
 
   getStateColor(prefix: string = 'bg-', suffix: string = '') {
     let val;

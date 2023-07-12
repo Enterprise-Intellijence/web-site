@@ -112,30 +112,129 @@
           <!-- DELIVERY CARD -->
 
           <div class="card p-2 shadow-sm" *ngIf="hasDelivery">
-            <div class="d-flex align-items-center">
-              <div class="fw-semibold me-3">
-                Delivery
-              </div>
-
-              <div class="card p-2">
-                <div class="d-flex">
-                  Shipped from:
-                  <span class="fw-semibold mx-2">{{delivery?.senderAddress?.city}}, {{delivery?.senderAddress?.country}}</span>
-                  <span class="text-muted">({{delivery?.sendTime | date}})</span>
-                </div>
-              </div>
-              <div class="card p-2">
-
-                <div class="d-flex" *ngIf="delivery?.deliveryStatus == 'SHIPPED'">
-                  Shipped to:
-                  <span class="fw-semibold mx-2">{{delivery?.receiverAddress?.city}}, {{delivery?.receiverAddress?.country}}</span>
+            <div>
+              <div class="d-flex gap-3 align-items-center">
+                <div class="col-auto fw-semibold">
+                  Delivery
                 </div>
 
+                <div class="ms-auto alert py-1 px-2 m-0" [ngClass]="delivery?.deliveryStatus =='DELIVERED' ? 'alert-success' : 'alert-warning'">
+                  <span>Delivery state: </span>
+                  <span class="fw-semibold">{{delivery?.deliveryStatus | titlecase}} <fa-icon [icon]="delivery?.deliveryStatus =='DELIVERED' ? faCheck : faTruck"></fa-icon></span>
+
+                </div>
               </div>
 
             </div>
+
+            <div class="row-col w-100">
+              <div class="card p-2 mt-2 shadow-sm">
+                <div class="d-flex">
+
+                  <div style="min-width: 120px;">
+                    Shipped from:
+                  </div>
+
+                  <span class="fw-semibold mx-2">{{delivery?.senderAddress?.street}}, {{delivery?.senderAddress?.city}}, {{delivery?.senderAddress?.country}}</span>
+
+                  <span class="mx-2">Phone: <span class="fw-semibold mx-2">{{delivery?.senderAddress?.phoneNumber}}</span></span>
+
+                  <span class="ms-auto text-muted">{{delivery?.sendTime | date}}</span>
+                </div>
+              </div>
+
+              <div class="card p-2 mt-2 shadow-sm">
+
+                <div class="d-flex">
+                  <span style="min-width: 120px;">
+                    {{delivery?.deliveryStatus == 'SHIPPED' ? 'Shipped' : 'Delivered'}} to:
+                  </span>
+
+                  <span class="fw-semibold mx-2">{{delivery?.receiverAddress?.street}}, {{delivery?.receiverAddress?.city}}, {{delivery?.receiverAddress?.country}}</span>
+
+                  <span class="mx-2">Phone: <span class="fw-semibold mx-2">{{delivery?.receiverAddress?.phoneNumber}}</span></span>
+
+                  <ng-container *ngIf="delivery?.deliveryStatus == 'DELIVERED'">
+                    <span class="ms-auto text-muted">{{delivery?.deliveredTime| date }}</span>
+                  </ng-container>
+                </div>
+
+              </div>
+
+              <div class="d-flex gap-4 mt-3 px-2">
+
+                <div class="text-muted">
+                  Shipped by: <span class="fw-semibold">{{delivery?.shipper}}</span>
+                </div>
+
+                <div class="ms-auto">
+                  Delivery cost: <span class="fw-semibold">{{delivery?.deliveryCost?.price | currency: delivery?.deliveryCost?.currency}}</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-2 shadow-sm" *ngIf="canDoSomething() && !canWriteReview()">
+            <div class="d-flex align-items-center">
+
+              <div class="fw-semibold me-auto">
+                Actions
+              </div>
+
+              <div *ngIf="canCancelOrder()">
+                <button class="btn btn-outline-danger" (click)="cancelOrder()">Cancel Order</button>
+              </div>
+
+              <div *ngIf="canCreateDelivery()">
+                <button class="btn btn-outline-primary" (click)="CreateDelivery()">Create Delivery</button>
+              </div>
+
+              <div *ngIf="canMarkAsDelivered()">
+                <button class="btn btn-outline-primary" (click)="MarkAsDelivered()">Mark as Delivered</button>
+              </div>
+
+              <div *ngIf="canMarkAsCompleted()">
+                <button class="btn btn-outline-primary" (click)="MarkAsCompleted()">Mark as Completed</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-2 shadow-sm" *ngIf="canWriteReview()">
+
+
+            <form (submit)="ReviewOrder()">
+
+              <div class="d-flex gap-3 align-items-center">
+                <span class="fw-semibold">
+                  Review
+                </span>
+
+
+                <label for="review-title">Title:</label>
+                <input type="text" name="review-title" id="review-title" class="form-control me-4" [(ngModel)]="reviewTitle" required>
+
+
+                <label for="review-rating" class="ms-auto">Rating:</label>
+                <ngb-rating id="review-rating" [(rate)]="reviewRating" [max]="5">
+                  <ng-template let-fill="fill" let-index="index">
+                    <fa-icon [icon]="fill ? faStar : faStarEmpty"></fa-icon>
+                  </ng-template>
+                </ngb-rating>
+              </div>
+
+              <div class="my-3">
+                <label for="review-description">description:</label>
+                <textarea type="text" name="review-description" id="review-description" class="form-control" [(ngModel)]="reviewDescription" required>
+                    </textarea>
+              </div>
+
+              <button type="button" class="btn btn-primary" (click)="ReviewOrder()" [disabled]="!canCreateReview()">Review</button>
+            </form>
+
           </div>
         </div>
+
       </div>
     </div>
   </div>
