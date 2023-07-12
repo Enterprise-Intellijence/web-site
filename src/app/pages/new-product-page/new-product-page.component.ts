@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class NewProductPageComponent implements OnInit {
 
   imagesLoaded = new Array<string>();
-  filesLoaded= new Array<File>();
+  filesLoaded = new Array<File>();
 
   primaryCategories = new Array<ProductCategory>();
   secondaryCategories = new Array<ProductCategory>();
@@ -26,30 +26,32 @@ export class NewProductPageComponent implements OnInit {
   deliverySizesMapping = new Map<string, ProductCreateDTO.ProductSizeEnum>();
   conditionsMapping = new Map<string, ProductCreateDTO.ConditionEnum>();
   visibilitiesMapping = new Map<string, ProductCreateDTO.VisibilityEnum>();
-  conditions = ["Nuovo con etichetta", "Nuovo senza etichetta", "Come nuovo", "Buone condizioni", "Acettabile"];
-  visibilities = ["Pubblico", "Privato"];
-  deliverySizes = ["Big", "Medium", "Small"];
-  prodSizes: Array<SizeDTO> = new Array<SizeDTO>();
-  categorySizes: SizeDTO[] = [];
-  currencies: string[] = [];
-  genders: string[] = [];
-  colours: string[] = [];
-  languages: string[] = [];
-  materials: string[] = [];
+
+  allProductSizes: SizeDTO[] = [];
+  sizesForSelectedCategory: SizeDTO[] = [];
+
+  conditions = Object.values(ProductCreateDTO.ConditionEnum);
+  visibilities = Object.values(ProductCreateDTO.VisibilityEnum);
+  deliverySizes = Object.values(ProductCreateDTO.ProductSizeEnum);
+  currencies = Object.values(CustomMoneyDTO.CurrencyEnum);
+  genders = Object.values(ClothingCreateDTO.ProductGenderEnum);
+  colours = Object.values(ClothingCreateDTO.ColourEnum);
+  languages = Object.values(EntertainmentCreateDTO.EntertainmentLanguageEnum);
+  materials = Object.values(HomeCreateDTO.HomeMaterialEnum);
 
 
-  selectedCategory?: ProductCategory;
+  selectedPrimaryCategory?: ProductCategory;
   selectedSecondaryCategory?: ProductCategory;
   selectedTertiaryCategory?: ProductCategory;
-  title?: string;
-  description?: string;
-  price?: string;
-  currency?: string;
-  deliveryPrice?: string;
-  deliverySize?: string;
-  condition?: string;
-  visibility?: string;
-  brand?: string;
+  title: string = '';
+  description: string = '';
+  price: number = 0;
+  currency: CustomMoneyDTO.CurrencyEnum = CustomMoneyDTO.CurrencyEnum.EUR;
+  deliveryPrice: number = 0;
+  deliverySize = ProductCreateDTO.ProductSizeEnum.MEDIUM;
+  condition: ProductCreateDTO.ConditionEnum = ProductCreateDTO.ConditionEnum.NEWWITHOUTTAG;
+  visibility: ProductCreateDTO.VisibilityEnum = ProductCreateDTO.VisibilityEnum.PUBLIC;
+  brand: string = '';
   gender?: ClothingCreateDTO.ProductGenderEnum;
   size?: SizeDTO;
   clothingColour?: ClothingCreateDTO.ColourEnum;
@@ -69,7 +71,7 @@ export class NewProductPageComponent implements OnInit {
     const reader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
-      
+
       this.filesLoaded.push(file);
       this.imagesLoaded.push(event.target.result);
       console.log("event.target: ", event.target.result);
@@ -79,63 +81,59 @@ export class NewProductPageComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onCategorySelected(i: number) {
-    console.log("selected cat: ", i);
-    this.selectedCategory = this.primaryCategories[i];
-    this.secondaryCategories = this.selectedCategory.childCategories;
+  onPrimaryCategorySelected(category: ProductCategory) {
+    this.selectedPrimaryCategory = category;
+    this.secondaryCategories = category.childCategories;
     this.selectedSecondaryCategory = undefined;
     this.selectedTertiaryCategory = undefined;
-    this.categorySizes = this.productSizesService.getSizesForCategory(this.selectedCategory);
-    console.log("cat size: ", this.categorySizes);
+    this.sizesForSelectedCategory = this.productSizesService.getSizesForCategory(this.selectedPrimaryCategory);
+
+    if (category.childCategories.length == 1)
+      this.onSecondaryCategorySelected(category.childCategories[0]);
   }
 
-  onSecondaryCategorySelected(i: number) {
-    console.log("selected cat: ", i);
-    this.selectedSecondaryCategory = this.secondaryCategories[i];
-    this.tertiaryCategories = this.secondaryCategories[i].childCategories;
+  onSecondaryCategorySelected(category: ProductCategory) {
+    this.selectedSecondaryCategory = category;
+    this.tertiaryCategories = category.childCategories;
     this.selectedTertiaryCategory = undefined;
-    this.categorySizes = this.productSizesService.getSizesForCategory(this.selectedSecondaryCategory);
-    console.log("cat size2: ", this.categorySizes);
+
+    this.sizesForSelectedCategory = this.productSizesService.getSizesForCategory(this.selectedSecondaryCategory);
+
+    if (category.childCategories.length == 1)
+      this.onTertiaryCategorySelected(category.childCategories[0]);
   }
 
-  onTertiaryCategorySelected(i: number) {
-    this.selectedTertiaryCategory = this.tertiaryCategories[i];
-    this.categorySizes = this.productSizesService.getSizesForCategory(this.selectedTertiaryCategory);
-    this.idTertiaryCategory = this.tertiaryCategories[i].id;
-    console.log("cat size3: ", this.categorySizes);
+  onTertiaryCategorySelected(category: ProductCategory) {
+    console.log("selected cat: ", category);
+    this.selectedTertiaryCategory = category;
+    this.sizesForSelectedCategory = this.productSizesService.getSizesForCategory(this.selectedTertiaryCategory);
+    this.idTertiaryCategory = category.id;
   }
 
   onSizeSelected(size: SizeDTO) {
     this.size = size;
-    console.log("size: ", size);
-
   }
 
   deleteImage(i: number) {
-    this.imagesLoaded.splice(i, 1);
-    this.filesLoaded.splice(i, 1);
+    this.imagesLoaded = this.imagesLoaded.splice(i, 1);
+    this.filesLoaded = this.filesLoaded.splice(i, 1);
   }
 
   uploadProduct() {
-    if (!this.title || !this.description || !this.price || !this.currency || !this.deliveryPrice || this.imagesLoaded.length == 0
-      || !this.brand || !this.selectedCategory || !this.selectedSecondaryCategory || !this.selectedTertiaryCategory
+    if (!this.title || !this.price || !this.currency || !this.deliveryPrice || this.imagesLoaded.length == 0
+      || !this.brand || !this.selectedPrimaryCategory || !this.selectedSecondaryCategory || !this.selectedTertiaryCategory
       || !this.condition || !this.visibility) {
       alert("Please fill all the fields");
       return;
     }
 
-    let regex: RegExp = /^\d+$/;
-    if(!regex.test(this.price) || !regex.test(this.deliveryPrice)) {
-      alert("Error: price and delivery price must be numbers")
-      return; 
-    }
 
     let newProduct: ProductCreateDTO = this.createProductDTO();
 
     console.log("id: ", this.idTertiaryCategory);
     console.log("type: ", newProduct.type);
 
-    if (this.selectedCategory.rawName === "Clothing") {
+    if (this.selectedPrimaryCategory.rawName === "Clothing") {
       if (!this.gender || !this.size || !this.clothingColour) {
         alert("Please fill all the fields.");
         console.log("gender: ", this.gender, " size: ", this.size, " color: ", this.clothingColour);
@@ -152,7 +150,7 @@ export class NewProductPageComponent implements OnInit {
       this.product = newClothingProduct;
     }
 
-    else if (this.selectedCategory.rawName === "Entertainment") {
+    else if (this.selectedPrimaryCategory.rawName === "Entertainment") {
       if (!this.language) {
         alert("Please fill all the fields");
         return;
@@ -166,7 +164,7 @@ export class NewProductPageComponent implements OnInit {
       this.product = newEntertainmentProd;
     }
 
-    else if (this.selectedCategory.rawName === "Home") {
+    else if (this.selectedPrimaryCategory.rawName === "Home") {
       if (!this.material || !this.size || !this.homeColour) {
         alert("Compilare tutti i campi.");
         console.log("material: ", this.material, " size: ", this.size, " colour: ", this.homeColour);
@@ -183,7 +181,7 @@ export class NewProductPageComponent implements OnInit {
       this.product = newHomeProduct;
     }
 
-    else if (this.selectedCategory.rawName === "Other") {
+    else if (this.selectedPrimaryCategory.rawName === "Other") {
       this.product = newProduct;
     }
 
@@ -205,22 +203,22 @@ export class NewProductPageComponent implements OnInit {
 
   createProductDTO(): ProductCreateDTO {
     return {
-      title: this.title || "",
-      description: this.description || "",
-      productCost: { price: +this.price!, currency: this.currency == "USD" ? 'USD' : 'EUR' },
-      deliveryCost: { price: +this.deliveryPrice!, currency: this.currency == "USD" ? 'USD' : 'EUR' },
+      title: this.title,
+      description: this.description,
+      productCost: { price: this.price, currency: this.currency },
+      deliveryCost: { price: this.deliveryPrice, currency: this.currency },
       brand: this.brand,
-      condition: this.conditionsMapping.get(this.condition!)!,
-      visibility: this.visibilitiesMapping.get(this.visibility!)!,
+      condition: this.condition,
+      visibility: this.visibility,
       productCategory: {
         id: this.idTertiaryCategory!,
-        primaryCat: this.selectedCategory!.rawName,
+        primaryCat: this.selectedPrimaryCategory!.rawName,
         secondaryCat: this.selectedSecondaryCategory!.rawName,
         tertiaryCat: this.selectedTertiaryCategory!.rawName
       },
-      productSize: this.deliverySizesMapping.get(this.deliverySize!)!,
+      productSize: this.deliverySize,
       // productImages: this.filesLoaded,
-      type: this.selectedCategory!.rawName
+      type: this.selectedPrimaryCategory!.rawName
     };
   }
 
@@ -247,18 +245,11 @@ export class NewProductPageComponent implements OnInit {
     var deliveryS = Object.values(ProductCreateDTO.ProductSizeEnum);
     for (let i = 0; i < this.visibilities.length; i++) {
       this.deliverySizesMapping.set(this.deliverySizes[i], deliveryS[i]);
-    }  
-    
-    this.currencies = Object.keys(CustomMoneyDTO.CurrencyEnum);
-    this.genders = Object.keys(ClothingCreateDTO.ProductGenderEnum);
-    this.colours = Object.keys(ClothingCreateDTO.ColourEnum);
-    this.languages = Object.values(EntertainmentCreateDTO.EntertainmentLanguageEnum);
-    this.materials = Object.keys(HomeCreateDTO.HomeMaterialEnum);
+    }
 
     this.productSizesService.onSizesLoaded.subscribe((sizes) => {
       if (this.productSizesService.areSizesLoaded) {
-        this.prodSizes = sizes;
-        console.log("on sizes loaded: ", this.prodSizes);
+        this.allProductSizes = sizes;
       }
     });
   }
