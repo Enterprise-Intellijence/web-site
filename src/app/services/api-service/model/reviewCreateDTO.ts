@@ -9,11 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { OrderBasicDTO } from './orderBasicDTO';
 import { UserBasicDTO } from './userBasicDTO';
 
 export interface ReviewCreateDTO { 
-    orderBasicDTO: OrderBasicDTO;
+    orderId: string;
     title: string;
     description?: string;
     vote: number;
