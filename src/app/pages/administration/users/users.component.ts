@@ -120,4 +120,18 @@ export class UsersComponent implements OnInit{
   viewProfile(user: UserDTO) {
 
   }
+
+  banUser(user: UserDTO) {
+    if(this.currentUser.user?.role==RoleEnum.ADMIN || this.currentUser.user?.role==RoleEnum.SUPERADMIN) {
+      this.adminService.banUser(user.id).subscribe({
+        next:(value:any)=>{
+          /*var ban = this.report!.reportedUser!
+          this.report!.reportedUser! = {...ban, status: "BANNED"}*/
+          this.refreshUsers()
+          this.refreshAdmins()
+        }
+      })
+    }
+
+  }
 }
