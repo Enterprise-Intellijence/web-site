@@ -24,6 +24,15 @@ export class ApiInterceptor implements HttpInterceptor {
       request = this.addAuthHeader(request);
     }
 
+
+    if(request.url.includes('logout') || request.url.toLowerCase().includes('changepassword'))
+      request = request.clone({
+        setHeaders: {
+          'refresh-token': this.apiAuth.encodedRefreshJWT!
+        }
+      });
+
+
     // Also handle errors globally
     return next.handle(request).pipe(
       tap({

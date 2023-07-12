@@ -96,6 +96,11 @@ export class ApiAuthService {
   }
 
   public logout() {
+    this.userService.logout().subscribe({
+      next: () => console.log('LOGOUT SUCCESS'),
+      error: (err) => console.log('LOGOUT ERROR', err)
+    });
+
     this.encodedAccessJWT = null;
     this.encodedRefreshJWT = null;
     this.accessJWT = null;
