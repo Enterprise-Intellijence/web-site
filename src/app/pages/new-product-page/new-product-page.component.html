@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col mb-2">
                     <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label"><small>Aggiungi fino a 5 foto</small></label><br>
+                        <label for="formFileMultiple" class="form-label"><small>Upload up to 5 photos</small></label><br>
                         <label class="d-flex justify-content-between form-control btn image-upload-container">
                             <input #imageInput
                                    type="file"
@@ -18,7 +18,7 @@
             <div class="row">
                 <div *ngIf="imagesLoaded.length === 0; else loadPhotos">
                     <div class="d-flex img-box border border-4 center-center">
-                        <small class="text-secondary">Carica foto</small>
+                        <small class="text-secondary">Upload photo</small>
                     </div>
                 </div>
                 <ng-template #loadPhotos>
@@ -34,16 +34,16 @@
     <div class="row">
         <div class="col-md-12 shadow-none p-3 mb-4 bg-light rounded mt-4">
             <div class="form-group row align-middle align-row">
-                <label class="col-sm-2 col-form-label">Titolo</label>
+                <label class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
-                  <input type="titolo" class="form-control" placeholder="Dai un titolo al prodotto" [(ngModel)]="title">
+                  <input type="titolo" class="form-control" placeholder="Insert a title" [(ngModel)]="title">
                 </div>
             </div>
             <hr>
             <div class="form-group row align-middle align-row">
-                <label class="col-sm-2 col-form-label">Descrizione</label>
+                <label class="col-sm-2 col-form-label">Description</label>
                 <div class="col-sm-10">
-                  <textarea type="descrizione" class="form-control" placeholder="Inserisci una descrizione" [(ngModel)]="description"></textarea>
+                  <textarea type="descrizione" class="form-control" placeholder="Insert a description" [(ngModel)]="description"></textarea>
                 </div>
             </div>
         </div>
@@ -51,71 +51,71 @@
     <div class="row shadow-none p-3 mb-4 bg-light rounded">
         <div class="col-md-12">
             <div class="form-group row align-middle">
-                <label class="col-sm-2 col-form-label">Categorie</label>
+                <label class="col-sm-2 col-form-label">Categories</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona una categoria">
+                    <select class="form-select" placeholder="Select a category">
                         <option *ngFor="let c of primaryCategories; let i=index" [ngValue]="c.name" (click)="onCategorySelected(i)">{{c.name}}</option>
                     </select>                
                 </div>
                 <div class="col-sm-2" *ngIf="selectedCategory">
-                    <select class="form-select" placeholder="Seleziona una categoria">
+                    <select class="form-select" placeholder="Select a category">
                         <option *ngFor="let c of secondaryCategories; let i=index" [ngValue]="c.name" (click)="onSecondaryCategorySelected(i)">{{c.name}}</option>
                     </select>               
                 </div>
                 <div class="col-sm-2" *ngIf="selectedSecondaryCategory">
-                    <select class="form-select" placeholder="Seleziona una categoria">
+                    <select class="form-select" placeholder="Select a category">
                         <option *ngFor="let c of tertiaryCategories; let i=index" [ngValue]="c.name" (click)="onTertiaryCategorySelected(i)">{{c.name}}</option>
                     </select>               
                 </div>
                 <label class="col-sm-1 col-form-label text-center">Brand</label>
                 <div class="col-sm-3">
-                    <input type="brand" class="form-control" placeholder="Inserisci il brand del prodotto" [(ngModel)]="brand">            
+                    <input type="brand" class="form-control" placeholder="Insert a brand" [(ngModel)]="brand">            
                 </div>
             </div>
             <div class="form-group row align-middle mt-3" *ngIf="selectedTertiaryCategory && selectedCategory?.rawName === 'Clothing'">
-                <label class="col-sm-2 col-form-label">Genere</label>
+                <label class="col-sm-2 col-form-label">Gender</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona un genere" [(ngModel)]="gender">
+                    <select class="form-select" placeholder="Select a gender" [(ngModel)]="gender">
                         <option *ngFor="let g of genders; let i=index" [ngValue]="g">{{g}}</option>
                     </select>               
                 </div>
-                <label class="col-sm-2 col-form-label text-center">Taglia</label>
+                <label class="col-sm-2 col-form-label text-center">Size</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona una taglia">
+                    <select class="form-select" placeholder="Select a size">
                         <option *ngFor="let s of categorySizes; let i=index" [ngValue]="s.sizeName" (click)="onSizeSelected(s)">{{s.sizeName}}</option>
                     </select>               
                 </div>
-                <label class="col-sm-2 col-form-label text-center">Colore</label>
+                <label class="col-sm-2 col-form-label text-center">Color</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona un colore" [(ngModel)]="clothingColour">
+                    <select class="form-select" placeholder="Select a color" [(ngModel)]="clothingColour">
                         <option *ngFor="let c of colours; let i=index" [ngValue]="c">{{c}}</option>
                     </select>               
                 </div>
             </div>
             <div class="form-group row align-middle mt-3" *ngIf="selectedTertiaryCategory && selectedCategory?.rawName === 'Entertainment'">
-                <label class="col-sm-2 col-form-label">Lingua</label>
+                <label class="col-sm-2 col-form-label">Language</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona un genere" [(ngModel)]="language">
+                    <select class="form-select" placeholder="Select a language" [(ngModel)]="language">
                         <option *ngFor="let l of languages; let i=index" [ngValue]="l">{{l}}</option>
                     </select>               
                 </div>
             </div>
             <div class="form-group row align-middle mt-3" *ngIf="selectedTertiaryCategory && selectedCategory?.rawName === 'Home'">
-                <label class="col-sm-2 col-form-label">Materiale</label>
+                <label class="col-sm-2 col-form-label">Material</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona un genere" [(ngModel)]="material">
+                    <select class="form-select" placeholder="Select a material" [(ngModel)]="material">
                         <option *ngFor="let m of materials; let i=index" [ngValue]="m">{{m}}</option>
                     </select>               
                 </div>
-                <label class="col-sm-2 col-form-label text-center">Dimensione</label>
+                <label class="col-sm-2 col-form-label text-center">Size</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona una taglia">
+                    <select class="form-select" placeholder="Select a size">
                         <option *ngFor="let s of categorySizes; let i=index" [ngValue]="s.sizeName" (click)="onSizeSelected(s)">{{s.sizeName}}</option>
                     </select>               
                 </div>
-                <label class="col-sm-2 col-form-label text-center">Colore</label>
+                <label class="col-sm-2 col-form-label text-center">Color</label>
                 <div class="col-sm-2">
-                    <select class="form-select" placeholder="Seleziona un colore" [(ngModel)]="homeColour">
+                    <select class="form-select" placeholder="Select a color" [(ngModel)]="homeColour">
                         <option *ngFor="let c of colours; let i=index" [ngValue]="c">{{c}}</option>
                     </select>               
                 </div>
@@ -126,15 +126,15 @@
         <div class="col-md-12">
             <div class="col">
                 <div class="form-group row align-middle">
-                    <label class="col-sm-2 col-form-label">Condizioni</label>
+                    <label class="col-sm-2 col-form-label">Condition</label>
                     <div class="col-sm-4">
-                        <select class="form-select" placeholder="Seleziona una condizione" [(ngModel)]="condition">
+                        <select class="form-select" placeholder="Select condition" [(ngModel)]="condition">
                             <option *ngFor="let con of conditions" [ngValue]="con">{{con}}</option>
                         </select>                       
                     </div>
-                    <label class="col-sm-2 col-form-label text-center">Visibilità</label>
+                    <label class="col-sm-2 col-form-label text-center">Visibility</label>
                     <div class="col-sm-4">
-                        <select class="form-select" placeholder="Seleziona una condizione" [(ngModel)]="visibility">
+                        <select class="form-select" placeholder="Select visibility" [(ngModel)]="visibility">
                             <option *ngFor="let v of visibilities" [ngValue]="v">{{v}}</option>
                         </select>                       
                     </div>
@@ -146,21 +146,31 @@
         <div class="col-md-12">
             <div class="col">
                 <div class="form-group row align-middle">
-                    <label class="col-sm-1 col-form-label">Prezzo</label>
+                    <label class="col-sm-1 col-form-label">Price</label>
                     <div class="col-sm-3">
-                        <input type="prezzo" class="form-control" placeholder="Inserisci il prezzo" [(ngModel)]="price">
+                        <input type="prezzo" class="form-control" placeholder="Insert price" [(ngModel)]="price">
                     </div>
-                    <label class="col-sm-1 col-form-label text-center">Valuta</label>
+                    <label class="col-sm-1 col-form-label text-center">Currency</label>
                     <div class="col-sm-1">
-                        <select class="form-select" placeholder="Seleziona una valuta" [(ngModel)]="currency">
+                        <select class="form-select" placeholder="Insert currency" [(ngModel)]="currency">
                             <option *ngFor="let cu of currencies" [ngValue]="cu">{{cu}}</option>
                         </select>                    
                     </div>
-                    <label class="col-sm-2 col-form-label text-center">Costo di spedizione</label>
+                    <label class="col-sm-2 col-form-label text-center">Delivery price</label>
                     <div class="col-sm-4">
-                        <input type="prezzoSpedizione" class="form-control" placeholder="Inserisci il costo della spedizione" [(ngModel)]="deliveryPrice">
+                        <input type="prezzoSpedizione" class="form-control" placeholder="Insert delivery price" [(ngModel)]="deliveryPrice">
                     </div>
                 </div> 
+            </div>
+            <div class="col mt-3">
+                <div class="form-group row align-middle">
+                    <label class="col-sm-2 col-form-label">Delivery size</label>
+                    <div class="col-sm-2">
+                        <select class="form-select" placeholder="Insert delivery size" [(ngModel)]="deliverySize">
+                            <option *ngFor="let ds of deliverySizes" [ngValue]="ds">{{ds}}</option>
+                        </select>                      
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -23,6 +23,7 @@ export class PaymentsComponent {
 
   expirationDayPlaceholder: string = "MM/AA";
   expirationDay: string = "";
+  expirationDate?: Date;
 
   error: boolean = false;
   alertErrorMessage!: string;
