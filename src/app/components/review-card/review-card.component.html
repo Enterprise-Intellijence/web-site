@@ -4,12 +4,19 @@
     <span class="ms-2">{{review.reviewer.username}}</span><br>
   </div>
   <div class="row ms-4">
-    <div class="col" *ngFor="let item of [].constructor(5); let i = index" style="max-width: 10px;">
-      <span class="fa fa-star checked" *ngIf="review.vote && i < review.vote; else emptyStar"></span>
-      <ng-template #emptyStar>
-        <span class="fa fa-star"></span>
-      </ng-template>
+
+    <div class="d-flex align-items-center">
+      <div class="fw-semibold">
+        {{review.title}}
+      </div>
+
+      <ngb-rating id="review-rating" [rate]="review.vote" [max]="5" class="ms-auto" [readonly]="true">
+        <ng-template let-fill="fill" let-index="index">
+          <fa-icon [icon]="fill ? faStar : faStarEmpty"></fa-icon>
+        </ng-template>
+      </ngb-rating>
     </div>
+
     <p class="mt-2">{{review.description}}</p>
     <p class="fst-italic" style="font-size: 12px;">{{review.date| date}}</p>
   </div>
