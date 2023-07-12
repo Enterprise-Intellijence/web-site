@@ -93,7 +93,9 @@
         </button>
       </td>
       <td>
-        <button class="btn btn btn-outline-light text-black border-1 border-black mb-2 text-start col-12" type="button">BAN</button>
+        <button *ngIf="user.status != 'BANNED'" class="btn btn btn-outline-light text-black border-1 border-black mb-2 text-start col-12" type="button" (click)="banUser(user)">BAN</button>
+        <button *ngIf="user.status == 'BANNED'" class="btn btn btn-outline-light text-black border-1 border-black mb-2 text-start col-12" type="button" (click)="banUser(user)">UNBAN</button>
+
       </td>
       <td *ngIf="currentUser.user?.role == 'SUPER_ADMIN' " >
         <button class="btn btn btn-outline-light text-black border-1 border-black mb-2 text-start col-12 " type="button" (click)="promoteDemoteUser(user)">PROMOTE</button> </td>

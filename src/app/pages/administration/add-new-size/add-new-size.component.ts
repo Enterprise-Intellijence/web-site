@@ -39,8 +39,11 @@ export class AddNewSizeComponent implements OnInit{
 
       this.superAdminService.createNewSize(this.newSize!).subscribe({
         next:(value: any)=>{
-          if(value.id != null)
+          if(value.id != null){
+            this.sizeService.loadSizes()
             this.route.navigate(['/administration/manage-sizes'])
+
+          }
         }
       })
     }
