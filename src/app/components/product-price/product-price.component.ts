@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserBasicDTO, UserDTO, OfferControllerService, OfferCreateDTO, ProductControllerService } from 'src/app/services/api-service';
+import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserBasicDTO, UserDTO, OfferControllerService, OfferCreateDTO, ProductControllerService, MessageControllerService } from 'src/app/services/api-service';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faCartShopping, faCircleInfo, faCommentDollar, faEdit, faHeart as faHeartFull, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { UserLikesService } from 'src/app/services/user-likes.service';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { NgForm } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'product-price',
@@ -54,6 +55,7 @@ export class ProductPriceComponent implements OnChanges {
     private userLikesService: UserLikesService,
     private productService: ProductService,
     private productControllerService: ProductControllerService,
+    private chatService: ChatService,
     private router: Router) {
 
     this.userLikesService.LikedProducts$.subscribe((products) => {
@@ -104,6 +106,7 @@ export class ProductPriceComponent implements OnChanges {
 
       this.offerService.createOffer(offer, "body").subscribe((offer) => {
         console.log("offer created: ", offer);
+        this.chatService.getAllConversations();
         this.router.navigate(["/messages"]);
         this.isMakingOffer = false;
       })
