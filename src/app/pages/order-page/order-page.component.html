@@ -175,7 +175,7 @@
             </div>
           </div>
 
-          <div class="card p-2 shadow-sm" *ngIf="canDoSomething() && !canWriteReview()">
+          <div class="card p-2 shadow-sm" *ngIf="canCancelOrder() || canMarkAsDelivered() || canMarkAsCompleted()">
             <div class="d-flex align-items-center">
 
               <div class="fw-semibold me-auto">
@@ -183,22 +183,73 @@
               </div>
 
               <div *ngIf="canCancelOrder()">
-                <button class="btn btn-outline-danger" (click)="cancelOrder()">Cancel Order</button>
-              </div>
-
-              <div *ngIf="canCreateDelivery()">
-                <button class="btn btn-outline-primary" (click)="CreateDelivery()">Create Delivery</button>
+                <button class="btn btn-danger" (click)="cancelOrder()">Cancel Order</button>
               </div>
 
               <div *ngIf="canMarkAsDelivered()">
-                <button class="btn btn-outline-primary" (click)="MarkAsDelivered()">Mark as Delivered</button>
+                <button class="btn btn-primary" (click)="MarkAsDelivered()">Mark as Delivered</button>
               </div>
 
               <div *ngIf="canMarkAsCompleted()">
-                <button class="btn btn-outline-primary" (click)="MarkAsCompleted()">Mark as Completed</button>
+                <button class="btn btn-primary" (click)="MarkAsCompleted()">Mark as Completed</button>
               </div>
             </div>
           </div>
+
+          <div class="card p-2 shadow-sm" *ngIf="canCreateDelivery()">
+
+            <div class="vstack gap-3">
+              <ng-container *ngFor="let address of addresses">
+                <div class="card p-2 border border-2 cursor-pointer" [ngClass]="(selectedSenderAdress === address) ? 'border-primary' : ''" (click)="toggleSelectSendersAddress(address)">
+                  <div class="row">
+
+                    <div class="col row justify-content-between">
+
+                      <div class="col-auto hstack gap-2">
+                        <span class="fw-semibold">Country:</span>
+                        <span>{{address.country}}</span>
+                      </div>
+
+                      <div class="col-auto hstack gap-2">
+                        <span class="fw-semibold">City:</span>
+                        <span>{{address.city}}</span>
+                      </div>
+
+                      <div class="col-auto hstack gap-2">
+                        <span class="fw-semibold">Street:</span>
+                        <span>{{address.street}}</span>
+                      </div>
+
+                      <div class="col-auto hstack gap-2">
+                        <span class="fw-semibold">Phone:</span>
+                        <span>{{address.phoneNumber}}</span>
+                      </div>
+                    </div>
+
+
+                    <div class="col-auto">
+
+                      <button type="button" class="btn" [ngClass]="address === selectedSenderAdress ? 'btn-primary' : 'btn-outline-primary' " (click)="toggleSelectSendersAddress(address)" style="min-width: 120px" clickStopPropagation>
+                        <fa-icon [icon]="address === selectedSenderAdress ? faXmark : faCheck"></fa-icon>
+                        <span class="ms-2">
+                          {{address === selectedSenderAdress ? 'unselect' : 'select'}}
+                        </span>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </ng-container>
+              <div *ngIf="addresses.length === 0" class="alert alert-danger p-2">
+                <h5>No addresses found</h5>
+                <span>add an address in the <a [routerLink]="['/settings/shipping']" class="alert-link">settings</a></span>
+
+              </div>
+
+
+            <button class="btn btn-primary" (click)="CreateDelivery()" [disabled]="!hasSelectedAddress">Create Delivery</button>
+          </div>
+
 
           <div class="card p-2 shadow-sm" *ngIf="canWriteReview()">
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IconDefinition, faCheck, faCreditCard, faHome, faHourglassHalf, faStar, faTruck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
-import { DeliveryControllerService, DeliveryCreateDTO, DeliveryDTO, OfferBasicDTO, OrderBasicDTO, OrderControllerService, OrderDTO, ReviewControllerService, ReviewCreateDTO, UserBasicDTO } from 'src/app/services/api-service';
+import { AddressDTO, DeliveryControllerService, DeliveryCreateDTO, DeliveryDTO, OfferBasicDTO, OrderBasicDTO, OrderControllerService, OrderDTO, ReviewControllerService, ReviewCreateDTO, UserBasicDTO } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
 
@@ -32,6 +32,13 @@ export class OrderPageComponent implements OnInit {
   reviewDescription: string = '';
   reviewRating: number = 5;
   reviewTitle: string = '';
+
+
+  addresses: AddressDTO[] = [];
+  selectedSenderAdress?: AddressDTO;
+
+  get hasAddresses() { return this.addresses.length > 0; }
+  get hasSelectedAddress() { return this.selectedSenderAdress != undefined; }
 
 
   get state() { return this.order!.state; }
@@ -82,6 +89,7 @@ export class OrderPageComponent implements OnInit {
     this.currentUserService.user$.subscribe({
       next: (user) => {
         this.currentUserId = user?.id;
+        this.addresses = user?.addresses ?? [];
       }
     });
 
@@ -137,13 +145,16 @@ export class OrderPageComponent implements OnInit {
     if (!this.canCreateDelivery())
       return;
 
+    if (this.selectedSenderAdress == undefined)
+      return;
+
     let shippers = ['DHL', 'UPS', 'FedEx', 'USPS', 'Bartolini spa']
     let shipper = shippers[Math.floor(Math.random() * shippers.length)];
 
-    // @ts-ignore
     let body: DeliveryCreateDTO = {
       order: this.order!,
       shipper: shipper,
+      senderAddressId: this.selectedSenderAdress.id
     }
 
     this.deliveryService.createDelivery(body).subscribe({
@@ -152,6 +163,13 @@ export class OrderPageComponent implements OnInit {
         this.loadOrder();
       }
     })
+  }
+
+  toggleSelectSendersAddress(address: AddressDTO) {
+    if(this.selectedSenderAdress == address)
+      this.selectedSenderAdress = undefined;
+    else
+      this.selectedSenderAdress = address;
   }
 
 

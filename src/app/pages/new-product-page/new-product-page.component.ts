@@ -48,18 +48,20 @@ export class NewProductPageComponent implements OnInit {
   price: number = 0;
   currency: CustomMoneyDTO.CurrencyEnum = CustomMoneyDTO.CurrencyEnum.EUR;
   deliveryPrice: number = 0;
-  deliverySize = ProductCreateDTO.ProductSizeEnum.MEDIUM;
-  condition: ProductCreateDTO.ConditionEnum = ProductCreateDTO.ConditionEnum.NEWWITHOUTTAG;
-  visibility: ProductCreateDTO.VisibilityEnum = ProductCreateDTO.VisibilityEnum.PUBLIC;
+  selectedDeliverySize = ProductCreateDTO.ProductSizeEnum.MEDIUM;
+  selectedCondition: ProductCreateDTO.ConditionEnum = ProductCreateDTO.ConditionEnum.NEWWITHOUTTAG;
+  selectedVisibility: ProductCreateDTO.VisibilityEnum = ProductCreateDTO.VisibilityEnum.PUBLIC;
   brand: string = '';
   gender?: ClothingCreateDTO.ProductGenderEnum;
-  size?: SizeDTO;
-  clothingColour?: ClothingCreateDTO.ColourEnum;
-  language?: EntertainmentCreateDTO.EntertainmentLanguageEnum;
-  material?: HomeCreateDTO.HomeMaterialEnum;
-  homeColour?: HomeCreateDTO.ColourEnum;
+  selectedProductSize?: SizeDTO;
+  selectedClothingColour?: ClothingCreateDTO.ColourEnum;
+  selectedLanguage?: EntertainmentCreateDTO.EntertainmentLanguageEnum;
+  selectedMaterial?: HomeCreateDTO.HomeMaterialEnum;
+  selectedHomeColour?: HomeCreateDTO.ColourEnum;
   idTertiaryCategory: string | null = null;
   product!: any;
+
+  hasAddress: boolean = true;
 
 
   processFile(imageInput: any) {
@@ -111,18 +113,18 @@ export class NewProductPageComponent implements OnInit {
   }
 
   onSizeSelected(size: SizeDTO) {
-    this.size = size;
+    this.selectedProductSize = size;
   }
 
   deleteImage(i: number) {
-    this.imagesLoaded = this.imagesLoaded.splice(i, 1);
-    this.filesLoaded = this.filesLoaded.splice(i, 1);
+    this.imagesLoaded.splice(i, 1);
+    this.filesLoaded.splice(i, 1);
   }
 
   uploadProduct() {
     if (!this.title || !this.price || !this.currency || !this.deliveryPrice || this.imagesLoaded.length == 0
       || !this.brand || !this.selectedPrimaryCategory || !this.selectedSecondaryCategory || !this.selectedTertiaryCategory
-      || !this.condition || !this.visibility) {
+      || !this.selectedCondition || !this.selectedVisibility) {
       alert("Please fill all the fields");
       return;
     }
@@ -134,16 +136,16 @@ export class NewProductPageComponent implements OnInit {
     console.log("type: ", newProduct.type);
 
     if (this.selectedPrimaryCategory.rawName === "Clothing") {
-      if (!this.gender || !this.size || !this.clothingColour) {
+      if (!this.gender || !this.selectedProductSize || !this.selectedClothingColour) {
         alert("Please fill all the fields.");
-        console.log("gender: ", this.gender, " size: ", this.size, " color: ", this.clothingColour);
+        console.log("gender: ", this.gender, " size: ", this.selectedProductSize, " color: ", this.selectedClothingColour);
         return;
       }
 
       let newClothingProduct: ClothingCreateDTO = {
         ...newProduct,
-        clothingSize: this.size,
-        colour: this.clothingColour,
+        clothingSize: this.selectedProductSize,
+        colour: this.selectedClothingColour,
         productGender: this.gender
       };
 
@@ -151,31 +153,31 @@ export class NewProductPageComponent implements OnInit {
     }
 
     else if (this.selectedPrimaryCategory.rawName === "Entertainment") {
-      if (!this.language) {
+      if (!this.selectedLanguage) {
         alert("Please fill all the fields");
         return;
       }
 
       let newEntertainmentProd: EntertainmentCreateDTO = {
         ...newProduct,
-        entertainmentLanguage: this.language
+        entertainmentLanguage: this.selectedLanguage
       };
 
       this.product = newEntertainmentProd;
     }
 
     else if (this.selectedPrimaryCategory.rawName === "Home") {
-      if (!this.material || !this.size || !this.homeColour) {
+      if (!this.selectedMaterial || !this.selectedProductSize || !this.selectedHomeColour) {
         alert("Compilare tutti i campi.");
-        console.log("material: ", this.material, " size: ", this.size, " colour: ", this.homeColour);
+        console.log("material: ", this.selectedMaterial, " size: ", this.selectedProductSize, " colour: ", this.selectedHomeColour);
         return;
       }
 
       let newHomeProduct: HomeCreateDTO = {
         ...newProduct,
-        colour: this.homeColour,
-        homeSize: this.size,
-        homeMaterial: this.material
+        colour: this.selectedHomeColour,
+        homeSize: this.selectedProductSize,
+        homeMaterial: this.selectedMaterial
       };
 
       this.product = newHomeProduct;
@@ -208,15 +210,15 @@ export class NewProductPageComponent implements OnInit {
       productCost: { price: this.price, currency: this.currency },
       deliveryCost: { price: this.deliveryPrice, currency: this.currency },
       brand: this.brand,
-      condition: this.condition,
-      visibility: this.visibility,
+      condition: this.selectedCondition,
+      visibility: this.selectedVisibility,
       productCategory: {
         id: this.idTertiaryCategory!,
         primaryCat: this.selectedPrimaryCategory!.rawName,
         secondaryCat: this.selectedSecondaryCategory!.rawName,
         tertiaryCat: this.selectedTertiaryCategory!.rawName
       },
-      productSize: this.deliverySize,
+      productSize: this.selectedDeliverySize,
       // productImages: this.filesLoaded,
       type: this.selectedPrimaryCategory!.rawName
     };
