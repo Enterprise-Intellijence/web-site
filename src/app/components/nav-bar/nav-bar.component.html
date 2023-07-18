@@ -117,7 +117,7 @@
       <nav-bar-menu-item title="entertainment" [primaryCategory]="entertainmentCategory" (onCategorySelected)="searchForProductCategory($event)"></nav-bar-menu-item>
       <nav-bar-menu-item title="home" [primaryCategory]="homeCategory" (onCategorySelected)="searchForProductCategory($event)"></nav-bar-menu-item>
       <li class="nav-item">
-        <a class="nav-link" tabindex="0" role="button">Other</a>
+        <a class="nav-link" tabindex="0" role="button" (click)="searchForProductCategory(otherCategory!)">Other</a>
       </li>
     </ul>
   </div>

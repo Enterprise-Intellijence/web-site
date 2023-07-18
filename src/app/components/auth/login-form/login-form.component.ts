@@ -24,10 +24,17 @@ export class LoginFormComponent {
 
   onLogin() {
     this.isWaitingForResponse = true;
-    this.auth.login(this.username, this.password).subscribe(res => {
-      this.isWaitingForResponse = false;
-      console.log('login result:', res);
-      this.router.navigate(['/']);
+    this.auth.login(this.username, this.password).subscribe({
+      next: res => {
+        this.isWaitingForResponse = false;
+        console.log('login result:', res);
+        this.router.navigate(['/']);
+      },
+      error: e => {
+        this.isWaitingForResponse = false;
+        alert('Login failed');
+        console.error('login error:', e);
+      }
     });
   }
 
