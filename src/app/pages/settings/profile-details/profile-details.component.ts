@@ -1,12 +1,10 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { DropzoneConfigInterface, DropzoneComponent, DropzoneDirective } from 'ngx-dropzone-wrapper';
 import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { UserDTO } from 'src/app/services/api-service';
-import { Config } from 'src/app/models/config';
 import { UploadImagesService } from 'src/app/services/upload-images.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'profile-details',
@@ -38,6 +36,11 @@ export class ProfileDetailsComponent {
 
   @ViewChild(DropzoneComponent, { static: false }) componentRef?: DropzoneComponent;
   @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
+
+  constructor(
+    public alertService: AlertService,
+    private currentUserService: CurrentUserService,
+    private uploadImageService: UploadImagesService) {}
 
   public toggleType(): void {
     this.type = (this.type === 'component') ? 'directive' : 'component';
@@ -111,25 +114,19 @@ export class ProfileDetailsComponent {
   public save() {
     if (this.textAreaText !== this.bioText) {
       this.user!.bio = this.textAreaText;
-      console.log("save");
       this.currentUserService.updateUser(this.user!);
+      this.currentUserService.userBasic$.value!.bio = this.textAreaText || "";
+      console.log("user: ", this.currentUserService.user?.bio);
     }
   }
 
 
   ngOnInit() {
     this.currentUserService.user$.subscribe(user => {
-      console.log("user: ", user);
       this.user = user;
       this.textAreaText = user?.bio;
       this.bioText = user?.bio;
       this.profilePic = user?.photoProfile?.urlPhoto;
-      console.log("photo: ", this.profilePic);
     });
   }
-
-  constructor(
-    public alertService: AlertService,
-    private currentUserService: CurrentUserService,
-    private uploadImageService: UploadImagesService) {}
 }

@@ -41,6 +41,7 @@ export class CurrentUserService {
       next: () => {
         this.user = user;
         this.user$.next(user);
+        this.userBasic$.next(user);
         console.log(user);
       }
     });
