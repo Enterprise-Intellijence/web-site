@@ -46,7 +46,7 @@
               </div>
               <div class="col-auto">
                 <div class="hstack gap-2 me-4" *ngIf="selectedConversation">
-                  <button class="btn btn-outline-warning" clickStopPropagation (click)="reportConversation()">
+                  <button class="btn btn-outline-warning" clickStopPropagation data-bs-toggle="modal" data-bs-target="#reportModal">
                     <fa-icon [icon]="faExclamationTriangle"></fa-icon>
                     Report
                   </button>
@@ -109,6 +109,31 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Report user modal -->
+<div class="modal" id="reportModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Report {{selectedConversationUser?.username}}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <textarea class="form-control" placeholder="Write your report message here" style="max-height: 200px;" [(ngModel)]="reportMessage"></textarea>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="reportConversation()">Report</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

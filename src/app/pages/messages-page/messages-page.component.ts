@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCircleInfo, faExclamationTriangle, faInfo, faInfoCircle, faPaperPlane, faPenToSquare, faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { Observable, map, of } from 'rxjs';
-import { ConversationDTO, MessageDTO, ProductBasicDTO, ProductControllerService, UserBasicDTO, UserControllerService } from 'src/app/services/api-service';
+import { faCircleInfo, faExclamationTriangle, faPaperPlane, faPenToSquare, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { ConversationDTO, MessageDTO, ProductBasicDTO, ProductControllerService, ReportControllerService, ReportDTO, UserBasicDTO, UserControllerService } from 'src/app/services/api-service';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -41,6 +40,7 @@ export class MessagesPageComponent implements OnInit {
 
   isRefreshingConversation: boolean = false;
   isRefreshingConversations: boolean = false;
+  reportMessage: string = '';
 
 
 
@@ -48,7 +48,8 @@ export class MessagesPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private userService: UserControllerService,
-    private productService: ProductControllerService
+    private productService: ProductControllerService,
+    private reportService: ReportControllerService
   ) {
 
   }
@@ -180,9 +181,7 @@ export class MessagesPageComponent implements OnInit {
     this.isRefreshingConversations = true;
   }
 
-  reportConversation() {
-    throw new Error('Method not implemented.');
-  }
+  reportConversation() {}
 
   refreshConversation() {
     this.isRefreshingConversation = true;
