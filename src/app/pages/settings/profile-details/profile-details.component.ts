@@ -15,7 +15,7 @@ import { UploadImagesService } from 'src/app/services/upload-images.service';
 export class ProfileDetailsComponent {
 
   textAreaText?: string;
-  bioText?: string;
+  bioText?: string = "";
   maxBioLength: number = 500;
   // TODO: Get profile pic from user service
   profilePic?: string;

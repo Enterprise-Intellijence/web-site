@@ -17,13 +17,30 @@
     </div>
 </div>
 
-<div class="basic-container">
+<div class="basic-container" style="margin-bottom: 40%;">
     <div class="row">
         <div class="col-6 text-left float-start fw-semibold">
             <p>Bio</p>
         </div>
         <div class="col-6">
             <textarea  class="form-control" id="floatingTextArea" [(ngModel)]="textAreaText" placeholder="Wow. Such empty."></textarea>
+        </div>
+    </div>
+
+    <div *ngIf="bioText != textAreaText" class = "row align-items-center mt-2">
+        <div class="col-6"></div>
+        <div class="col-6 fw-semibold">
+            <div *ngIf="textAreaText?.length! <= maxBioLength">
+                <button class="btn btn-sm btn-primary float-end" type="button" (click)="save()">Save</button>
+            </div>
+            <div *ngIf="textAreaText?.length! > maxBioLength">
+                <button class="btn btn-sm btn-primary float-end" type="button" disabled>Save</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="textAreaText?.length! > maxBioLength">
+        <div class="alert alert-danger mt-2">
+              Bio must be less than {{maxBioLength}} characters.
         </div>
     </div>
 </div>
@@ -68,14 +85,5 @@
         </div>
 
       </div>
-    </div>
-</div>
-
-<div *ngIf="bioText != textAreaText" class = "row align-items-center mt-4">
-    <div class="col-6">
-
-    </div>
-    <div class="col-6 fw-semibold">
-        <button class="btn btn-sm btn-primary float-end" type="button" (click)="save()">Save</button>
     </div>
 </div>
