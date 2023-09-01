@@ -74,6 +74,7 @@ export class ProfileComponent implements OnInit {
       });
 
       this.visitedUser!.followersNumber!++;
+      this.currentUserService.userBasic$!.value!.followingNumber!++;
     }
   }
 
@@ -84,7 +85,7 @@ export class ProfileComponent implements OnInit {
       });
 
       this.visitedUser!.followersNumber!--;
-      
+      this.currentUserService.userBasic$!.value!.followingNumber!--;
     }
   }
 
