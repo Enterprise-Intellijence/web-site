@@ -8,6 +8,7 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 import { NgForm } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'product-price',
@@ -28,6 +29,7 @@ export class ProductPriceComponent implements OnChanges {
 
   @Input() productDTO?: ProductDTO;
   private _productBasicDTO?: ProductBasicDTO;
+  faExclamationTriangle: any = faExclamationTriangle;
 
   get isPrivate() {
     return this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE;

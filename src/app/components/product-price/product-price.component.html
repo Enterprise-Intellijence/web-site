@@ -56,11 +56,25 @@
         Share
       </button>
 
+      <button class="btn btn-outline-warning" clickStopPropagation data-bs-toggle="modal" data-bs-target="#reportModal">
+        <fa-icon [icon]="faExclamationTriangle" class="me-1"></fa-icon>
+        Report
+      </button>
+
       <div *ngIf="wasLinkCopied">
         <div class="alert alert-success" role="alert">
           Link copied to clipboard!
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!--Report product modal -->
+<div class="modal" id="reportModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <product-report [productName]="productDTO?.title"></product-report>
     </div>
   </div>
 </div>

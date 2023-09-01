@@ -1,0 +1,20 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title">Report product: {{productName}}</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+    <textarea class="form-control" placeholder="Write here your report message" style="resize: none; min-height: 150px;" [(ngModel)]="reportMessage"></textarea>
+        <div *ngIf="reportMessage.length > maxReportMessageLength" class="alert alert-danger mt-2">
+            <strong>Warning!</strong> Your report message is longer than {{maxReportMessageLength}} characters. Please shorten it.   
+        </div>
+</div>
+
+<!-- Modal footer -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button *ngIf="reportMessage.length <= maxReportMessageLength" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="reportConversation()">Report</button>
+    <button *ngIf="reportMessage.length > maxReportMessageLength" type="button" class="btn btn-danger" disabled>Report</button>
+</div>
