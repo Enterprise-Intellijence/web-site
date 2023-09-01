@@ -68,6 +68,8 @@ import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { OrderPageComponent } from './pages/order-page/order-page.component';
 import { OrderCardComponent } from './components/orders/order-card/order-card.component';
 import { OrdersListComponent } from './components/orders/orders-list/orders-list.component';
+import { UserReportComponent } from './components/reports/user-report/user-report.component';
+import { ProductReportComponent } from './components/reports/product-report/product-report.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -137,6 +139,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     OrderPageComponent,
     OrderCardComponent,
     OrdersListComponent,
+    UserReportComponent,
+    ProductReportComponent,
     ],
   providers: [
     HttpClient,

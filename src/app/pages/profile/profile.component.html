@@ -89,23 +89,7 @@
 <div class="modal" id="myModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header justify-content-center">
-        <fa-icon [icon]="faCircleExclamation"></fa-icon>
-         <h5 class="text-center">Report user</h5>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body ">
-        Are you sure you want to report <b>{{visitedUser?.username}}</b>?
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="" (click)="report()">Yes</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-      </div>
-
+      <user-report [username]="visitedUser?.username"></user-report>
     </div>
   </div>
 </div>
