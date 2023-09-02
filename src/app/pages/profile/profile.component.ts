@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { faCircleExclamation, faEnvelope, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation, faEnvelope, faUserPlus, faExclamation} from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
-import { FollowingControllerService, ReportControllerService, UserBasicDTO, UserControllerService, UserDTO } from 'src/app/services/api-service';
+import { FollowingControllerService, UserBasicDTO, UserControllerService } from 'src/app/services/api-service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ActivatedRoute } from '@angular/router';
-import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'profile',
@@ -13,25 +12,26 @@ import { subscribeOn } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
 
-  faCircleExclamation = faCircleExclamation;
-
+  
   userId: string | null = null;
   isFollowing: boolean = false;
-
-  isCurrentUser: boolean = false;
-
-  visitedUser?: UserBasicDTO;
-  get userImage() { return this.visitedUser?.photoProfile?.urlPhoto; }
+  isCurrentUser: boolean = false;  
+  isUserReported: boolean = false;
   emptyBio: string = 'Wow, such empty.';
+  visitedUser?: UserBasicDTO;
+
+  get userImage() { return this.visitedUser?.photoProfile?.urlPhoto; }
+  
   faEnvelope = faEnvelope;
   faUserPlus = faUserPlus;
+  faCircleExclamation = faCircleExclamation;
+  faExclamation = faExclamation;
 
   constructor(
     private route: ActivatedRoute,
     private currentUserService: CurrentUserService,
     private userService: UserControllerService,
-    private followingService: FollowingControllerService,
-    private reportService: ReportControllerService) { }
+    private followingService: FollowingControllerService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -89,13 +89,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  report() {
-    this.reportService.createReport({
-      reportedUser: this.visitedUser!,
-      reporterUser: this.currentUserService.user!,
-      description: "Reported by " + this.currentUserService.user?.username
-    }).subscribe(report => {
-      console.log("report: ", report);
-    });
+  handleReportEvent(value: boolean) {
+    this.isUserReported = value;
   }
 }

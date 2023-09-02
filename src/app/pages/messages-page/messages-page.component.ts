@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCircleInfo, faExclamationTriangle, faPaperPlane, faPenToSquare, faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { ConversationDTO, MessageDTO, ProductBasicDTO, ProductControllerService, ReportControllerService, ReportDTO, UserBasicDTO, UserControllerService } from 'src/app/services/api-service';
+import { faCircleInfo, faExclamationTriangle, faExclamation, faPaperPlane, faPenToSquare, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { ConversationDTO, MessageDTO, ProductBasicDTO, ProductControllerService, ReportControllerService, UserBasicDTO, UserControllerService } from 'src/app/services/api-service';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class MessagesPageComponent implements OnInit {
   faRefresh = faRotateRight;
   faPaperPlane = faPaperPlane;
 
+  isUserReported: boolean = false;
+  faExclamation = faExclamation;
 
   conversationId?: string;
 
@@ -48,9 +50,7 @@ export class MessagesPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private userService: UserControllerService,
-    private productService: ProductControllerService,
-    private reportService: ReportControllerService
-  ) {
+    private productService: ProductControllerService) {
 
   }
 
@@ -214,4 +214,7 @@ export class MessagesPageComponent implements OnInit {
     );
   }
 
+  handleReportEvent(value: boolean) {
+    this.isUserReported = value;
+  }
 }

@@ -6,3 +6,11 @@
     background-color: #007bff;
     color: #fff;
 }
+
+.fixed-bottom-right {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}

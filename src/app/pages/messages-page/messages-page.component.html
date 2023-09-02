@@ -118,7 +118,12 @@
 <div class="modal" id="reportModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <user-report [username]="selectedConversationUser?.username"></user-report>
+      <user-report [user]="selectedConversationUser" (isUserReported)="handleReportEvent($event)"></user-report>
     </div>
   </div>
 </div>
+
+<ngb-toast *ngIf="isUserReported" class="fixed-bottom-right bg-success text-light" [autohide]="true" (hidden)="isUserReported=false">
+  <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
+	The user was reported successfully! Thank you for your feedback!
+</ngb-toast>
