@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ProductBasicDTO, ReportControllerService } from 'src/app/services/api-service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'product-report',
@@ -7,10 +9,24 @@ import { Component, Input } from '@angular/core';
 })
 export class ProductReportComponent {
 
-  @Input() productName?: string;
+  @Input() product?: ProductBasicDTO;
   reportMessage: string = '';
   maxReportMessageLength: number = 200;
-  isProductReported: boolean = false;
+  @Output() isProductReported = new EventEmitter<boolean>();
 
-  reportConversation() {}
+  constructor(
+    private currentUserService: CurrentUserService,
+    private reportService: ReportControllerService
+  ) { }
+
+  reportConversation() {
+    this.reportService.createReport({
+      reporterUser: this.currentUserService.user!,
+      reportedUser: this.product!.seller!,
+      reportedProduct: this.product!,
+      description: this.reportMessage
+    }).subscribe( () => {
+      this.isProductReported.emit(true);
+    });
+  }
 }

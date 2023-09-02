@@ -74,7 +74,13 @@
 <div class="modal" id="reportModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <product-report [productName]="productDTO?.title"></product-report>
+      <product-report [product]="productDTO" (isProductReported)="handleReportEvent($event)"></product-report>
     </div>
   </div>
 </div>
+
+<ngb-toast *ngIf="isProductReported" class="fixed-bottom-left bg-success text-light" [autohide]="true" (hidden)="isProductReported=false">
+  <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
+	The product was reported successfully! Thank you for your feedback!
+</ngb-toast>
+

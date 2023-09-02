@@ -123,7 +123,7 @@
   </div>
 </div>
 
-<ngb-toast *ngIf="isUserReported" class="fixed-bottom-right bg-success text-light" [autohide]="true" (hidden)="isUserReported=false">
+<ngb-toast *ngIf="isUserReported" class="fixed-bottom-left bg-success text-light" [autohide]="true" (hidden)="isUserReported=false">
   <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
 	The user was reported successfully! Thank you for your feedback!
 </ngb-toast>

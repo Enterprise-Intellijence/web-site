@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserBasicDTO, UserDTO, OfferControllerService, OfferCreateDTO, ProductControllerService, MessageControllerService } from 'src/app/services/api-service';
+import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserDTO, OfferControllerService, OfferCreateDTO, ProductControllerService } from 'src/app/services/api-service';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faCartShopping, faCircleInfo, faCommentDollar, faEdit, faHeart as faHeartFull, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCircleInfo, faCommentDollar, faEdit, faExclamation, faHeart as faHeartFull, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { UserLikesService } from 'src/app/services/user-likes.service';
 import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/services/current-user.service';
@@ -23,13 +23,15 @@ export class ProductPriceComponent implements OnChanges {
   faShareNodes = faShareNodes;
   faCircleInfo = faCircleInfo;
   faCommentDollar = faCommentDollar;
+  faExclamationTriangle: any = faExclamationTriangle;
   faEdit = faEdit;
+  faExclamation = faExclamation;
 
 
 
   @Input() productDTO?: ProductDTO;
   private _productBasicDTO?: ProductBasicDTO;
-  faExclamationTriangle: any = faExclamationTriangle;
+  isProductReported: boolean = false;
 
   get isPrivate() {
     return this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE;
@@ -165,6 +167,7 @@ export class ProductPriceComponent implements OnChanges {
     }
   }
 
-
-
+  handleReportEvent(value: boolean) {
+    this.isProductReported = value;
+  }
 }
