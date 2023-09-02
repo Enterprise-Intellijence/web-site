@@ -56,7 +56,7 @@
         Share
       </button>
 
-      <button class="btn btn-outline-warning" clickStopPropagation data-bs-toggle="modal" data-bs-target="#reportModal">
+      <button *ngIf="isSeller == false" class="btn btn-outline-warning" clickStopPropagation data-bs-toggle="modal" data-bs-target="#reportModal">
         <fa-icon [icon]="faExclamationTriangle" class="me-1"></fa-icon>
         Report
       </button>

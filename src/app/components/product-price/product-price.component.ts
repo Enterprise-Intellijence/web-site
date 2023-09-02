@@ -28,7 +28,7 @@ export class ProductPriceComponent implements OnChanges {
   faExclamation = faExclamation;
 
 
-
+  
   @Input() productDTO?: ProductDTO;
   private _productBasicDTO?: ProductBasicDTO;
   isProductReported: boolean = false;
