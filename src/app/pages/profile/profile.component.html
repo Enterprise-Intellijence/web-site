@@ -3,62 +3,91 @@
     <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
       <div class="row">
         <div class="col-4">
-          <img [src]="userImage | defaultProfilePic" class="rounded-circle" style="width: 200px; height: 200px" />
+          <img
+            [src]="userImage | defaultProfilePic"
+            class="rounded-circle"
+            style="width: 200px; height: 200px"
+          />
         </div>
       </div>
     </div>
 
     <div class="col col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-5">
       <div class="row">
-        <h4>{{ visitedUser?.username ?? "N/A"}}</h4>
+        <h4>{{ visitedUser?.username ?? "N/A" }}</h4>
       </div>
 
       <div class="row">
         <div class="col col-12">
           <span class="fw-light">Followers: </span>
-          <span class="fw-bold">{{ visitedUser?.followersNumber ?? 0}}</span>
+          <span class="fw-bold">{{ visitedUser?.followersNumber ?? 0 }}</span>
         </div>
 
         <div class="col col-12">
           <span class="fw-light">Following: </span>
-          <span class="fw-bold">{{ visitedUser?.followingNumber ?? 0}}</span>
+          <span class="fw-bold">{{ visitedUser?.followingNumber ?? 0 }}</span>
         </div>
       </div>
 
       <div class="row mt-2">
         <div class="col col-12">
           <span class="fw-light">Reviews: </span>
-          <span class="fw-bold">{{ visitedUser?.reviewsNumber ?? 0}}</span>
+          <span class="fw-bold">{{ visitedUser?.reviewsNumber ?? 0 }}</span>
         </div>
       </div>
 
       <div class="row mt-2">
-        <span class="fw-bold block-span" >Bio</span>
-        <span class="fw-light" style="word-wrap: break-word;">{{ visitedUser?.bio || emptyBio }}</span>
+        <span class="fw-bold block-span">Bio</span>
+        <span class="fw-light" style="word-wrap: break-word">{{
+          visitedUser?.bio || emptyBio
+        }}</span>
       </div>
     </div>
 
     <div class="col-xs-12 col-sm-2 col-md-4 col-lg-4 col-xl-4">
       <div *ngIf="isCurrentUser">
-        <button class="btn btn-outline-secondary" type="button" [routerLink]="['/settings/profile-details']">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          [routerLink]="['/settings/profile-details']"
+        >
           Edit Profile
         </button>
       </div>
 
       <div *ngIf="!isCurrentUser">
-        <button class="btn btn-outline-success" type="button" [routerLink]="['/messages/new', visitedUser?.id]">
-        <fa-icon [icon]="faEnvelope" class="me-1"></fa-icon>
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          [routerLink]="['/messages/new', visitedUser?.id]"
+        >
+          <fa-icon [icon]="faEnvelope" class="me-1"></fa-icon>
           Message
         </button>
 
-        <button *ngIf="isFollowing == false" class="btn btn-success margin-button" type="button" (click)="follow()">
-        <fa-icon [icon]="faUserPlus" class="me-1"></fa-icon>
+        <button
+          *ngIf="isFollowing == false"
+          class="btn btn-success margin-button"
+          type="button"
+          (click)="follow()"
+        >
+          <fa-icon [icon]="faUserPlus" class="me-1"></fa-icon>
           Follow
         </button>
-        <button *ngIf="isFollowing == true" class="btn btn-outline-success margin-button" type="button" (click)="unfollow()">
+        <button
+          *ngIf="isFollowing == true"
+          class="btn btn-outline-success margin-button"
+          type="button"
+          (click)="unfollow()"
+        >
           Unfollow
         </button>
-        <button class="btn btn-outline-warning margin-button" data-bs-toggle="modal" data-bs-target="#myModal" type="button">
+        <button
+          class="btn btn-outline-warning margin-button"
+          data-bs-toggle="modal"
+          data-bs-target="#myModal"
+          type="button"
+        >
           <fa-icon [icon]="faCircleExclamation"></fa-icon>
         </button>
       </div>
@@ -66,35 +95,49 @@
   </div>
 
   <div class="row-col row-bottom" *ngIf="visitedUser">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
-        <li ngbNavItem>
-          <button ngbNavLink>Closet</button>
-          <ng-template ngbNavContent>
-            <closet [visitedUser]="visitedUser" [isCurrentUser]="isCurrentUser"></closet>
-          </ng-template>
-        </li>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs mt-4">
+      <li ngbNavItem>
+        <button ngbNavLink>Closet</button>
+        <ng-template ngbNavContent>
+          <closet
+            [visitedUser]="visitedUser"
+            [isCurrentUser]="isCurrentUser"
+          ></closet>
+        </ng-template>
+      </li>
 
-        <li ngbNavItem>
-          <button ngbNavLink>Reviews</button>
-          <ng-template ngbNavContent>
-            <review [visitedUser]="visitedUser" [isCurrentUser]="isCurrentUser"></review>
-          </ng-template>
-        </li>
-      </ul>
-      <div [ngbNavOutlet]="nav"></div>
-    </div>
+      <li ngbNavItem>
+        <button ngbNavLink>Reviews</button>
+        <ng-template ngbNavContent>
+          <review
+            [visitedUser]="visitedUser"
+            [isCurrentUser]="isCurrentUser"
+          ></review>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
 </div>
 
 <!--Report user modal -->
 <div class="modal" id="myModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <user-report [user]="visitedUser" (isUserReported)="handleReportEvent($event)"></user-report>
+      <user-report
+        [user]="visitedUser"
+        (isUserReported)="handleReportEvent($event)"
+      ></user-report>
     </div>
   </div>
 </div>
 
-<ngb-toast *ngIf="isUserReported" class="fixed-bottom-left bg-success text-light" [autohide]="true" (hidden)="isUserReported=false">
+<ngb-toast
+  *ngIf="isUserReported"
+  class="fixed-bottom-left bg-success text-light"
+  [autohide]="true"
+  (hidden)="isUserReported = false"
+>
   <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
-	The user was reported successfully! Thank you for your feedback!
+  The user was reported successfully! Thank you for your feedback!
 </ngb-toast>

@@ -1,91 +1,83 @@
-import {
-  Component,
-  Directive,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  QueryList, SimpleChanges,
-  ViewChildren
-} from '@angular/core';
-import { DecimalPipe, NgFor } from '@angular/common';
-import {PageableObject, PageReportDTO, Report, ReportControllerService, ReportDTO} from "../../../services/api-service";
-import {NgbNavChangeEvent} from "@ng-bootstrap/ng-bootstrap";
-import {single} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { PageReportDTO, Report, ReportControllerService, ReportDTO } from "../../../services/api-service";
+import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
+import { faInbox, faCircleXmark, faUserShield } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'reports',
   templateUrl: './reports.component.html',
 })
-export class ReportsComponent implements OnInit/*,OnChanges*/{
+export class ReportsComponent implements OnInit/*,OnChanges*/ {
   reportsPending?: PageReportDTO;
   pageNumberPending: any
   pageSizePending: any
-  totalNumberPending:any
+  totalNumberPending: any
 
   reportsClosed?: PageReportDTO;
-  pageNumberClosed:any
-  pageSizeClosed:any
-  totalNumberClosed:any
-  active:any;
+  pageNumberClosed: any
+  pageSizeClosed: any
+  totalNumberClosed: any
+  active: any;
   disabled = true;
 
   myFollowingReports?: PageReportDTO;
 
   singleReportDTO?: ReportDTO;
+  faInbox = faInbox;
+  faCircleXmark = faCircleXmark;
+  faUserShield = faUserShield;
 
 
   constructor(private reportService: ReportControllerService) {
   }
 
   ngOnInit(): void {
-    this.pageNumberPending=1
-    this.pageSizePending=5
+    this.pageNumberPending = 1
+    this.pageSizePending = 5
     this.refreshReportsPending();
 
-    this.pageNumberClosed=1
-    this.pageSizeClosed=5
-    }
+    this.pageNumberClosed = 1
+    this.pageSizeClosed = 5
+  }
 
   refreshReportsPending() {
 
-    this.reportService.getReportsByStatus(Report.StatusEnum.PENDING,this.pageNumberPending-1,this.pageSizePending).subscribe({
-      next: (page: PageReportDTO )=>{
+    this.reportService.getReportsByStatus(Report.StatusEnum.PENDING, this.pageNumberPending - 1, this.pageSizePending).subscribe({
+      next: (page: PageReportDTO) => {
         this.reportsPending = page;
         this.totalNumberPending = page.totalElements
       },
-      error:(error: any)=>{
+      error: (error: any) => {
         console.error(error);
       }
     })
   }
 
   refreshReportsClosed() {
-    this.reportService.getReportsByStatus(Report.StatusEnum.CLOSED,this.pageNumberClosed-1,this.pageSizeClosed).subscribe({
-      next: (page: PageReportDTO )=>{
+    this.reportService.getReportsByStatus(Report.StatusEnum.CLOSED, this.pageNumberClosed - 1, this.pageSizeClosed).subscribe({
+      next: (page: PageReportDTO) => {
         this.reportsClosed = page;
         this.totalNumberClosed = page.totalElements
         console.log(this.reportsClosed)
       },
-      error:(error: any)=>{
+      error: (error: any) => {
         console.error(error);
       }
     })
   }
 
-  getMyFollowingReports(){
-    this.reportService.getReportsMeManaging(0,10).subscribe({
-      next: (page: PageReportDTO)=>{
+  getMyFollowingReports() {
+    this.reportService.getReportsMeManaging(0, 10).subscribe({
+      next: (page: PageReportDTO) => {
         this.myFollowingReports = page;
       }
     })
   }
 
-  closeReport(report:ReportDTO) {
-    if(report!=null && report.status=="PENDING"){
+  closeReport(report: ReportDTO) {
+    if (report != null && report.status == "PENDING") {
       this.reportService.closeReport(report.id!).subscribe({
-        next:(value: any)=>{
+        next: (value: any) => {
           report.status = "CLOSED"
           this.reportsClosed?.content?.push(report)
           this.refreshReportsPending();
@@ -97,7 +89,7 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
     if (changeEvent.nextId === 1) {
       this.refreshReportsPending()
     }
-    else if(changeEvent.nextId ===2){
+    else if (changeEvent.nextId === 2) {
       this.refreshReportsClosed()
 
     }
@@ -115,7 +107,7 @@ export class ReportsComponent implements OnInit/*,OnChanges*/{
 
   followReport(report: ReportDTO) {
     this.reportService.updateReport(report.id!).subscribe({
-      next:(value: ReportDTO)=>{
+      next: (value: ReportDTO) => {
         report = value
         this.refreshReportsPending()
       }
