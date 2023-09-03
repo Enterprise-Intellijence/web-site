@@ -42,7 +42,7 @@
         <div class="row">
           <button
             *ngIf="report?.reportedUser?.status != 'BANNED'"
-            class="btn btn-danger btn-sm m-1"
+            class="btn btn-primary btn-sm m-1"
             type="button"
             (click)="banUser()"
           >
@@ -54,7 +54,7 @@
         <div class="row">
           <button
             *ngIf="report?.reportedUser?.status == 'BANNED'"
-            class="btn btn-primary btn-sm m-1"
+            class="btn btn-success btn-sm m-1"
             type="button"
             (click)="unBanUser()"
           >
@@ -84,26 +84,67 @@
             View product
           </button>
           <button
-            class="btn btn-secondary btn-sm m-1"
+            class="btn btn-danger btn-sm m-1"
             type="button"
-            (click)="removeProduct()"
+            clickStopPropagation
+            data-bs-toggle="modal"
+            data-bs-target="#deleteModal"
+            (click)="deleteProduct()"
           >
             <fa-icon [icon]="faTrashCan"></fa-icon>
             Remove product
           </button>
         </div>
 
-        <div class="row float-end">
+        <div *ngIf="report?.status != 'CLOSED'" class="row float-end">
           <button
             class="btn btn-danger m-1"
             type="button"
+            clickStopPropagation
+            data-bs-toggle="modal"
+            data-bs-target="#closeReportModal"
             (click)="closeReport()"
           >
             <fa-icon [icon]="faBoxArchive"></fa-icon>
             Close and archive report
           </button>
         </div>
+
+        <div *ngIf="report?.status == 'CLOSED'" class="row float-end">
+          <button
+            class="btn btn-secondary m-1"
+            type="button"
+            disabled
+          >
+            <fa-icon [icon]="faBoxArchive"></fa-icon>
+            Archived
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<!--Delete product modal -->
+<div class="modal" id="deleteModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <delete-product-modal [product]="reportedProduct" (isProductDeletedWithError)="handleDeleteErrorEvent($event)" (isProductDeleted)="handleDeleteEvent($event)"></delete-product-modal>
+    </div>
+  </div>
+</div>
+
+<ngb-toast *ngIf="isProductDeleted" class="fixed-bottom-left bg-success text-light" [autohide]="true" (hidden)="isProductDeleted=false">
+  <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
+	The product was successfully deleted! Thank you for your feedback!
+</ngb-toast>
+
+<ngb-toast *ngIf="isProductDeletedWithError" class="fixed-bottom-left bg-danger text-light" [autohide]="true" (hidden)="isProductDeletedWithError=false">
+  <fa-icon [icon]="faExclamationTriangle" class="me-1"></fa-icon>
+  Product deletion failed! You can't delete a product in an active order!
+</ngb-toast>
+
+<ngb-toast *ngIf="report?.status == 'CLOSED'" class="fixed-bottom-left bg-success text-light" [autohide]="true" (hidden)="report?.status == 'CLOSED'">
+  <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
+	The report status has been changed to "CLOSED"
+</ngb-toast>

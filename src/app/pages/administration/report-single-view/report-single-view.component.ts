@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { AdminControllerService, ReportControllerService, ReportDTO, UserDTO } from "../../../services/api-service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AdminControllerService, ProductDTO, ReportControllerService, ReportDTO, UserDTO } from "../../../services/api-service";
 import { CurrentUserService } from "../../../services/current-user.service";
 import RoleEnum = UserDTO.RoleEnum;
 import StatusEnum = UserDTO.StatusEnum;
-import { faUserSlash, faAddressCard, faUser, faBoxesPacking, faTrashCan, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
+import { faUserSlash, faAddressCard, faUser, faBoxesPacking, faTrashCan, faBoxArchive, faExclamation, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'report-single-view',
@@ -12,16 +12,26 @@ import { faUserSlash, faAddressCard, faUser, faBoxesPacking, faTrashCan, faBoxAr
 })
 export class ReportSingleViewComponent {
 
-  @Input() report?: ReportDTO
-
+  @Input() report?: ReportDTO;
   faUserSlash = faUserSlash;
   faAddressCard = faAddressCard;
   faUser = faUser;
   faBoxesPacking = faBoxesPacking;
   faTrashCan = faTrashCan;
   faBoxArchive = faBoxArchive;
+  faExclamation = faExclamation;
+  faExclamationTriangle = faExclamationTriangle;
 
-  constructor(private reportService: ReportControllerService, private currentUser: CurrentUserService, private adminService: AdminControllerService) {
+  isProductDeleted: boolean = false;
+  isProductDeletedWithError: boolean = false;
+
+  reportedProduct!: ProductDTO;
+
+
+  constructor(
+    private reportService: ReportControllerService,
+    private currentUser: CurrentUserService,
+    private adminService: AdminControllerService) {
   }
 
   closeReport() {
@@ -35,7 +45,15 @@ export class ReportSingleViewComponent {
 
   }
 
-  removeProduct() {
+  ngOnInit() {
+    this.reportedProduct = this.report!.reportedProduct! as ProductDTO;
+  }
+
+  ngOnChanges() {
+    this.reportedProduct = this.report!.reportedProduct! as ProductDTO;
+  }
+
+  deleteProduct() {
     if (this.currentUser.user?.role == RoleEnum.ADMIN || this.currentUser.user?.role == RoleEnum.SUPERADMIN) {
       this.adminService.deleteProduct1(this.report!.reportedProduct!.id!).subscribe({
         next: (value: any) => {
@@ -68,6 +86,14 @@ export class ReportSingleViewComponent {
         }
       })
     }
+  }
 
+  handleDeleteEvent(value: boolean) {
+    this.isProductDeleted = value;
+  }
+
+  handleDeleteErrorEvent(value: boolean) {
+    this.isProductDeletedWithError = value;
   }
 }
+
