@@ -70,6 +70,7 @@ import { OrderCardComponent } from './components/orders/order-card/order-card.co
 import { OrdersListComponent } from './components/orders/orders-list/orders-list.component';
 import { UserReportComponent } from './components/reports/user-report/user-report.component';
 import { ProductReportComponent } from './components/reports/product-report/product-report.component';
+import { DeleteProductModalComponent } from './components/delete-product-modal/delete-product-modal.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -141,6 +142,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     OrdersListComponent,
     UserReportComponent,
     ProductReportComponent,
+    DeleteProductModalComponent,
     ],
   providers: [
     HttpClient,
