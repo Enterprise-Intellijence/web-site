@@ -9,20 +9,25 @@ import { faInbox, faCircleXmark, faUserShield, faBoxArchive } from '@fortawesome
 })
 export class ReportsComponent implements OnInit, OnChanges {
   reportsPending?: PageReportDTO;
-  pageNumberPending: any
-  pageSizePending: any
-  totalNumberPending: any
+  pageNumberPending: any = 1;
+  pageSizePending: any = 1;
+  totalNumberPending: any = 1;
 
   reportsClosed?: PageReportDTO;
-  pageNumberClosed: any
-  pageSizeClosed: any
-  totalNumberClosed: any
+  pageNumberClosed: any = 1;
+  pageSizeClosed: any = 1;
+  totalNumberClosed: any = 1;
+
+  myFollowingReports?: PageReportDTO;
+  pageNumberFollowing: any = 1;
+  pageSizeFollowing: any = 1;
+  totalNumberFollowing: any = 1;
+  
+  singleReportDTO?: ReportDTO;
+  
   active: any;
   disabled = true;
 
-  myFollowingReports?: PageReportDTO;
-
-  singleReportDTO?: ReportDTO;
   faInbox = faInbox;
   faCircleXmark = faCircleXmark;
   faUserShield = faUserShield;
@@ -32,7 +37,7 @@ export class ReportsComponent implements OnInit, OnChanges {
   constructor(private reportService: ReportControllerService) {
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.getMyFollowingReports();
+    this.refreshFollowingReport();
   }
 
   ngOnInit(): void {
@@ -42,10 +47,10 @@ export class ReportsComponent implements OnInit, OnChanges {
 
     this.pageNumberClosed = 1
     this.pageSizeClosed = 10
+    this.refreshReportsClosed();
   }
 
   refreshReportsPending() {
-
     this.reportService.getReportsByStatus(Report.StatusEnum.PENDING, this.pageNumberPending - 1, this.pageSizePending).subscribe({
       next: (page: PageReportDTO) => {
         this.reportsPending = page;
@@ -62,7 +67,6 @@ export class ReportsComponent implements OnInit, OnChanges {
       next: (page: PageReportDTO) => {
         this.reportsClosed = page;
         this.totalNumberClosed = page.totalElements
-        console.log(this.reportsClosed)
       },
       error: (error: any) => {
         console.error(error);
@@ -70,10 +74,14 @@ export class ReportsComponent implements OnInit, OnChanges {
     })
   }
 
-  getMyFollowingReports() {
+  refreshFollowingReport() {
     this.reportService.getReportsMeManaging(0, 10).subscribe({
       next: (page: PageReportDTO) => {
+        this.totalNumberFollowing = page.totalElements
         this.myFollowingReports = page;
+      },
+      error: (error: any) => {
+        console.error(error);
       }
     })
   }
@@ -81,10 +89,10 @@ export class ReportsComponent implements OnInit, OnChanges {
   closeReport(report: ReportDTO) {
     if (report != null && report.status == "PENDING") {
       this.reportService.closeReport(report.id!).subscribe({
-        next: (value: any) =>{
+        next: (value: any) => {
           report.status = "CLOSED"
           this.reportsClosed?.content?.push(report)
-          this.getMyFollowingReports()
+          this.refreshFollowingReport()
         }
       })
     }
@@ -99,7 +107,7 @@ export class ReportsComponent implements OnInit, OnChanges {
 
     }
     else
-      this.getMyFollowingReports()
+      this.refreshFollowingReport()
 
   }
 
@@ -124,6 +132,6 @@ export class ReportsComponent implements OnInit, OnChanges {
   }
 
   handleClosedReport(value: boolean) {
-    this.getMyFollowingReports();
+    this.refreshFollowingReport();
   }
 }

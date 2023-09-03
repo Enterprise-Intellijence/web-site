@@ -11,6 +11,9 @@
       Pending
     </button>
     <ng-template ngbNavContent>
+      <span class="fw-bold">Total report pending: </span>
+      <span>{{ totalNumberPending }}</span>
+
       <table class="table table-striped">
         <thead>
           <tr>
@@ -79,8 +82,11 @@
       Closed
     </button>
 
-    <ng-template ngbNavContent
-      ><table class="table table-striped">
+    <ng-template ngbNavContent>
+      <span class="fw-bold">Total report closed: </span>
+      <span>{{ totalNumberClosed }}</span>
+
+      <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -99,7 +105,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
-            "
+              "
             >
               {{ report.id }}
             </th>
@@ -121,7 +127,7 @@
           [collectionSize]="totalNumberClosed"
           [(page)]="pageNumberClosed"
           [pageSize]="pageSizeClosed"
-          (pageChange)="refreshReportsPending()"
+          (pageChange)="refreshReportsClosed()"
         >
         </ngb-pagination>
       </div>
@@ -135,10 +141,14 @@
 
     <ng-template ngbNavContent>
       <div class="mt-4" *ngIf="singleReportDTO">
-        <report-single-view [report]="singleReportDTO" (closedReport)="handleClosedReport($event)"></report-single-view>
+        <report-single-view
+          [report]="singleReportDTO"
+          (closedReport)="handleClosedReport($event)"
+        ></report-single-view>
       </div>
 
-      Total report followed: {{ myFollowingReports?.totalElements }}
+      <span class="fw-bold">Total report followed: </span>
+      <span>{{ myFollowingReports?.totalElements }}</span>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -189,10 +199,10 @@
       </table>
       <div class="d-flex justify-content-between p-2">
         <ngb-pagination
-          [collectionSize]="totalNumberClosed"
-          [(page)]="pageNumberClosed"
-          [pageSize]="pageSizeClosed"
-          (pageChange)="refreshReportsPending()"
+          [collectionSize]="totalNumberFollowing"
+          [(page)]="pageNumberFollowing"
+          [pageSize]="pageSizeFollowing"
+          (pageChange)="refreshFollowingReport()"
         >
         </ngb-pagination>
       </div>
