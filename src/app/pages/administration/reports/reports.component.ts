@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PageReportDTO, Report, ReportControllerService, ReportDTO } from "../../../services/api-service";
 import { NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
-import { faInbox, faCircleXmark, faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { faInbox, faCircleXmark, faUserShield, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'reports',
   templateUrl: './reports.component.html',
 })
-export class ReportsComponent implements OnInit/*,OnChanges*/ {
+export class ReportsComponent implements OnInit, OnChanges {
   reportsPending?: PageReportDTO;
   pageNumberPending: any
   pageSizePending: any
@@ -26,18 +26,22 @@ export class ReportsComponent implements OnInit/*,OnChanges*/ {
   faInbox = faInbox;
   faCircleXmark = faCircleXmark;
   faUserShield = faUserShield;
+  faBoxArchive = faBoxArchive
 
 
   constructor(private reportService: ReportControllerService) {
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getMyFollowingReports();
+  }
 
   ngOnInit(): void {
     this.pageNumberPending = 1
-    this.pageSizePending = 5
+    this.pageSizePending = 10
     this.refreshReportsPending();
 
     this.pageNumberClosed = 1
-    this.pageSizeClosed = 5
+    this.pageSizeClosed = 10
   }
 
   refreshReportsPending() {
@@ -77,14 +81,15 @@ export class ReportsComponent implements OnInit/*,OnChanges*/ {
   closeReport(report: ReportDTO) {
     if (report != null && report.status == "PENDING") {
       this.reportService.closeReport(report.id!).subscribe({
-        next: (value: any) => {
+        next: (value: any) =>{
           report.status = "CLOSED"
           this.reportsClosed?.content?.push(report)
-          this.refreshReportsPending();
+          this.getMyFollowingReports()
         }
       })
     }
   }
+
   onNavChange(changeEvent: NgbNavChangeEvent) {
     if (changeEvent.nextId === 1) {
       this.refreshReportsPending()
@@ -116,6 +121,9 @@ export class ReportsComponent implements OnInit/*,OnChanges*/ {
 
   openReport(report: ReportDTO) {
     this.singleReportDTO = report
+  }
 
+  handleClosedReport(value: boolean) {
+    this.getMyFollowingReports();
   }
 }

@@ -26,7 +26,7 @@ export class ReportSingleViewComponent {
   isProductDeletedWithError: boolean = false;
 
   reportedProduct!: ProductDTO;
-
+  @Output() closedReport = new EventEmitter<boolean>();
 
   constructor(
     private reportService: ReportControllerService,
@@ -39,6 +39,7 @@ export class ReportSingleViewComponent {
       this.reportService.closeReport(this.report!.id!).subscribe({
         next: (value: any) => {
           this.report = value
+          this.closedReport.emit(true)
         }
       })
     }
@@ -93,7 +94,7 @@ export class ReportSingleViewComponent {
   }
 
   handleDeleteErrorEvent(value: boolean) {
-    this.isProductDeletedWithError = value;
+    if (value) this.isProductDeletedWithError = value;
   }
 }
 
