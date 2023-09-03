@@ -1,14 +1,13 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ProductDTO, ProductBasicDTO, CustomMoneyDTO, UserDTO, OfferControllerService, OfferCreateDTO, ProductControllerService } from 'src/app/services/api-service';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faCartShopping, faCircleInfo, faCommentDollar, faEdit, faExclamation, faHeart as faHeartFull, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCircleInfo, faCommentDollar, faEdit, faExclamation, faHeart as faHeartFull, faShareNodes, faExclamationTriangle, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { UserLikesService } from 'src/app/services/user-likes.service';
 import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { NgForm } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { ChatService } from 'src/app/services/chat.service';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'product-price',
@@ -26,12 +25,14 @@ export class ProductPriceComponent implements OnChanges {
   faExclamationTriangle: any = faExclamationTriangle;
   faEdit = faEdit;
   faExclamation = faExclamation;
-
+  faTrash = faTrash;
 
   
   @Input() productDTO?: ProductDTO;
   private _productBasicDTO?: ProductBasicDTO;
   isProductReported: boolean = false;
+  isProductDeleted: boolean = false;
+  isProductDeletedWithError: boolean = false;
 
   get isPrivate() {
     return this.productDTO?.visibility == ProductDTO.VisibilityEnum.PRIVATE;
@@ -169,5 +170,13 @@ export class ProductPriceComponent implements OnChanges {
 
   handleReportEvent(value: boolean) {
     this.isProductReported = value;
+  }
+
+  handleDeleteEvent(value: boolean) {
+    this.isProductDeleted = value;
+  }
+
+  handleDeleteErrorEvent(value: boolean) {
+    this.isProductDeletedWithError = value;
   }
 }

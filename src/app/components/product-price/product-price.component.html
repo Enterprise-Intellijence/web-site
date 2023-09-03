@@ -51,14 +51,19 @@
         Edit Product
       </button>
 
-      <button type="button" (click)="clickShareProduct()" class="btn btn-outline-secondary btn-block">
+      <button type="button" (click)="clickShareProduct()" class="btn btn-success btn-block">
         <fa-icon [icon]="faShareNodes" class="me-1"></fa-icon>
         Share
       </button>
 
-      <button *ngIf="isSeller == false" class="btn btn-outline-warning" clickStopPropagation data-bs-toggle="modal" data-bs-target="#reportModal">
+      <button *ngIf="isSeller == false" class="btn btn-warning" clickStopPropagation data-bs-toggle="modal" data-bs-target="#reportModal">
         <fa-icon [icon]="faExclamationTriangle" class="me-1"></fa-icon>
         Report
+      </button>
+
+      <button *ngIf="isSeller == true" class="btn btn-danger" clickStopPropagation data-bs-toggle="modal" data-bs-target="#deleteModal">
+        <fa-icon [icon]="faTrash" class="me-1"></fa-icon>
+        Delete
       </button>
 
       <div *ngIf="wasLinkCopied">
@@ -81,6 +86,25 @@
 
 <ngb-toast *ngIf="isProductReported" class="fixed-bottom-left bg-success text-light" [autohide]="true" (hidden)="isProductReported=false">
   <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
-	The product was reported successfully! Thank you for your feedback!
+	The product was successfully reported! Thank you for your feedback!
+</ngb-toast>
+
+<!--Delete product modal -->
+<div class="modal" id="deleteModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <delete-product-modal [product]="productDTO" (isProductDeletedWithError)="handleDeleteErrorEvent($event)" (isProductDeleted)="handleDeleteEvent($event)"></delete-product-modal>
+    </div>
+  </div>
+</div>
+
+<ngb-toast *ngIf="isProductDeleted" class="fixed-bottom-left bg-success text-light" [autohide]="true" (hidden)="isProductDeleted=false">
+  <fa-icon [icon]="faExclamation" class="me-1"></fa-icon>
+	The product was successfully deleted! Thank you for your feedback!
+</ngb-toast>
+
+<ngb-toast *ngIf="isProductDeletedWithError" class="fixed-bottom-left bg-danger text-light" [autohide]="true" (hidden)="isProductDeletedWithError=false">
+  <fa-icon [icon]="faExclamationTriangle" class="me-1"></fa-icon>
+  Product deletion failed! You can't delete a product in an active order!
 </ngb-toast>
 
