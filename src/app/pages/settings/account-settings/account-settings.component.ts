@@ -75,11 +75,11 @@ export class AccountSettingsComponent {
     this.userService.userHoliday(this.user?.id!).subscribe(res =>{
       console.log("res",res);
       console.log("updated");
-      this.userService.me().subscribe(updatedUser => {
-        this.user = updatedUser;
-      });
       
-    })
+      window.location.reload();
+      this.route.navigate(['/settings']);
+      
+    })  
   }
 
   refreshPage() {
