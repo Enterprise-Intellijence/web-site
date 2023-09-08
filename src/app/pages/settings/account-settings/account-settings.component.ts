@@ -18,6 +18,8 @@ export class AccountSettingsComponent {
   newUsername?: string;
   newEmail!: string;
 
+
+
   constructor(private currentUserService: CurrentUserService,
     private userService: UserControllerService,
     private apiAuth: ApiAuthService,
@@ -66,6 +68,23 @@ export class AccountSettingsComponent {
       console.log("res", res);
       this.logout();
 
+    });
+  }
+
+  changeStatus(){
+    this.userService.userHoliday(this.user?.id!).subscribe(res =>{
+      console.log("res",res);
+      console.log("updated");
+      this.userService.me().subscribe(updatedUser => {
+        this.user = updatedUser;
+      });
+      
+    })
+  }
+
+  refreshPage() {
+    this.route.navigateByUrl('/account-settings', { skipLocationChange: true }).then(() => {
+      this.route.navigate([this.route.url]);
     });
   }
 
@@ -122,4 +141,7 @@ export class AccountSettingsComponent {
     console.log('Saving...');
     this.currentUserService.updateUser(this.user as UserDTO);
   }
+
 }
+
+
